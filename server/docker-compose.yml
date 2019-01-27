@@ -1,0 +1,62 @@
+version: '3'
+
+volumes:
+  postgres: {}
+  elasticsearch: {}
+
+services:
+  router:
+    build: ./docker/router
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    networks:
+      default:
+        aliases:
+          - api.edgar.local
+    labels:
+      - 'traefik.enable=false'
+
+  postgres:
+    build: ./docker/postgres
+    labels:
+      - 'traefik.enable=false'
+    ports:
+      - '5432:5432'
+    volumes:
+      - 'postgres:/var/lib/postgresql/data'
+
+  api:
+    build: ./docker/node
+    depends_on:
+      - 'elasticsearch'
+      - 'postgres'
+    volumes:
+      - '.:/var/www:cached'
+    labels:
+      - 'traefik.port=3000'
+      - 'traefik.frontend.entryPoints=https'
+      - 'traefik.frontend.rule=Host:api.edgar.local'
+
+  elasticsearch:
+    build: ./docker/elasticsearch
+    volumes:
+      - 'elasticsearch:/usr/share/elasticsearch/data'
+    environment:
+      - 'ES_JAVA_OPTS=-Xms256m -Xmx256m'
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.6.0
+    labels:
+      - 'traefik.port=5601'
+      - 'traefik.frontend.entryPoints=https'
+      - 'traefik.frontend.rule=Host:kibana.edgar.local'
+    depends_on: ['elasticsearch']
