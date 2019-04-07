@@ -4,11 +4,14 @@ import { IUserRepository } from 'src/Domain/User/Repository/IUserRepository';
 import { Inject, BadRequestException } from '@nestjs/common';
 import { User } from 'src/Domain/User/User.entity';
 import { CanUserCreateAccount } from 'src/Domain/User/CanUserCreateAccount';
+import { IMailerAdapter } from 'src/Application/Adapter/IMailerAdapter';
+import { Mail } from 'src/Domain/Common/Mail/Mail';
 
 @CommandHandler(CreateUserCommand)
 export class CreateUserCommandHandler {
   constructor(
     @Inject('IUserRepository') private readonly userRepository: IUserRepository,
+    @Inject('IMailerAdapter') private readonly mailerAdapter: IMailerAdapter,
     private readonly canUserCreateAccount: CanUserCreateAccount,
   ) {}
 
@@ -19,13 +22,22 @@ export class CreateUserCommandHandler {
       throw new BadRequestException('user.already.exists');
     }
 
-    return await this.userRepository.save(
-      new User({
-        firstName: command.firstName,
-        lastName: command.lastName,
-        email: command.email,
-        password: command.password,
+    const user = new User({
+      firstName: command.firstName,
+      lastName: command.lastName,
+      email: command.email,
+      password: command.password,
+    });
+
+    await this.userRepository.save(user);
+
+    this.mailerAdapter.send(
+      new Mail(command.email, process.env.SENDGRID_TEMPLATE_WELCOME, {
+        firstName: user.firstName,
+        lastName: user.lastName,
       }),
     );
+
+    return user;
   };
 }

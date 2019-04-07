@@ -16,7 +16,7 @@ import { GetUserByIdQuery } from 'src/Application/User/Query/GetUserByIdQuery';
 import { User } from 'src/Domain/User/User.entity';
 
 @Controller('users')
-@ApiUseTags('Users')
+@ApiUseTags('User')
 export class GetUserAction {
   constructor(
     @Inject('IQueryBusAdapter')

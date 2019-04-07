@@ -18,4 +18,8 @@ export class House {
   @ManyToMany(type => UserHouse, userHouse => userHouse.house)
   @JoinTable()
   userHouses: UserHouse[];
+
+  constructor(house: Partial<House>) {
+    Object.assign(this, house);
+  }
 }

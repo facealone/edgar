@@ -8,12 +8,14 @@ import { GetUserAction } from '../Action/GetUserAction';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/Domain/User/User.entity';
 import { CanUserCreateAccount } from 'src/Domain/User/CanUserCreateAccount';
+import { MailerAdapter } from 'src/Infrastructure/Adapter/MailerAdapter';
 
 @Module({
   imports: [BusModule, TypeOrmModule.forFeature([User])],
   controllers: [CreateUserAction, GetUserAction],
   providers: [
     { provide: 'IUserRepository', useClass: UserRepository },
+    { provide: 'IMailerAdapter', useClass: MailerAdapter },
     CreateUserCommandHandler,
     CanUserCreateAccount,
     GetUserByIdQueryHandler,

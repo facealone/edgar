@@ -13,9 +13,7 @@
     "start:prod": "node dist/main.js",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
-    "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "migration:generate": "ts-node ./node_modules/.bin/typeorm migration:generate -d migrations -n",
     "migration:migrate": "ts-node ./node_modules/.bin/typeorm migration:run"
@@ -27,6 +25,7 @@
     "@nestjs/platform-express": "^6.0.4",
     "@nestjs/swagger": "^3.0.2",
     "@nestjs/typeorm": "^6.0.0",
+    "@sendgrid/mail": "^6.3.1",
     "@sentry/node": "^5.0.5",
     "bcrypt": "^3.0.5",
     "class-transformer": "^0.2.0",

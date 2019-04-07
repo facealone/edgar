@@ -14,7 +14,7 @@ import { CreateUserCommand } from 'src/Application/User/Command/CreateUserComman
 import { User } from 'src/Domain/User/User.entity';
 
 @Controller('users')
-@ApiUseTags('Users')
+@ApiUseTags('User')
 export class CreateUserAction {
   constructor(
     @Inject('ICommandBusAdapter')

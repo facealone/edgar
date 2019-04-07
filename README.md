@@ -13,3 +13,10 @@
 -   Sentry
 
 ## Installation
+
+### Server side
+
+```bash
+$ cd server
+$ docker-compose up -d
+```
