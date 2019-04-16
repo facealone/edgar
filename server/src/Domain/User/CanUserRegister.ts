@@ -3,7 +3,7 @@ import { IUserRepository } from './Repository/IUserRepository';
 import { User } from './User.entity';
 
 @Injectable()
-export class CanUserCreateAccount {
+export class CanUserRegister {
   constructor(
     @Inject('IUserRepository') private readonly userRepository: IUserRepository,
   ) {}

@@ -10,7 +10,7 @@ export class GetUserByIdQueryHandler {
     @Inject('IUserRepository') private readonly userRepository: IUserRepository,
   ) {}
 
-  execute = async (query: GetUserByIdQuery): Promise<User> => {
+  execute = async (query: GetUserByIdQuery): Promise<User | null> => {
     return await this.userRepository.findOneById(query.id);
   };
 }

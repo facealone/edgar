@@ -1,22 +1,21 @@
-import { ApiUseTags, ApiOperation } from '@nestjs/swagger';
+import { ApiUseTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import {
   Controller,
   Inject,
   Get,
   Param,
-  UseInterceptors,
-  ClassSerializerInterceptor,
   NotFoundException,
-  BadRequestException,
-  ValidationPipe,
-  UsePipes,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { GetUserByIdQuery } from 'src/Application/User/Query/GetUserByIdQuery';
 import { User } from 'src/Domain/User/User.entity';
 
 @Controller('users')
+@ApiBearerAuth()
 @ApiUseTags('User')
+@UseGuards(AuthGuard())
 export class GetUserAction {
   constructor(
     @Inject('IQueryBusAdapter')
@@ -24,16 +23,19 @@ export class GetUserAction {
   ) {}
 
   @Get('/:id')
-  @UseInterceptors(ClassSerializerInterceptor)
-  @UsePipes(new ValidationPipe({ transform: true }))
   @ApiOperation({ title: 'Get user ressource' })
-  async index(@Param() query: GetUserByIdQuery): Promise<User> {
+  async index(@Param() query: GetUserByIdQuery): Promise<object> {
     const user = await this.queryBus.execute(query);
 
     if (!(user instanceof User)) {
       throw new NotFoundException();
     }
 
-    return user;
+    return {
+      id: user.id,
+      fullName: user.getFullName(),
+      email: user.email,
+      pushNotificationToken: user.pushNotificationToken,
+    };
   }
 }

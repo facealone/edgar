@@ -7,7 +7,6 @@ import {
   ManyToOne,
   BeforeInsert,
 } from 'typeorm';
-import { Exclude } from 'class-transformer';
 import * as bcrypt from 'bcrypt';
 import { House } from '../House/House.entity';
 import { UserHouse } from './UserHouse.entity';
@@ -30,29 +29,33 @@ export class User {
   email: string;
 
   @Column({ type: 'text', nullable: true })
-  @Exclude()
   pushNotificationToken: string;
 
   @Column({ type: 'varchar' })
-  @Exclude()
   password: string;
 
   @ManyToOne(type => House)
   currentHouse: House;
 
   @ManyToMany(type => UserHouse, userHouse => userHouse.user)
-  @Exclude()
   @JoinTable()
   userHouses: UserHouse[];
 
   @BeforeInsert()
-  @Exclude()
-  hashPassword = async () => {
+  hashPassword = () => {
     if (!this.password) {
       return;
     }
 
-    this.password = await bcrypt.hash(this.password, 10);
+    this.password = bcrypt.hashSync(this.password, 10);
+  };
+
+  isPasswordValid = (plainPassword: string): boolean => {
+    return bcrypt.compareSync(plainPassword, this.password);
+  };
+
+  getFullName = (): string => {
+    return this.firstName + ' ' + this.lastName.toUpperCase();
   };
 
   constructor(user: Partial<User>) {

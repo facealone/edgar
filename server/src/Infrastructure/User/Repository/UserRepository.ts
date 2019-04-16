@@ -10,11 +10,11 @@ export class UserRepository implements IUserRepository {
     @InjectRepository(User) private readonly repository: Repository<User>,
   ) {}
 
-  findOneById = async (id: string): Promise<User> => {
+  findOneById = async (id: string): Promise<User | null> => {
     return await this.repository.findOne({ id });
   };
 
-  findOneByEmail = async (email: string): Promise<User> => {
+  findOneByEmail = async (email: string): Promise<User | null> => {
     return await this.repository.findOne({ email });
   };
 

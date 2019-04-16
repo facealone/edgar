@@ -1,24 +1,24 @@
 import { CommandHandler } from '@nestjs/cqrs';
-import { CreateUserCommand } from './CreateUserCommand';
+import { RegisterCommand } from './RegisterCommand';
 import { IUserRepository } from 'src/Domain/User/Repository/IUserRepository';
 import { Inject, BadRequestException } from '@nestjs/common';
 import { User } from 'src/Domain/User/User.entity';
-import { CanUserCreateAccount } from 'src/Domain/User/CanUserCreateAccount';
+import { CanUserRegister } from 'src/Domain/User/CanUserRegister';
 import { IMailerAdapter } from 'src/Application/Adapter/IMailerAdapter';
 import { Mail } from 'src/Domain/Common/Mail/Mail';
+import { ITokenAdapter } from 'src/Application/Adapter/ITokenAdapter';
 
-@CommandHandler(CreateUserCommand)
-export class CreateUserCommandHandler {
+@CommandHandler(RegisterCommand)
+export class RegisterCommandHandler {
   constructor(
     @Inject('IUserRepository') private readonly userRepository: IUserRepository,
     @Inject('IMailerAdapter') private readonly mailerAdapter: IMailerAdapter,
-    private readonly canUserCreateAccount: CanUserCreateAccount,
+    @Inject('ITokenAdapter') private readonly jwtAdapter: ITokenAdapter,
+    private readonly canUserRegister: CanUserRegister,
   ) {}
 
-  execute = async (command: CreateUserCommand): Promise<User> => {
-    if (
-      false === (await this.canUserCreateAccount.isSatisfiedBy(command.email))
-    ) {
+  execute = async (command: RegisterCommand): Promise<string> => {
+    if (false === (await this.canUserRegister.isSatisfiedBy(command.email))) {
       throw new BadRequestException('user.already.exists');
     }
 
@@ -38,6 +38,10 @@ export class CreateUserCommandHandler {
       }),
     );
 
-    return user;
+    return this.jwtAdapter.sign({
+      id: user.id,
+      name: user.getFullName(),
+      email: user.email,
+    });
   };
 }
