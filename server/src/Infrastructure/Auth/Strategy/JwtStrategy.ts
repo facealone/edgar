@@ -3,9 +3,9 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException, Inject } from '@nestjs/common';
 import { ITokenPayload } from 'src/Application/ITokenPayload';
-import { User } from 'src/Domain/User/User.entity';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { GetUserByIdQuery } from 'src/Application/User/Query/GetUserByIdQuery';
+import { UserDetailView } from 'src/Application/User/View/UserDetailView';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
@@ -16,21 +16,18 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: process.env.JWT_SECRET_KEY,
-      /*signOptions: {
-        expiresIn: process.env.JWT_EXPIRES,
-      },*/
     });
   }
 
-  validate = async (payload: ITokenPayload): Promise<User> => {
+  validate = async (payload: ITokenPayload): Promise<UserDetailView> => {
     const query = new GetUserByIdQuery();
     query.id = payload.id;
 
-    const user = await this.queryBus.execute(query);
-    if (!(user instanceof User)) {
+    const userDetailView = await this.queryBus.execute(query);
+    if (!(userDetailView instanceof UserDetailView)) {
       throw new UnauthorizedException();
     }
 
-    return user;
+    return userDetailView;
   };
 }

@@ -15,7 +15,7 @@ export class UserHouse {
   @Column({
     type: 'enum',
     enum: UserRole,
-    default: UserRole.GUEST,
+    default: UserRole.OWNER,
   })
   role: UserRole;
 
@@ -36,4 +36,8 @@ export class UserHouse {
 
   @ManyToOne(type => User)
   user: User;
+
+  constructor(userHouse: Partial<UserHouse>) {
+    Object.assign(this, userHouse);
+  }
 }

@@ -24,7 +24,8 @@ export class LoginCommandHandler {
 
     return this.jwtAdapter.sign({
       id: user.id,
-      name: user.getFullName(),
+      firstName: user.firstName,
+      lastName: user.lastName.toUpperCase(),
       email: user.email,
     });
   };

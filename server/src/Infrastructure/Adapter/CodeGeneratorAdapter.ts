@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import shortid from 'shortid';
-import { IShortIdGeneratorAdapter } from 'src/Application/Adapter/IShortIdGeneratorAdapter';
+import { ICodeGeneratorAdapter } from 'src/Application/Adapter/ICodeGeneratorAdapter';
 
 @Injectable()
-export class ShortIdGeneratorAdapter implements IShortIdGeneratorAdapter {
+export class CodeGeneratorAdapter implements ICodeGeneratorAdapter {
   generate = () => {
     shortid.characters(
       '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',

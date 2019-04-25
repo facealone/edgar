@@ -54,7 +54,7 @@ services:
       - 9200:9200
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:6.6.0
+    image: docker.elastic.co/kibana/kibana:7.0.0
     labels:
       - 'traefik.port=5601'
       - 'traefik.frontend.entryPoints=https'

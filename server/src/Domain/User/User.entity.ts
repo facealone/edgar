@@ -54,10 +54,6 @@ export class User {
     return bcrypt.compareSync(plainPassword, this.password);
   };
 
-  getFullName = (): string => {
-    return this.firstName + ' ' + this.lastName.toUpperCase();
-  };
-
   constructor(user: Partial<User>) {
     Object.assign(this, user);
   }
