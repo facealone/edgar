@@ -14,12 +14,11 @@ setSubstitutionWrappers('{{', '}}');
 @Injectable()
 export class MailerAdapter implements IMailerAdapter {
   send = (mail: Mail): void => {
-    try {
-      SendgridSend({
-        from: process.env.SENDER_MAIL,
-        templateId: mail.templateId,
-        substitutions: mail.substitutions,
-      });
-    } catch (err) {}
+    SendgridSend({
+      to: mail.receiver,
+      from: process.env.SENDER_MAIL,
+      templateId: mail.templateId,
+      substitutions: mail.substitutions,
+    });
   };
 }

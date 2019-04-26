@@ -10,6 +10,7 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { GetUserByIdQuery } from 'src/Application/User/Query/GetUserByIdQuery';
+import { User } from 'src/Domain/User/User.entity';
 import { UserDetailView } from 'src/Application/User/View/UserDetailView';
 
 @Controller('users')
@@ -25,12 +26,17 @@ export class GetUserAction {
   @Get('/:id')
   @ApiOperation({ title: 'Get user ressource' })
   async index(@Param() query: GetUserByIdQuery): Promise<UserDetailView> {
-    const userDetailView = await this.queryBus.execute(query);
+    const user = await this.queryBus.execute(query);
 
-    if (!(userDetailView instanceof UserDetailView)) {
+    if (!(user instanceof User)) {
       throw new NotFoundException();
     }
 
-    return userDetailView;
+    return new UserDetailView(
+      user.id,
+      user.firstName,
+      user.lastName,
+      user.email,
+    );
   }
 }

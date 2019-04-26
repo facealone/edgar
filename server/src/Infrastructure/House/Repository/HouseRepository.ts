@@ -13,4 +13,8 @@ export class HouseRepository implements IHouseRepository {
   save = async (house: House): Promise<House> => {
     return await this.repository.save(house);
   };
+
+  find = async (id: string): Promise<House | null> => {
+    return await this.repository.findOne({ id });
+  };
 }

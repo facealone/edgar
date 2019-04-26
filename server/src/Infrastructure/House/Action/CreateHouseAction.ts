@@ -11,11 +11,11 @@ import { AuthGuard } from '@nestjs/passport';
 import { CreateHouseCommand } from 'src/Application/House/Command/CreateHouseCommand';
 import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapter';
 import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorator';
-import { User } from 'src/Domain/User/User.entity';
 import { CreateUserHouseCommand } from 'src/Application/User/Command/CreateUserHouseCommand';
 import { House } from 'src/Domain/House/House.entity';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
 import { UpdateCurrentHouseCommand } from 'src/Application/User/Command/UpdateCurrentHouseCommand';
+import { User } from 'src/Domain/User/User.entity';
 
 @Controller('houses')
 @ApiUseTags('House')
@@ -31,7 +31,7 @@ export class CreateHouseAction {
   @ApiOperation({ title: 'Create new house' })
   async index(
     @Body() command: CreateHouseCommand,
-    @LoggedUser() user: User,
+    @LoggedUser() loggedUser: User,
   ): Promise<object> {
     const house = await this.commandBus.execute(command);
     if (!(house instanceof House)) {
@@ -39,13 +39,15 @@ export class CreateHouseAction {
     }
 
     const userHouse = await this.commandBus.execute(
-      new CreateUserHouseCommand(house, user),
+      new CreateUserHouseCommand(loggedUser, house),
     );
     if (!(userHouse instanceof UserHouse)) {
       throw new BadRequestException();
     }
 
-    await this.commandBus.execute(new UpdateCurrentHouseCommand(user, house));
+    await this.commandBus.execute(
+      new UpdateCurrentHouseCommand(loggedUser, house),
+    );
 
     return {
       id: house.id,

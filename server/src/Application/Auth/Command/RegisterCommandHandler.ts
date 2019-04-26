@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { CommandHandler } from '@nestjs/cqrs';
 import { RegisterCommand } from './RegisterCommand';
 import { IUserRepository } from 'src/Domain/User/Repository/IUserRepository';
@@ -19,7 +20,7 @@ export class RegisterCommandHandler {
 
   execute = async (command: RegisterCommand): Promise<string> => {
     if (false === (await this.canUserRegister.isSatisfiedBy(command.email))) {
-      throw new BadRequestException('user.already.exists');
+      throw new BadRequestException('auth.user.already.exists');
     }
 
     const user = new User({

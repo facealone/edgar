@@ -5,7 +5,7 @@ import { Injectable, UnauthorizedException, Inject } from '@nestjs/common';
 import { ITokenPayload } from 'src/Application/ITokenPayload';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { GetUserByIdQuery } from 'src/Application/User/Query/GetUserByIdQuery';
-import { UserDetailView } from 'src/Application/User/View/UserDetailView';
+import { User } from 'src/Domain/User/User.entity';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
@@ -19,15 +19,15 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     });
   }
 
-  validate = async (payload: ITokenPayload): Promise<UserDetailView> => {
+  validate = async (payload: ITokenPayload): Promise<User> => {
     const query = new GetUserByIdQuery();
     query.id = payload.id;
 
-    const userDetailView = await this.queryBus.execute(query);
-    if (!(userDetailView instanceof UserDetailView)) {
+    const user = await this.queryBus.execute(query);
+    if (!(user instanceof User)) {
       throw new UnauthorizedException();
     }
 
-    return userDetailView;
+    return user;
   };
 }

@@ -17,13 +17,17 @@ export class Voucher {
   @Column({
     type: 'enum',
     enum: UserRole,
-    default: UserRole.GUEST,
+    default: UserRole.OWNER,
   })
-  role: UserRole;
+  role: string;
 
   @ManyToOne(type => House, { onDelete: 'CASCADE' })
   house: House;
 
   @ManyToOne(type => User, { onDelete: 'CASCADE' })
   user: User;
+
+  constructor(voucher: Partial<Voucher>) {
+    Object.assign(this, voucher);
+  }
 }

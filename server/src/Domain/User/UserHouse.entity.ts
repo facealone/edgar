@@ -17,7 +17,7 @@ export class UserHouse {
     enum: UserRole,
     default: UserRole.OWNER,
   })
-  role: UserRole;
+  role: string;
 
   @Column({
     type: 'boolean',
