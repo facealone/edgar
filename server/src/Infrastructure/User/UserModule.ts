@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { BusModule } from '../Common/BusModule';
+import { BusModule } from '../BusModule';
 import { UserRepository } from 'src/Infrastructure/User/Repository/UserRepository';
 import { GetUserByIdQueryHandler } from 'src/Application/User/Query/GetUserByIdQueryHandler';
 import { GetUserAction } from './Action/GetUserAction';

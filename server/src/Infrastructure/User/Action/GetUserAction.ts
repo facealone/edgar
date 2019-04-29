@@ -23,8 +23,8 @@ export class GetUserAction {
     private readonly queryBus: IQueryBusAdapter,
   ) {}
 
-  @Get('/:id')
   @ApiOperation({ title: 'Get user ressource' })
+  @Get('/:id')
   public async index(
     @Param() query: GetUserByIdQuery,
   ): Promise<UserDetailView> {

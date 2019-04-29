@@ -27,8 +27,8 @@ export class CreateHouseAction {
     private readonly commandBus: ICommandBusAdapter,
   ) {}
 
-  @Post()
   @ApiOperation({ title: 'Create new house' })
+  @Post()
   public async index(
     @Body() command: CreateHouseCommand,
     @LoggedUser() loggedUser: User,

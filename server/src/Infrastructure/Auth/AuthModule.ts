@@ -4,7 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
 import { RegisterCommandHandler } from 'src/Application/Auth/Command/RegisterCommandHandler';
-import { BusModule } from '../Common/BusModule';
+import { BusModule } from '../BusModule';
 import { UserRepository } from 'src/Infrastructure/User/Repository/UserRepository';
 import { RegisterAction } from 'src/Infrastructure/Auth/Action/RegisterAction';
 import { User } from 'src/Domain/User/User.entity';

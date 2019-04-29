@@ -11,7 +11,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapter';
 import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorator';
 import { User } from 'src/Domain/User/User.entity';
-import { CreateVoucherCommand } from 'src/Application/House/Command/CreateVoucherCommand';
+import { CreateVoucherCommand } from 'src/Application/House/Command/Voucher/CreateVoucherCommand';
 import { Voucher } from 'src/Domain/House/Voucher.entity';
 
 @Controller('vouchers')
@@ -24,10 +24,10 @@ export class CreateVoucherAction {
     private readonly commandBus: ICommandBusAdapter,
   ) {}
 
-  @Post()
   @ApiOperation({
     title: 'Create voucher and send notification to invited user',
   })
+  @Post()
   public async index(
     @Body() command: CreateVoucherCommand,
     @LoggedUser() user: User,
@@ -41,6 +41,7 @@ export class CreateVoucherAction {
 
     return {
       id: voucher.id,
+      code: voucher.code,
     };
   }
 }

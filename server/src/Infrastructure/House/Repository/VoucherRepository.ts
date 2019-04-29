@@ -24,4 +24,15 @@ export class VoucherRepository implements IVoucherRepository {
       email,
     });
   };
+
+  public findOneByCode = async (code: string): Promise<Voucher | null> => {
+    return await this.repository.findOne({
+      where: { code },
+      relations: ['house'],
+    });
+  };
+
+  public remove = async (voucher: Voucher): Promise<void> => {
+    await this.repository.remove(voucher);
+  };
 }

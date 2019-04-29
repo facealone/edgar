@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './Infrastructure/User/UserModule';
-import { HouseModule } from './Infrastructure/HouseModule';
+import { HouseModule } from './Infrastructure/House/HouseModule';
 import { AuthModule } from './Infrastructure/Auth/AuthModule';
 
 @Module({

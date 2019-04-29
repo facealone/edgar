@@ -10,11 +10,18 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 export class MailerAdapter implements IMailerAdapter {
   public send = (mail: AbstractMail): void => {
     sgMail.send({
-      to: mail.receiver,
       from: process.env.SENDER_MAIL,
       templateId: mail.templateId,
-      substitutions: mail.substitutions,
-      substitutionWrappers: ['{{', '}}'],
+      personalizations: [
+        {
+          to: [
+            {
+              email: mail.receiver,
+            },
+          ],
+          dynamicTemplateData: mail.substitutions,
+        },
+      ],
     });
   };
 }
