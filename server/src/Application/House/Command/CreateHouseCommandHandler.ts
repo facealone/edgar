@@ -10,7 +10,7 @@ export class CreateHouseCommandHandler {
     @Inject('IHouseRepository') private readonly repository: IHouseRepository,
   ) {}
 
-  execute = async (command: CreateHouseCommand): Promise<House> => {
+  public execute = async (command: CreateHouseCommand): Promise<House> => {
     return await this.repository.save(new House({ name: command.name }));
   };
 }

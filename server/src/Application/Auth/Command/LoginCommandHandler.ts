@@ -12,7 +12,7 @@ export class LoginCommandHandler {
     @Inject('ITokenAdapter') private readonly jwtAdapter: ITokenAdapter,
   ) {}
 
-  execute = async (command: LoginCommand): Promise<string> => {
+  public execute = async (command: LoginCommand): Promise<string> => {
     const user = await this.userRepository.findOneByEmail(command.email);
 
     if (

@@ -7,7 +7,7 @@ import { IQuery } from 'src/Application/IQuery';
 export class QueryBusAdapter implements IQueryBusAdapter {
   constructor(private readonly queryBus: QueryBus) {}
 
-  execute = (query: IQuery) => {
+  public execute = (query: IQuery) => {
     return this.queryBus.execute(query);
   };
 }

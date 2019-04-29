@@ -25,7 +25,9 @@ export class GetUserAction {
 
   @Get('/:id')
   @ApiOperation({ title: 'Get user ressource' })
-  async index(@Param() query: GetUserByIdQuery): Promise<UserDetailView> {
+  public async index(
+    @Param() query: GetUserByIdQuery,
+  ): Promise<UserDetailView> {
     const user = await this.queryBus.execute(query);
 
     if (!(user instanceof User)) {

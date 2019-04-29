@@ -12,7 +12,7 @@ export class LoginAction {
   ) {}
 
   @Post()
-  async index(@Body() command: LoginCommand): Promise<object> {
+  public async index(@Body() command: LoginCommand): Promise<object> {
     const accessToken = await this.commandBus.execute(command);
 
     return {

@@ -1,24 +1,20 @@
 import 'dotenv/config';
-import {
-  send as SendgridSend,
-  setApiKey,
-  setSubstitutionWrappers,
-} from '@sendgrid/mail';
+import * as sgMail from '@sendgrid/mail';
 import { Injectable } from '@nestjs/common';
 import { IMailerAdapter } from 'src/Application/Adapter/IMailerAdapter';
-import { Mail } from 'src/Domain/Common/Mail/Mail';
+import { AbstractMail } from 'src/Domain/AbstractMail';
 
-setApiKey(process.env.SENDGRID_API_KEY);
-setSubstitutionWrappers('{{', '}}');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 @Injectable()
 export class MailerAdapter implements IMailerAdapter {
-  send = (mail: Mail): void => {
-    SendgridSend({
+  public send = (mail: AbstractMail): void => {
+    sgMail.send({
       to: mail.receiver,
       from: process.env.SENDER_MAIL,
       templateId: mail.templateId,
       substitutions: mail.substitutions,
+      substitutionWrappers: ['{{', '}}'],
     });
   };
 }

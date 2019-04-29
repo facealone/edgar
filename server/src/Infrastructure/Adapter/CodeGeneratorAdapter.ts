@@ -4,7 +4,7 @@ import { ICodeGeneratorAdapter } from 'src/Application/Adapter/ICodeGeneratorAda
 
 @Injectable()
 export class CodeGeneratorAdapter implements ICodeGeneratorAdapter {
-  generate = () => {
+  public generate = () => {
     return shortid.generate();
   };
 }

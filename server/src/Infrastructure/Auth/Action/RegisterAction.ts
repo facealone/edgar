@@ -12,7 +12,7 @@ export class RegisterAction {
   ) {}
 
   @Post()
-  async index(@Body() command: RegisterCommand): Promise<object> {
+  public async index(@Body() command: RegisterCommand): Promise<object> {
     const accessToken = await this.commandBus.execute(command);
 
     return {

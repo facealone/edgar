@@ -29,7 +29,7 @@ export class CreateHouseAction {
 
   @Post()
   @ApiOperation({ title: 'Create new house' })
-  async index(
+  public async index(
     @Body() command: CreateHouseCommand,
     @LoggedUser() loggedUser: User,
   ): Promise<object> {

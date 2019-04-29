@@ -1,5 +1,5 @@
-import { Mail } from 'src/Domain/Common/Mail/Mail';
+import { AbstractMail } from 'src/Domain/AbstractMail';
 
 export interface IMailerAdapter {
-  send(mail: Mail): void;
+  send(mail: AbstractMail): void;
 }

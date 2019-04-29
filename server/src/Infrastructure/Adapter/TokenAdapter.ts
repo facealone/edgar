@@ -7,7 +7,7 @@ import { ITokenPayload } from 'src/Application/ITokenPayload';
 export class TokenAdapter implements ITokenAdapter {
   constructor(private readonly jwtService: JwtService) {}
 
-  sign = (payload: ITokenPayload): string => {
+  public sign = (payload: ITokenPayload): string => {
     return this.jwtService.sign(payload);
   };
 }

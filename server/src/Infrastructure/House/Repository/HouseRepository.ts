@@ -10,11 +10,11 @@ export class HouseRepository implements IHouseRepository {
     @InjectRepository(House) private readonly repository: Repository<House>,
   ) {}
 
-  save = async (house: House): Promise<House> => {
+  public save = async (house: House): Promise<House> => {
     return await this.repository.save(house);
   };
 
-  find = async (id: string): Promise<House | null> => {
+  public find = async (id: string): Promise<House | null> => {
     return await this.repository.findOne({ id });
   };
 }

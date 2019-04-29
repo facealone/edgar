@@ -8,7 +8,7 @@ export class CanUserRegister {
     @Inject('IUserRepository') private readonly userRepository: IUserRepository,
   ) {}
 
-  isSatisfiedBy = async (email: string): Promise<boolean> => {
+  public isSatisfiedBy = async (email: string): Promise<boolean> => {
     const user = await this.userRepository.findOneByEmail(email);
 
     return !(user instanceof User);

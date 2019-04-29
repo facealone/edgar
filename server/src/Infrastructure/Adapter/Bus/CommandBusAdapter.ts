@@ -6,7 +6,7 @@ import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapt
 export class CommandBusAdapter implements ICommandBusAdapter {
   constructor(private readonly commandBus: CommandBus) {}
 
-  execute = (command: ICommand) => {
+  public execute = (command: ICommand) => {
     return this.commandBus.execute(command);
   };
 }

@@ -28,7 +28,7 @@ export class CreateVoucherAction {
   @ApiOperation({
     title: 'Create voucher and send notification to invited user',
   })
-  async index(
+  public async index(
     @Body() command: CreateVoucherCommand,
     @LoggedUser() user: User,
   ): Promise<object> {

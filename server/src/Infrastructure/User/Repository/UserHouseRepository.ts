@@ -11,7 +11,7 @@ export class UserHouseRepository implements IUserHouseRepository {
     private readonly repository: Repository<UserHouse>,
   ) {}
 
-  save = async (userHouse: UserHouse): Promise<UserHouse> => {
+  public save = async (userHouse: UserHouse): Promise<UserHouse> => {
     return await this.repository.save(userHouse);
   };
 }
