@@ -11,7 +11,10 @@ export class UserRepository implements IUserRepository {
   ) {}
 
   public findOneById = async (id: string): Promise<User | null> => {
-    return await this.repository.findOne({ id });
+    return await this.repository.findOne({
+      where: { id },
+      relations: ['currentHouse'],
+    });
   };
 
   public findOneByEmail = async (email: string): Promise<User | null> => {

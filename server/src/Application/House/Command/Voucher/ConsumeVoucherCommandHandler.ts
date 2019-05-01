@@ -32,7 +32,7 @@ export class ConsumeVoucherCommandHandler {
     }
 
     const userHouse = await this.commandBus.execute(
-      new CreateUserHouseCommand(user, voucher.house),
+      new CreateUserHouseCommand(user, voucher.house, voucher.role),
     );
 
     if (!(userHouse instanceof UserHouse)) {

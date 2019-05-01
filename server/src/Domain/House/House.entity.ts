@@ -22,4 +22,8 @@ export class House {
   constructor(house: Partial<House>) {
     Object.assign(this, house);
   }
+
+  update(name: string) {
+    this.name = name;
+  }
 }

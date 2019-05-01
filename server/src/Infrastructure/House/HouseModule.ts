@@ -18,6 +18,10 @@ import { ConsumeVoucherCommandHandler } from 'src/Application/House/Command/Vouc
 import { CanConsumeVoucher } from 'src/Domain/House/CanConsumeVoucher';
 import { UserHouseRepository } from '../User/Repository/UserHouseRepository';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
+import { UpdateHouseAction } from './Action/UpdateHouseAction';
+import { GetHouseByIdQueryHandler } from 'src/Application/House/Query/GetHouseByIdQueryHandler';
+import { UpdateHouseCommandHandler } from 'src/Application/House/Command/UpdateHouseCommandHandler';
+import { HouseMemberGuard } from './Guard/HouseMemberGuard';
 
 @Module({
   imports: [
@@ -25,7 +29,12 @@ import { UserHouse } from 'src/Domain/User/UserHouse.entity';
     AuthModule,
     TypeOrmModule.forFeature([House, Voucher, UserHouse]),
   ],
-  controllers: [CreateHouseAction, CreateVoucherAction, ConsumeVoucherAction],
+  controllers: [
+    CreateHouseAction,
+    CreateVoucherAction,
+    ConsumeVoucherAction,
+    UpdateHouseAction,
+  ],
   providers: [
     { provide: 'IHouseRepository', useClass: HouseRepository },
     { provide: 'IVoucherRepository', useClass: VoucherRepository },
@@ -33,10 +42,13 @@ import { UserHouse } from 'src/Domain/User/UserHouse.entity';
     { provide: 'ICodeGeneratorAdapter', useClass: CodeGeneratorAdapter },
     { provide: 'IMailerAdapter', useClass: MailerAdapter },
     CreateHouseCommandHandler,
+    UpdateHouseCommandHandler,
     CreateVoucherCommandHandler,
     ConsumeVoucherCommandHandler,
+    GetHouseByIdQueryHandler,
     CanCreateVoucher,
     CanConsumeVoucher,
+    HouseMemberGuard,
   ],
 })
 export class HouseModule {}

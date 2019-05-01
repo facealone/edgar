@@ -32,7 +32,7 @@ export class CreateHouseAction {
   public async index(
     @Body() command: CreateHouseCommand,
     @LoggedUser() loggedUser: User,
-  ): Promise<object> {
+  ): Promise<House> {
     const house = await this.commandBus.execute(command);
     if (!(house instanceof House)) {
       throw new BadRequestException();
@@ -49,8 +49,6 @@ export class CreateHouseAction {
       new UpdateCurrentHouseCommand(loggedUser, house),
     );
 
-    return {
-      id: house.id,
-    };
+    return house;
   }
 }
