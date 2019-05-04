@@ -13,7 +13,8 @@ export class UpdateCurrentHouseComandHandler {
 
   execute = async (command: UpdateCurrentHouseCommand): Promise<User> => {
     const user = command.user;
-    user.currentHouse = command.house;
+
+    user.updateCurrentHouse(command.house);
 
     return await this.userRepository.save(user);
   };

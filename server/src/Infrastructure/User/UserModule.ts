@@ -10,16 +10,19 @@ import { UserHouseRepository } from './Repository/UserHouseRepository';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
 import { UpdateCurrentHouseComandHandler } from 'src/Application/User/Command/UpdateCurrentHouseCommandHandler';
 import { CreateUserHouseCommandHandler } from 'src/Application/User/Command/CreateUserHouseCommandHandler';
+import { SwitchCurrentHouseAction } from './Action/SwitchCurrentHouseAction';
+import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 
 @Module({
   imports: [BusModule, AuthModule, TypeOrmModule.forFeature([User, UserHouse])],
-  controllers: [GetUserAction],
+  controllers: [GetUserAction, SwitchCurrentHouseAction],
   providers: [
     { provide: 'IUserRepository', useClass: UserRepository },
     { provide: 'IUserHouseRepository', useClass: UserHouseRepository },
     GetUserByIdQueryHandler,
     UpdateCurrentHouseComandHandler,
     CreateUserHouseCommandHandler,
+    IsMemberOfHouse,
   ],
 })
 export class UserModule {}

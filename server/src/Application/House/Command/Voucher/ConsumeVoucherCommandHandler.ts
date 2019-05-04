@@ -7,7 +7,7 @@ import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapt
 import { UpdateCurrentHouseCommand } from 'src/Application/User/Command/UpdateCurrentHouseCommand';
 import { CreateUserHouseCommand } from 'src/Application/User/Command/CreateUserHouseCommand';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
-import { CanConsumeVoucher } from 'src/Domain/House/CanConsumeVoucher';
+import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 
 @CommandHandler(ConsumeVoucherCommand)
 export class ConsumeVoucherCommandHandler {
@@ -16,7 +16,7 @@ export class ConsumeVoucherCommandHandler {
     private readonly voucherRepository: IVoucherRepository,
     @Inject('ICommandBusAdapter')
     private readonly commandBus: ICommandBusAdapter,
-    private readonly canConsumeVoucher: CanConsumeVoucher,
+    private readonly isMemberOfHouse: IsMemberOfHouse,
   ) {}
 
   public execute = async (command: ConsumeVoucherCommand): Promise<void> => {
@@ -27,12 +27,14 @@ export class ConsumeVoucherCommandHandler {
       throw new NotFoundException('house.voucher.not_found');
     }
 
-    if (false === (await this.canConsumeVoucher.isSatisfiedBy(voucher, user))) {
-      throw new BadRequestException('house.cannot.consume.voucher');
+    const { house, role } = voucher;
+
+    if (true === (await this.isMemberOfHouse.isSatisfiedBy(house, user))) {
+      throw new BadRequestException('house.user.already.member');
     }
 
     const userHouse = await this.commandBus.execute(
-      new CreateUserHouseCommand(user, voucher.house, voucher.role),
+      new CreateUserHouseCommand(user, house, role),
     );
 
     if (!(userHouse instanceof UserHouse)) {

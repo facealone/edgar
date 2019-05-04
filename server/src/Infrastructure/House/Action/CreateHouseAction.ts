@@ -20,14 +20,14 @@ import { User } from 'src/Domain/User/User.entity';
 @Controller('houses')
 @ApiUseTags('House')
 @ApiBearerAuth()
-@UseGuards(AuthGuard())
 export class CreateHouseAction {
   constructor(
     @Inject('ICommandBusAdapter')
     private readonly commandBus: ICommandBusAdapter,
   ) {}
 
-  @ApiOperation({ title: 'Create new house' })
+  @ApiOperation({ title: 'Create house by the logged user' })
+  @UseGuards(AuthGuard())
   @Post()
   public async index(
     @Body() command: CreateHouseCommand,

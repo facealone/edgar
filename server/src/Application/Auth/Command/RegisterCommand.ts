@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
 import { ICommand } from 'src/Application/ICommand';
 import { ApiModelProperty } from '@nestjs/swagger';
 
@@ -17,6 +17,7 @@ export class RegisterCommand implements ICommand {
   public email: string;
 
   @IsNotEmpty()
+  @MinLength(10)
   @ApiModelProperty()
   public password: string;
 }

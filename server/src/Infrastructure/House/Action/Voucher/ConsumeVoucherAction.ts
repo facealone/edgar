@@ -9,7 +9,6 @@ import { User } from 'src/Domain/User/User.entity';
 @Controller('vouchers')
 @ApiUseTags('Voucher')
 @ApiBearerAuth()
-@UseGuards(AuthGuard())
 export class ConsumeVoucherAction {
   constructor(
     @Inject('ICommandBusAdapter')
@@ -17,8 +16,9 @@ export class ConsumeVoucherAction {
   ) {}
 
   @ApiOperation({
-    title: 'Consume voucher by notified user to join a house',
+    title: 'Consume voucher to join a house by notified user',
   })
+  @UseGuards(AuthGuard())
   @Delete('/:code/consume')
   public async index(
     @Param() command: ConsumeVoucherCommand,

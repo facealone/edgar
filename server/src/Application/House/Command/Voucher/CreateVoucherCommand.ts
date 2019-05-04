@@ -8,7 +8,7 @@ export class CreateVoucherCommand implements ICommand {
   @IsNotEmpty()
   @IsEmail()
   @ApiModelProperty()
-  email: string;
+  public email: string;
 
   @IsNotEmpty()
   @IsUUID()

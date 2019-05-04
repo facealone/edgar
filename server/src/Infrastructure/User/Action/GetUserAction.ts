@@ -13,10 +13,9 @@ import { GetUserByIdQuery } from 'src/Application/User/Query/GetUserByIdQuery';
 import { User } from 'src/Domain/User/User.entity';
 import { UserDetailView } from 'src/Application/User/View/UserDetailView';
 
-@Controller('users')
 @ApiBearerAuth()
+@Controller('users')
 @ApiUseTags('User')
-@UseGuards(AuthGuard())
 export class GetUserAction {
   constructor(
     @Inject('IQueryBusAdapter')
@@ -24,6 +23,7 @@ export class GetUserAction {
   ) {}
 
   @ApiOperation({ title: 'Get user ressource' })
+  @UseGuards(AuthGuard())
   @Get('/:id')
   public async index(
     @Param() query: GetUserByIdQuery,

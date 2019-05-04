@@ -16,12 +16,11 @@ import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorato
 import { User } from 'src/Domain/User/User.entity';
 import { House } from 'src/Domain/House/House.entity';
 import { GetHouseByIdQuery } from 'src/Application/House/Query/GetHouseByIdQuery';
-import { HouseMemberGuard } from '../Guard/HouseMemberGuard';
+import { HouseMemberGuard } from '../../User/Guard/HouseMemberGuard';
 
 @Controller('houses')
 @ApiUseTags('House')
 @ApiBearerAuth()
-@UseGuards(AuthGuard(), HouseMemberGuard)
 export class UpdateHouseAction {
   constructor(
     @Inject('ICommandBusAdapter')
@@ -30,7 +29,8 @@ export class UpdateHouseAction {
     private readonly queryBus: IQueryBusAdapter,
   ) {}
 
-  @ApiOperation({ title: 'Update house' })
+  @ApiOperation({ title: 'Update house by the logged user' })
+  @UseGuards(AuthGuard(), HouseMemberGuard)
   @Put('/:id')
   public async index(
     @Param() query: GetHouseByIdQuery,

@@ -17,7 +17,6 @@ import { Voucher } from 'src/Domain/House/Voucher.entity';
 @Controller('vouchers')
 @ApiUseTags('Voucher')
 @ApiBearerAuth()
-@UseGuards(AuthGuard())
 export class CreateVoucherAction {
   constructor(
     @Inject('ICommandBusAdapter')
@@ -25,8 +24,9 @@ export class CreateVoucherAction {
   ) {}
 
   @ApiOperation({
-    title: 'Create voucher and send notification to invited user',
+    title: 'Create voucher by the logged user and send it to invited user',
   })
+  @UseGuards(AuthGuard())
   @Post()
   public async index(
     @Body() command: CreateVoucherCommand,

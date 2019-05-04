@@ -15,13 +15,13 @@ import { MailerAdapter } from '../Adapter/MailerAdapter';
 import { VoucherRepository } from './Repository/VoucherRepository';
 import { ConsumeVoucherAction } from './Action/Voucher/ConsumeVoucherAction';
 import { ConsumeVoucherCommandHandler } from 'src/Application/House/Command/Voucher/ConsumeVoucherCommandHandler';
-import { CanConsumeVoucher } from 'src/Domain/House/CanConsumeVoucher';
 import { UserHouseRepository } from '../User/Repository/UserHouseRepository';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
 import { UpdateHouseAction } from './Action/UpdateHouseAction';
 import { GetHouseByIdQueryHandler } from 'src/Application/House/Query/GetHouseByIdQueryHandler';
 import { UpdateHouseCommandHandler } from 'src/Application/House/Command/UpdateHouseCommandHandler';
-import { HouseMemberGuard } from './Guard/HouseMemberGuard';
+import { HouseMemberGuard } from '../User/Guard/HouseMemberGuard';
+import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 
 @Module({
   imports: [
@@ -47,7 +47,7 @@ import { HouseMemberGuard } from './Guard/HouseMemberGuard';
     ConsumeVoucherCommandHandler,
     GetHouseByIdQueryHandler,
     CanCreateVoucher,
-    CanConsumeVoucher,
+    IsMemberOfHouse,
     HouseMemberGuard,
   ],
 })

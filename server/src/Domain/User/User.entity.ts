@@ -41,6 +41,10 @@ export class User {
   @JoinTable()
   userHouses: UserHouse[];
 
+  constructor(user: Partial<User>) {
+    Object.assign(this, user);
+  }
+
   @BeforeInsert()
   hashPassword = () => {
     if (!this.password) {
@@ -54,7 +58,7 @@ export class User {
     return bcrypt.compareSync(plainPassword, this.password);
   };
 
-  constructor(user: Partial<User>) {
-    Object.assign(this, user);
-  }
+  updateCurrentHouse = (house: House) => {
+    this.currentHouse = house;
+  };
 }
