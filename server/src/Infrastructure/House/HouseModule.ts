@@ -1,23 +1,23 @@
 import { Module } from '@nestjs/common';
 import { BusModule } from '../BusModule';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CreateHouseAction } from './Action/CreateHouseAction';
+import { CreateHouseController } from './Controller/CreateHouseController';
 import { House } from 'src/Domain/House/House.entity';
 import { Voucher } from 'src/Domain/House/Voucher.entity';
 import { HouseRepository } from './Repository/HouseRepository';
 import { CreateHouseCommandHandler } from 'src/Application/House/Command/CreateHouseCommandHandler';
 import { AuthModule } from '../Auth/AuthModule';
-import { CreateVoucherAction } from './Action/Voucher/CreateVoucherAction';
+import { CreateVoucherController } from './Controller/Voucher/CreateVoucherController';
 import { CanCreateVoucher } from 'src/Domain/House/CanCreateVoucher';
 import { CreateVoucherCommandHandler } from 'src/Application/House/Command/Voucher/CreateVoucherCommandHandler';
 import { CodeGeneratorAdapter } from '../Adapter/CodeGeneratorAdapter';
 import { MailerAdapter } from '../Adapter/MailerAdapter';
 import { VoucherRepository } from './Repository/VoucherRepository';
-import { ConsumeVoucherAction } from './Action/Voucher/ConsumeVoucherAction';
+import { ConsumeVoucherController } from './Controller/Voucher/ConsumeVoucherController';
 import { ConsumeVoucherCommandHandler } from 'src/Application/House/Command/Voucher/ConsumeVoucherCommandHandler';
 import { UserHouseRepository } from '../User/Repository/UserHouseRepository';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
-import { UpdateHouseAction } from './Action/UpdateHouseAction';
+import { UpdateHouseController } from './Controller/UpdateHouseController';
 import { GetHouseByIdQueryHandler } from 'src/Application/House/Query/GetHouseByIdQueryHandler';
 import { UpdateHouseCommandHandler } from 'src/Application/House/Command/UpdateHouseCommandHandler';
 import { HouseMemberGuard } from '../User/Guard/HouseMemberGuard';
@@ -30,10 +30,10 @@ import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
     TypeOrmModule.forFeature([House, Voucher, UserHouse]),
   ],
   controllers: [
-    CreateHouseAction,
-    CreateVoucherAction,
-    ConsumeVoucherAction,
-    UpdateHouseAction,
+    CreateHouseController,
+    CreateVoucherController,
+    ConsumeVoucherController,
+    UpdateHouseController,
   ],
   providers: [
     { provide: 'IHouseRepository', useClass: HouseRepository },

@@ -6,11 +6,11 @@ import { PassportModule } from '@nestjs/passport';
 import { RegisterCommandHandler } from 'src/Application/Auth/Command/RegisterCommandHandler';
 import { BusModule } from '../BusModule';
 import { UserRepository } from 'src/Infrastructure/User/Repository/UserRepository';
-import { RegisterAction } from 'src/Infrastructure/Auth/Action/RegisterAction';
+import { RegisterController } from 'src/Infrastructure/Auth/Controller/RegisterController';
 import { User } from 'src/Domain/User/User.entity';
 import { CanUserRegister } from 'src/Domain/User/CanUserRegister';
 import { MailerAdapter } from 'src/Infrastructure/Adapter/MailerAdapter';
-import { LoginAction } from './Action/LoginAction';
+import { LoginController } from './Controller/LoginController';
 import { TokenAdapter } from '../Adapter/TokenAdapter';
 import { LoginCommandHandler } from 'src/Application/Auth/Command/LoginCommandHandler';
 import { JwtStrategy } from './Strategy/JwtStrategy';
@@ -27,7 +27,7 @@ import { JwtStrategy } from './Strategy/JwtStrategy';
     PassportModule.register({ defaultStrategy: 'jwt' }),
     TypeOrmModule.forFeature([User]),
   ],
-  controllers: [RegisterAction, LoginAction],
+  controllers: [RegisterController, LoginController],
   providers: [
     { provide: 'IUserRepository', useClass: UserRepository },
     { provide: 'IMailerAdapter', useClass: MailerAdapter },

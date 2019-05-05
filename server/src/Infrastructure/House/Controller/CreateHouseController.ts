@@ -20,7 +20,7 @@ import { User } from 'src/Domain/User/User.entity';
 @Controller('houses')
 @ApiUseTags('House')
 @ApiBearerAuth()
-export class CreateHouseAction {
+export class CreateHouseController {
   constructor(
     @Inject('ICommandBusAdapter')
     private readonly commandBus: ICommandBusAdapter,

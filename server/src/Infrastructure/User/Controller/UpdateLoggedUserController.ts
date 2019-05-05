@@ -9,7 +9,7 @@ import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapt
 @ApiBearerAuth()
 @Controller('users')
 @ApiUseTags('User')
-export class UpdateLoggedUserAction {
+export class UpdateLoggedUserController {
   constructor(
     @Inject('ICommandBusAdapter')
     private readonly commandBus: ICommandBusAdapter,

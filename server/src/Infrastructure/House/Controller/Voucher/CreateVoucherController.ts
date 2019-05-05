@@ -17,7 +17,7 @@ import { Voucher } from 'src/Domain/House/Voucher.entity';
 @Controller('vouchers')
 @ApiUseTags('Voucher')
 @ApiBearerAuth()
-export class CreateVoucherAction {
+export class CreateVoucherController {
   constructor(
     @Inject('ICommandBusAdapter')
     private readonly commandBus: ICommandBusAdapter,

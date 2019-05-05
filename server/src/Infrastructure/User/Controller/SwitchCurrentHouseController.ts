@@ -11,7 +11,7 @@ import { House } from 'src/Domain/House/House.entity';
 @ApiBearerAuth()
 @Controller('users')
 @ApiUseTags('User')
-export class SwitchCurrentHouseAction {
+export class SwitchCurrentHouseController {
   constructor(
     @Inject('ICommandBusAdapter')
     private readonly commandBus: ICommandBusAdapter,
@@ -19,7 +19,7 @@ export class SwitchCurrentHouseAction {
 
   @ApiOperation({ title: 'Switch the current house of the logged user' })
   @UseGuards(AuthGuard(), HouseMemberGuard)
-  @Put('me/house/:houseId/switch')
+  @Put('me/houses/:houseId/switch')
   public async index(
     @Param('houseId') houseId: string,
     @LoggedUser() user: User,

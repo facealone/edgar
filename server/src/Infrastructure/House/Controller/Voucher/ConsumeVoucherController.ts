@@ -9,7 +9,7 @@ import { User } from 'src/Domain/User/User.entity';
 @Controller('vouchers')
 @ApiUseTags('Voucher')
 @ApiBearerAuth()
-export class ConsumeVoucherAction {
+export class ConsumeVoucherController {
   constructor(
     @Inject('ICommandBusAdapter')
     private readonly commandBus: ICommandBusAdapter,

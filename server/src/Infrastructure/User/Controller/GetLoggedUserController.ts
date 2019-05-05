@@ -7,7 +7,7 @@ import { LoggedUser } from '../Decorator/LoggedUserDecorator';
 @ApiBearerAuth()
 @Controller('users')
 @ApiUseTags('User')
-export class GetLoggedUserAction {
+export class GetLoggedUserController {
   @ApiOperation({ title: 'Get logged user information' })
   @UseGuards(AuthGuard())
   @Get('/me')

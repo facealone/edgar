@@ -1,18 +1,18 @@
 import { ApiUseTags } from '@nestjs/swagger';
 import { Post, Controller, Inject, Body } from '@nestjs/common';
 import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapter';
-import { LoginCommand } from 'src/Application/Auth/Command/LoginCommand';
+import { RegisterCommand } from 'src/Application/Auth/Command/RegisterCommand';
 
-@Controller('login')
+@Controller('register')
 @ApiUseTags('Auth')
-export class LoginAction {
+export class RegisterController {
   constructor(
     @Inject('ICommandBusAdapter')
     private readonly commandBus: ICommandBusAdapter,
   ) {}
 
   @Post()
-  public async index(@Body() command: LoginCommand): Promise<object> {
+  public async index(@Body() command: RegisterCommand): Promise<object> {
     const accessToken = await this.commandBus.execute(command);
 
     return {

@@ -21,7 +21,7 @@ import { HouseMemberGuard } from '../../User/Guard/HouseMemberGuard';
 @Controller('houses')
 @ApiUseTags('House')
 @ApiBearerAuth()
-export class UpdateHouseAction {
+export class UpdateHouseController {
   constructor(
     @Inject('ICommandBusAdapter')
     private readonly commandBus: ICommandBusAdapter,
