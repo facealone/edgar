@@ -16,22 +16,23 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: false })
   firstName: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: false })
   lastName: string;
 
   @Column({
     type: 'varchar',
     unique: true,
+    nullable: false,
   })
   email: string;
 
   @Column({ type: 'text', nullable: true })
   pushNotificationToken: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: false })
   password: string;
 
   @ManyToOne(type => House)

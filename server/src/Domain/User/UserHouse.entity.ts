@@ -31,10 +31,10 @@ export class UserHouse {
   })
   pushNotification: boolean;
 
-  @ManyToOne(type => House)
+  @ManyToOne(type => House, { nullable: false })
   house: House;
 
-  @ManyToOne(type => User)
+  @ManyToOne(type => User, { nullable: false })
   user: User;
 
   constructor(userHouse: Partial<UserHouse>) {

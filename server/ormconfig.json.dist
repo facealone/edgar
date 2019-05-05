@@ -5,7 +5,7 @@
   "username": "docker",
   "password": "docker",
   "database": "docker",
-  "synchronize": true,
+  "synchronize": false,
   "logging": false,
   "entities": ["src/Domain/**/*.entity.ts"],
   "migrations": ["migrations/**/*.ts"],

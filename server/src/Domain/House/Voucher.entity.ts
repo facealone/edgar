@@ -8,23 +8,24 @@ export class Voucher {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: false })
   code: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: false })
   email: string;
 
   @Column({
     type: 'enum',
     enum: UserRole,
     default: UserRole.OWNER,
+    nullable: false,
   })
   role: string;
 
-  @ManyToOne(type => House, { onDelete: 'CASCADE' })
+  @ManyToOne(type => House, { onDelete: 'CASCADE', nullable: false })
   house: House;
 
-  @ManyToOne(type => User, { onDelete: 'CASCADE' })
+  @ManyToOne(type => User, { onDelete: 'CASCADE', nullable: false })
   user: User;
 
   constructor(voucher: Partial<Voucher>) {

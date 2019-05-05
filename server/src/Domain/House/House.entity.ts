@@ -12,7 +12,7 @@ export class House {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: false })
   name: string;
 
   @ManyToMany(type => UserHouse, userHouse => userHouse.house)
