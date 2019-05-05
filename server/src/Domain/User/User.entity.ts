@@ -58,6 +58,12 @@ export class User {
     return bcrypt.compareSync(plainPassword, this.password);
   };
 
+  update = (firstName: string, lastName: string, email: string) => {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+  };
+
   updateCurrentHouse = (house: House) => {
     this.currentHouse = house;
   };

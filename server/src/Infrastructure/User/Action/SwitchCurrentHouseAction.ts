@@ -19,7 +19,7 @@ export class SwitchCurrentHouseAction {
 
   @ApiOperation({ title: 'Switch the current house of the logged user' })
   @UseGuards(AuthGuard(), HouseMemberGuard)
-  @Put('house/:houseId/switch')
+  @Put('me/house/:houseId/switch')
   public async index(
     @Param('houseId') houseId: string,
     @LoggedUser() user: User,

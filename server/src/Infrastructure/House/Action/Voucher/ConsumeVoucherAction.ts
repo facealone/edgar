@@ -16,7 +16,7 @@ export class ConsumeVoucherAction {
   ) {}
 
   @ApiOperation({
-    title: 'Consume voucher to join a house by notified user',
+    title: 'Consume voucher to join a house by logged user',
   })
   @UseGuards(AuthGuard())
   @Delete('/:code/consume')
