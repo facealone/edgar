@@ -1,4 +1,4 @@
-export class UserDetailView {
+export class LoggedUserView {
   constructor(
     public readonly id: string,
     public readonly firstName: string,

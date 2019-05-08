@@ -1,36 +1,29 @@
 import { ApiUseTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { Controller, UseGuards, Put, Body, Inject } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { UserDetailView } from 'src/Application/User/View/UserDetailView';
 import { LoggedUser } from '../Decorator/LoggedUserDecorator';
 import { UpdateUserCommand } from 'src/Application/User/Command/UpdateUserCommand';
 import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapter';
+import { UserUpdatedView } from 'src/Application/User/View/UserUpdatedView';
 
 @ApiBearerAuth()
 @Controller('users')
 @ApiUseTags('User')
-export class UpdateLoggedUserController {
+@UseGuards(AuthGuard())
+export class UpdateMeController {
   constructor(
     @Inject('ICommandBusAdapter')
     private readonly commandBus: ICommandBusAdapter,
   ) {}
 
   @ApiOperation({ title: 'Update logged user' })
-  @UseGuards(AuthGuard())
   @Put('/me')
   public async index(
     @Body() command: UpdateUserCommand,
     @LoggedUser() loggedUser,
-  ): Promise<UserDetailView> {
+  ): Promise<UserUpdatedView> {
     command.user = loggedUser;
 
-    const user = await this.commandBus.execute(command);
-
-    return new UserDetailView(
-      user.id,
-      user.firstName,
-      user.lastName,
-      user.email,
-    );
+    return await this.commandBus.execute(command);
   }
 }

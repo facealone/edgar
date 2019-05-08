@@ -20,7 +20,6 @@ import { UserHouse } from 'src/Domain/User/UserHouse.entity';
 import { UpdateHouseController } from './Controller/UpdateHouseController';
 import { GetHouseByIdQueryHandler } from 'src/Application/House/Query/GetHouseByIdQueryHandler';
 import { UpdateHouseCommandHandler } from 'src/Application/House/Command/UpdateHouseCommandHandler';
-import { HouseMemberGuard } from '../User/Guard/HouseMemberGuard';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 
 @Module({
@@ -48,7 +47,6 @@ import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
     GetHouseByIdQueryHandler,
     CanCreateVoucher,
     IsMemberOfHouse,
-    HouseMemberGuard,
   ],
 })
 export class HouseModule {}

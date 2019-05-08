@@ -15,4 +15,8 @@ export class Shop {
 
   @ManyToOne(type => User, { nullable: false })
   owner: User;
+
+  constructor(shop: Partial<Shop>) {
+    Object.assign(this, shop);
+  }
 }

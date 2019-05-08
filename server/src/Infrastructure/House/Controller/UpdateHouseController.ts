@@ -16,11 +16,12 @@ import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorato
 import { User } from 'src/Domain/User/User.entity';
 import { House } from 'src/Domain/House/House.entity';
 import { GetHouseByIdQuery } from 'src/Application/House/Query/GetHouseByIdQuery';
-import { HouseMemberGuard } from '../../User/Guard/HouseMemberGuard';
+import { HouseUpdatedView } from 'src/Application/House/View/HouseUpdatedView';
 
 @Controller('houses')
 @ApiUseTags('House')
 @ApiBearerAuth()
+@UseGuards(AuthGuard())
 export class UpdateHouseController {
   constructor(
     @Inject('ICommandBusAdapter')
@@ -30,13 +31,12 @@ export class UpdateHouseController {
   ) {}
 
   @ApiOperation({ title: 'Update house by the logged user' })
-  @UseGuards(AuthGuard(), HouseMemberGuard)
   @Put('/:id')
   public async index(
     @Param() query: GetHouseByIdQuery,
     @Body() command: UpdateHouseCommand,
     @LoggedUser() user: User,
-  ): Promise<void> {
+  ): Promise<HouseUpdatedView> {
     const house = await this.queryBus.execute(query);
     if (!(house instanceof House)) {
       throw new NotFoundException('house.not.found');

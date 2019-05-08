@@ -9,6 +9,7 @@ import { IHouseRepository } from 'src/Domain/House/Repository/IHouseRepository';
 import { House } from 'src/Domain/House/House.entity';
 import { IVoucherRepository } from 'src/Domain/House/Repository/IVoucherRepository';
 import { InvitationMail } from 'src/Domain/House/Mail/InvitationMail';
+import { VoucherCreatedView } from '../../View/Voucher/VoucherCreatedView';
 
 @CommandHandler(CreateVoucherCommand)
 export class CreateVoucherCommandHandler {
@@ -24,12 +25,14 @@ export class CreateVoucherCommandHandler {
     private readonly canCreateVoucher: CanCreateVoucher,
   ) {}
 
-  public execute = async (command: CreateVoucherCommand): Promise<Voucher> => {
+  public execute = async (
+    command: CreateVoucherCommand,
+  ): Promise<VoucherCreatedView> => {
     const { user, email, role } = command;
+    const house = user.currentHouse;
 
-    const house = await this.houseRepository.find(command.house);
     if (!(house instanceof House)) {
-      throw new BadRequestException('voucher.house.not_found');
+      throw new BadRequestException('house.not.found');
     }
 
     if (false === (await this.canCreateVoucher.isSatisfiedBy(house, email))) {
@@ -55,6 +58,6 @@ export class CreateVoucherCommandHandler {
       }),
     );
 
-    return voucher;
+    return new VoucherCreatedView(voucher.code);
   };
 }

@@ -9,6 +9,7 @@ import { User } from 'src/Domain/User/User.entity';
 @Controller('vouchers')
 @ApiUseTags('Voucher')
 @ApiBearerAuth()
+@UseGuards(AuthGuard())
 export class ConsumeVoucherController {
   constructor(
     @Inject('ICommandBusAdapter')
@@ -18,12 +19,11 @@ export class ConsumeVoucherController {
   @ApiOperation({
     title: 'Consume voucher to join a house by logged user',
   })
-  @UseGuards(AuthGuard())
   @Delete('/:code/consume')
   public async index(
     @Param() command: ConsumeVoucherCommand,
     @LoggedUser() user: User,
-  ) {
+  ): Promise<void> {
     command.user = user;
 
     await this.commandBus.execute(command);

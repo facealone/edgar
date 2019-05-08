@@ -10,17 +10,17 @@ import { UserHouseRepository } from './Repository/UserHouseRepository';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
 import { UpdateCurrentHouseComandHandler } from 'src/Application/User/Command/UpdateCurrentHouseCommandHandler';
 import { CreateUserHouseCommandHandler } from 'src/Application/User/Command/CreateUserHouseCommandHandler';
-import { SwitchCurrentHouseController } from './Controller/SwitchCurrentHouseController';
+import { UpdateCurrentHouseController } from './Controller/UpdateCurrentHouseController';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
-import { UpdateLoggedUserController } from './Controller/UpdateLoggedUserController';
+import { UpdateMeController } from './Controller/UpdateMeController';
 import { UpdateUserCommandHandler } from 'src/Application/User/Command/UpdateUserCommandHandler';
 
 @Module({
   imports: [BusModule, AuthModule, TypeOrmModule.forFeature([User, UserHouse])],
   controllers: [
     GetLoggedUserController,
-    UpdateLoggedUserController,
-    SwitchCurrentHouseController,
+    UpdateMeController,
+    UpdateCurrentHouseController,
   ],
   providers: [
     { provide: 'IUserRepository', useClass: UserRepository },

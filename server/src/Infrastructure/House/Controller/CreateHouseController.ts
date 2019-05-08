@@ -16,10 +16,12 @@ import { House } from 'src/Domain/House/House.entity';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
 import { UpdateCurrentHouseCommand } from 'src/Application/User/Command/UpdateCurrentHouseCommand';
 import { User } from 'src/Domain/User/User.entity';
+import { HouseCreatedView } from 'src/Application/House/View/HouseCreatedView';
 
 @Controller('houses')
 @ApiUseTags('House')
 @ApiBearerAuth()
+@UseGuards(AuthGuard())
 export class CreateHouseController {
   constructor(
     @Inject('ICommandBusAdapter')
@@ -27,12 +29,11 @@ export class CreateHouseController {
   ) {}
 
   @ApiOperation({ title: 'Create house by the logged user' })
-  @UseGuards(AuthGuard())
   @Post()
   public async index(
     @Body() command: CreateHouseCommand,
     @LoggedUser() loggedUser: User,
-  ): Promise<House> {
+  ): Promise<HouseCreatedView> {
     const house = await this.commandBus.execute(command);
     if (!(house instanceof House)) {
       throw new BadRequestException();
@@ -49,6 +50,6 @@ export class CreateHouseController {
       new UpdateCurrentHouseCommand(loggedUser, house),
     );
 
-    return house;
+    return new HouseCreatedView(house.id, house.name);
   }
 }

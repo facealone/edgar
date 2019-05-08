@@ -12,11 +12,12 @@ import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapt
 import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorator';
 import { User } from 'src/Domain/User/User.entity';
 import { CreateVoucherCommand } from 'src/Application/House/Command/Voucher/CreateVoucherCommand';
-import { Voucher } from 'src/Domain/House/Voucher.entity';
+import { VoucherCreatedView } from 'src/Application/House/View/Voucher/VoucherCreatedView';
 
 @Controller('vouchers')
 @ApiUseTags('Voucher')
 @ApiBearerAuth()
+@UseGuards(AuthGuard())
 export class CreateVoucherController {
   constructor(
     @Inject('ICommandBusAdapter')
@@ -24,24 +25,15 @@ export class CreateVoucherController {
   ) {}
 
   @ApiOperation({
-    title: 'Create voucher by the logged user and send it to invited user',
+    title: 'Create voucher for the current house of the the logged user',
   })
-  @UseGuards(AuthGuard())
   @Post()
   public async index(
     @Body() command: CreateVoucherCommand,
     @LoggedUser() user: User,
-  ): Promise<object> {
+  ): Promise<VoucherCreatedView> {
     command.user = user;
-    const voucher = await this.commandBus.execute(command);
 
-    if (!(voucher instanceof Voucher)) {
-      throw new BadRequestException('voucher.not.found');
-    }
-
-    return {
-      id: voucher.id,
-      code: voucher.code,
-    };
+    return await this.commandBus.execute(command);
   }
 }

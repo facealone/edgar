@@ -1,21 +1,31 @@
 import { CommandHandler } from '@nestjs/cqrs';
-import { Inject } from '@nestjs/common';
+import { Inject, ForbiddenException } from '@nestjs/common';
 import { UpdateCurrentHouseCommand } from './UpdateCurrentHouseCommand';
 import { IUserRepository } from 'src/Domain/User/Repository/IUserRepository';
-import { User } from 'src/Domain/User/User.entity';
+import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
+import { CurrentHouseUpdatedView } from '../View/CurrentHouseUpdatedView';
 
 @CommandHandler(UpdateCurrentHouseCommand)
 export class UpdateCurrentHouseComandHandler {
   constructor(
     @Inject('IUserRepository')
     private readonly userRepository: IUserRepository,
+    private readonly isMemberOfHouse: IsMemberOfHouse,
   ) {}
 
-  execute = async (command: UpdateCurrentHouseCommand): Promise<User> => {
-    const user = command.user;
+  execute = async (
+    command: UpdateCurrentHouseCommand,
+  ): Promise<CurrentHouseUpdatedView> => {
+    const { user, house } = command;
 
-    user.updateCurrentHouse(command.house);
+    if (false === (await this.isMemberOfHouse.isSatisfiedBy(house, user))) {
+      throw new ForbiddenException('not.member.of.house');
+    }
 
-    return await this.userRepository.save(user);
+    user.updateCurrentHouse(house);
+
+    const { currentHouse } = await this.userRepository.save(user);
+
+    return new CurrentHouseUpdatedView(currentHouse.id);
   };
 }
