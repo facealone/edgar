@@ -1,3 +1,3 @@
-export class VoucherCreatedView {
+export class VoucherView {
   constructor(public readonly code: string) {}
 }

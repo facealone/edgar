@@ -3,7 +3,7 @@ import { CommandHandler } from '@nestjs/cqrs';
 import { UpdateHouseCommand } from './UpdateHouseCommand';
 import { IHouseRepository } from 'src/Domain/House/Repository/IHouseRepository';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
-import { HouseUpdatedView } from '../View/HouseUpdatedView';
+import { HouseView } from '../View/HouseView';
 
 @CommandHandler(UpdateHouseCommand)
 export class UpdateHouseCommandHandler {
@@ -13,9 +13,7 @@ export class UpdateHouseCommandHandler {
     private readonly isMemberOfHouse: IsMemberOfHouse,
   ) {}
 
-  public execute = async (
-    command: UpdateHouseCommand,
-  ): Promise<HouseUpdatedView> => {
+  public execute = async (command: UpdateHouseCommand): Promise<HouseView> => {
     const { house, name, user } = command;
 
     if (false === (await this.isMemberOfHouse.isSatisfiedBy(house, user))) {
@@ -26,6 +24,6 @@ export class UpdateHouseCommandHandler {
 
     const savedHouse = await this.houseRepository.save(house);
 
-    return new HouseUpdatedView(savedHouse.id, savedHouse.name);
+    return new HouseView(savedHouse.id, savedHouse.name);
   };
 }

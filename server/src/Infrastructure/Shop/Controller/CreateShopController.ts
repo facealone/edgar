@@ -5,7 +5,7 @@ import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapt
 import { CreateShopCommand } from 'src/Application/Shop/Command/CreateShopCommand';
 import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorator';
 import { User } from 'src/Domain/User/User.entity';
-import { ShopCreatedView } from 'src/Application/Shop/View/ShopCreatedView';
+import { ShopView } from 'src/Application/Shop/View/ShopView';
 
 @ApiBearerAuth()
 @Controller('shops')
@@ -22,7 +22,7 @@ export class CreateShopController {
   public async index(
     @Body() command: CreateShopCommand,
     @LoggedUser() user: User,
-  ): Promise<ShopCreatedView> {
+  ): Promise<ShopView> {
     command.user = user;
 
     return await this.commandBus.execute(command);

@@ -16,7 +16,7 @@ import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorato
 import { User } from 'src/Domain/User/User.entity';
 import { House } from 'src/Domain/House/House.entity';
 import { GetHouseByIdQuery } from 'src/Application/House/Query/GetHouseByIdQuery';
-import { HouseUpdatedView } from 'src/Application/House/View/HouseUpdatedView';
+import { HouseView } from 'src/Application/House/View/HouseView';
 
 @Controller('houses')
 @ApiUseTags('House')
@@ -36,7 +36,7 @@ export class UpdateHouseController {
     @Param() query: GetHouseByIdQuery,
     @Body() command: UpdateHouseCommand,
     @LoggedUser() user: User,
-  ): Promise<HouseUpdatedView> {
+  ): Promise<HouseView> {
     const house = await this.queryBus.execute(query);
     if (!(house instanceof House)) {
       throw new NotFoundException('house.not.found');

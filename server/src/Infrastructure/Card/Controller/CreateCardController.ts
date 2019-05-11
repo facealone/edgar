@@ -5,7 +5,7 @@ import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapt
 import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorator';
 import { User } from 'src/Domain/User/User.entity';
 import { CreateCardCommand } from 'src/Application/Card/Command/CreateCardCommand';
-import { CardCreatedView } from 'src/Application/Card/View/CardCreatedView';
+import { CardView } from 'src/Application/Card/View/CardView';
 
 @ApiBearerAuth()
 @Controller('cards')
@@ -17,12 +17,12 @@ export class CreateCardController {
     private readonly commandBus: ICommandBusAdapter,
   ) {}
 
-  @ApiOperation({ title: 'Create card by logged user' })
+  @ApiOperation({ title: 'Create loyalty card by logged user' })
   @Post()
   public async index(
     @Body() command: CreateCardCommand,
     @LoggedUser() user: User,
-  ): Promise<CardCreatedView> {
+  ): Promise<CardView> {
     command.user = user;
 
     return await this.commandBus.execute(command);

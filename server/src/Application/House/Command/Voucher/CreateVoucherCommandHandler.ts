@@ -9,7 +9,7 @@ import { IHouseRepository } from 'src/Domain/House/Repository/IHouseRepository';
 import { House } from 'src/Domain/House/House.entity';
 import { IVoucherRepository } from 'src/Domain/House/Repository/IVoucherRepository';
 import { InvitationMail } from 'src/Domain/House/Mail/InvitationMail';
-import { VoucherCreatedView } from '../../View/Voucher/VoucherCreatedView';
+import { VoucherView } from '../../View/Voucher/VoucherView';
 
 @CommandHandler(CreateVoucherCommand)
 export class CreateVoucherCommandHandler {
@@ -27,7 +27,7 @@ export class CreateVoucherCommandHandler {
 
   public execute = async (
     command: CreateVoucherCommand,
-  ): Promise<VoucherCreatedView> => {
+  ): Promise<VoucherView> => {
     const { user, email, role } = command;
     const house = user.currentHouse;
 
@@ -58,6 +58,6 @@ export class CreateVoucherCommandHandler {
       }),
     );
 
-    return new VoucherCreatedView(voucher.code);
+    return new VoucherView(voucher.code);
   };
 }

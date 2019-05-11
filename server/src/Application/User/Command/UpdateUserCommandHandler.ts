@@ -2,7 +2,7 @@ import { CommandHandler } from '@nestjs/cqrs';
 import { Inject } from '@nestjs/common';
 import { UpdateUserCommand } from './UpdateUserCommand';
 import { IUserRepository } from 'src/Domain/User/Repository/IUserRepository';
-import { UserUpdatedView } from '../View/UserUpdatedView';
+import { LoggedUserView } from '../View/LoggedUserView';
 
 @CommandHandler(UpdateUserCommand)
 export class UpdateUserCommandHandler {
@@ -13,14 +13,14 @@ export class UpdateUserCommandHandler {
 
   public execute = async (
     command: UpdateUserCommand,
-  ): Promise<UserUpdatedView> => {
+  ): Promise<LoggedUserView> => {
     const { user, firstName, lastName, email } = command;
 
     user.update(firstName, lastName, email);
 
     const savedUser = await this.userRepository.save(user);
 
-    return new UserUpdatedView(
+    return new LoggedUserView(
       savedUser.id,
       savedUser.firstName,
       savedUser.lastName,

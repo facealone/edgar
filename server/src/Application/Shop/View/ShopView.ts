@@ -1,3 +1,3 @@
-export class ShopCreatedView {
+export class ShopView {
   constructor(public id: string, public name: string) {}
 }

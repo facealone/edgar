@@ -16,7 +16,7 @@ import { House } from 'src/Domain/House/House.entity';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
 import { UpdateCurrentHouseCommand } from 'src/Application/User/Command/UpdateCurrentHouseCommand';
 import { User } from 'src/Domain/User/User.entity';
-import { HouseCreatedView } from 'src/Application/House/View/HouseCreatedView';
+import { HouseView } from 'src/Application/House/View/HouseView';
 
 @Controller('houses')
 @ApiUseTags('House')
@@ -33,7 +33,7 @@ export class CreateHouseController {
   public async index(
     @Body() command: CreateHouseCommand,
     @LoggedUser() loggedUser: User,
-  ): Promise<HouseCreatedView> {
+  ): Promise<HouseView> {
     const house = await this.commandBus.execute(command);
     if (!(house instanceof House)) {
       throw new BadRequestException();
@@ -50,6 +50,6 @@ export class CreateHouseController {
       new UpdateCurrentHouseCommand(loggedUser, house),
     );
 
-    return new HouseCreatedView(house.id, house.name);
+    return new HouseView(house.id, house.name);
   }
 }

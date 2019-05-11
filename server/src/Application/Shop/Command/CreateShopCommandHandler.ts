@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { Shop } from 'src/Domain/Shop/Shop.entity';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
-import { ShopCreatedView } from '../View/ShopCreatedView';
+import { ShopView } from '../View/ShopView';
 import { House } from 'src/Domain/House/House.entity';
 
 @CommandHandler(CreateShopCommand)
@@ -19,9 +19,7 @@ export class CreateShopCommandHandler {
     private readonly isMemberOfHouse: IsMemberOfHouse,
   ) {}
 
-  public execute = async (
-    command: CreateShopCommand,
-  ): Promise<ShopCreatedView> => {
+  public execute = async (command: CreateShopCommand): Promise<ShopView> => {
     const { user, name } = command;
     const house = user.currentHouse;
 
@@ -41,6 +39,6 @@ export class CreateShopCommandHandler {
       }),
     );
 
-    return new ShopCreatedView(shop.id, shop.name);
+    return new ShopView(shop.id, shop.name);
   };
 }
