@@ -5,7 +5,7 @@ import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorato
 import { User } from 'src/Domain/User/User.entity';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { GetCardsByUserQuery } from 'src/Application/Card/Query/GetCardsByUserQuery';
-import { CardListView } from 'src/Application/Card/View/CardListView';
+import { CardView } from 'src/Application/Card/View/CardView';
 
 @ApiBearerAuth()
 @Controller('cards')
@@ -19,7 +19,7 @@ export class GetCardsController {
 
   @ApiOperation({ title: 'Get logged user loyalty cards' })
   @Get()
-  public async index(@LoggedUser() user: User): Promise<CardListView> {
+  public async index(@LoggedUser() user: User): Promise<CardView[]> {
     return await this.queryBus.execute(new GetCardsByUserQuery(user));
   }
 }

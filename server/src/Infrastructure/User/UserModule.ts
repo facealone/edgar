@@ -14,6 +14,8 @@ import { UpdateCurrentHouseController } from './Controller/UpdateCurrentHouseCon
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { UpdateMeController } from './Controller/UpdateMeController';
 import { UpdateUserCommandHandler } from 'src/Application/User/Command/UpdateUserCommandHandler';
+import { GetHousesController } from './Controller/GetHousesController';
+import { GetUserHousesByUserQueryHandler } from 'src/Application/User/Query/GetUserHousesByUserQueryHandler';
 
 @Module({
   imports: [BusModule, AuthModule, TypeOrmModule.forFeature([User, UserHouse])],
@@ -21,6 +23,7 @@ import { UpdateUserCommandHandler } from 'src/Application/User/Command/UpdateUse
     GetLoggedUserController,
     UpdateMeController,
     UpdateCurrentHouseController,
+    GetHousesController,
   ],
   providers: [
     { provide: 'IUserRepository', useClass: UserRepository },
@@ -30,6 +33,7 @@ import { UpdateUserCommandHandler } from 'src/Application/User/Command/UpdateUse
     UpdateCurrentHouseComandHandler,
     CreateUserHouseCommandHandler,
     IsMemberOfHouse,
+    GetUserHousesByUserQueryHandler,
   ],
 })
 export class UserModule {}

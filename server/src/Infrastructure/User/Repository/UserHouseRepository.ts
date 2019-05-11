@@ -23,4 +23,11 @@ export class UserHouseRepository implements IUserHouseRepository {
   ): Promise<UserHouse | null> => {
     return await this.repository.findOne({ user, house });
   };
+
+  public findUserHousesByUser = async (user: User): Promise<UserHouse[]> => {
+    return await this.repository.find({
+      where: { user },
+      relations: ['house'],
+    });
+  };
 }

@@ -15,7 +15,7 @@ import { UpdateCurrentHouseCommand } from 'src/Application/User/Command/UpdateCu
 import { House } from 'src/Domain/House/House.entity';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { GetHouseByIdQuery } from 'src/Application/House/Query/GetHouseByIdQuery';
-import { CurrentHouseDto } from 'src/Infrastructure/User/Controller/DTO/CurrentHouseDto';
+import { CurrentHouseDto } from 'src/Infrastructure/User/Controller/Dto/CurrentHouseDto';
 import { CurrentHouseUpdatedView } from 'src/Application/User/View/CurrentHouseUpdatedView';
 
 @ApiBearerAuth()
