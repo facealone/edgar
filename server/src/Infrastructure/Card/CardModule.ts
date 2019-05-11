@@ -8,14 +8,17 @@ import { CreateCardController } from './Controller/CreateCardController';
 import { CreateCardCommandHandler } from 'src/Application/Card/Command/CreateCardCommandHandler';
 import { GetCardsController } from './Controller/GetCardsController';
 import { GetCardsByUserQueryHandler } from 'src/Application/Card/Query/GetCardsByUserQueryHandler';
+import { RemoveCardController } from './Controller/RemoveCardController';
+import { RemoveCardCommandHandler } from 'src/Application/Card/Command/RemoveCardCommandHandler';
 
 @Module({
   imports: [BusModule, AuthModule, TypeOrmModule.forFeature([Card])],
-  controllers: [CreateCardController, GetCardsController],
+  controllers: [CreateCardController, GetCardsController, RemoveCardController],
   providers: [
     { provide: 'ICardRepository', useClass: CardRepository },
     CreateCardCommandHandler,
     GetCardsByUserQueryHandler,
+    RemoveCardCommandHandler,
   ],
 })
 export class CardModule {}

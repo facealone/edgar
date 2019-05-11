@@ -21,4 +21,15 @@ export class CardRepository implements ICardRepository {
       order: { name: 'ASC' },
     });
   };
+
+  public findOneById = async (id: string): Promise<Card | null> => {
+    return await this.repository.findOne({
+      where: { id },
+      relations: ['user'],
+    });
+  };
+
+  public remove = async (card: Card): Promise<void> => {
+    await this.repository.remove(card);
+  };
 }
