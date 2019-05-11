@@ -19,12 +19,14 @@ export class UpdateUserCommandHandler {
     user.update(firstName, lastName, email);
 
     const savedUser = await this.userRepository.save(user);
+    const house = user.currentHouse;
 
     return new LoggedUserView(
       savedUser.id,
       savedUser.firstName,
       savedUser.lastName,
       savedUser.email,
+      house ? house.id : null,
     );
   };
 }
