@@ -4,7 +4,7 @@ import { ConsumeVoucherCommand } from './ConsumeVoucherCommand';
 import { IVoucherRepository } from 'src/Domain/House/Repository/IVoucherRepository';
 import { Voucher } from 'src/Domain/House/Voucher.entity';
 import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapter';
-import { UpdateCurrentHouseCommand } from 'src/Application/User/Command/UpdateCurrentHouseCommand';
+import { ChangeCurrentHouseCommand } from 'src/Application/User/Command/ChangeCurrentHouseCommand';
 import { CreateUserHouseCommand } from 'src/Application/User/Command/CreateUserHouseCommand';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
@@ -42,7 +42,7 @@ export class ConsumeVoucherCommandHandler {
     }
 
     await this.commandBus.execute(
-      new UpdateCurrentHouseCommand(userHouse.user, userHouse.house),
+      new ChangeCurrentHouseCommand(userHouse.user, userHouse.house),
     );
 
     await this.voucherRepository.remove(voucher);

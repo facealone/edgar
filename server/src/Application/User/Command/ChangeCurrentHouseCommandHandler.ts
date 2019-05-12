@@ -1,12 +1,12 @@
 import { CommandHandler } from '@nestjs/cqrs';
 import { Inject, ForbiddenException } from '@nestjs/common';
-import { UpdateCurrentHouseCommand } from './UpdateCurrentHouseCommand';
+import { ChangeCurrentHouseCommand } from './ChangeCurrentHouseCommand';
 import { IUserRepository } from 'src/Domain/User/Repository/IUserRepository';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { CurrentHouseUpdatedView } from '../View/CurrentHouseUpdatedView';
 
-@CommandHandler(UpdateCurrentHouseCommand)
-export class UpdateCurrentHouseComandHandler {
+@CommandHandler(ChangeCurrentHouseCommand)
+export class ChangeCurrentHouseComandHandler {
   constructor(
     @Inject('IUserRepository')
     private readonly userRepository: IUserRepository,
@@ -14,7 +14,7 @@ export class UpdateCurrentHouseComandHandler {
   ) {}
 
   execute = async (
-    command: UpdateCurrentHouseCommand,
+    command: ChangeCurrentHouseCommand,
   ): Promise<CurrentHouseUpdatedView> => {
     const { user, house } = command;
 

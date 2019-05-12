@@ -11,7 +11,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { LoggedUser } from '../../Decorator/LoggedUserDecorator';
 import { User } from 'src/Domain/User/User.entity';
 import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapter';
-import { UpdateCurrentHouseCommand } from 'src/Application/User/Command/UpdateCurrentHouseCommand';
+import { ChangeCurrentHouseCommand } from 'src/Application/User/Command/ChangeCurrentHouseCommand';
 import { House } from 'src/Domain/House/House.entity';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { GetHouseByIdQuery } from 'src/Application/House/Query/GetHouseByIdQuery';
@@ -22,7 +22,7 @@ import { CurrentHouseUpdatedView } from 'src/Application/User/View/CurrentHouseU
 @Controller('users')
 @ApiUseTags('User')
 @UseGuards(AuthGuard())
-export class UpdateCurrentHouseController {
+export class ChangeCurrentHouseController {
   constructor(
     @Inject('ICommandBusAdapter')
     private readonly commandBus: ICommandBusAdapter,
@@ -30,7 +30,7 @@ export class UpdateCurrentHouseController {
     private readonly queryBus: IQueryBusAdapter,
   ) {}
 
-  @ApiOperation({ title: 'Update the logged user current house' })
+  @ApiOperation({ title: 'Change the logged user current house' })
   @Put('me/current-house')
   public async index(
     @Body() currentHouseDto: CurrentHouseDto,
@@ -46,7 +46,7 @@ export class UpdateCurrentHouseController {
     }
 
     return await this.commandBus.execute(
-      new UpdateCurrentHouseCommand(user, house),
+      new ChangeCurrentHouseCommand(user, house),
     );
   }
 }

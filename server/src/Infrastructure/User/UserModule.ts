@@ -8,9 +8,9 @@ import { User } from 'src/Domain/User/User.entity';
 import { AuthModule } from '../Auth/AuthModule';
 import { UserHouseRepository } from './Repository/UserHouseRepository';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
-import { UpdateCurrentHouseComandHandler } from 'src/Application/User/Command/UpdateCurrentHouseCommandHandler';
+import { ChangeCurrentHouseComandHandler } from 'src/Application/User/Command/ChangeCurrentHouseCommandHandler';
 import { CreateUserHouseCommandHandler } from 'src/Application/User/Command/CreateUserHouseCommandHandler';
-import { UpdateCurrentHouseController } from './Controller/CurrentHouse/UpdateCurrentHouseController';
+import { ChangeCurrentHouseController } from './Controller/CurrentHouse/ChangeCurrentHouseController';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { UpdateMeController } from './Controller/UpdateMeController';
 import { UpdateUserCommandHandler } from 'src/Application/User/Command/UpdateUserCommandHandler';
@@ -27,7 +27,7 @@ import { GetMembersController } from './Controller/CurrentHouse/GetMembersContro
     GetLoggedUserController,
     UpdateMeController,
     GetCardsController,
-    UpdateCurrentHouseController,
+    ChangeCurrentHouseController,
     GetShopsController,
     GetMembersController,
     GetHousesController,
@@ -37,7 +37,7 @@ import { GetMembersController } from './Controller/CurrentHouse/GetMembersContro
     { provide: 'IUserHouseRepository', useClass: UserHouseRepository },
     GetUserByIdQueryHandler,
     UpdateUserCommandHandler,
-    UpdateCurrentHouseComandHandler,
+    ChangeCurrentHouseComandHandler,
     CreateUserHouseCommandHandler,
     IsMemberOfHouse,
     GetHousesByUserQueryHandler,
