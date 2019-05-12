@@ -4,21 +4,19 @@ import {
   UseGuards,
   Inject,
   Get,
-  Param,
-  NotFoundException,
+  BadRequestException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorator';
 import { GetUsersByHouseQuery } from 'src/Application/User/Query/GetUsersByHouseQuery';
 import { User } from 'src/Domain/User/User.entity';
-import { HouseIdDto } from './Dto/HouseIdDto';
-import { GetHouseByIdQuery } from 'src/Application/House/Query/GetHouseByIdQuery';
 import { House } from 'src/Domain/House/House.entity';
+import { GetUsersByHouseView } from 'src/Application/User/View/GetUsersByHouseView';
 
 @ApiBearerAuth()
-@Controller('houses')
-@ApiUseTags('House')
+@Controller('/users/me/current-house')
+@ApiUseTags('User')
 @UseGuards(AuthGuard())
 export class GetUsersController {
   constructor(
@@ -26,19 +24,13 @@ export class GetUsersController {
     private readonly queryBus: IQueryBusAdapter,
   ) {}
 
-  @ApiOperation({ title: 'Get house users by logged user' })
-  @Get('/:id/users')
-  public async index(
-    @Param() houseIdDto: HouseIdDto,
-    @LoggedUser() user: User,
-  ) {
-    const houseQuery = new GetHouseByIdQuery();
-    houseQuery.id = houseIdDto.id;
-
-    const house = await this.queryBus.execute(houseQuery);
+  @ApiOperation({ title: 'Get members of the logged user current house' })
+  @Get('/members')
+  public async index(@LoggedUser() user: User): Promise<GetUsersByHouseView[]> {
+    const house = user.currentHouse;
 
     if (!(house instanceof House)) {
-      throw new NotFoundException();
+      throw new BadRequestException();
     }
 
     return await this.queryBus.execute(new GetUsersByHouseQuery(house, user));

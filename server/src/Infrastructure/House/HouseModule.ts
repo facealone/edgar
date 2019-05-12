@@ -21,8 +21,6 @@ import { UpdateHouseController } from './Controller/UpdateHouseController';
 import { GetHouseByIdQueryHandler } from 'src/Application/House/Query/GetHouseByIdQueryHandler';
 import { UpdateHouseCommandHandler } from 'src/Application/House/Command/UpdateHouseCommandHandler';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
-import { GetUsersByHouseQueryHandler } from 'src/Application/User/Query/GetUsersByHouseQueryHandler';
-import { GetUsersController } from './Controller/GetUsersController';
 
 @Module({
   imports: [
@@ -35,7 +33,6 @@ import { GetUsersController } from './Controller/GetUsersController';
     CreateVoucherController,
     ConsumeVoucherController,
     UpdateHouseController,
-    GetUsersController,
   ],
   providers: [
     { provide: 'IHouseRepository', useClass: HouseRepository },

@@ -10,10 +10,10 @@ import { CardModule } from './Infrastructure/Card/CardModule';
   imports: [
     TypeOrmModule.forRoot(),
     AuthModule,
-    UserModule,
+    CardModule,
     HouseModule,
     ShopModule,
-    CardModule,
+    UserModule,
   ],
 })
 export class AppModule {}

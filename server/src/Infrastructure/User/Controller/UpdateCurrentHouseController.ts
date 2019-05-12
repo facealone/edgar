@@ -30,7 +30,7 @@ export class UpdateCurrentHouseController {
     private readonly queryBus: IQueryBusAdapter,
   ) {}
 
-  @ApiOperation({ title: 'Update the current house of the logged user' })
+  @ApiOperation({ title: 'Update the logged user current house' })
   @Put('me/current-house')
   public async index(
     @Body() currentHouseDto: CurrentHouseDto,

@@ -9,6 +9,7 @@ import { CreateShopCommandHandler } from 'src/Application/Shop/Command/CreateSho
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { UserHouseRepository } from '../User/Repository/UserHouseRepository';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
+import { GetShopsByHouseQueryHandler } from 'src/Application/Shop/Query/GetShopsByHouseQueryHandler';
 
 @Module({
   imports: [BusModule, AuthModule, TypeOrmModule.forFeature([Shop, UserHouse])],
@@ -17,6 +18,7 @@ import { UserHouse } from 'src/Domain/User/UserHouse.entity';
     { provide: 'IShopRepository', useClass: ShopRepository },
     { provide: 'IUserHouseRepository', useClass: UserHouseRepository },
     CreateShopCommandHandler,
+    GetShopsByHouseQueryHandler,
     IsMemberOfHouse,
   ],
 })

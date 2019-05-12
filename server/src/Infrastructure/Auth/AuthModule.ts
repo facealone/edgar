@@ -27,7 +27,7 @@ import { JwtStrategy } from './Strategy/JwtStrategy';
     PassportModule.register({ defaultStrategy: 'jwt' }),
     TypeOrmModule.forFeature([User]),
   ],
-  controllers: [RegisterController, LoginController],
+  controllers: [LoginController, RegisterController],
   providers: [
     { provide: 'IUserRepository', useClass: UserRepository },
     { provide: 'IMailerAdapter', useClass: MailerAdapter },

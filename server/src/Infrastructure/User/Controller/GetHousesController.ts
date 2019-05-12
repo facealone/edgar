@@ -7,7 +7,7 @@ import { GetHousesByUserQuery } from 'src/Application/User/Query/GetHousesByUser
 import { User } from 'src/Domain/User/User.entity';
 
 @ApiBearerAuth()
-@Controller('users')
+@Controller('users/me')
 @ApiUseTags('User')
 @UseGuards(AuthGuard())
 export class GetHousesController {
@@ -17,7 +17,7 @@ export class GetHousesController {
   ) {}
 
   @ApiOperation({ title: 'Get logged user houses' })
-  @Get('/me/houses')
+  @Get('/houses')
   public async index(@LoggedUser() user: User) {
     return await this.queryBus.execute(new GetHousesByUserQuery(user));
   }

@@ -17,13 +17,19 @@ import { UpdateUserCommandHandler } from 'src/Application/User/Command/UpdateUse
 import { GetHousesController } from './Controller/GetHousesController';
 import { GetHousesByUserQueryHandler } from 'src/Application/User/Query/GetHousesByUserQueryHandler';
 import { GetUsersByHouseQueryHandler } from 'src/Application/User/Query/GetUsersByHouseQueryHandler';
+import { GetCardsController } from './Controller/GetCardsController';
+import { GetShopsController } from '../User/Controller/GetShopsController';
+import { GetUsersController } from './Controller/GetUsersController';
 
 @Module({
   imports: [BusModule, AuthModule, TypeOrmModule.forFeature([User, UserHouse])],
   controllers: [
     GetLoggedUserController,
     UpdateMeController,
+    GetCardsController,
     UpdateCurrentHouseController,
+    GetShopsController,
+    GetUsersController,
     GetHousesController,
   ],
   providers: [

@@ -8,8 +8,8 @@ import { GetCardsByUserQuery } from 'src/Application/Card/Query/GetCardsByUserQu
 import { CardView } from 'src/Application/Card/View/CardView';
 
 @ApiBearerAuth()
-@Controller('cards')
-@ApiUseTags('Card')
+@Controller('users/me')
+@ApiUseTags('User')
 @UseGuards(AuthGuard())
 export class GetCardsController {
   constructor(
@@ -18,7 +18,7 @@ export class GetCardsController {
   ) {}
 
   @ApiOperation({ title: 'Get logged user loyalty cards' })
-  @Get()
+  @Get('/cards')
   public async index(@LoggedUser() user: User): Promise<CardView[]> {
     return await this.queryBus.execute(new GetCardsByUserQuery(user));
   }
