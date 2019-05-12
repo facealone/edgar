@@ -30,4 +30,11 @@ export class UserHouseRepository implements IUserHouseRepository {
       relations: ['house'],
     });
   };
+
+  public findUserHousesByHouse = async (house: House): Promise<UserHouse[]> => {
+    return await this.repository.find({
+      where: { house },
+      relations: ['user'],
+    });
+  };
 }

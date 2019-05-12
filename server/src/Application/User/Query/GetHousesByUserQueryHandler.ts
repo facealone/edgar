@@ -1,19 +1,19 @@
 import { QueryHandler } from '@nestjs/cqrs';
 import { Inject } from '@nestjs/common';
-import { GetUserHousesByUserQuery } from './GetUserHousesByUserQuery';
+import { GetHousesByUserQuery } from './GetHousesByUserQuery';
 import { IUserHouseRepository } from 'src/Domain/User/Repository/IUserHouseRepository';
-import { GetUserHousesByUserView } from '../View/GetUserHousesByUserView';
+import { GetHousesByUserView } from '../View/GetHousesByUserView';
 
-@QueryHandler(GetUserHousesByUserQuery)
-export class GetUserHousesByUserQueryHandler {
+@QueryHandler(GetHousesByUserQuery)
+export class GetHousesByUserQueryHandler {
   constructor(
     @Inject('IUserHouseRepository')
     private readonly userHouseRepository: IUserHouseRepository,
   ) {}
 
   execute = async (
-    query: GetUserHousesByUserQuery,
-  ): Promise<GetUserHousesByUserView[]> => {
+    query: GetHousesByUserQuery,
+  ): Promise<GetHousesByUserView[]> => {
     const user = query.user;
     const userHouses = await this.userHouseRepository.findUserHousesByUser(
       user,
@@ -21,12 +21,13 @@ export class GetUserHousesByUserQueryHandler {
     const userHousesviews = [];
 
     for (const userHouse of userHouses) {
-      const { house } = userHouse;
+      const { house, role } = userHouse;
 
       userHousesviews.push(
-        new GetUserHousesByUserView(
+        new GetHousesByUserView(
           house.id,
           house.name,
+          role,
           house.id === user.currentHouse.id,
         ),
       );

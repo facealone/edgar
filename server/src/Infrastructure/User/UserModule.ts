@@ -15,7 +15,8 @@ import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { UpdateMeController } from './Controller/UpdateMeController';
 import { UpdateUserCommandHandler } from 'src/Application/User/Command/UpdateUserCommandHandler';
 import { GetHousesController } from './Controller/GetHousesController';
-import { GetUserHousesByUserQueryHandler } from 'src/Application/User/Query/GetUserHousesByUserQueryHandler';
+import { GetHousesByUserQueryHandler } from 'src/Application/User/Query/GetHousesByUserQueryHandler';
+import { GetUsersByHouseQueryHandler } from 'src/Application/User/Query/GetUsersByHouseQueryHandler';
 
 @Module({
   imports: [BusModule, AuthModule, TypeOrmModule.forFeature([User, UserHouse])],
@@ -33,7 +34,8 @@ import { GetUserHousesByUserQueryHandler } from 'src/Application/User/Query/GetU
     UpdateCurrentHouseComandHandler,
     CreateUserHouseCommandHandler,
     IsMemberOfHouse,
-    GetUserHousesByUserQueryHandler,
+    GetHousesByUserQueryHandler,
+    GetUsersByHouseQueryHandler,
   ],
 })
 export class UserModule {}

@@ -6,4 +6,5 @@ export interface IUserHouseRepository {
   save(user: UserHouse): Promise<UserHouse>;
   findOneByUserAndHouse(user: User, house: House): Promise<UserHouse | null>;
   findUserHousesByUser(user: User): Promise<UserHouse[]>;
+  findUserHousesByHouse(house: House): Promise<UserHouse[]>;
 }

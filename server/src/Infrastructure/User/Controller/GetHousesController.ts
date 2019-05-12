@@ -3,7 +3,8 @@ import { Controller, UseGuards, Inject, Get } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { LoggedUser } from '../Decorator/LoggedUserDecorator';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
-import { GetUserHousesByUserQuery } from 'src/Application/User/Query/GetUserHousesByUserQuery';
+import { GetHousesByUserQuery } from 'src/Application/User/Query/GetHousesByUserQuery';
+import { User } from 'src/Domain/User/User.entity';
 
 @ApiBearerAuth()
 @Controller('users')
@@ -12,12 +13,12 @@ import { GetUserHousesByUserQuery } from 'src/Application/User/Query/GetUserHous
 export class GetHousesController {
   constructor(
     @Inject('IQueryBusAdapter')
-    private readonly commandBus: IQueryBusAdapter,
+    private readonly queryBus: IQueryBusAdapter,
   ) {}
 
   @ApiOperation({ title: 'Get logged user houses' })
   @Get('/me/houses')
-  public async index(@LoggedUser() user) {
-    return await this.commandBus.execute(new GetUserHousesByUserQuery(user));
+  public async index(@LoggedUser() user: User) {
+    return await this.queryBus.execute(new GetHousesByUserQuery(user));
   }
 }

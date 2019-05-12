@@ -5,6 +5,7 @@ import { LoggedUser } from '../Decorator/LoggedUserDecorator';
 import { UpdateUserCommand } from 'src/Application/User/Command/UpdateUserCommand';
 import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapter';
 import { LoggedUserView } from 'src/Application/User/View/LoggedUserView';
+import { User } from 'src/Domain/User/User.entity';
 
 @ApiBearerAuth()
 @Controller('users')
@@ -20,7 +21,7 @@ export class UpdateMeController {
   @Put('/me')
   public async index(
     @Body() command: UpdateUserCommand,
-    @LoggedUser() loggedUser,
+    @LoggedUser() loggedUser: User,
   ): Promise<LoggedUserView> {
     command.user = loggedUser;
 
