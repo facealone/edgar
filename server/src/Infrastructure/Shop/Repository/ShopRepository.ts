@@ -21,4 +21,11 @@ export class ShopRepository implements IShopRepository {
       order: { name: 'ASC' },
     });
   };
+
+  public find = async (id: string): Promise<Shop | null> => {
+    return await this.repository.findOne({
+      where: { id },
+      relations: ['house'],
+    });
+  };
 }

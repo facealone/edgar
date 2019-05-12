@@ -10,16 +10,16 @@ import { UserHouseRepository } from './Repository/UserHouseRepository';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
 import { UpdateCurrentHouseComandHandler } from 'src/Application/User/Command/UpdateCurrentHouseCommandHandler';
 import { CreateUserHouseCommandHandler } from 'src/Application/User/Command/CreateUserHouseCommandHandler';
-import { UpdateCurrentHouseController } from './Controller/UpdateCurrentHouseController';
+import { UpdateCurrentHouseController } from './Controller/CurrentHouse/UpdateCurrentHouseController';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { UpdateMeController } from './Controller/UpdateMeController';
 import { UpdateUserCommandHandler } from 'src/Application/User/Command/UpdateUserCommandHandler';
-import { GetHousesController } from './Controller/GetHousesController';
+import { GetHousesController } from './Controller/CurrentHouse/GetHousesController';
 import { GetHousesByUserQueryHandler } from 'src/Application/User/Query/GetHousesByUserQueryHandler';
 import { GetUsersByHouseQueryHandler } from 'src/Application/User/Query/GetUsersByHouseQueryHandler';
 import { GetCardsController } from './Controller/GetCardsController';
-import { GetShopsController } from '../User/Controller/GetShopsController';
-import { GetUsersController } from './Controller/GetUsersController';
+import { GetShopsController } from './Controller/CurrentHouse/GetShopsController';
+import { GetMembersController } from './Controller/CurrentHouse/GetMembersController';
 
 @Module({
   imports: [BusModule, AuthModule, TypeOrmModule.forFeature([User, UserHouse])],
@@ -29,7 +29,7 @@ import { GetUsersController } from './Controller/GetUsersController';
     GetCardsController,
     UpdateCurrentHouseController,
     GetShopsController,
-    GetUsersController,
+    GetMembersController,
     GetHousesController,
   ],
   providers: [

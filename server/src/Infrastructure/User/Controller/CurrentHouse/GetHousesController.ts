@@ -1,7 +1,7 @@
 import { ApiUseTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { Controller, UseGuards, Inject, Get } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { LoggedUser } from '../Decorator/LoggedUserDecorator';
+import { LoggedUser } from '../../Decorator/LoggedUserDecorator';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { GetHousesByUserQuery } from 'src/Application/User/Query/GetHousesByUserQuery';
 import { User } from 'src/Domain/User/User.entity';

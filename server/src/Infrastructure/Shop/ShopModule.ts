@@ -10,16 +10,21 @@ import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { UserHouseRepository } from '../User/Repository/UserHouseRepository';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
 import { GetShopsByHouseQueryHandler } from 'src/Application/Shop/Query/GetShopsByHouseQueryHandler';
+import { UpdateShopController } from './Controller/UpdateShopController';
+import { GetShopByIdQueryHandler } from 'src/Application/Shop/Query/GetShopByIdQueryHandler';
+import { UpdateShopCommandHandler } from 'src/Application/Shop/Command/UpdateShopCommandHandler';
 
 @Module({
   imports: [BusModule, AuthModule, TypeOrmModule.forFeature([Shop, UserHouse])],
-  controllers: [CreateShopController],
+  controllers: [CreateShopController, UpdateShopController],
   providers: [
     { provide: 'IShopRepository', useClass: ShopRepository },
     { provide: 'IUserHouseRepository', useClass: UserHouseRepository },
     CreateShopCommandHandler,
     GetShopsByHouseQueryHandler,
     IsMemberOfHouse,
+    GetShopByIdQueryHandler,
+    UpdateShopCommandHandler,
   ],
 })
 export class ShopModule {}

@@ -19,4 +19,8 @@ export class Shop {
   constructor(shop: Partial<Shop>) {
     Object.assign(this, shop);
   }
+
+  updateName = (name: string): void => {
+    this.name = name;
+  };
 }
