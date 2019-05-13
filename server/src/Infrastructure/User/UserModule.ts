@@ -20,6 +20,8 @@ import { GetUsersByHouseQueryHandler } from 'src/Application/User/Query/GetUsers
 import { GetCardsController } from './Controller/GetCardsController';
 import { GetShopsController } from './Controller/CurrentHouse/GetShopsController';
 import { GetMembersController } from './Controller/CurrentHouse/GetMembersController';
+import { UpdatePushNotificationTokenController } from './Controller/UpdatePushNotificationTokenController';
+import { UpdatePushNotificationTokenCommandHandler } from 'src/Application/User/Command/UpdatePushNotificationTokenCommandHandler';
 
 @Module({
   imports: [BusModule, AuthModule, TypeOrmModule.forFeature([User, UserHouse])],
@@ -31,6 +33,7 @@ import { GetMembersController } from './Controller/CurrentHouse/GetMembersContro
     GetShopsController,
     GetMembersController,
     GetHousesController,
+    UpdatePushNotificationTokenController,
   ],
   providers: [
     { provide: 'IUserRepository', useClass: UserRepository },
@@ -42,6 +45,7 @@ import { GetMembersController } from './Controller/CurrentHouse/GetMembersContro
     IsMemberOfHouse,
     GetHousesByUserQueryHandler,
     GetUsersByHouseQueryHandler,
+    UpdatePushNotificationTokenCommandHandler,
   ],
 })
 export class UserModule {}
