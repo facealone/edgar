@@ -6,10 +6,11 @@ import {
   USER_AUTHENTICATION_LOGOUT,
 } from '../constants/authentication';
 import {
-  IAuthenticatedAction,
   IErrorAction,
   IResetAction,
   ILogoutAction,
+  ILoadingAction,
+  IAuthenticatedAction,
 } from '../types/authentication';
 
 export const authenticated = (authenticated: boolean): IAuthenticatedAction => {
@@ -19,7 +20,7 @@ export const authenticated = (authenticated: boolean): IAuthenticatedAction => {
   };
 };
 
-export const loading = (loading: boolean): IAuthenticatedAction => {
+export const loading = (loading: boolean): ILoadingAction => {
   return {
     type: USER_AUTHENTICATION_LOADING,
     loading,
