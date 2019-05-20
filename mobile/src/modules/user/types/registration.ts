@@ -4,34 +4,32 @@ import {
   USER_REGISTRATION_RESET,
   USER_REGISTRATION_SUCCESS,
 } from '../constants/registration';
+import { IErrorAction, ILoadingAction } from '../../../types/actions';
+import { IBaseState } from '../../../types/states';
 
-export interface IRegistrationState {
-  loading: boolean;
+export interface IRegistrationState extends IBaseState {
   payload: string | null;
-  errors: [];
 }
 
-export interface ISuccessAction {
+export interface IRegistrationSuccessAction {
   type: typeof USER_REGISTRATION_SUCCESS;
   payload: string;
 }
 
-export interface ILoadingAction {
+export interface IRegistrationLoadingAction extends ILoadingAction {
   type: typeof USER_REGISTRATION_LOADING;
-  loading: boolean;
 }
 
-export interface IResetAction {
+export interface IRegistrationResetAction {
   type: typeof USER_REGISTRATION_RESET;
 }
 
-export interface IErrorAction {
+export interface IRegistrationErrorAction extends IErrorAction {
   type: typeof USER_REGISTRATION_ERROR;
-  errors: [];
 }
 
 export type RegistrationActionTypes =
-  | ISuccessAction
-  | ILoadingAction
-  | IResetAction
-  | IErrorAction;
+  | IRegistrationSuccessAction
+  | IRegistrationLoadingAction
+  | IRegistrationResetAction
+  | IRegistrationErrorAction;

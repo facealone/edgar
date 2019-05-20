@@ -6,10 +6,10 @@ import {
   USER_AUTHENTICATION_LOGOUT,
 } from '../constants/authentication';
 import {
-  IErrorAction,
-  IResetAction,
-  ILogoutAction,
-  ILoadingAction,
+  IAuthenticationErrorAction,
+  IAuthenticationResetAction,
+  IAuthenticationLogoutAction,
+  IAuthenticationLoadingAction,
   IAuthenticatedAction,
 } from '../types/authentication';
 
@@ -20,27 +20,27 @@ export const authenticated = (authenticated: boolean): IAuthenticatedAction => {
   };
 };
 
-export const loading = (loading: boolean): ILoadingAction => {
+export const loading = (loading: boolean): IAuthenticationLoadingAction => {
   return {
     type: USER_AUTHENTICATION_LOADING,
     loading,
   };
 };
 
-export const errors = (errors: []): IErrorAction => {
+export const errors = (errors: []): IAuthenticationErrorAction => {
   return {
     type: USER_AUTHENTICATION_ERROR,
     errors,
   };
 };
 
-export const reset = (): IResetAction => {
+export const reset = (): IAuthenticationResetAction => {
   return {
     type: USER_AUTHENTICATION_RESET,
   };
 };
 
-export const logout = (): ILogoutAction => {
+export const logout = (): IAuthenticationLogoutAction => {
   return {
     type: USER_AUTHENTICATION_LOGOUT,
   };

@@ -4,30 +4,29 @@ import {
   CARD_LIST_RESET,
   CARD_LIST_ERROR,
 } from '../constants/list';
+import {
+  IListSuccessAction,
+  ILoadingAction,
+  IErrorAction,
+} from '../../../types/actions';
+import { IListState } from '../../../types/states';
 
-export interface ICardListState {
-  loading: boolean;
-  errors: [];
-  payload: [];
-}
+export interface ICardListState extends IListState {}
 
-export interface ICardListSuccessAction {
+export interface ICardListSuccessAction extends IListSuccessAction {
   type: typeof CARD_LIST_SUCCESS;
-  payload: [];
 }
 
-export interface ICardListLoadingAction {
+export interface ICardListLoadingAction extends ILoadingAction {
   type: typeof CARD_LIST_LOADING;
-  loading: boolean;
 }
 
 export interface ICardListResetAction {
   type: typeof CARD_LIST_RESET;
 }
 
-export interface ICardListErrorAction {
+export interface ICardListErrorAction extends IErrorAction {
   type: typeof CARD_LIST_ERROR;
-  errors: [];
 }
 
 export type ICardListActionTypes =

@@ -4,26 +4,25 @@ import {
   HOUSE_LIST_ERROR,
   HOUSE_LIST_RESET,
 } from '../constants/list';
+import { IListState } from '../../../types/states';
+import {
+  IListSuccessAction,
+  ILoadingAction,
+  IErrorAction,
+} from '../../../types/actions';
 
-export interface IHouseListState {
-  loading: boolean;
-  errors: [];
-  payload: [];
-}
+export interface IHouseListState extends IListState {}
 
-export interface IHouseListSuccessAction {
+export interface IHouseListSuccessAction extends IListSuccessAction {
   type: typeof HOUSE_LIST_SUCCESS;
-  payload: [];
 }
 
-export interface IHouseListLoadingAction {
+export interface IHouseListLoadingAction extends ILoadingAction {
   type: typeof HOUSE_LIST_LOADING;
-  loading: boolean;
 }
 
-export interface IHouseListErrorAction {
+export interface IHouseListErrorAction extends IErrorAction {
   type: typeof HOUSE_LIST_ERROR;
-  errors: [];
 }
 
 export interface IHouseListResetAction {

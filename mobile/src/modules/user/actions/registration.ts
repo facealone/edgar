@@ -5,34 +5,34 @@ import {
   USER_REGISTRATION_LOADING,
 } from '../constants/registration';
 import {
-  ISuccessAction,
-  IErrorAction,
-  IResetAction,
-  ILoadingAction,
+  IRegistrationSuccessAction,
+  IRegistrationErrorAction,
+  IRegistrationResetAction,
+  IRegistrationLoadingAction,
 } from '../types/registration';
 
-export const success = (payload: string): ISuccessAction => {
+export const success = (payload: string): IRegistrationSuccessAction => {
   return {
     type: USER_REGISTRATION_SUCCESS,
     payload,
   };
 };
 
-export const loading = (loading: boolean): ILoadingAction => {
+export const loading = (loading: boolean): IRegistrationLoadingAction => {
   return {
     type: USER_REGISTRATION_LOADING,
     loading,
   };
 };
 
-export const errors = (errors: []): IErrorAction => {
+export const errors = (errors: []): IRegistrationErrorAction => {
   return {
     type: USER_REGISTRATION_ERROR,
     errors,
   };
 };
 
-export const reset = (): IResetAction => {
+export const reset = (): IRegistrationResetAction => {
   return {
     type: USER_REGISTRATION_RESET,
   };

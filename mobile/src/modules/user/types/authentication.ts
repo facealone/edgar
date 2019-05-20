@@ -5,6 +5,8 @@ import {
   USER_AUTHENTICATION_LOGOUT,
   USER_AUTHENTICATION_LOADING,
 } from '../constants/authentication';
+import { ILoadingAction, IErrorAction } from '../../../types/actions';
+import { IBaseState } from '../../../types/states';
 
 export interface IAuthenticatedUserState {
   firstName: string | null;
@@ -12,10 +14,8 @@ export interface IAuthenticatedUserState {
   email: string | null;
 }
 
-export interface IAuthenticatedState {
-  loading: boolean;
+export interface IAuthenticatedState extends IBaseState {
   authenticated: boolean;
-  errors: [];
   user: IAuthenticatedUserState;
 }
 
@@ -24,27 +24,26 @@ export interface IAuthenticatedAction {
   authenticated: boolean;
 }
 
-export interface ILoadingAction {
+export interface IAuthenticationLoadingAction extends ILoadingAction {
   type: typeof USER_AUTHENTICATION_LOADING;
-  loading: boolean;
 }
 
-export interface IResetAction {
+export interface IAuthenticationResetAction {
   type: typeof USER_AUTHENTICATION_RESET;
 }
 
-export interface IErrorAction {
+export interface IAuthenticationErrorAction extends IErrorAction {
   type: typeof USER_AUTHENTICATION_ERROR;
   errors: [];
 }
 
-export interface ILogoutAction {
+export interface IAuthenticationLogoutAction {
   type: typeof USER_AUTHENTICATION_LOGOUT;
 }
 
 export type AuthenticationActionTypes =
   | IAuthenticatedAction
-  | ILoadingAction
-  | IErrorAction
-  | IResetAction
-  | ILogoutAction;
+  | IAuthenticationLoadingAction
+  | IAuthenticationErrorAction
+  | IAuthenticationResetAction
+  | IAuthenticationLogoutAction;
