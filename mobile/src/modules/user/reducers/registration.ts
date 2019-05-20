@@ -16,7 +16,7 @@ const initialState: IRegistrationState = {
 };
 
 export const registrationReducers = (
-  state: IRegistrationState = initialState,
+  state = initialState,
   action: RegistrationActionTypes,
 ): IRegistrationState => {
   switch (action.type) {

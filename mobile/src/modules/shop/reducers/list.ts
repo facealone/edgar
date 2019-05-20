@@ -13,7 +13,7 @@ const initialState: IShopListState = {
 };
 
 export const listReducers = (
-  state: IShopListState = initialState,
+  state = initialState,
   action: IShopListActionTypes,
 ): IShopListState => {
   switch (action.type) {

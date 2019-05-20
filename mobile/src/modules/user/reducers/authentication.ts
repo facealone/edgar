@@ -24,7 +24,7 @@ const initialState: IAuthenticatedState = {
 };
 
 export const authenticationReducers = (
-  state: IAuthenticatedState = initialState,
+  state = initialState,
   action: AuthenticationActionTypes,
 ): IAuthenticatedState => {
   switch (action.type) {

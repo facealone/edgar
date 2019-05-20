@@ -13,7 +13,7 @@ const initialState: ICardListState = {
 };
 
 export const listReducers = (
-  state: ICardListState = initialState,
+  state = initialState,
   action: ICardListActionTypes,
 ): ICardListState => {
   switch (action.type) {

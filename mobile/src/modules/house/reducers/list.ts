@@ -13,7 +13,7 @@ const initialState: IHouseListState = {
 };
 
 export const listReducers = (
-  state: IHouseListState = initialState,
+  state = initialState,
   action: IHouseListActionTypes,
 ): IHouseListState => {
   switch (action.type) {
