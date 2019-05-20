@@ -1,22 +1,23 @@
 import {
-  USER_AUTHENTICATION_LOADING,
-  USER_AUTHENTICATION_ERROR,
-  USER_AUTHENTICATION_AUTHENTICATED,
-  USER_AUTHENTICATION_RESET,
+  AUTH_AUTHENTICATION_LOADING,
+  AUTH_AUTHENTICATION_ERROR,
+  AUTH_AUTHENTICATION_AUTHENTICATED,
+  AUTH_AUTHENTICATION_RESET,
+  AUTH_AUTHENTICATION_USER,
 } from '../constants/authentication';
 import {
-  IAuthenticatedUserState,
-  IAuthenticatedState,
   AuthenticationActionTypes,
+  IAuthenticationState,
+  IAuthenticationUserState,
 } from '../types/authentication';
 
-const initialUserState: IAuthenticatedUserState = {
+const initialUserState: IAuthenticationUserState = {
   firstName: null,
   lastName: null,
   email: null,
 };
 
-const initialState: IAuthenticatedState = {
+const initialState: IAuthenticationState = {
   loading: false,
   authenticated: false,
   errors: [],
@@ -26,27 +27,33 @@ const initialState: IAuthenticatedState = {
 export const authenticationReducers = (
   state = initialState,
   action: AuthenticationActionTypes,
-): IAuthenticatedState => {
+): IAuthenticationState => {
   switch (action.type) {
-    case USER_AUTHENTICATION_LOADING:
+    case AUTH_AUTHENTICATION_LOADING:
       return {
         ...state,
         loading: action.loading,
       };
 
-    case USER_AUTHENTICATION_AUTHENTICATED:
+    case AUTH_AUTHENTICATION_AUTHENTICATED:
       return {
         ...state,
         authenticated: action.authenticated,
       };
 
-    case USER_AUTHENTICATION_ERROR:
+    case AUTH_AUTHENTICATION_USER:
+      return {
+        ...state,
+        user: action.user,
+      };
+
+    case AUTH_AUTHENTICATION_ERROR:
       return {
         ...state,
         errors: action.errors,
       };
 
-    case USER_AUTHENTICATION_RESET:
+    case AUTH_AUTHENTICATION_RESET:
       return initialState;
 
     default:

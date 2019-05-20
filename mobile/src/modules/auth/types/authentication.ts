@@ -1,44 +1,50 @@
 import {
-  USER_AUTHENTICATION_AUTHENTICATED,
-  USER_AUTHENTICATION_RESET,
-  USER_AUTHENTICATION_ERROR,
-  USER_AUTHENTICATION_LOGOUT,
-  USER_AUTHENTICATION_LOADING,
+  AUTH_AUTHENTICATION_AUTHENTICATED,
+  AUTH_AUTHENTICATION_RESET,
+  AUTH_AUTHENTICATION_ERROR,
+  AUTH_AUTHENTICATION_LOGOUT,
+  AUTH_AUTHENTICATION_LOADING,
+  AUTH_AUTHENTICATION_USER,
 } from '../constants/authentication';
 import { ILoadingAction, IErrorAction } from '../../../types/actions';
 import { IBaseState } from '../../../types/states';
 
-export interface IAuthenticatedUserState {
+export interface IAuthenticationUserState {
   firstName: string | null;
   lastName: string | null;
   email: string | null;
 }
 
-export interface IAuthenticatedState extends IBaseState {
+export interface IAuthenticationState extends IBaseState {
   authenticated: boolean;
-  user: IAuthenticatedUserState;
+  user: IAuthenticationUserState;
 }
 
 export interface IAuthenticatedAction {
-  type: typeof USER_AUTHENTICATION_AUTHENTICATED;
+  type: typeof AUTH_AUTHENTICATION_AUTHENTICATED;
   authenticated: boolean;
 }
 
+export interface IAuthenticationUserAction {
+  type: typeof AUTH_AUTHENTICATION_USER;
+  user: IAuthenticationUserState;
+}
+
 export interface IAuthenticationLoadingAction extends ILoadingAction {
-  type: typeof USER_AUTHENTICATION_LOADING;
+  type: typeof AUTH_AUTHENTICATION_LOADING;
 }
 
 export interface IAuthenticationResetAction {
-  type: typeof USER_AUTHENTICATION_RESET;
+  type: typeof AUTH_AUTHENTICATION_RESET;
 }
 
 export interface IAuthenticationErrorAction extends IErrorAction {
-  type: typeof USER_AUTHENTICATION_ERROR;
+  type: typeof AUTH_AUTHENTICATION_ERROR;
   errors: [];
 }
 
 export interface IAuthenticationLogoutAction {
-  type: typeof USER_AUTHENTICATION_LOGOUT;
+  type: typeof AUTH_AUTHENTICATION_LOGOUT;
 }
 
 export type AuthenticationActionTypes =
@@ -46,4 +52,5 @@ export type AuthenticationActionTypes =
   | IAuthenticationLoadingAction
   | IAuthenticationErrorAction
   | IAuthenticationResetAction
-  | IAuthenticationLogoutAction;
+  | IAuthenticationLogoutAction
+  | IAuthenticationUserAction;

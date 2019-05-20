@@ -1,6 +1,6 @@
 import { useScreens } from 'react-native-screens';
 import { createStackNavigator } from 'react-navigation';
-import { AuthenticationScreen } from '../modules/user/screens/AuthenticationScreen';
+import { AuthenticationScreen } from '../modules/auth/screens/AuthenticationScreen';
 import { HomeScreen } from '../modules/home/screens/HomeScreen';
 
 useScreens();

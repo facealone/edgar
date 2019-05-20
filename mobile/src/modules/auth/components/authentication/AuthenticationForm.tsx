@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
 
 export default connect(state => {
   return {
-    loading: state.user.authentication.loading,
-    errors: state.user.authentication.errors,
+    loading: state.auth.authentication.loading,
+    errors: state.auth.authentication.errors,
   };
 })(AuthenticationForm);

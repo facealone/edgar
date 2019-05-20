@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-import user from '../modules/user/reducers';
+import auth from '../modules/auth/reducers';
 import card from '../modules/card/reducers';
 import house from '../modules/house/reducers';
 import shop from '../modules/shop/reducers';
 
 export default combineReducers({
-  user,
+  auth,
   card,
   house,
   shop,
