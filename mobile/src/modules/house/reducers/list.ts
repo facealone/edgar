@@ -1,41 +1,41 @@
-import { ICardListState, ICardListActionTypes } from '../types/list';
+import { IHouseListState, IHouseListActionTypes } from '../types/list';
 import {
-  CARD_LIST_SUCCESS,
-  CARD_LIST_LOADING,
-  CARD_LIST_ERROR,
-  CARD_LIST_RESET,
+  HOUSE_LIST_SUCCESS,
+  HOUSE_LIST_LOADING,
+  HOUSE_LIST_ERROR,
+  HOUSE_LIST_RESET,
 } from '../constants/list';
 
-const initialState: ICardListState = {
+const initialState: IHouseListState = {
   loading: false,
   payload: [],
   errors: [],
 };
 
 export const listReducers = (
-  state: ICardListState = initialState,
-  action: ICardListActionTypes,
-): ICardListState => {
+  state: IHouseListState = initialState,
+  action: IHouseListActionTypes,
+): IHouseListState => {
   switch (action.type) {
-    case CARD_LIST_SUCCESS:
+    case HOUSE_LIST_SUCCESS:
       return {
         ...state,
         payload: action.payload,
       };
 
-    case CARD_LIST_LOADING:
+    case HOUSE_LIST_LOADING:
       return {
         ...state,
         loading: action.loading,
       };
 
-    case CARD_LIST_ERROR:
+    case HOUSE_LIST_ERROR:
       return {
         ...state,
         errors: action.errors,
       };
 
-    case CARD_LIST_RESET:
+    case HOUSE_LIST_RESET:
       return initialState;
 
     default:
