@@ -7,17 +7,23 @@ import { CanUserRegister } from 'src/Domain/User/CanUserRegister';
 import { IMailerAdapter } from 'src/Application/Adapter/IMailerAdapter';
 import { ITokenAdapter } from 'src/Application/Adapter/ITokenAdapter';
 import { WelcomeMail } from 'src/Domain/User/Mail/WelcomeMail';
+import { AuthenticatedView } from '../View/AuthenticatedView';
 
 @CommandHandler(RegisterCommand)
 export class RegisterCommandHandler {
   constructor(
-    @Inject('IUserRepository') private readonly userRepository: IUserRepository,
-    @Inject('IMailerAdapter') private readonly mailerAdapter: IMailerAdapter,
-    @Inject('ITokenAdapter') private readonly jwtAdapter: ITokenAdapter,
+    @Inject('IUserRepository')
+    private readonly userRepository: IUserRepository,
+    @Inject('IMailerAdapter')
+    private readonly mailerAdapter: IMailerAdapter,
+    @Inject('ITokenAdapter')
+    private readonly jwtAdapter: ITokenAdapter,
     private readonly canUserRegister: CanUserRegister,
   ) {}
 
-  public execute = async (command: RegisterCommand): Promise<string> => {
+  public execute = async (
+    command: RegisterCommand,
+  ): Promise<AuthenticatedView> => {
     if (false === (await this.canUserRegister.isSatisfiedBy(command.email))) {
       throw new BadRequestException('auth.user.already.exists');
     }
@@ -38,11 +44,19 @@ export class RegisterCommandHandler {
       }),
     );
 
-    return this.jwtAdapter.sign({
+    const token = this.jwtAdapter.sign({
       id: user.id,
       firstName: user.firstName,
       lastName: user.lastName.toUpperCase(),
       email: user.email,
     });
+
+    return new AuthenticatedView(
+      user.firstName,
+      user.lastName,
+      user.email,
+      token,
+      null,
+    );
   };
 }
