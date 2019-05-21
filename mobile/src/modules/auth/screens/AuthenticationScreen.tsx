@@ -7,7 +7,7 @@ export class AuthenticationScreen extends React.PureComponent {
     title: 'Se connecter',
   };
 
-  public render = () => {
+  render = () => {
     return (
       <View style={styles.container}>
         <Text>Te revoilà, saisis ton adresse email et ton mot de passe.</Text>

@@ -2,18 +2,28 @@ import React from 'react';
 import { View, StyleSheet, Button, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import t, { form } from 'tcomb-form-native';
+import { bindActionCreators } from 'redux';
+import { authentication } from '../../middlewares/authentication';
+import { reset } from '../../actions/authentication';
 
 type Props = {
   loading: boolean;
   errors: [];
+  authentication(email: string, password: string): any;
+  reset(): any;
 };
 
 class AuthenticationForm extends React.Component<Props> {
-  private handleSubmit = () => {
-    const values = this.form.getValue();
+  handleSubmit = () => {
+    const payload = this.form.getValue();
+    if (!payload) {
+      return;
+    }
+
+    this.props.authentication(payload.email, payload.password);
   };
 
-  private initForm = () => {
+  initForm = () => {
     const { loading } = this.props;
 
     const authenticationStruct = t.struct({
@@ -41,13 +51,18 @@ class AuthenticationForm extends React.Component<Props> {
     return { authenticationStruct, options };
   };
 
-  public render = () => {
+  componentWillUnmount = () => {
+    this.props.reset();
+  };
+
+  render = () => {
     const { errors, loading } = this.props;
     const { authenticationStruct, options } = this.initForm();
 
     return (
       <View style={styles.container}>
         {errors.length > 0 && <Text>Error !!</Text>}
+        {loading && <Text>Loading...</Text>}
         <form.Form
           ref={(ref: any) => {
             this.form = ref;
@@ -75,9 +90,16 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(state => {
-  return {
-    loading: state.auth.authentication.loading,
-    errors: state.auth.authentication.errors,
-  };
-})(AuthenticationForm);
+export default connect(
+  state => {
+    return {
+      loading: state.auth.authentication.loading,
+      errors: state.auth.authentication.errors,
+    };
+  },
+  dispatch => {
+    return {
+      ...bindActionCreators(authentication, reset, dispatch),
+    };
+  },
+)(AuthenticationForm);

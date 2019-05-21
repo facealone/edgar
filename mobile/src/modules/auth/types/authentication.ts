@@ -13,6 +13,7 @@ export interface IAuthenticationUserState {
   firstName: string | null;
   lastName: string | null;
   email: string | null;
+  currentHouse: string | null;
 }
 
 export interface IAuthenticationState extends IBaseState {

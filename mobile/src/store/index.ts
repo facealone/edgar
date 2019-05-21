@@ -4,7 +4,7 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
-import { client } from '../libraries/axios';
+import { client, axiosMiddleware } from '../libraries/axios';
 
 const persistConfig = {
   key: 'edgar-majordome',
@@ -17,7 +17,7 @@ const persistedReducer = persistReducer(persistConfig, reducers);
 export default () => {
   let store = createStore(
     persistedReducer,
-    applyMiddleware(thunk.withExtraArgument(client)),
+    applyMiddleware(thunk.withExtraArgument(client), axiosMiddleware(client)),
   );
 
   let persistor = persistStore(store);

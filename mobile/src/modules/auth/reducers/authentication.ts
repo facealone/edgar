@@ -15,6 +15,7 @@ const initialUserState: IAuthenticationUserState = {
   firstName: null,
   lastName: null,
   email: null,
+  currentHouse: null,
 };
 
 const initialState: IAuthenticationState = {
@@ -54,7 +55,11 @@ export const authenticationReducers = (
       };
 
     case AUTH_AUTHENTICATION_RESET:
-      return initialState;
+      return {
+        ...state,
+        loading: false,
+        errors: [],
+      };
 
     default:
       return state;

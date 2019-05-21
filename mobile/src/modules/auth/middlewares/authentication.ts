@@ -2,27 +2,27 @@ import {
   loading,
   errors,
   authenticated,
-  auth,
+  user,
 } from '../actions/authentication';
+import { LoggedUser } from '../models/LoggedUser';
+import { TokenStorage } from '../../../libraries/tokenStorage';
 
 export const authentication = (email: string, password: string) => {
-  return async (dispatch, getState, axios) => {
+  return async (dispatch: any, getState: any, axios: any) => {
     dispatch(loading(true));
 
     try {
-      const response = await axios.post('login', {
-        email,
-        password,
-      });
+      const { firstName, lastName, currentHouse, token } = await axios.post(
+        'login',
+        { email, password },
+      );
 
+      await TokenStorage.save(token);
+      dispatch(user(new LoggedUser(firstName, lastName, email, currentHouse)));
       dispatch(authenticated(true));
-      dispatch(auth(true));
-      //let token = response.token;
-      // todo :
-      // store token
-      // set logged auth
-    } catch (e) {
-      dispatch(errors([e]));
+    } catch (err) {
+      console.log(err);
+      //dispatch(errors([err])); // @todo : verify errors
     } finally {
       dispatch(loading(false));
     }
