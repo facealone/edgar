@@ -99,7 +99,7 @@ export default connect(
   },
   dispatch => {
     return {
-      ...bindActionCreators(authentication, reset, dispatch),
+      ...bindActionCreators({ authentication, reset }, dispatch),
     };
   },
 )(AuthenticationForm);

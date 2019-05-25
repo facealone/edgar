@@ -6,12 +6,21 @@ export const client = axios.create({
   baseURL: API_URL,
 });
 
-export const axiosMiddleware = (axios: AxiosInstance): any => {
+export const axiosMiddleware = (axios: AxiosInstance) => ({ dispatch }) => {
   axios.interceptors.request.use(async config => {
-    config.headers.Authorization = `Bearer ${await TokenStorage.get()}`;
+    if ('login' !== config.url && 'register' !== config.url) {
+      config.headers.Authorization = `Bearer ${await TokenStorage.get()}`;
+    }
 
     return config;
   });
+
+  axios.interceptors.response.use(
+    response => response,
+    error => {
+      return Promise.reject(error.response.data);
+    },
+  );
 
   return next => action => next(action);
 };

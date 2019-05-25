@@ -1,1 +1,1 @@
-export const API_URL = 'https://api.edgar.local';
+export const API_URL = 'http://192.168.0.23:3000';

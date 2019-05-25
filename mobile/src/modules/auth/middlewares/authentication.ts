@@ -21,8 +21,7 @@ export const authentication = (email: string, password: string) => {
       dispatch(user(new LoggedUser(firstName, lastName, email, currentHouse)));
       dispatch(authenticated(true));
     } catch (err) {
-      console.log(err);
-      //dispatch(errors([err])); // @todo : verify errors
+      dispatch(errors(err.message));
     } finally {
       dispatch(loading(false));
     }

@@ -39,6 +39,8 @@ services:
       - 'traefik.port=3000'
       - 'traefik.frontend.entryPoints=https'
       - 'traefik.frontend.rule=Host:api.edgar.local'
+    ports:
+      - 3000:3000
 
   elasticsearch:
     build: ./docker/elasticsearch
