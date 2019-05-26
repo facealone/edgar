@@ -1,5 +1,7 @@
+import { IError } from '../models/Error';
+
 export interface IErrorAction {
-  errors: [];
+  errors: IError[];
 }
 
 export interface ILoadingAction {

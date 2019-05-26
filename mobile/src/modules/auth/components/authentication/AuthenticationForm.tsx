@@ -6,10 +6,12 @@ import { bindActionCreators } from 'redux';
 import { authentication } from '../../middlewares/authentication';
 import { reset } from '../../actions/authentication';
 import i18n from '../../../../i18n';
+import { IError } from '../../../common/models/Error';
+import { Errors } from '../../../common/components/Errors';
 
 type Props = {
   loading: boolean;
-  errors: [];
+  errors: IError[];
   authentication(email: string, password: string): any;
   reset(): any;
 };
@@ -38,14 +40,12 @@ class AuthenticationForm extends React.Component<Props> {
           label: i18n.t('auth.form.email'),
           autoFocus: true,
           editable: !loading,
-          hasError: errors.length > 0,
           keyboardType: 'email-address',
         },
         password: {
           label: i18n.t('auth.form.password'),
           password: true,
           editable: !loading,
-          hasError: errors.length > 0,
           secureTextEntry: true,
         },
       },
@@ -64,9 +64,8 @@ class AuthenticationForm extends React.Component<Props> {
 
     return (
       <View style={styles.container}>
-        {errors.length > 0 && <Text>Error !!</Text>}
+        <Errors errors={errors} />
         {loading && <Text>Loading...</Text>}
-
         <form.Form
           ref={(ref: any) => {
             this.form = ref;
@@ -74,7 +73,6 @@ class AuthenticationForm extends React.Component<Props> {
           type={authenticationStruct}
           options={options}
         />
-
         <TouchableOpacity>
           <Button
             disabled={loading}
@@ -83,8 +81,7 @@ class AuthenticationForm extends React.Component<Props> {
             color={'#686868'}
           />
         </TouchableOpacity>
-
-        <Text>{i18n.t('auth.form.forgot_password')}</Text>
+        <Text>{i18n.t('auth.form.forgotPassword')}</Text>
       </View>
     );
   };

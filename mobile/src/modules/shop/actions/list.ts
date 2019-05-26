@@ -10,8 +10,10 @@ import {
   IShopListLoadingAction,
   IShopListResetAction,
 } from '../types/list';
+import { IError } from '../../common/models/Error';
+import { IShop } from '../models/Shop';
 
-export const success = (payload: []): IShopListSuccessAction => {
+export const success = (payload: IShop[]): IShopListSuccessAction => {
   return {
     type: SHOP_LIST_SUCCESS,
     payload,
@@ -25,7 +27,7 @@ export const loading = (loading: boolean): IShopListLoadingAction => {
   };
 };
 
-export const errors = (errors: []): IShopListErrorAction => {
+export const errors = (errors: IError[]): IShopListErrorAction => {
   return {
     type: SHOP_LIST_ERROR,
     errors,

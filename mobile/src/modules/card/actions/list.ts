@@ -11,6 +11,7 @@ import {
   ICardListResetAction,
 } from '../types/list';
 import { ICard } from '../models/Card';
+import { IError } from '../../common/models/Error';
 
 export const success = (payload: ICard[]): ICardListSuccessAction => {
   return {
@@ -26,7 +27,7 @@ export const loading = (loading: boolean): ICardListLoadingAction => {
   };
 };
 
-export const errors = (errors: []): ICardListErrorAction => {
+export const errors = (errors: IError[]): ICardListErrorAction => {
   return {
     type: CARD_LIST_ERROR,
     errors,

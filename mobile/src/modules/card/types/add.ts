@@ -4,8 +4,8 @@ import {
   CARD_ADD_LOADING,
   CARD_ADD_RESET,
 } from '../constants/add';
-import { ILoadingAction, IErrorAction } from '../../../types/actions';
-import { IState } from '../../../types/states';
+import { ILoadingAction, IErrorAction } from '../../common/types/actions';
+import { IState } from '../../common/types/states';
 import { ICard } from '../models/Card';
 
 export interface ICardAddState extends IState {

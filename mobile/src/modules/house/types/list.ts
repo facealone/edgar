@@ -4,8 +4,8 @@ import {
   HOUSE_LIST_ERROR,
   HOUSE_LIST_RESET,
 } from '../constants/list';
-import { IState } from '../../../types/states';
-import { ILoadingAction, IErrorAction } from '../../../types/actions';
+import { IState } from '../../common/types/states';
+import { ILoadingAction, IErrorAction } from '../../common/types/actions';
 import { IHouse } from '../models/House';
 
 export interface IHouseListState extends IState {

@@ -3,8 +3,8 @@ import {
   AUTH_REGISTRATION_LOADING,
   AUTH_REGISTRATION_RESET,
 } from '../constants/registration';
-import { IErrorAction, ILoadingAction } from '../../../types/actions';
-import { IState } from '../../../types/states';
+import { IErrorAction, ILoadingAction } from '../../common/types/actions';
+import { IState } from '../../common/types/states';
 
 export interface IRegistrationState extends IState {}
 

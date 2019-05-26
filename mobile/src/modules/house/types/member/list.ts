@@ -4,8 +4,8 @@ import {
   HOUSE_MEMBER_LIST_ERROR,
   HOUSE_MEMBER_LIST_RESET,
 } from '../../constants/member/list';
-import { IState } from '../../../../types/states';
-import { ILoadingAction, IErrorAction } from '../../../../types/actions';
+import { IState } from '../../../common/types/states';
+import { ILoadingAction, IErrorAction } from '../../../common/types/actions';
 import { IMember } from '../../models/Member';
 
 export interface IHouseMemberListState extends IState {

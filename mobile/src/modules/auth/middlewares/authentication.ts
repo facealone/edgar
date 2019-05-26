@@ -6,6 +6,7 @@ import {
 } from '../actions/authentication';
 import { LoggedUser } from '../models/LoggedUser';
 import { TokenStorage } from '../../../libraries/tokenStorage';
+import { Error } from '../../common/models/Error';
 
 export const authentication = (email: string, password: string) => {
   return async (dispatch: any, getState: any, axios: any) => {
@@ -21,7 +22,7 @@ export const authentication = (email: string, password: string) => {
       dispatch(user(new LoggedUser(firstName, lastName, email, currentHouse)));
       dispatch(authenticated(true));
     } catch (err) {
-      dispatch(errors(err.message));
+      dispatch(errors([new Error('auth.failure')]));
     } finally {
       dispatch(loading(false));
     }

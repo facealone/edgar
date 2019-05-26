@@ -4,8 +4,8 @@ import {
   CARD_LIST_RESET,
   CARD_LIST_ERROR,
 } from '../constants/list';
-import { ILoadingAction, IErrorAction } from '../../../types/actions';
-import { IState } from '../../../types/states';
+import { ILoadingAction, IErrorAction } from '../../common/types/actions';
+import { IState } from '../../common/types/states';
 import { ICardAddSuccessAction } from './add';
 import { ICard } from '../models/Card';
 

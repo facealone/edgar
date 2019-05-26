@@ -4,8 +4,8 @@ import {
   SHOP_LIST_RESET,
   SHOP_LIST_ERROR,
 } from '../constants/list';
-import { IState } from '../../../types/states';
-import { ILoadingAction, IErrorAction } from '../../../types/actions';
+import { IState } from '../../common/types/states';
+import { ILoadingAction, IErrorAction } from '../../common/types/actions';
 import { IShop } from '../models/Shop';
 
 export interface IShopListState extends IState {

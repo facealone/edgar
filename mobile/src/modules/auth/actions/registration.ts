@@ -8,6 +8,7 @@ import {
   IRegistrationResetAction,
   IRegistrationLoadingAction,
 } from '../types/registration';
+import { IError } from '../../common/models/Error';
 
 export const loading = (loading: boolean): IRegistrationLoadingAction => {
   return {
@@ -16,7 +17,7 @@ export const loading = (loading: boolean): IRegistrationLoadingAction => {
   };
 };
 
-export const errors = (errors: []): IRegistrationErrorAction => {
+export const errors = (errors: IError[]): IRegistrationErrorAction => {
   return {
     type: AUTH_REGISTRATION_ERROR,
     errors,

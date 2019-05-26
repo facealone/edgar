@@ -15,6 +15,7 @@ import {
   IAuthenticationUserAction,
 } from '../types/authentication';
 import { ILoggedUser } from '../models/LoggedUser';
+import { IError } from '../../common/models/Error';
 
 export const authenticated = (authenticated: boolean): IAuthenticatedAction => {
   return {
@@ -37,7 +38,7 @@ export const loading = (loading: boolean): IAuthenticationLoadingAction => {
   };
 };
 
-export const errors = (errors: []): IAuthenticationErrorAction => {
+export const errors = (errors: IError[]): IAuthenticationErrorAction => {
   return {
     type: AUTH_AUTHENTICATION_ERROR,
     errors,

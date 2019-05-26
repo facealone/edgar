@@ -6,8 +6,8 @@ import {
   AUTH_AUTHENTICATION_LOADING,
   AUTH_AUTHENTICATION_USER,
 } from '../constants/authentication';
-import { ILoadingAction, IErrorAction } from '../../../types/actions';
-import { IState } from '../../../types/states';
+import { ILoadingAction, IErrorAction } from '../../common/types/actions';
+import { IState } from '../../common/types/states';
 import { ILoggedUser } from '../models/LoggedUser';
 
 export interface IAuthenticationState extends IState {
@@ -35,7 +35,6 @@ export interface IAuthenticationResetAction {
 
 export interface IAuthenticationErrorAction extends IErrorAction {
   type: typeof AUTH_AUTHENTICATION_ERROR;
-  errors: [];
 }
 
 export interface IAuthenticationLogoutAction {

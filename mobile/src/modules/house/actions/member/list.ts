@@ -11,6 +11,7 @@ import {
   IHouseMemberListResetAction,
 } from '../../types/member/list';
 import { IMember } from '../../models/Member';
+import { IError } from '../../../common/models/Error';
 
 export const success = (payload: IMember[]): IHouseMemberListSuccessAction => {
   return {
@@ -26,7 +27,7 @@ export const loading = (loading: boolean): IHouseMemberListLoadingAction => {
   };
 };
 
-export const errors = (errors: []): IHouseMemberListErrorAction => {
+export const errors = (errors: IError[]): IHouseMemberListErrorAction => {
   return {
     type: HOUSE_MEMBER_LIST_ERROR,
     errors,

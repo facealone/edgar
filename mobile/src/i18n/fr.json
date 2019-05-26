@@ -3,6 +3,7 @@
     "auth": {
       "login": "Se connecter",
       "introduction": "Te revoilà, saisis ton adresse e-mail et ton mot de passe.",
+      "failure": "Adresse email ou mot de passe incorrect.",
       "form": {
         "email": "Ton adresse e-mail",
         "password": "Mot de passe",
