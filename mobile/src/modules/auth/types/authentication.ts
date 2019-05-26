@@ -7,18 +7,12 @@ import {
   AUTH_AUTHENTICATION_USER,
 } from '../constants/authentication';
 import { ILoadingAction, IErrorAction } from '../../../types/actions';
-import { IBaseState } from '../../../types/states';
+import { IState } from '../../../types/states';
+import { ILoggedUser } from '../models/LoggedUser';
 
-export interface IAuthenticationUserState {
-  firstName: string | null;
-  lastName: string | null;
-  email: string | null;
-  currentHouse: string | null;
-}
-
-export interface IAuthenticationState extends IBaseState {
+export interface IAuthenticationState extends IState {
   authenticated: boolean;
-  user: IAuthenticationUserState;
+  user: ILoggedUser | null;
 }
 
 export interface IAuthenticatedAction {
@@ -28,7 +22,7 @@ export interface IAuthenticatedAction {
 
 export interface IAuthenticationUserAction {
   type: typeof AUTH_AUTHENTICATION_USER;
-  user: IAuthenticationUserState;
+  user: ILoggedUser;
 }
 
 export interface IAuthenticationLoadingAction extends ILoadingAction {

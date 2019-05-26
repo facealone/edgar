@@ -12,9 +12,9 @@ import {
   IAuthenticationLogoutAction,
   IAuthenticationLoadingAction,
   IAuthenticatedAction,
-  IAuthenticationUserState,
   IAuthenticationUserAction,
 } from '../types/authentication';
+import { ILoggedUser } from '../models/LoggedUser';
 
 export const authenticated = (authenticated: boolean): IAuthenticatedAction => {
   return {
@@ -23,9 +23,7 @@ export const authenticated = (authenticated: boolean): IAuthenticatedAction => {
   };
 };
 
-export const user = (
-  user: IAuthenticationUserState,
-): IAuthenticationUserAction => {
+export const user = (user: ILoggedUser): IAuthenticationUserAction => {
   return {
     type: AUTH_AUTHENTICATION_USER,
     user,

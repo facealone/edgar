@@ -1,6 +1,11 @@
-import { IAuthenticationUserState } from '../types/authentication';
+export interface ILoggedUser {
+  firstName: string;
+  lastName: string;
+  email: string;
+  currentHouse: string;
+}
 
-export class LoggedUser implements IAuthenticationUserState {
+export class LoggedUser implements ILoggedUser {
   constructor(
     public readonly firstName: string,
     public readonly lastName: string,

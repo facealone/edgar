@@ -8,21 +8,13 @@ import {
 import {
   AuthenticationActionTypes,
   IAuthenticationState,
-  IAuthenticationUserState,
 } from '../types/authentication';
-
-const initialUserState: IAuthenticationUserState = {
-  firstName: null,
-  lastName: null,
-  email: null,
-  currentHouse: null,
-};
 
 const initialState: IAuthenticationState = {
   loading: false,
   authenticated: false,
   errors: [],
-  user: initialUserState,
+  user: null,
 };
 
 export const authenticationReducers = (

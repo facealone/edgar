@@ -4,9 +4,9 @@ import {
   AUTH_REGISTRATION_RESET,
 } from '../constants/registration';
 import { IErrorAction, ILoadingAction } from '../../../types/actions';
-import { IBaseState } from '../../../types/states';
+import { IState } from '../../../types/states';
 
-export interface IRegistrationState extends IBaseState {}
+export interface IRegistrationState extends IState {}
 
 export interface IRegistrationLoadingAction extends ILoadingAction {
   type: typeof AUTH_REGISTRATION_LOADING;
