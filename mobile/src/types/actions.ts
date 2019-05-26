@@ -2,6 +2,10 @@ export interface IListSuccessAction {
   payload: [];
 }
 
+export interface ISuccessAction {
+  payload: {};
+}
+
 export interface IErrorAction {
   errors: [];
 }

@@ -6,3 +6,7 @@ export interface IBaseState {
 export interface IListState extends IBaseState {
   payload: [];
 }
+
+export interface IState extends IBaseState {
+  payload: {};
+}
