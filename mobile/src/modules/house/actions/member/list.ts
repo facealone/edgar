@@ -10,8 +10,9 @@ import {
   IHouseMemberListErrorAction,
   IHouseMemberListResetAction,
 } from '../../types/member/list';
+import { IMember } from '../../models/Member';
 
-export const success = (payload: []): IHouseMemberListSuccessAction => {
+export const success = (payload: IMember[]): IHouseMemberListSuccessAction => {
   return {
     type: HOUSE_MEMBER_LIST_SUCCESS,
     payload,

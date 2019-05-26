@@ -4,17 +4,17 @@ import {
   HOUSE_LIST_ERROR,
   HOUSE_LIST_RESET,
 } from '../constants/list';
-import { IListState } from '../../../types/states';
-import {
-  IListSuccessAction,
-  ILoadingAction,
-  IErrorAction,
-} from '../../../types/actions';
+import { IState } from '../../../types/states';
+import { ILoadingAction, IErrorAction } from '../../../types/actions';
+import { IHouse } from '../models/House';
 
-export interface IHouseListState extends IListState {}
+export interface IHouseListState extends IState {
+  payload: IHouse[];
+}
 
-export interface IHouseListSuccessAction extends IListSuccessAction {
+export interface IHouseListSuccessAction {
   type: typeof HOUSE_LIST_SUCCESS;
+  payload: IHouse[];
 }
 
 export interface IHouseListLoadingAction extends ILoadingAction {

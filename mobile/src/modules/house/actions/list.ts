@@ -10,8 +10,9 @@ import {
   IHouseListErrorAction,
   IHouseListResetAction,
 } from '../types/list';
+import { IHouse } from '../models/House';
 
-export const success = (payload: []): IHouseListSuccessAction => {
+export const success = (payload: IHouse[]): IHouseListSuccessAction => {
   return {
     type: HOUSE_LIST_SUCCESS,
     payload,

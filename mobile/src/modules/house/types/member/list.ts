@@ -4,17 +4,17 @@ import {
   HOUSE_MEMBER_LIST_ERROR,
   HOUSE_MEMBER_LIST_RESET,
 } from '../../constants/member/list';
-import { IListState } from '../../../../types/states';
-import {
-  IListSuccessAction,
-  ILoadingAction,
-  IErrorAction,
-} from '../../../../types/actions';
+import { IState } from '../../../../types/states';
+import { ILoadingAction, IErrorAction } from '../../../../types/actions';
+import { IMember } from '../../models/Member';
 
-export interface IHouseMemberListState extends IListState {}
+export interface IHouseMemberListState extends IState {
+  payload: IMember[];
+}
 
-export interface IHouseMemberListSuccessAction extends IListSuccessAction {
+export interface IHouseMemberListSuccessAction {
   type: typeof HOUSE_MEMBER_LIST_SUCCESS;
+  payload: IMember[];
 }
 
 export interface IHouseMemberListLoadingAction extends ILoadingAction {
