@@ -4,17 +4,17 @@ import {
   CARD_ADD_LOADING,
   CARD_ADD_RESET,
 } from '../constants/add';
-import {
-  ILoadingAction,
-  IErrorAction,
-  ISuccessAction,
-} from '../../../types/actions';
+import { ILoadingAction, IErrorAction } from '../../../types/actions';
 import { IState } from '../../../types/states';
+import { ICard } from '../models/Card';
 
-export interface ICardAddState extends IState {}
+export interface ICardAddState extends IState {
+  payload: ICard | null;
+}
 
-export interface ICardAddSuccessAction extends ISuccessAction {
+export interface ICardAddSuccessAction {
   type: typeof CARD_ADD_SUCCESS;
+  payload: ICard;
 }
 
 export interface ICardAddErrorAction extends IErrorAction {

@@ -7,7 +7,7 @@ import {
 } from '../constants/add';
 
 const initialState: ICardAddState = {
-  payload: {},
+  payload: null,
   errors: [],
   loading: false,
 };

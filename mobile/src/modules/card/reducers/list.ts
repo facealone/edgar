@@ -5,6 +5,7 @@ import {
   CARD_LIST_ERROR,
   CARD_LIST_RESET,
 } from '../constants/list';
+import { CARD_ADD_SUCCESS } from '../constants/add';
 
 const initialState: ICardListState = {
   loading: false,
@@ -17,6 +18,12 @@ export const listReducers = (
   action: ICardListActionTypes,
 ): ICardListState => {
   switch (action.type) {
+    case CARD_ADD_SUCCESS:
+      return {
+        ...state,
+        payload: [...state.payload, action.payload],
+      };
+
     case CARD_LIST_SUCCESS:
       return {
         ...state,

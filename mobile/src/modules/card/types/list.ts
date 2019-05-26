@@ -4,17 +4,18 @@ import {
   CARD_LIST_RESET,
   CARD_LIST_ERROR,
 } from '../constants/list';
-import {
-  IListSuccessAction,
-  ILoadingAction,
-  IErrorAction,
-} from '../../../types/actions';
-import { IListState } from '../../../types/states';
+import { ILoadingAction, IErrorAction } from '../../../types/actions';
+import { IState } from '../../../types/states';
+import { ICardAddSuccessAction } from './add';
+import { ICard } from '../models/Card';
 
-export interface ICardListState extends IListState {}
+export interface ICardListState extends IState {
+  payload: ICard[];
+}
 
-export interface ICardListSuccessAction extends IListSuccessAction {
+export interface ICardListSuccessAction {
   type: typeof CARD_LIST_SUCCESS;
+  payload: ICard[];
 }
 
 export interface ICardListLoadingAction extends ILoadingAction {
@@ -31,6 +32,7 @@ export interface ICardListErrorAction extends IErrorAction {
 
 export type ICardListActionTypes =
   | ICardListSuccessAction
+  | ICardAddSuccessAction
   | ICardListLoadingAction
   | ICardListResetAction
   | ICardListErrorAction;

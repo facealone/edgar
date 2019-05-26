@@ -10,8 +10,9 @@ import {
   ICardListLoadingAction,
   ICardListResetAction,
 } from '../types/list';
+import { ICard } from '../models/Card';
 
-export const success = (payload: []): ICardListSuccessAction => {
+export const success = (payload: ICard[]): ICardListSuccessAction => {
   return {
     type: CARD_LIST_SUCCESS,
     payload,

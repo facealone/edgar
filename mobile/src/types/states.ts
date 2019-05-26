@@ -1,12 +1,4 @@
-export interface IBaseState {
+export interface IState {
   loading: boolean;
   errors: [];
-}
-
-export interface IListState extends IBaseState {
-  payload: [];
-}
-
-export interface IState extends IBaseState {
-  payload: {};
 }
