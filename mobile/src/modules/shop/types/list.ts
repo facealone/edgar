@@ -4,17 +4,17 @@ import {
   SHOP_LIST_RESET,
   SHOP_LIST_ERROR,
 } from '../constants/list';
-import { IListState } from '../../../types/states';
-import {
-  IListSuccessAction,
-  ILoadingAction,
-  IErrorAction,
-} from '../../../types/actions';
+import { IState } from '../../../types/states';
+import { ILoadingAction, IErrorAction } from '../../../types/actions';
+import { IShop } from '../models/Shop';
 
-export interface IShopListState extends IListState {}
+export interface IShopListState extends IState {
+  payload: IShop[];
+}
 
-export interface IShopListSuccessAction extends IListSuccessAction {
+export interface IShopListSuccessAction {
   type: typeof SHOP_LIST_SUCCESS;
+  payload: IShop[];
 }
 
 export interface IShopListLoadingAction extends ILoadingAction {
