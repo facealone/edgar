@@ -5,6 +5,7 @@ import t, { form } from 'tcomb-form-native';
 import { bindActionCreators } from 'redux';
 import { authentication } from '../../middlewares/authentication';
 import { reset } from '../../actions/authentication';
+import i18n from '../../../../i18n';
 
 type Props = {
   loading: boolean;
@@ -24,7 +25,7 @@ class AuthenticationForm extends React.Component<Props> {
   };
 
   initForm = () => {
-    const { loading } = this.props;
+    const { loading, errors } = this.props;
 
     const authenticationStruct = t.struct({
       email: t.String,
@@ -34,15 +35,17 @@ class AuthenticationForm extends React.Component<Props> {
     const options = {
       fields: {
         email: {
-          label: 'Adresse email',
+          label: i18n.t('auth.form.email'),
           autoFocus: true,
           editable: !loading,
+          hasError: errors.length > 0,
           keyboardType: 'email-address',
         },
         password: {
-          label: 'Mot de passe',
+          label: i18n.t('auth.form.password'),
           password: true,
           editable: !loading,
+          hasError: errors.length > 0,
           secureTextEntry: true,
         },
       },
@@ -63,6 +66,7 @@ class AuthenticationForm extends React.Component<Props> {
       <View style={styles.container}>
         {errors.length > 0 && <Text>Error !!</Text>}
         {loading && <Text>Loading...</Text>}
+
         <form.Form
           ref={(ref: any) => {
             this.form = ref;
@@ -74,11 +78,13 @@ class AuthenticationForm extends React.Component<Props> {
         <TouchableOpacity>
           <Button
             disabled={loading}
-            title={'Se connecter'}
+            title={i18n.t('auth.login')}
             onPress={this.handleSubmit}
             color={'#686868'}
           />
         </TouchableOpacity>
+
+        <Text>{i18n.t('auth.form.forgot_password')}</Text>
       </View>
     );
   };

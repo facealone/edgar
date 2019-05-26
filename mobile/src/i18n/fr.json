@@ -1,0 +1,13 @@
+{
+  "translation": {
+    "auth": {
+      "login": "Se connecter",
+      "introduction": "Te revoilà, saisis ton adresse e-mail et ton mot de passe.",
+      "form": {
+        "email": "Ton adresse e-mail",
+        "password": "Mot de passe",
+        "forgotPassword": "Mot de passe oublié ?"
+      }
+    }
+  }
+}
