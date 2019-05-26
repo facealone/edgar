@@ -1,5 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Button, Text, TouchableOpacity } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Button,
+  Text,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import { connect } from 'react-redux';
 import t, { form } from 'tcomb-form-native';
 import { bindActionCreators } from 'redux';
@@ -7,7 +14,6 @@ import { authentication } from '../../middlewares/authentication';
 import { reset } from '../../actions/authentication';
 import i18n from '../../../../i18n';
 import { IError } from '../../../common/models/Error';
-import { Errors } from '../../../common/components/Errors';
 
 type Props = {
   loading: boolean;
@@ -23,11 +29,12 @@ class AuthenticationForm extends React.Component<Props> {
       return;
     }
 
+    this.props.reset();
     this.props.authentication(payload.email, payload.password);
   };
 
   initForm = () => {
-    const { loading, errors } = this.props;
+    const { loading } = this.props;
 
     const authenticationStruct = t.struct({
       email: t.String,
@@ -64,7 +71,8 @@ class AuthenticationForm extends React.Component<Props> {
 
     return (
       <View style={styles.container}>
-        <Errors errors={errors} />
+        {errors.length > 0 &&
+          Alert.alert(i18n.t('auth.failure.title'), i18n.t(errors[0].message))}
         {loading && <Text>Loading...</Text>}
         <form.Form
           ref={(ref: any) => {
