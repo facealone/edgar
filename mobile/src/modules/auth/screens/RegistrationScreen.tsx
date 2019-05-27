@@ -17,7 +17,7 @@ interface Props {
 
 class AuthenticationScreen extends React.PureComponent<Props> {
   static navigationOptions = {
-    title: i18n.t('auth.authentication.login'),
+    title: i18n.t('auth.login'),
   };
 
   componentWillUnmount = () => {
@@ -40,12 +40,10 @@ class AuthenticationScreen extends React.PureComponent<Props> {
       <Content>
         {auth.errors.length > 0 &&
           Alert.alert(
-            i18n.t('auth.authentication.failure.title'),
+            i18n.t('auth.failure.title'),
             i18n.t(auth.errors[0].message),
           )}
-        <Text style={styles.intro}>
-          {i18n.t('auth.authentication.introduction')}
-        </Text>
+        <Text style={styles.intro}>{i18n.t('auth.introduction')}</Text>
         <AuthenticationForm
           onSubmit={this.handleSubmit}
           loading={auth.loading}

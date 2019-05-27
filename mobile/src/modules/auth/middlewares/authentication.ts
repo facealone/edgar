@@ -22,7 +22,7 @@ export const authentication = (email: string, password: string) => {
       dispatch(user(new LoggedUser(firstName, lastName, email, currentHouse)));
       dispatch(authenticated(true));
     } catch (err) {
-      dispatch(errors([new Error('auth.failure.content')]));
+      dispatch(errors([new Error('auth.authentication.failure.content')]));
     } finally {
       dispatch(loading(false));
     }

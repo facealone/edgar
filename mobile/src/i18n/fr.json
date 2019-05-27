@@ -1,17 +1,26 @@
 {
   "translation": {
     "auth": {
-      "login": "Se connecter",
-      "introduction": "Te revoilà, saisis ton adresse e-mail et ton mot de passe.",
-      "failure": {
-        "title": "Oups !",
-        "content": "Ton adresse email ou mot de passe est incorrect."
+      "authentication": {
+        "login": "Se connecter",
+        "introduction": "Vous revoilà, saisissez votre adresse e-mail et votre mot de passe.",
+        "failure": {
+          "title": "Oups !",
+          "content": "Votre adresse email ou mot de passe est incorrect."
+        },
+        "form": {
+          "email": "Votre adresse e-mail",
+          "password": "Mot de passe",
+          "forgotPassword": "Mot de passe oublié ?"
+        }
       },
-      "form": {
-        "email": "Ton adresse e-mail",
-        "password": "Mot de passe",
-        "forgotPassword": "Mot de passe oublié ?"
-      }
+      "registration": {}
+    },
+    "home": {
+      "slogan": "Edgar est un assistant personnel vous permettant de gérer vos maisons au quotidien.",
+      "goToLogin": "Déjà un compte ? Connectez-vous",
+      "goToAccountCreation": "Créer un compte",
+      "cgu": "En utilisant Edgar Majordome, tu acceptes les conditions d'utilistions et la politique de confidentialité."
     }
   }
 }
