@@ -1,53 +1,21 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Alert, StyleSheet } from 'react-native';
-import AuthenticationForm from '../components/authentication/AuthenticationForm';
+import { StyleSheet, Text } from 'react-native';
+import { Content } from 'native-base';
 import i18n from '../../../i18n';
-import { authentication } from '../middlewares/authentication';
-import { reset } from '../actions/authentication';
-import { IAuthenticationState } from '../types/authentication';
-import { Content, Text } from 'native-base';
+import RegistrationForm from '../components/RegistrationForm';
 
-interface Props {
-  auth: IAuthenticationState;
-  authentication(email: string, password: string): any;
-  reset(): any;
-}
-
-class AuthenticationScreen extends React.PureComponent<Props> {
+export default class RegistrationScreen extends React.PureComponent {
   static navigationOptions = {
-    title: i18n.t('auth.login'),
-  };
-
-  componentWillUnmount = () => {
-    this.props.reset();
-  };
-
-  handleSubmit = payload => {
-    if (!payload) {
-      return;
-    }
-
-    this.props.reset();
-    this.props.authentication(payload.email, payload.password);
+    title: i18n.t('auth.registration.title'),
   };
 
   render = () => {
-    const { auth } = this.props;
-
     return (
       <Content>
-        {auth.errors.length > 0 &&
-          Alert.alert(
-            i18n.t('auth.failure.title'),
-            i18n.t(auth.errors[0].message),
-          )}
-        <Text style={styles.intro}>{i18n.t('auth.introduction')}</Text>
-        <AuthenticationForm
-          onSubmit={this.handleSubmit}
-          loading={auth.loading}
-        />
+        <Text style={styles.intro}>
+          {i18n.t('auth.registration.introduction')}
+        </Text>
+        <RegistrationForm onSubmit={() => {}} loading={false} />
       </Content>
     );
   };
@@ -56,16 +24,3 @@ class AuthenticationScreen extends React.PureComponent<Props> {
 const styles = StyleSheet.create({
   intro: { margin: 10 },
 });
-
-export default connect(
-  state => {
-    return {
-      auth: state.auth.authentication,
-    };
-  },
-  dispatch => {
-    return {
-      ...bindActionCreators({ authentication, reset }, dispatch),
-    };
-  },
-)(AuthenticationScreen);

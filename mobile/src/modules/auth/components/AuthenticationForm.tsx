@@ -11,8 +11,8 @@ import {
 } from 'native-base';
 import { StyleSheet } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
-import i18n from '../../../../i18n';
-import { MAIN_COLOR } from '../../../../theme/colors';
+import i18n from '../../../i18n';
+import { MAIN_COLOR } from '../../../theme/colors';
 
 interface Props {
   loading: boolean;

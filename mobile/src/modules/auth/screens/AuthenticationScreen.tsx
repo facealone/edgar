@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Alert, StyleSheet } from 'react-native';
-import AuthenticationForm from '../components/authentication/AuthenticationForm';
+import AuthenticationForm from '../components/AuthenticationForm';
 import i18n from '../../../i18n';
 import { authentication } from '../middlewares/authentication';
 import { reset } from '../actions/authentication';

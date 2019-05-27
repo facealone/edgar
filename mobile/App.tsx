@@ -6,8 +6,11 @@ import { Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import { createAppContainer } from 'react-navigation';
 import { Container } from 'native-base';
+import { useScreens } from 'react-native-screens';
 import configureStore from './src/store';
 import { AppNavigator } from './src/libraries/navigator';
+
+useScreens();
 
 const { store, persistor } = configureStore();
 const AppContainer = createAppContainer(AppNavigator);

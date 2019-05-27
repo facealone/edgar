@@ -11,17 +11,22 @@ export class HomeScreen extends React.PureComponent {
   };
 
   render() {
+    const { navigation } = this.props;
+
     return (
       <Content style={styles.container}>
         <Thumbnail source={Logo} style={styles.logo} />
         <Text style={styles.slogan}>{i18n.t('home.slogan')}</Text>
         <Button style={styles.createAccount}>
-          <Text style={styles.createAccountText}>
-            {i18n.t('home.goToAccountCreation')}
+          <Text
+            style={styles.createAccountText}
+            onPress={() => navigation.navigate('Registration')}
+          >
+            {i18n.t('auth.registration.title')}
           </Text>
         </Button>
         <Text
-          onPress={() => this.props.navigation.navigate('Authentication')}
+          onPress={() => navigation.navigate('Authentication')}
           style={styles.login}
         >
           {i18n.t('home.goToLogin')}
@@ -43,18 +48,19 @@ const styles = StyleSheet.create({
     width: 170,
     height: 170,
     alignSelf: 'center',
-    marginTop: 50,
+    marginTop: 40,
   },
   slogan: {
     fontSize: 16,
     fontFamily: 'Roboto_medium',
     textAlign: 'center',
     color: '#fff',
-    padding: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
     alignSelf: 'center',
   },
   createAccount: {
-    marginTop: 30,
+    marginTop: 50,
     fontSize: 16,
     textAlign: 'center',
     color: MAIN_COLOR,
@@ -73,7 +79,6 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   cgu: {
-    flex: 1,
     justifyContent: 'flex-end',
     marginBottom: 10,
     fontSize: 12,

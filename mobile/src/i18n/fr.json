@@ -9,17 +9,26 @@
           "content": "Votre adresse email ou mot de passe est incorrect."
         },
         "form": {
-          "email": "Votre adresse e-mail",
+          "email": "Adresse e-mail",
           "password": "Mot de passe",
           "forgotPassword": "Mot de passe oublié ?"
         }
       },
-      "registration": {}
+      "registration": {
+        "title": "Créer un compte",
+        "introduction": "Créez votre compte en 2min chrono",
+        "form": {
+          "firstName": "Prénom",
+          "lastName": "Nom",
+          "email": "Adresse e-mail",
+          "password": "Mot de passe",
+          "next": "Suivant"
+        }
+      }
     },
     "home": {
       "slogan": "Edgar est un assistant personnel vous permettant de gérer vos maisons au quotidien.",
       "goToLogin": "Déjà un compte ? Connectez-vous",
-      "goToAccountCreation": "Créer un compte",
       "cgu": "En utilisant Edgar Majordome, tu acceptes les conditions d'utilistions et la politique de confidentialité."
     }
   }
