@@ -24,3 +24,10 @@ export type RegistrationActionTypes =
   | IRegistrationLoadingAction
   | IRegistrationResetAction
   | IRegistrationErrorAction;
+
+export interface IRegistrationForm {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}

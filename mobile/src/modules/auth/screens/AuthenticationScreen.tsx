@@ -6,16 +6,19 @@ import AuthenticationForm from '../components/AuthenticationForm';
 import i18n from '../../../i18n';
 import { authentication } from '../middlewares/authentication';
 import { reset } from '../actions/authentication';
-import { IAuthenticationState } from '../types/authentication';
+import {
+  IAuthenticationState,
+  IAuthenticationForm,
+} from '../types/authentication';
 import { Content, Text } from 'native-base';
 
-interface Props {
+interface IProps {
   auth: IAuthenticationState;
-  authentication(email: string, password: string): any;
+  authentication(payload: IAuthenticationForm): any;
   reset(): any;
 }
 
-class AuthenticationScreen extends React.PureComponent<Props> {
+class AuthenticationScreen extends React.PureComponent<IProps> {
   static navigationOptions = {
     title: i18n.t('auth.authentication.login'),
   };
@@ -24,13 +27,13 @@ class AuthenticationScreen extends React.PureComponent<Props> {
     this.props.reset();
   };
 
-  handleSubmit = payload => {
+  handleSubmit = (payload: IAuthenticationForm) => {
     if (!payload) {
       return;
     }
 
     this.props.reset();
-    this.props.authentication(payload.email, payload.password);
+    this.props.authentication(payload);
   };
 
   render = () => {

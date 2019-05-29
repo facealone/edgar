@@ -48,3 +48,8 @@ export type AuthenticationActionTypes =
   | IAuthenticationResetAction
   | IAuthenticationLogoutAction
   | IAuthenticationUserAction;
+
+export interface IAuthenticationForm {
+  email: string;
+  password: string;
+}

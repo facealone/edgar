@@ -10,16 +10,20 @@ import {
   Spinner,
 } from 'native-base';
 import { StyleSheet } from 'react-native';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import i18n from '../../../i18n';
 import { MAIN_COLOR } from '../../../theme/colors';
+import { validate } from '../validators/authentication';
+import { IAuthenticationForm } from '../types/authentication';
 
-interface Props {
+interface IProps {
   loading: boolean;
   handleSubmit(): any;
 }
 
-class AuthenticationForm extends React.PureComponent<Props> {
+class AuthenticationForm extends React.PureComponent<
+  InjectedFormProps<IAuthenticationForm> & IProps
+> {
   render = () => {
     const { loading, handleSubmit } = this.props;
 
@@ -78,6 +82,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default reduxForm({
+export default reduxForm<IAuthenticationForm, IProps>({
   form: 'authentication',
+  validate,
 })(AuthenticationForm);

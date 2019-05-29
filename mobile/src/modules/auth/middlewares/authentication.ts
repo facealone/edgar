@@ -7,12 +7,14 @@ import {
 import { LoggedUser } from '../models/LoggedUser';
 import { TokenStorage } from '../../../libraries/tokenStorage';
 import { Error } from '../../common/models/Error';
+import { IAuthenticationForm } from '../types/authentication';
 
-export const authentication = (email: string, password: string) => {
+export const authentication = (payload: IAuthenticationForm) => {
   return async (dispatch: any, getState: any, axios: any) => {
     dispatch(loading(true));
 
     try {
+      const { email, password } = payload;
       const { firstName, lastName, currentHouse, token } = await axios.post(
         'login',
         { email, password },

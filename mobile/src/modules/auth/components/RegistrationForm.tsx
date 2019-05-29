@@ -10,16 +10,20 @@ import {
   Spinner,
 } from 'native-base';
 import { StyleSheet } from 'react-native';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import i18n from '../../../i18n';
 import { MAIN_COLOR } from '../../../theme/colors';
+import { validate } from '../validators/registration';
+import { IRegistrationForm } from '../types/registration';
 
-interface Props {
+interface IProps {
   loading: boolean;
   handleSubmit(): any;
 }
 
-class RegistrationForm extends React.PureComponent<Props> {
+class RegistrationForm extends React.PureComponent<
+  InjectedFormProps<IRegistrationForm> & IProps
+> {
   render = () => {
     const { loading, handleSubmit } = this.props;
 
@@ -89,6 +93,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default reduxForm({
+export default reduxForm<IRegistrationForm, IProps>({
   form: 'registration',
+  validate,
 })(RegistrationForm);
