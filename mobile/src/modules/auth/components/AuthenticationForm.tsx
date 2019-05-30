@@ -1,20 +1,12 @@
 import React from 'react';
-import {
-  Form,
-  Button,
-  Text,
-  Input,
-  Label,
-  Item,
-  Content,
-  Spinner,
-} from 'native-base';
-import { StyleSheet } from 'react-native';
+import { Form, Button, Text, Content, Spinner } from 'native-base';
+import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import i18n from '../../../i18n';
 import { MAIN_COLOR } from '../../../theme/colors';
 import { validate } from '../validators/authentication';
 import { IAuthenticationForm } from '../types/authentication';
+import { Input } from '../../common/components/Input';
 
 interface IProps {
   loading: boolean;
@@ -28,42 +20,39 @@ class AuthenticationForm extends React.PureComponent<
     const { loading, handleSubmit } = this.props;
 
     return (
-      <Content>
-        <Form>
-          <Item stackedLabel>
-            <Label>{i18n.t('auth.authentication.form.email')}</Label>
+      <KeyboardAvoidingView behavior={'padding'}>
+        <Content>
+          <Form>
             <Field
               autoFocus
+              label={i18n.t('auth.authentication.form.email')}
               returnKeyType={'next'}
               name={'email'}
-              required={true}
+              keyboardType={'email-address'}
+              textContentType={'emailAddress'}
               component={Input}
             />
-          </Item>
-
-          <Item stackedLabel>
-            <Label>{i18n.t('auth.authentication.form.password')}</Label>
             <Field
               name={'password'}
-              required={true}
+              label={i18n.t('auth.authentication.form.password')}
               returnKeyType={'done'}
               secureTextEntry={true}
               component={Input}
             />
-          </Item>
-          <Button
-            disabled={loading}
-            style={styles.loginButton}
-            onPress={handleSubmit}
-          >
-            <Text>{i18n.t('auth.authentication.login')}</Text>
-            {loading && <Spinner color={'#fff'} />}
-          </Button>
-          <Text style={styles.forgotPassword}>
-            {i18n.t('auth.authentication.form.forgotPassword')}
-          </Text>
-        </Form>
-      </Content>
+            <Button
+              disabled={loading}
+              style={styles.loginButton}
+              onPress={handleSubmit}
+            >
+              {loading && <Spinner color={'#fff'} />}
+              <Text>{i18n.t('auth.authentication.login')}</Text>
+            </Button>
+            <Text style={styles.forgotPassword}>
+              {i18n.t('auth.authentication.form.forgotPassword')}
+            </Text>
+          </Form>
+        </Content>
+      </KeyboardAvoidingView>
     );
   };
 }

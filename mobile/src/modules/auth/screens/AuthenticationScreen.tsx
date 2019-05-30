@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Alert, StyleSheet } from 'react-native';
+import { Alert, StyleSheet, Keyboard } from 'react-native';
 import AuthenticationForm from '../components/AuthenticationForm';
 import i18n from '../../../i18n';
 import { authentication } from '../middlewares/authentication';
@@ -28,10 +28,7 @@ class AuthenticationScreen extends React.PureComponent<IProps> {
   };
 
   handleSubmit = (payload: IAuthenticationForm) => {
-    if (!payload) {
-      return;
-    }
-
+    Keyboard.dismiss();
     this.props.reset();
     this.props.authentication(payload);
   };

@@ -7,7 +7,7 @@ export const validate = (payload: IAuthenticationForm) => {
   if (!payload.email) {
     errors.email = i18n.t('form.errors.requiredField');
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(payload.email)) {
-    errors.email = i18n.t('form.error.invalidEmail');
+    errors.email = i18n.t('form.errors.invalidEmail');
   }
 
   if (!payload.password) {

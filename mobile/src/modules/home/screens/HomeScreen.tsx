@@ -25,12 +25,15 @@ export class HomeScreen extends React.PureComponent {
             {i18n.t('auth.registration.title')}
           </Text>
         </Button>
-        <Text
+        <Button
+          transparent
           onPress={() => navigation.navigate('Authentication')}
           style={styles.login}
         >
-          {i18n.t('home.goToLogin')}
-        </Text>
+          <Text uppercase={false} style={styles.loginText}>
+            {i18n.t('home.goToLogin')}
+          </Text>
+        </Button>
 
         <Text style={styles.cgu}>{i18n.t('home.cgu')}</Text>
       </Content>
@@ -45,15 +48,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   logo: {
-    width: 190,
-    height: 190,
+    width: 200,
+    height: 200,
     alignSelf: 'center',
     marginTop: 40,
   },
   slogan: {
     fontSize: 16,
-    fontFamily: 'Roboto_medium',
+    fontFamily: 'Roboto',
     textAlign: 'center',
+    lineHeight: 16,
     color: '#fff',
     paddingLeft: 10,
     paddingRight: 10,
@@ -71,11 +75,15 @@ const styles = StyleSheet.create({
     color: MAIN_COLOR,
   },
   login: {
-    margin: 30,
-    fontSize: 16,
+    margin: 15,
     textAlign: 'center',
-    color: '#fff',
+    backgroundColor: 'transparent',
     alignSelf: 'center',
+  },
+  loginText: {
+    fontSize: 15,
+    fontFamily: 'Roboto',
+    color: '#fff',
     textDecorationLine: 'underline',
   },
   cgu: {

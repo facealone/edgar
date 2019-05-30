@@ -15,10 +15,8 @@ export const authentication = (payload: IAuthenticationForm) => {
 
     try {
       const { email, password } = payload;
-      const { firstName, lastName, currentHouse, token } = await axios.post(
-        'login',
-        { email, password },
-      );
+      const response = await axios.post('login', { email, password });
+      const { firstName, lastName, currentHouse, token } = response.data;
 
       await TokenStorage.save(token);
       dispatch(user(new LoggedUser(firstName, lastName, email, currentHouse)));

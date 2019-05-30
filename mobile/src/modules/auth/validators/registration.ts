@@ -10,8 +10,16 @@ export const validate = (payload: IRegistrationForm) => {
     errors.email = i18n.t('form.errors.invalidEmail');
   }
 
-  if (!payload.password) {
+  if (!payload.firstName) {
     errors.password = i18n.t('form.errors.requiredField');
+  }
+
+  if (!payload.lastName) {
+    errors.lastName = i18n.t('form.errors.requiredField');
+  }
+
+  if (!payload.password) {
+    errors.firstName = i18n.t('form.errors.requiredField');
   }
 
   return errors;
