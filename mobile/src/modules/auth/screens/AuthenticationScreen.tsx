@@ -10,13 +10,16 @@ import { reset } from '../actions/authentication';
 import {
   IAuthenticationState,
   IAuthenticationForm,
+  IAuthenticationResetAction,
 } from '../types/authentication';
 import { commonStyles } from '../../../theme/common';
+import AppEntryPoint from '../AppEntryPoint';
 
 interface IProps {
   auth: IAuthenticationState;
+  navigation: any;
   authentication(payload: IAuthenticationForm): any;
-  reset(): any;
+  reset(): IAuthenticationResetAction;
 }
 
 class AuthenticationScreen extends React.PureComponent<IProps> {
@@ -26,6 +29,14 @@ class AuthenticationScreen extends React.PureComponent<IProps> {
 
   componentWillUnmount = () => {
     this.props.reset();
+  };
+
+  componentDidUpdate = () => {
+    const { auth, navigation } = this.props;
+
+    if (true === auth.authenticated) {
+      navigation.navigate(AppEntryPoint.getByAuthenticationState(auth));
+    }
   };
 
   handleSubmit = (payload: IAuthenticationForm) => {

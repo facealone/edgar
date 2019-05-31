@@ -29,6 +29,7 @@ class AuthenticationForm extends React.PureComponent<
               returnKeyType={'next'}
               name={'email'}
               keyboardType={'email-address'}
+              autoCapitalize={'none'}
               textContentType={'emailAddress'}
               component={Input}
             />

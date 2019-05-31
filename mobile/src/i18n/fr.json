@@ -2,7 +2,7 @@
   "translation": {
     "form": {
       "errors": {
-        "requiredField": "Ce champs est requis",
+        "requiredField": "Ce champs est requis.",
         "invalidEmail": "Cette adresse e-mail n'est pas valide."
       }
     },
@@ -28,24 +28,51 @@
           "lastName": "Nom",
           "email": "Adresse e-mail",
           "password": "Mot de passe",
-          "next": "Suivant"
+          "confirmPassword": "Confirmez votre mot de passe",
+          "next": "Suivant",
+          "errors": {
+            "invalidPasswords": "Les mots de passe doivent être identiques.",
+            "passwordLength": "Le mot de passe doit faire 10 charactères mininum."
+          }
         }
       }
     },
     "house": {
       "add": {
         "title": "Créez votre maison",
-        "introduction": "Vous y êtes presque, créez maintenant votre première maison et invitez vos membres."
+        "introduction": "Vous y êtes presque, créez maintenant votre première maison."
       },
       "form": {
         "name": "Nom de la maison",
         "next": "Suivant"
+      },
+      "member": {
+        "voucher": {
+          "title": "Invitez vos amis",
+          "introduction": "Invitez maintenant vos amis / famille pour partager avec eux la gestion de votre maison \"{{house}}\""
+        }
       }
     },
     "home": {
       "slogan": "Edgar est un assistant personnel vous permettant de gérer vos maisons au quotidien.",
       "goToLogin": "Déjà un compte ? Connectez-vous",
       "cgu": "En utilisant Edgar Majordome, vous acceptez les conditions d'utilistions et la politique de confidentialité."
+    },
+    "navigation": {
+      "home": "Maison",
+      "cards": "Cartes",
+      "profil": "Profile",
+      "chat": "Chat",
+      "tabs": {
+        "shops": "Magasins",
+        "menus": "Menus",
+        "recipes": "Recettes"
+      }
+    },
+    "card": {
+      "list": {
+        "intro": "Portefeuille encombrant ? Toutes vos cartes maintenant sauvegardées dans votre application !"
+      }
     }
   }
 }

@@ -10,7 +10,7 @@ export class HomeScreen extends React.PureComponent {
     header: null,
   };
 
-  render() {
+  render = () => {
     const { navigation } = this.props;
 
     return (
@@ -38,7 +38,7 @@ export class HomeScreen extends React.PureComponent {
         <Text style={styles.cgu}>{i18n.t('home.cgu')}</Text>
       </Content>
     );
-  }
+  };
 }
 
 const styles = StyleSheet.create({

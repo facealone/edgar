@@ -1,47 +1,37 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { AppLoading } from 'expo';
-import { Font } from 'expo';
+import { AppLoading, Font } from 'expo';
+import { Ionicons } from '@expo/vector-icons';
 import { Container } from 'native-base';
-import { createRootNavigator } from '../../../libraries/navigator';
-import { IAuthenticationState } from '../../auth/types/authentication';
+import Navigation from '../../../navigation';
 
-interface IProps {
-  auth: IAuthenticationState;
+interface IState {
+  ready: boolean;
 }
 
-class Layout extends React.PureComponent<IProps> {
+export default class Layout extends React.PureComponent<{}, IState> {
   state = {
     ready: false,
   };
 
-  async componentDidMount() {
+  componentDidMount = async () => {
     await Font.loadAsync({
       Roboto: require('native-base/Fonts/Roboto.ttf'),
       Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+      ...Ionicons.font,
     });
 
     this.setState({ ready: true });
-  }
+  };
 
-  render() {
-    const { auth } = this.props;
-    const RootNavigator = createRootNavigator(auth);
-
+  render = () => {
     if (!this.state.ready) {
       return <AppLoading />;
     }
 
     return (
       <Container>
-        <RootNavigator />
+        <Navigation />
       </Container>
     );
-  }
-}
-
-export default connect(state => {
-  return {
-    auth: state.auth.authentication,
   };
-})(Layout);
+}

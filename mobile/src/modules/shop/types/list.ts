@@ -8,6 +8,7 @@ import { IState } from '../../common/types/states';
 import { ILoadingAction, IErrorAction } from '../../common/types/actions';
 import { IShop } from '../models/Shop';
 import { IShopAddSuccessAction } from './add';
+import { IAuthenticationLogoutAction } from '../../auth/types/authentication';
 
 export interface IShopListState extends IState {
   payload: IShop[];
@@ -33,6 +34,7 @@ export interface IShopListErrorAction extends IErrorAction {
 export type IShopListActionTypes =
   | IShopListSuccessAction
   | IShopAddSuccessAction
+  | IAuthenticationLogoutAction
   | IShopListLoadingAction
   | IShopListResetAction
   | IShopListErrorAction;

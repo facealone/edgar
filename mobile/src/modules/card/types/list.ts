@@ -8,6 +8,7 @@ import { ILoadingAction, IErrorAction } from '../../common/types/actions';
 import { IState } from '../../common/types/states';
 import { ICardAddSuccessAction } from './add';
 import { ICard } from '../models/Card';
+import { IAuthenticationLogoutAction } from '../../auth/types/authentication';
 
 export interface ICardListState extends IState {
   payload: ICard[];
@@ -33,6 +34,7 @@ export interface ICardListErrorAction extends IErrorAction {
 export type ICardListActionTypes =
   | ICardListSuccessAction
   | ICardAddSuccessAction
+  | IAuthenticationLogoutAction
   | ICardListLoadingAction
   | ICardListResetAction
   | ICardListErrorAction;

@@ -2,7 +2,6 @@ import { IRegistrationForm } from '../types/registration';
 import { loading, errors } from '../actions/registration';
 import { user, authenticated } from '../actions/authentication';
 import { LoggedUser } from '../models/LoggedUser';
-import { House } from '../../home/models/House';
 import { TokenStorage } from '../../../libraries/tokenStorage';
 
 export const register = (payload: IRegistrationForm) => {
@@ -11,13 +10,10 @@ export const register = (payload: IRegistrationForm) => {
 
     try {
       const response = await axios.post('register', payload);
-      const { firstName, lastName, currentHouse, email, token } = response.data;
-      const house = currentHouse
-        ? new House(currentHouse.id, currentHouse.name)
-        : null;
+      const { firstName, lastName, email, token } = response.data;
 
       await TokenStorage.save(token);
-      dispatch(user(new LoggedUser(firstName, lastName, email, house)));
+      dispatch(user(new LoggedUser(firstName, lastName, email, null)));
       dispatch(authenticated(true));
     } catch (err) {
       // todo dispatch error

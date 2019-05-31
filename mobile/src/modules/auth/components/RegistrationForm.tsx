@@ -39,6 +39,7 @@ class RegistrationForm extends React.PureComponent<
             <Field
               label={i18n.t('auth.registration.form.email')}
               returnKeyType={'next'}
+              autoCapitalize={'none'}
               keyboardType={'email-address'}
               textContentType={'emailAddress'}
               name={'email'}
@@ -47,6 +48,13 @@ class RegistrationForm extends React.PureComponent<
             <Field
               name={'password'}
               label={i18n.t('auth.registration.form.password')}
+              returnKeyType={'next'}
+              secureTextEntry={true}
+              component={Input}
+            />
+            <Field
+              name={'confirmPassword'}
+              label={i18n.t('auth.registration.form.confirmPassword')}
               returnKeyType={'done'}
               secureTextEntry={true}
               component={Input}

@@ -11,7 +11,7 @@ export const validate = (payload: IRegistrationForm) => {
   }
 
   if (!payload.firstName) {
-    errors.password = i18n.t('form.errors.requiredField');
+    errors.firstName = i18n.t('form.errors.requiredField');
   }
 
   if (!payload.lastName) {
@@ -19,7 +19,23 @@ export const validate = (payload: IRegistrationForm) => {
   }
 
   if (!payload.password) {
-    errors.firstName = i18n.t('form.errors.requiredField');
+    errors.password = i18n.t('form.errors.requiredField');
+  }
+
+  if (!payload.confirmPassword) {
+    errors.confirmPassword = i18n.t('form.errors.requiredField');
+  }
+
+  if (payload.password && payload.password.length < 10) {
+    errors.password = i18n.t('auth.registration.form.errors.passwordLength');
+  }
+
+  if (
+    payload.password &&
+    payload.confirmPassword &&
+    payload.password !== payload.confirmPassword
+  ) {
+    errors.password = i18n.t('auth.registration.form.errors.invalidPasswords');
   }
 
   return errors;

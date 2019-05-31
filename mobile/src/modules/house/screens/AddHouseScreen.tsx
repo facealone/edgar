@@ -5,15 +5,16 @@ import i18n from '../../../i18n';
 import { Content, Text } from 'native-base';
 import HouseForm from '../components/HouseForm';
 import { commonStyles } from '../../../theme/common';
-import { IHouseAddState, IHouseForm } from '../types/add';
+import { IHouseAddState, IHouseForm, IHouseAddResetAction } from '../types/add';
 import { addHouse } from '../middlewares/add';
 import { reset } from '../actions/add';
 import { Keyboard } from 'react-native';
 
 interface IProps {
   add: IHouseAddState;
+  navigation: any;
   addHouse(payload: IHouseForm): any;
-  reset(): any;
+  reset(): IHouseAddResetAction;
 }
 
 class AddHouseScreen extends React.PureComponent<IProps> {
@@ -27,9 +28,17 @@ class AddHouseScreen extends React.PureComponent<IProps> {
     this.props.addHouse(payload);
   };
 
-  componentWillUnmount() {
+  componentDidUpdate = () => {
+    const { add, navigation } = this.props;
+
+    if (add.payload) {
+      navigation.navigate('MembersInit');
+    }
+  };
+
+  componentWillUnmount = () => {
     this.props.reset();
-  }
+  };
 
   render = () => {
     const { add } = this.props;

@@ -6,13 +6,21 @@ import { Content } from 'native-base';
 import i18n from '../../../i18n';
 import RegistrationForm from '../components/RegistrationForm';
 import { commonStyles } from '../../../theme/common';
-import { IRegistrationState, IRegistrationForm } from '../types/registration';
+import {
+  IRegistrationState,
+  IRegistrationForm,
+  IRegistrationResetAction,
+} from '../types/registration';
 import { reset } from '../actions/registration';
 import { register } from '../middlewares/registration';
+import AppEntryPoint from '../AppEntryPoint';
+import { IAuthenticationState } from '../types/authentication';
 
 interface IProps {
   registration: IRegistrationState;
-  reset(): any;
+  authentication: IAuthenticationState;
+  navigation: any;
+  reset(): IRegistrationResetAction;
   register(payload: IRegistrationForm): any;
 }
 
@@ -23,6 +31,16 @@ class RegistrationScreen extends React.PureComponent<IProps> {
 
   componentWillUnmount = () => {
     this.props.reset();
+  };
+
+  componentDidUpdate = () => {
+    const { authentication, navigation } = this.props;
+
+    if (true === authentication.authenticated) {
+      navigation.navigate(
+        AppEntryPoint.getByAuthenticationState(authentication),
+      );
+    }
   };
 
   handleSubmit = (payload: IRegistrationForm) => {
@@ -52,6 +70,7 @@ export default connect(
   state => {
     return {
       registration: state.auth.registration,
+      authentication: state.auth.authentication,
     };
   },
   dispatch => {

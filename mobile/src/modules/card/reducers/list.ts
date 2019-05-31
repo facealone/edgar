@@ -6,6 +6,7 @@ import {
   CARD_LIST_RESET,
 } from '../constants/list';
 import { CARD_ADD_SUCCESS } from '../constants/add';
+import { AUTH_AUTHENTICATION_LOGOUT } from '../../auth/constants/authentication';
 
 const initialState: ICardListState = {
   loading: false,
@@ -43,6 +44,7 @@ export const listReducers = (
       };
 
     case CARD_LIST_RESET:
+    case AUTH_AUTHENTICATION_LOGOUT:
       return initialState;
 
     default:

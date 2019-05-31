@@ -8,6 +8,7 @@ export const Input = ({
   returnKeyType,
   keyboardType,
   textContentType,
+  autoCapitalize,
   label,
   meta: { touched, error },
 }) => {
@@ -27,6 +28,7 @@ export const Input = ({
           secureTextEntry={secureTextEntry}
           keyboardType={keyboardType}
           textContentType={textContentType}
+          autoCapitalize={autoCapitalize}
           clearButtonMode={'while-editing'}
         />
       </Item>
@@ -38,7 +40,7 @@ export const Input = ({
 const styles = StyleSheet.create({
   error: {
     paddingLeft: 15,
-    fontSize: 13,
+    fontSize: 14,
     color: 'red',
     textAlign: 'left',
   },

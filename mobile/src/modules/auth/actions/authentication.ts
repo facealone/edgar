@@ -16,6 +16,7 @@ import {
 } from '../types/authentication';
 import { ILoggedUser } from '../models/LoggedUser';
 import { IError } from '../../common/models/Error';
+import { TokenStorage } from '../../../libraries/tokenStorage';
 
 export const authenticated = (authenticated: boolean): IAuthenticatedAction => {
   return {
@@ -52,6 +53,8 @@ export const reset = (): IAuthenticationResetAction => {
 };
 
 export const logout = (): IAuthenticationLogoutAction => {
+  TokenStorage.remove();
+
   return {
     type: AUTH_AUTHENTICATION_LOGOUT,
   };
