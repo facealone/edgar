@@ -4,11 +4,11 @@ import {
   createAppContainer,
 } from 'react-navigation';
 import AuthenticationScreen from '../modules/auth/screens/AuthenticationScreen';
-import { HomeScreen } from '../modules/home/screens/HomeScreen';
+import AddHouseScreen from '../modules/house/screens/AddHouseScreen';
 import RegistrationScreen from '../modules/auth/screens/RegistrationScreen';
+import { HomeScreen } from '../modules/home/screens/HomeScreen';
 import { MAIN_COLOR } from '../theme/colors';
 import { IAuthenticationState } from '../modules/auth/types/authentication';
-import { AddHouseScreen } from '../modules/house/screens/AddHouseScreen';
 
 const options = {
   headerStyle: {

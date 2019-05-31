@@ -5,6 +5,7 @@ import {
   HOUSE_LIST_ERROR,
   HOUSE_LIST_RESET,
 } from '../constants/list';
+import { HOUSE_ADD_SUCCESS } from '../constants/add';
 
 const initialState: IHouseListState = {
   loading: false,
@@ -17,6 +18,12 @@ export const listReducers = (
   action: IHouseListActionTypes,
 ): IHouseListState => {
   switch (action.type) {
+    case HOUSE_ADD_SUCCESS:
+      return {
+        ...state,
+        payload: [...state.payload, action.payload],
+      };
+
     case HOUSE_LIST_SUCCESS:
       return {
         ...state,

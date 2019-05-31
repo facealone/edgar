@@ -7,6 +7,7 @@ import {
 import { IState } from '../../common/types/states';
 import { ILoadingAction, IErrorAction } from '../../common/types/actions';
 import { IHouse } from '../models/House';
+import { IHouseAddActionTypes } from './add';
 
 export interface IHouseListState extends IState {
   payload: IHouse[];
@@ -30,6 +31,7 @@ export interface IHouseListResetAction {
 }
 
 export type IHouseListActionTypes =
+  | IHouseAddActionTypes
   | IHouseListSuccessAction
   | IHouseListLoadingAction
   | IHouseListErrorAction

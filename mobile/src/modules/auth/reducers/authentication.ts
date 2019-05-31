@@ -4,11 +4,13 @@ import {
   AUTH_AUTHENTICATION_AUTHENTICATED,
   AUTH_AUTHENTICATION_RESET,
   AUTH_AUTHENTICATION_USER,
+  AUTH_AUTHENTICATION_LOGOUT,
 } from '../constants/authentication';
 import {
   AuthenticationActionTypes,
   IAuthenticationState,
 } from '../types/authentication';
+import { HOUSE_ADD_SUCCESS } from '../../house/constants/add';
 
 const initialState: IAuthenticationState = {
   loading: false,
@@ -40,11 +42,24 @@ export const authenticationReducers = (
         user: action.user,
       };
 
+    // Update user current house
+    case HOUSE_ADD_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          currentHouse: action.payload,
+        },
+      };
+
     case AUTH_AUTHENTICATION_ERROR:
       return {
         ...state,
         errors: action.errors,
       };
+
+    case AUTH_AUTHENTICATION_LOGOUT:
+      return initialState;
 
     case AUTH_AUTHENTICATION_RESET:
       return {

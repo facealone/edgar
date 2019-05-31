@@ -9,6 +9,7 @@ import {
 import { ILoadingAction, IErrorAction } from '../../common/types/actions';
 import { IState } from '../../common/types/states';
 import { ILoggedUser } from '../models/LoggedUser';
+import { IHouseAddSuccessAction } from '../../house/types/add';
 
 export interface IAuthenticationState extends IState {
   authenticated: boolean;
@@ -43,6 +44,7 @@ export interface IAuthenticationLogoutAction {
 
 export type AuthenticationActionTypes =
   | IAuthenticatedAction
+  | IHouseAddSuccessAction
   | IAuthenticationLoadingAction
   | IAuthenticationErrorAction
   | IAuthenticationResetAction

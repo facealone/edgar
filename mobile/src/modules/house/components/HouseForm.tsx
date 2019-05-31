@@ -5,7 +5,7 @@ import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import i18n from '../../../i18n';
 import { validate } from '../validators/house';
 import { Input } from '../../common/components/Input';
-import { IHouseForm } from '../types/house';
+import { IHouseForm } from '../types/add';
 import { SubmitButton } from '../../common/components/SubmitButton';
 
 interface IProps {
