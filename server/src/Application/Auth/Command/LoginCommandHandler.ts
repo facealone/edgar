@@ -6,6 +6,7 @@ import { LoginCommand } from './LoginCommand';
 import { ITokenAdapter } from 'src/Application/Adapter/ITokenAdapter';
 import { AuthenticatedView } from '../View/AuthenticatedView';
 import { House } from 'src/Domain/House/House.entity';
+import { HouseView } from 'src/Application/House/View/HouseView';
 
 @CommandHandler(LoginCommand)
 export class LoginCommandHandler {
@@ -41,7 +42,7 @@ export class LoginCommandHandler {
       user.lastName,
       user.email,
       token,
-      house instanceof House ? house.id : null,
+      house instanceof House ? new HouseView(house.id, house.name) : null,
     );
   };
 }

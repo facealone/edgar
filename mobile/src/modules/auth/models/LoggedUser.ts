@@ -1,8 +1,10 @@
+import { IHouse } from '../../house/models/House';
+
 export interface ILoggedUser {
   firstName: string;
   lastName: string;
   email: string;
-  currentHouse: string;
+  currentHouse: IHouse | null;
 }
 
 export class LoggedUser implements ILoggedUser {
@@ -10,6 +12,6 @@ export class LoggedUser implements ILoggedUser {
     public readonly firstName: string,
     public readonly lastName: string,
     public readonly email: string,
-    public readonly currentHouse: string,
+    public readonly currentHouse: IHouse | null,
   ) {}
 }

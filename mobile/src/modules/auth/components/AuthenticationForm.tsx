@@ -1,12 +1,12 @@
 import React from 'react';
-import { Form, Button, Text, Content, Spinner } from 'native-base';
+import { Form, Text, Content } from 'native-base';
 import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import i18n from '../../../i18n';
-import { MAIN_COLOR } from '../../../theme/colors';
 import { validate } from '../validators/authentication';
 import { IAuthenticationForm } from '../types/authentication';
 import { Input } from '../../common/components/Input';
+import { SubmitButton } from '../../common/components/SubmitButton';
 
 interface IProps {
   loading: boolean;
@@ -39,14 +39,11 @@ class AuthenticationForm extends React.PureComponent<
               secureTextEntry={true}
               component={Input}
             />
-            <Button
-              disabled={loading}
-              style={styles.loginButton}
-              onPress={handleSubmit}
-            >
-              {loading && <Spinner color={'#fff'} />}
-              <Text>{i18n.t('auth.authentication.login')}</Text>
-            </Button>
+            <SubmitButton
+              loading={loading}
+              handleSubmit={handleSubmit}
+              label={i18n.t('auth.authentication.login')}
+            />
             <Text style={styles.forgotPassword}>
               {i18n.t('auth.authentication.form.forgotPassword')}
             </Text>
@@ -58,12 +55,6 @@ class AuthenticationForm extends React.PureComponent<
 }
 
 const styles = StyleSheet.create({
-  loginButton: {
-    backgroundColor: MAIN_COLOR,
-    alignSelf: 'flex-end',
-    margin: 10,
-    marginTop: 20,
-  },
   forgotPassword: {
     alignSelf: 'flex-end',
     margin: 10,

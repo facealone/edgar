@@ -1,12 +1,12 @@
 import React from 'react';
-import { Form, Button, Text, Content, Spinner } from 'native-base';
-import { StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { Form, Content } from 'native-base';
+import { KeyboardAvoidingView } from 'react-native';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import i18n from '../../../i18n';
-import { MAIN_COLOR } from '../../../theme/colors';
 import { validate } from '../validators/registration';
 import { IRegistrationForm } from '../types/registration';
 import { Input } from '../../common/components/Input';
+import { SubmitButton } from '../../common/components/SubmitButton';
 
 interface IProps {
   loading: boolean;
@@ -51,29 +51,17 @@ class RegistrationForm extends React.PureComponent<
               secureTextEntry={true}
               component={Input}
             />
-            <Button
-              disabled={loading}
-              style={styles.button}
-              onPress={handleSubmit}
-            >
-              {loading && <Spinner color={'#fff'} />}
-              <Text>{i18n.t('auth.registration.form.next')}</Text>
-            </Button>
+            <SubmitButton
+              loading={loading}
+              handleSubmit={handleSubmit}
+              label={i18n.t('auth.registration.form.next')}
+            />
           </Form>
         </Content>
       </KeyboardAvoidingView>
     );
   };
 }
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: MAIN_COLOR,
-    alignSelf: 'flex-end',
-    margin: 10,
-    marginTop: 20,
-  },
-});
 
 export default reduxForm<IRegistrationForm, IProps>({
   form: 'registration',

@@ -22,7 +22,7 @@
       },
       "registration": {
         "title": "Créer un compte",
-        "introduction": "Créez votre compte en 2min chrono",
+        "introduction": "Créez votre compte client pour utiliser dès maintenant Edgar Majordome gratuitement.",
         "form": {
           "firstName": "Prénom",
           "lastName": "Nom",
@@ -32,10 +32,20 @@
         }
       }
     },
+    "house": {
+      "add": {
+        "title": "Créez votre maison",
+        "introduction": "Vous y êtes presque, créez maintenant votre première maison et invitez vos membres."
+      },
+      "form": {
+        "name": "Nom de la maison",
+        "next": "Suivant"
+      }
+    },
     "home": {
       "slogan": "Edgar est un assistant personnel vous permettant de gérer vos maisons au quotidien.",
       "goToLogin": "Déjà un compte ? Connectez-vous",
-      "cgu": "En utilisant Edgar Majordome, tu acceptes les conditions d'utilistions et la politique de confidentialité."
+      "cgu": "En utilisant Edgar Majordome, vous acceptez les conditions d'utilistions et la politique de confidentialité."
     }
   }
 }

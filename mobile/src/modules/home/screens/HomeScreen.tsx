@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { Content, Text, Button, Thumbnail } from 'native-base';
 import i18n from '../../../i18n';
 import Logo from '../../../../assets/logo.png';
+import { StyleSheet } from 'react-native';
 import { MAIN_COLOR } from '../../../theme/colors';
 
 export class HomeScreen extends React.PureComponent {

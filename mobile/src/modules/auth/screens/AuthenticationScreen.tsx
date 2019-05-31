@@ -1,7 +1,8 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Alert, StyleSheet, Keyboard } from 'react-native';
+import { Content, Text } from 'native-base';
+import { Alert, Keyboard } from 'react-native';
 import AuthenticationForm from '../components/AuthenticationForm';
 import i18n from '../../../i18n';
 import { authentication } from '../middlewares/authentication';
@@ -10,7 +11,7 @@ import {
   IAuthenticationState,
   IAuthenticationForm,
 } from '../types/authentication';
-import { Content, Text } from 'native-base';
+import { commonStyles } from '../../../theme/common';
 
 interface IProps {
   auth: IAuthenticationState;
@@ -43,7 +44,7 @@ class AuthenticationScreen extends React.PureComponent<IProps> {
             i18n.t('auth.authentication.failure.title'),
             i18n.t(auth.errors[0].message),
           )}
-        <Text style={styles.intro}>
+        <Text style={commonStyles.intro}>
           {i18n.t('auth.authentication.introduction')}
         </Text>
         <AuthenticationForm
@@ -54,10 +55,6 @@ class AuthenticationScreen extends React.PureComponent<IProps> {
     );
   };
 }
-
-const styles = StyleSheet.create({
-  intro: { margin: 10 },
-});
 
 export default connect(
   state => {
