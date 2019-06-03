@@ -7,12 +7,14 @@ import {
 import { MAIN_COLOR } from '../theme/colors';
 import { HomeScreen } from '../modules/home/screens/HomeScreen';
 import AuthenticationScreen from '../modules/auth/screens/AuthenticationScreen';
-import AddHouseScreen from '../modules/house/screens/AddHouseScreen';
+import HouseAddScreen from '../modules/house/screens/AddScreen';
 import RegistrationScreen from '../modules/auth/screens/RegistrationScreen';
 import { BottomTabsStack } from './bottomTabs';
 import AuthLoadingScreen from '../modules/auth/screens/AuthLoadingScreen';
 import SendVoucherScreen from '../modules/house/screens/member/SendVoucherScreen';
 import { Button, Icon } from 'native-base';
+import CardShowScreen from '../modules/card/screens/ShowScreen';
+import { commonStyles } from '../theme/common';
 
 const options = {
   headerStyle: {
@@ -35,10 +37,10 @@ const LogoutNavigator = createStackNavigator(
 
 const HouseInitNavigator = createStackNavigator(
   {
-    AddHouse: AddHouseScreen,
+    HouseAdd: HouseAddScreen,
   },
   {
-    initialRouteName: 'AddHouse',
+    initialRouteName: 'HouseAdd',
     defaultNavigationOptions: options,
   },
 );
@@ -64,21 +66,19 @@ const AppNavigator = createStackNavigator(
             <Button transparent>
               <Icon
                 name={'ios-notifications'}
-                style={{ color: '#fff', marginTop: 7 }}
+                style={commonStyles.headerIcon}
               />
             </Button>
             <Button transparent>
-              <Icon
-                name={'ios-settings'}
-                style={{ color: '#fff', marginTop: 7 }}
-              />
+              <Icon name={'person-add'} style={commonStyles.headerIcon} />
             </Button>
           </Fragment>
         ),
       },
     },
-    AddHouse: AddHouseScreen,
+    HouseAdd: HouseAddScreen,
     SendVoucher: SendVoucherScreen,
+    CardShow: CardShowScreen,
   },
   {
     initialRouteName: 'BottomTabs',

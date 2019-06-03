@@ -8,6 +8,7 @@ import {
   HOUSE_MEMBER_LIST_ERROR,
   HOUSE_MEMBER_LIST_RESET,
 } from '../../constants/member/list';
+import { AUTH_AUTHENTICATION_LOGOUT } from '../../../auth/constants/authentication';
 
 const initialState: IHouseMemberListState = {
   loading: false,
@@ -39,6 +40,7 @@ export const listReducers = (
       };
 
     case HOUSE_MEMBER_LIST_RESET:
+    case AUTH_AUTHENTICATION_LOGOUT:
       return initialState;
 
     default:

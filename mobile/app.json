@@ -17,8 +17,12 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
+    "android": {
+      "permissions": ["SYSTEM_BRIGHTNESS"]
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "permissions": ["SYSTEM_BRIGHTNESS"]
     }
   }
 }

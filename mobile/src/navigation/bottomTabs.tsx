@@ -2,7 +2,7 @@ import React from 'react';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { MAIN_COLOR } from '../theme/colors';
 import { Icon } from 'native-base';
-import CardsScreen from '../modules/card/screens/CardsScreen';
+import CardListScreen from '../modules/card/screens/ListScreen';
 import ChatScreen from '../modules/chat/screens/ChatScreen';
 import ProfilScreen from '../modules/user/screens/ProfilScreen';
 import i18n from '../i18n';
@@ -19,8 +19,8 @@ export const BottomTabsStack = createMaterialBottomTabNavigator(
         ),
       },
     },
-    Cards: {
-      screen: CardsScreen,
+    CardList: {
+      screen: CardListScreen,
       navigationOptions: {
         tabBarLabel: i18n.t('navigation.cards'),
         tabBarIcon: () => (
@@ -42,7 +42,7 @@ export const BottomTabsStack = createMaterialBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: i18n.t('navigation.profil'),
         tabBarIcon: () => (
-          <Icon style={{ color: MAIN_COLOR }} name={'ios-person'} />
+          <Icon style={{ color: MAIN_COLOR }} name={'person'} />
         ),
       },
     },

@@ -27,7 +27,7 @@ class ProfilScreen extends React.PureComponent<IProps> {
         <Button onPress={() => this.props.logout()}>
           <Text>Logout</Text>
         </Button>
-        <Button onPress={() => this.props.navigation.navigate('AddHouse')}>
+        <Button onPress={() => this.props.navigation.navigate('HouseAdd')}>
           <Text>Add house</Text>
         </Button>
       </Content>

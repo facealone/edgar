@@ -9,4 +9,5 @@ export const commonStyles = StyleSheet.create({
     marginTop: 20,
   },
   intro: { margin: 10 },
+  headerIcon: { color: '#fff', marginTop: 10 },
 });

@@ -7,6 +7,7 @@ import {
 import { IState } from '../../../common/types/states';
 import { ILoadingAction, IErrorAction } from '../../../common/types/actions';
 import { IMember } from '../../models/Member';
+import { IAuthenticationLogoutAction } from '../../../auth/types/authentication';
 
 export interface IHouseMemberListState extends IState {
   payload: IMember[];
@@ -31,6 +32,7 @@ export interface IHouseMemberListResetAction {
 
 export type IHouseMemberListActionTypes =
   | IHouseMemberListSuccessAction
+  | IAuthenticationLogoutAction
   | IHouseMemberListLoadingAction
   | IHouseMemberListErrorAction
   | IHouseMemberListResetAction;

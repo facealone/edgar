@@ -17,7 +17,7 @@ interface IProps {
   reset(): IHouseAddResetAction;
 }
 
-class AddHouseScreen extends React.PureComponent<IProps> {
+class AddScreen extends React.PureComponent<IProps> {
   static navigationOptions = {
     title: i18n.t('house.add.title'),
   };
@@ -65,4 +65,4 @@ export default connect(
       ...bindActionCreators({ addHouse, reset }, dispatch),
     };
   },
-)(AddHouseScreen);
+)(AddScreen);

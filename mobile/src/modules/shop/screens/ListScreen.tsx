@@ -1,7 +1,7 @@
 import React from 'react';
 import { Content, Text } from 'native-base';
 
-export default class ShopsScreen extends React.PureComponent {
+export default class ListScreen extends React.PureComponent {
   static navigationOptions = {
     title: 'PLop',
   };

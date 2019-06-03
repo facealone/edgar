@@ -1,13 +1,13 @@
 import { createMaterialTopTabNavigator } from 'react-navigation';
 import { MAIN_COLOR } from '../theme/colors';
-import ShopsScreen from '../modules/shop/screens/ShopsScreen';
-import CardsScreen from '../modules/card/screens/CardsScreen';
+import ShopListScreen from '../modules/shop/screens/ListScreen';
+import CardsScreen from '../modules/card/screens/ListScreen';
 import i18n from '../i18n';
 
 export const HouseTabsStack = createMaterialTopTabNavigator(
   {
-    Shops: {
-      screen: ShopsScreen,
+    ShopList: {
+      screen: ShopListScreen,
       navigationOptions: {
         tabBarLabel: i18n.t('navigation.tabs.shops'),
       },
@@ -26,7 +26,7 @@ export const HouseTabsStack = createMaterialTopTabNavigator(
     },
   },
   {
-    initialRouteName: 'Shops',
+    initialRouteName: 'ShopList',
     tabBarOptions: {
       style: {
         backgroundColor: '#fff',
