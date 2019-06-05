@@ -12,7 +12,7 @@ interface IState {
   brightness: number;
 }
 
-export default class ShowScreen extends React.PureComponent<IProps, IState> {
+export default class ShowScreen extends React.Component<IProps, IState> {
   state = {
     brightness: 100,
   };

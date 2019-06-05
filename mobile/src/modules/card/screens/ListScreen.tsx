@@ -15,7 +15,7 @@ interface IProps {
   cards: ICardListState;
 }
 
-class ListScreen extends React.PureComponent<IProps> {
+class ListScreen extends React.Component<IProps> {
   componentWillUnmount = () => {
     this.props.reset();
   };

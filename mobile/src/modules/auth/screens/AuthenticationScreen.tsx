@@ -14,15 +14,17 @@ import {
 } from '../types/authentication';
 import { commonStyles } from '../../../theme/common';
 import AppEntryPoint from '../AppEntryPoint';
+import { IHouse } from '../../house/models/House';
 
 interface IProps {
   auth: IAuthenticationState;
+  currentHouse: IHouse;
   navigation: any;
   authentication(payload: IAuthenticationForm): any;
   reset(): IAuthenticationResetAction;
 }
 
-class AuthenticationScreen extends React.PureComponent<IProps> {
+class AuthenticationScreen extends React.Component<IProps> {
   static navigationOptions = {
     title: i18n.t('auth.authentication.login'),
   };
@@ -32,10 +34,10 @@ class AuthenticationScreen extends React.PureComponent<IProps> {
   };
 
   componentDidUpdate = () => {
-    const { auth, navigation } = this.props;
+    const { auth, navigation, currentHouse } = this.props;
 
     if (true === auth.authenticated) {
-      navigation.navigate(AppEntryPoint.getByAuthenticationState(auth));
+      navigation.navigate(AppEntryPoint.get(true, currentHouse));
     }
   };
 
@@ -71,6 +73,7 @@ export default connect(
   state => {
     return {
       auth: state.auth.authentication,
+      currentHouse: state.house.current.payload,
     };
   },
   dispatch => {

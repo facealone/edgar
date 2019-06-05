@@ -13,7 +13,7 @@ interface IProps {
   handleSubmit(): any;
 }
 
-class AuthenticationForm extends React.PureComponent<
+class AuthenticationForm extends React.Component<
   InjectedFormProps<IAuthenticationForm> & IProps
 > {
   render = () => {

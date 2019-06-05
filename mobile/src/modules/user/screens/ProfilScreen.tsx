@@ -11,7 +11,7 @@ interface IProps {
   logout(): IAuthenticationLogoutAction;
 }
 
-class ProfilScreen extends React.PureComponent<IProps> {
+class ProfilScreen extends React.Component<IProps> {
   componentDidUpdate = () => {
     const { authenticated, navigation } = this.props;
 

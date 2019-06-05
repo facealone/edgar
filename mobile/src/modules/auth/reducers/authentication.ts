@@ -10,7 +10,6 @@ import {
   AuthenticationActionTypes,
   IAuthenticationState,
 } from '../types/authentication';
-import { HOUSE_ADD_SUCCESS } from '../../house/constants/add';
 
 const initialState: IAuthenticationState = {
   loading: false,
@@ -40,16 +39,6 @@ export const authenticationReducers = (
       return {
         ...state,
         user: action.user,
-      };
-
-    // Update user current house
-    case HOUSE_ADD_SUCCESS:
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          currentHouse: action.payload,
-        },
       };
 
     case AUTH_AUTHENTICATION_ERROR:

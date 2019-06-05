@@ -9,9 +9,8 @@ export const addHouse = (payload: IHouseForm) => {
     try {
       const response = await axios.post('houses', { name: payload.name });
       const { name, id } = response.data;
-      const house = new House(id, name);
 
-      dispatch(success(house));
+      dispatch(success(new House(id, name)));
     } catch (err) {
       // todo : errors
       dispatch(errors([]));

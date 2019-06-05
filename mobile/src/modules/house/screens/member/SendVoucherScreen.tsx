@@ -10,7 +10,7 @@ interface IProps {
   authentication: IAuthenticationState;
 }
 
-class SendVoucherScreen extends React.PureComponent<IProps> {
+class SendVoucherScreen extends React.Component<IProps> {
   static navigationOptions = {
     title: i18n.t('house.member.voucher.title'),
   };

@@ -1,15 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ActivityIndicator, View } from 'react-native';
-import { IAuthenticationState } from '../types/authentication';
 import AppEntryPoint from '../AppEntryPoint';
+import { IHouse } from '../../house/models/House';
 
 interface IProps {
-  auth: IAuthenticationState;
+  authenticated: boolean;
+  currentHouse: IHouse;
   navigation: any;
 }
 
-class AuthLoadingScreen extends React.PureComponent<IProps> {
+class AuthLoadingScreen extends React.Component<IProps> {
   constructor(props) {
     super(props);
 
@@ -17,9 +18,9 @@ class AuthLoadingScreen extends React.PureComponent<IProps> {
   }
 
   init = () => {
-    const { navigation, auth } = this.props;
+    const { navigation, authenticated, currentHouse } = this.props;
 
-    navigation.navigate(AppEntryPoint.getByAuthenticationState(auth));
+    navigation.navigate(AppEntryPoint.get(authenticated, currentHouse));
   };
 
   render = () => {
@@ -33,6 +34,7 @@ class AuthLoadingScreen extends React.PureComponent<IProps> {
 
 export default connect(state => {
   return {
-    auth: state.auth.authentication,
+    authenticated: state.auth.authentication.authenticated,
+    currentHouse: state.house.current.payload,
   };
 })(AuthLoadingScreen);

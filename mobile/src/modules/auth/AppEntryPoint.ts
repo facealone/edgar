@@ -1,15 +1,16 @@
-import { IAuthenticationState } from './types/authentication';
+import { IHouse } from '../house/models/House';
 
 export default class AppEntryPoint {
-  public static getByAuthenticationState = (
-    auth: IAuthenticationState,
+  public static get = (
+    authenticated: boolean,
+    currentHouse: IHouse | null,
   ): string => {
     let entryPoint = 'Logout';
 
-    if (true === auth.authenticated) {
+    if (true === authenticated) {
       entryPoint = 'App';
 
-      if (auth.user && !auth.user.currentHouse) {
+      if (!currentHouse) {
         entryPoint = 'HouseInit';
       }
     }

@@ -13,7 +13,7 @@ interface IProps {
   handleSubmit(): any;
 }
 
-class HouseForm extends React.PureComponent<
+class HouseForm extends React.Component<
   InjectedFormProps<IHouseForm> & IProps
 > {
   render = () => {

@@ -5,7 +5,7 @@ import Logo from '../../../../assets/logo.png';
 import { StyleSheet } from 'react-native';
 import { MAIN_COLOR } from '../../../theme/colors';
 
-export class HomeScreen extends React.PureComponent {
+export class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };

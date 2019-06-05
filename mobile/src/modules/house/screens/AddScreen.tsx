@@ -17,7 +17,7 @@ interface IProps {
   reset(): IHouseAddResetAction;
 }
 
-class AddScreen extends React.PureComponent<IProps> {
+class AddScreen extends React.Component<IProps> {
   static navigationOptions = {
     title: i18n.t('house.add.title'),
   };

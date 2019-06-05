@@ -24,7 +24,7 @@ interface IProps {
   register(payload: IRegistrationForm): any;
 }
 
-class RegistrationScreen extends React.PureComponent<IProps> {
+class RegistrationScreen extends React.Component<IProps> {
   static navigationOptions = {
     title: i18n.t('auth.registration.title'),
   };
@@ -37,9 +37,7 @@ class RegistrationScreen extends React.PureComponent<IProps> {
     const { authentication, navigation } = this.props;
 
     if (true === authentication.authenticated) {
-      navigation.navigate(
-        AppEntryPoint.getByAuthenticationState(authentication),
-      );
+      navigation.navigate(AppEntryPoint.get(true, null));
     }
   };
 

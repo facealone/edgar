@@ -13,7 +13,7 @@ export const register = (payload: IRegistrationForm) => {
       const { firstName, lastName, email, token } = response.data;
 
       await TokenStorage.save(token);
-      dispatch(user(new LoggedUser(firstName, lastName, email, null)));
+      dispatch(user(new LoggedUser(firstName, lastName, email)));
       dispatch(authenticated(true));
     } catch (err) {
       // todo dispatch error

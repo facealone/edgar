@@ -13,7 +13,7 @@ interface IProps {
   handleSubmit(): any;
 }
 
-class RegistrationForm extends React.PureComponent<
+class RegistrationForm extends React.Component<
   InjectedFormProps<IRegistrationForm> & IProps
 > {
   render = () => {

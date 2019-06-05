@@ -8,7 +8,7 @@ interface IProps {
   handleSubmit(): any;
 }
 
-export class SubmitButton extends React.PureComponent<IProps> {
+export class SubmitButton extends React.Component<IProps> {
   render = () => {
     const { loading, label, handleSubmit } = this.props;
 

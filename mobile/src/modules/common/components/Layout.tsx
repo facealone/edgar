@@ -8,7 +8,7 @@ interface IState {
   ready: boolean;
 }
 
-export default class Layout extends React.PureComponent<{}, IState> {
+export default class Layout extends React.Component<{}, IState> {
   state = {
     ready: false,
   };
