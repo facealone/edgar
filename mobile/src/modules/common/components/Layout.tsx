@@ -1,6 +1,6 @@
 import React from 'react';
-import { AppLoading, Font } from 'expo';
-import { Ionicons } from '@expo/vector-icons';
+import { AppLoading } from 'expo';
+import * as Font from 'expo-font';
 import { Container } from 'native-base';
 import Navigation from '../../../navigation';
 
@@ -15,9 +15,8 @@ export default class Layout extends React.Component<{}, IState> {
 
   componentDidMount = async () => {
     await Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      ...Ionicons.font,
+      Roboto: require('../../../../node_modules/native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('../../../../node_modules/native-base/Fonts/Roboto_medium.ttf'),
     });
 
     this.setState({ ready: true });

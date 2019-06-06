@@ -3,7 +3,7 @@
     "name": "Edgar Majordome",
     "slug": "edgar-majordome",
     "privacy": "public",
-    "sdkVersion": "32.0.0",
+    "sdkVersion": "33.0.0",
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,11 +18,10 @@
     },
     "assetBundlePatterns": ["**/*"],
     "android": {
-      "permissions": ["SYSTEM_BRIGHTNESS"]
+      "permissions": ["WRITE_SETTINGS"]
     },
     "ios": {
-      "supportsTablet": true,
-      "permissions": ["SYSTEM_BRIGHTNESS"]
+      "supportsTablet": true
     }
   }
 }

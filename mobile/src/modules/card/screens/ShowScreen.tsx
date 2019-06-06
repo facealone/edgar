@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import { Content, Text, Button, Icon, Card, CardItem, Body } from 'native-base';
+import * as Permissions from 'expo-permissions';
+import * as Brightness from 'expo-brightness';
 import Barcode from 'react-native-barcode-builder';
 import { commonStyles } from '../../../theme/common';
-import { Permissions, Brightness } from 'expo';
 
 interface IProps {
   navigation: any;
