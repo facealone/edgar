@@ -5,41 +5,37 @@ import Logo from '../../../../assets/logo.png';
 import { StyleSheet } from 'react-native';
 import { MAIN_COLOR } from '../../../theme/colors';
 
-export class HomeScreen extends React.Component {
-  static navigationOptions = {
-    header: null,
-  };
+export const HomeScreen = (props: any) => {
+  const { navigation } = props;
 
-  render = () => {
-    const { navigation } = this.props;
-
-    return (
-      <Content style={styles.container}>
-        <Thumbnail source={Logo} style={styles.logo} />
-        <Text style={styles.slogan}>{i18n.t('home.slogan')}</Text>
-        <Button style={styles.createAccount}>
-          <Text
-            style={styles.createAccountText}
-            onPress={() => navigation.navigate('Registration')}
-          >
-            {i18n.t('auth.registration.title')}
-          </Text>
-        </Button>
-        <Button
-          transparent
-          onPress={() => navigation.navigate('Authentication')}
-          style={styles.login}
+  return (
+    <Content style={styles.container}>
+      <Thumbnail source={Logo} style={styles.logo} />
+      <Text style={styles.slogan}>{i18n.t('home.slogan')}</Text>
+      <Button style={styles.createAccount}>
+        <Text
+          style={styles.createAccountText}
+          onPress={() => navigation.navigate('Registration')}
         >
-          <Text uppercase={false} style={styles.loginText}>
-            {i18n.t('home.goToLogin')}
-          </Text>
-        </Button>
+          {i18n.t('auth.registration.title')}
+        </Text>
+      </Button>
+      <Button
+        transparent
+        onPress={() => navigation.navigate('Authentication')}
+        style={styles.login}
+      >
+        <Text uppercase={false} style={styles.loginText}>
+          {i18n.t('home.goToLogin')}
+        </Text>
+      </Button>
 
-        <Text style={styles.cgu}>{i18n.t('home.cgu')}</Text>
-      </Content>
-    );
-  };
-}
+      <Text style={styles.cgu}>{i18n.t('home.cgu')}</Text>
+    </Content>
+  );
+};
+
+HomeScreen.navigationOptions = { header: null };
 
 const styles = StyleSheet.create({
   container: {
