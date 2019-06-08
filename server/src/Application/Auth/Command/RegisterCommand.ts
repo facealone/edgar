@@ -17,7 +17,7 @@ export class RegisterCommand implements ICommand {
   public email: string;
 
   @IsNotEmpty()
-  @MinLength(10)
+  @MinLength(8)
   @ApiModelProperty()
   public password: string;
 }

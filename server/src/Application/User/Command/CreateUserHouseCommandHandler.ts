@@ -11,7 +11,9 @@ export class CreateUserHouseCommandHandler {
     private readonly userHouseRepository: IUserHouseRepository,
   ) {}
 
-  execute = async (command: CreateUserHouseCommand): Promise<UserHouse> => {
+  public execute = async (
+    command: CreateUserHouseCommand,
+  ): Promise<UserHouse> => {
     return await this.userHouseRepository.save(
       new UserHouse({
         house: command.house,

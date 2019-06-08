@@ -26,7 +26,7 @@ export const validate = (payload: IRegistrationForm) => {
     errors.confirmPassword = i18n.t('form.errors.requiredField');
   }
 
-  if (payload.password && payload.password.length < 10) {
+  if (payload.password && payload.password.length < 8) {
     errors.password = i18n.t('auth.registration.form.errors.passwordLength');
   }
 

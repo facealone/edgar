@@ -32,7 +32,7 @@
           "next": "Suivant",
           "errors": {
             "invalidPasswords": "Les mots de passe doivent être identiques.",
-            "passwordLength": "Le mot de passe doit faire 10 charactères mininum."
+            "passwordLength": "Le mot de passe doit faire 8 charactères mininum."
           }
         }
       }

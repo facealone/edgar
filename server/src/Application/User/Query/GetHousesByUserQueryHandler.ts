@@ -11,7 +11,7 @@ export class GetHousesByUserQueryHandler {
     private readonly userHouseRepository: IUserHouseRepository,
   ) {}
 
-  execute = async (
+  public execute = async (
     query: GetHousesByUserQuery,
   ): Promise<GetHousesByUserView[]> => {
     const user = query.user;

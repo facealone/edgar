@@ -5,7 +5,7 @@ export class AuthenticatedView {
     public readonly firstName: string,
     public readonly lastName: string,
     public readonly email: string,
-    public readonly token: string,
+    public readonly apiToken: string,
     public readonly currentHouse: HouseView | null,
   ) {}
 }

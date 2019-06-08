@@ -11,9 +11,9 @@ import { User } from 'src/Domain/User/User.entity';
 import { CanUserRegister } from 'src/Domain/User/CanUserRegister';
 import { MailerAdapter } from 'src/Infrastructure/Adapter/MailerAdapter';
 import { LoginController } from './Controller/LoginController';
-import { TokenAdapter } from '../Adapter/TokenAdapter';
 import { LoginCommandHandler } from 'src/Application/Auth/Command/LoginCommandHandler';
-import { JwtStrategy } from './Strategy/JwtStrategy';
+import { TokenStrategy } from './Strategy/TokenStrategy';
+import { EncryptionAdapter } from '../Adapter/EncryptionAdapter';
 
 @Module({
   imports: [
@@ -24,19 +24,19 @@ import { JwtStrategy } from './Strategy/JwtStrategy';
         expiresIn: process.env.JWT_EXPIRES,
       },
     }),
-    PassportModule.register({ defaultStrategy: 'jwt' }),
+    PassportModule.register({ defaultStrategy: 'bearer' }),
     TypeOrmModule.forFeature([User]),
   ],
   controllers: [LoginController, RegisterController],
   providers: [
     { provide: 'IUserRepository', useClass: UserRepository },
     { provide: 'IMailerAdapter', useClass: MailerAdapter },
-    { provide: 'ITokenAdapter', useClass: TokenAdapter },
-    JwtStrategy,
+    { provide: 'IEncryptionAdapter', useClass: EncryptionAdapter },
+    TokenStrategy,
     RegisterCommandHandler,
     LoginCommandHandler,
     CanUserRegister,
   ],
-  exports: [PassportModule, JwtStrategy],
+  exports: [PassportModule],
 })
 export class AuthModule {}

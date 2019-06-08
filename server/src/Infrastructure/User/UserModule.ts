@@ -22,6 +22,7 @@ import { GetShopsController } from './Controller/CurrentHouse/GetShopsController
 import { GetMembersController } from './Controller/CurrentHouse/GetMembersController';
 import { UpdatePushNotificationTokenController } from './Controller/UpdatePushNotificationTokenController';
 import { UpdatePushNotificationTokenCommandHandler } from 'src/Application/User/Command/UpdatePushNotificationTokenCommandHandler';
+import { GetUserByApiTokenHandler } from 'src/Application/User/Query/GetUserByApiTokenQueryHandler';
 
 @Module({
   imports: [BusModule, AuthModule, TypeOrmModule.forFeature([User, UserHouse])],
@@ -45,6 +46,7 @@ import { UpdatePushNotificationTokenCommandHandler } from 'src/Application/User/
     IsMemberOfHouse,
     GetHousesByUserQueryHandler,
     GetUsersByHouseQueryHandler,
+    GetUserByApiTokenHandler,
     UpdatePushNotificationTokenCommandHandler,
   ],
 })

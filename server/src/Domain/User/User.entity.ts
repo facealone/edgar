@@ -5,9 +5,8 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
-  BeforeInsert,
+  Index,
 } from 'typeorm';
-import * as bcrypt from 'bcrypt';
 import { House } from '../House/House.entity';
 import { UserHouse } from './UserHouse.entity';
 
@@ -32,6 +31,10 @@ export class User {
   @Column({ type: 'text', nullable: true })
   pushNotificationToken: string;
 
+  @Index('api-token')
+  @Column({ type: 'text', nullable: true })
+  apiToken: string;
+
   @Column({ type: 'varchar', nullable: false })
   password: string;
 
@@ -45,19 +48,6 @@ export class User {
   constructor(user: Partial<User>) {
     Object.assign(this, user);
   }
-
-  @BeforeInsert()
-  hashPassword = () => {
-    if (!this.password) {
-      return;
-    }
-
-    this.password = bcrypt.hashSync(this.password, 10);
-  };
-
-  isPasswordValid = (plainPassword: string): boolean => {
-    return bcrypt.compareSync(plainPassword, this.password);
-  };
 
   update = (firstName: string, lastName: string, email: string): void => {
     this.firstName = firstName;

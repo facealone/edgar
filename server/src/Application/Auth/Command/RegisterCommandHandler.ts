@@ -5,9 +5,9 @@ import { Inject, BadRequestException } from '@nestjs/common';
 import { User } from 'src/Domain/User/User.entity';
 import { CanUserRegister } from 'src/Domain/User/CanUserRegister';
 import { IMailerAdapter } from 'src/Application/Adapter/IMailerAdapter';
-import { ITokenAdapter } from 'src/Application/Adapter/ITokenAdapter';
 import { WelcomeMail } from 'src/Domain/User/Mail/WelcomeMail';
 import { AuthenticatedView } from '../View/AuthenticatedView';
+import { IEncryptionAdapter } from 'src/Application/Adapter/IEncryptionAdapter';
 
 @CommandHandler(RegisterCommand)
 export class RegisterCommandHandler {
@@ -16,8 +16,8 @@ export class RegisterCommandHandler {
     private readonly userRepository: IUserRepository,
     @Inject('IMailerAdapter')
     private readonly mailerAdapter: IMailerAdapter,
-    @Inject('ITokenAdapter')
-    private readonly jwtAdapter: ITokenAdapter,
+    @Inject('IEncryptionAdapter')
+    private readonly encryptionAdapter: IEncryptionAdapter,
     private readonly canUserRegister: CanUserRegister,
   ) {}
 
@@ -28,11 +28,17 @@ export class RegisterCommandHandler {
       throw new BadRequestException('auth.user.already.exists');
     }
 
+    const password = this.encryptionAdapter.hash(command.password);
+    const apiToken = this.encryptionAdapter.hash(
+      command.email + Date.now().toString(),
+    );
+
     const user = new User({
       firstName: command.firstName,
       lastName: command.lastName,
       email: command.email,
-      password: command.password,
+      password,
+      apiToken,
     });
 
     await this.userRepository.save(user);
@@ -44,18 +50,11 @@ export class RegisterCommandHandler {
       }),
     );
 
-    const token = this.jwtAdapter.sign({
-      id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName.toUpperCase(),
-      email: user.email,
-    });
-
     return new AuthenticatedView(
       user.firstName,
       user.lastName,
       user.email,
-      token,
+      apiToken,
       null,
     );
   };

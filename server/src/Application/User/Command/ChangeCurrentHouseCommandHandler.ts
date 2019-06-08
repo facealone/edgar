@@ -13,7 +13,7 @@ export class ChangeCurrentHouseComandHandler {
     private readonly isMemberOfHouse: IsMemberOfHouse,
   ) {}
 
-  execute = async (
+  public execute = async (
     command: ChangeCurrentHouseCommand,
   ): Promise<CurrentHouseUpdatedView> => {
     const { user, house } = command;

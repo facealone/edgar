@@ -13,7 +13,7 @@ export class GetUsersByHouseQueryHandler {
     private readonly isMemberOfHouse: IsMemberOfHouse,
   ) {}
 
-  execute = async (
+  public execute = async (
     query: GetUsersByHouseQuery,
   ): Promise<GetUsersByHouseView[]> => {
     const { house } = query;

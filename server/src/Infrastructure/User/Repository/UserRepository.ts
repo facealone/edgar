@@ -17,6 +17,13 @@ export class UserRepository implements IUserRepository {
     });
   };
 
+  public findOneByApiToken = async (apiToken: string): Promise<User | null> => {
+    return await this.repository.findOne({
+      where: { apiToken },
+      relations: ['currentHouse'],
+    });
+  };
+
   public findOneByEmail = async (email: string): Promise<User | null> => {
     return await this.repository.findOne({
       where: { email },
