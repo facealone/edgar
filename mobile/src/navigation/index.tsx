@@ -4,6 +4,7 @@ import {
   createSwitchNavigator,
   createAppContainer,
 } from 'react-navigation';
+import { Button, Icon } from 'native-base';
 import { MAIN_COLOR } from '../theme/colors';
 import { HomeScreen } from '../modules/home/screens/HomeScreen';
 import AuthenticationScreen from '../modules/auth/screens/AuthenticationScreen';
@@ -12,10 +13,10 @@ import RegistrationScreen from '../modules/auth/screens/RegistrationScreen';
 import { BottomTabsStack } from './bottomTabs';
 import AuthLoadingScreen from '../modules/auth/screens/AuthLoadingScreen';
 import SendVoucherScreen from '../modules/house/screens/member/SendVoucherScreen';
-import { Button, Icon } from 'native-base';
 import CardShowScreen from '../modules/card/screens/ShowScreen';
+import CardAddScreen from '../modules/card/screens/AddScreen';
+import { ScanScreen } from '../modules/card/screens/ScanScreen';
 import { commonStyles } from '../theme/common';
-
 const options = {
   headerStyle: {
     backgroundColor: MAIN_COLOR,
@@ -79,6 +80,8 @@ const AppNavigator = createStackNavigator(
     HouseAdd: HouseAddScreen,
     SendVoucher: SendVoucherScreen,
     CardShow: CardShowScreen,
+    CardScan: ScanScreen,
+    CardAdd: CardAddScreen,
   },
   {
     initialRouteName: 'BottomTabs',

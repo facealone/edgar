@@ -18,7 +18,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "android": {
-      "permissions": ["WRITE_SETTINGS"]
+      "permissions": ["WRITE_SETTINGS", "CAMERA"]
     },
     "ios": {
       "supportsTablet": true

@@ -2,7 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { FlatList } from 'react-native';
 import { bindActionCreators } from 'redux';
-import { Content, Text, Body, Right, Card, CardItem, Icon } from 'native-base';
+import {
+  Content,
+  Text,
+  Body,
+  Right,
+  Card,
+  CardItem,
+  Icon,
+  Button,
+} from 'native-base';
 import i18n from '../../../i18n';
 import { listCards } from '../middlewares/list';
 import { reset } from '../actions/list';
@@ -15,7 +24,7 @@ interface IProps {
   cards: ICardListState;
 }
 
-class ListScreen extends React.Component<IProps> {
+class ListScreen extends React.PureComponent<IProps> {
   componentWillUnmount = () => {
     this.props.reset();
   };
@@ -24,29 +33,8 @@ class ListScreen extends React.Component<IProps> {
     this.props.listCards();
   };
 
-  renderItem = ({ item: card }: ICard) => {
-    const { navigation } = this.props;
-    const { barCode, name } = card;
-
-    return (
-      <Card>
-        <CardItem
-          button
-          onPress={() => navigation.navigate('CardShow', { barCode, name })}
-        >
-          <Body>
-            <Text>{name}</Text>
-          </Body>
-          <Right>
-            <Icon name={'arrow-forward'} />
-          </Right>
-        </CardItem>
-      </Card>
-    );
-  };
-
   render = () => {
-    const { cards } = this.props;
+    const { cards, navigation } = this.props;
 
     return (
       <Content padder>
@@ -54,8 +42,35 @@ class ListScreen extends React.Component<IProps> {
         <FlatList
           keyExtractor={card => card.id}
           data={cards.payload}
-          renderItem={this.renderItem}
+          renderItem={({ item: card }: ICard) => {
+            const { barCode, name } = card;
+
+            return (
+              <Card>
+                <CardItem
+                  button
+                  onPress={() =>
+                    navigation.navigate('CardShow', { barCode, name })
+                  }
+                >
+                  <Body>
+                    <Text>{name}</Text>
+                  </Body>
+                  <Right>
+                    <Icon name={'arrow-forward'} />
+                  </Right>
+                </CardItem>
+              </Card>
+            );
+          }}
         />
+        <Button
+          onPress={() => {
+            navigation.navigate('CardScan');
+          }}
+        >
+          <Text>{i18n.t('card.scan.button')}</Text>
+        </Button>
       </Content>
     );
   };

@@ -18,7 +18,7 @@ export const listCards = () => {
       // todo errors
       dispatch(errors([]));
     } finally {
-      dispatch(loading(true));
+      dispatch(loading(false));
     }
   };
 };

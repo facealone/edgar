@@ -29,6 +29,10 @@ export interface ICardAddResetAction {
   type: typeof CARD_ADD_RESET;
 }
 
+export interface ICardForm {
+  name: string;
+}
+
 export type ICardAddActionTypes =
   | ICardAddSuccessAction
   | ICardAddErrorAction

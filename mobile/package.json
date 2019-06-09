@@ -9,6 +9,7 @@
   "dependencies": {
     "axios": ">=0.19.0",
     "expo": "^33.0.0",
+    "expo-barcode-scanner": "^5.0.1",
     "expo-brightness": "^5.0.1",
     "expo-constants": "^5.0.1",
     "expo-font": "^5.0.1",

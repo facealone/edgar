@@ -20,7 +20,7 @@ export const loading = (loading: boolean): ICardAddLoadingAction => {
   };
 };
 
-export const susccess = (payload: ICard): ICardAddSuccessAction => {
+export const success = (payload: ICard): ICardAddSuccessAction => {
   return {
     type: CARD_ADD_SUCCESS,
     payload,
