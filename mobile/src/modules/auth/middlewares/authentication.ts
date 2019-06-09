@@ -18,9 +18,9 @@ export const authentication = (payload: IAuthenticationForm) => {
     try {
       const { email, password } = payload;
       const response = await axios.post('login', { email, password });
-      const { firstName, lastName, currentHouse, token } = response.data;
+      const { firstName, lastName, currentHouse, apiToken } = response.data;
 
-      await TokenStorage.save(token);
+      await TokenStorage.save(apiToken);
 
       if (currentHouse) {
         dispatch(success(new House(currentHouse.id, currentHouse.name)));

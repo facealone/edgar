@@ -5,9 +5,7 @@ import Logo from '../../../../assets/logo.png';
 import { StyleSheet } from 'react-native';
 import { MAIN_COLOR } from '../../../theme/colors';
 
-export const HomeScreen = (props: any) => {
-  const { navigation } = props;
-
+export const HomeScreen = ({ navigation }: any) => {
   return (
     <Content style={styles.container}>
       <Thumbnail source={Logo} style={styles.logo} />

@@ -10,9 +10,9 @@ export const register = (payload: IRegistrationForm) => {
 
     try {
       const response = await axios.post('register', payload);
-      const { firstName, lastName, email, token } = response.data;
+      const { firstName, lastName, email, apiToken } = response.data;
 
-      await TokenStorage.save(token);
+      await TokenStorage.save(apiToken);
       dispatch(user(new LoggedUser(firstName, lastName, email)));
       dispatch(authenticated(true));
     } catch (err) {

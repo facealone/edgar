@@ -3,7 +3,7 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import { MAIN_COLOR } from '../theme/colors';
 import { Icon } from 'native-base';
 import CardListScreen from '../modules/card/screens/ListScreen';
-import ChatScreen from '../modules/chat/screens/ChatScreen';
+import { ChatScreen } from '../modules/chat/screens/ChatScreen';
 import ProfilScreen from '../modules/user/screens/ProfilScreen';
 import i18n from '../i18n';
 import { HouseTabsStack } from './houseTabs';

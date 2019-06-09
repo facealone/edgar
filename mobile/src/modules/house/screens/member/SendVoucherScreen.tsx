@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { Content, Text } from 'native-base';
 import { commonStyles } from '../../../../theme/common';
 import i18n from '../../../../i18n';
-import { IAuthenticationState } from '../../../auth/types/authentication';
+import { ICurrentHouseState } from '../../types/current';
 
 interface IProps {
-  authentication: IAuthenticationState;
+  currentHouse: ICurrentHouseState;
 }
 
 class SendVoucherScreen extends React.Component<IProps> {
@@ -16,13 +16,13 @@ class SendVoucherScreen extends React.Component<IProps> {
   };
 
   render = () => {
-    const { authentication } = this.props;
+    const { currentHouse } = this.props;
 
     return (
       <Content>
         <Text style={commonStyles.intro}>
           {i18n.t('house.member.voucher.introduction', {
-            house: authentication.user.currentHouse.name,
+            house: currentHouse.payload.name,
           })}
         </Text>
       </Content>
@@ -33,7 +33,7 @@ class SendVoucherScreen extends React.Component<IProps> {
 export default connect(
   state => {
     return {
-      authentication: state.auth.authentication,
+      currentHouse: state.house.current,
     };
   },
   dispatch => {
