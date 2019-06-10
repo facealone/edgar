@@ -10,6 +10,7 @@ export const commonStyles = StyleSheet.create({
   },
   headerFlatList: {
     textTransform: 'uppercase',
+    fontWeight: '500',
     fontSize: 13,
   },
   intro: { margin: 10 },
