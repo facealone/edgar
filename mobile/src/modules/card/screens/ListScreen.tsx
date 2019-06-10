@@ -1,23 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native';
 import { bindActionCreators } from 'redux';
 import {
   Content,
   Text,
   Body,
   Right,
-  Card,
-  CardItem,
   Icon,
   Button,
+  ListItem,
+  Separator,
 } from 'native-base';
 import i18n from '../../../i18n';
 import { listCards } from '../middlewares/list';
 import { reset } from '../actions/list';
 import { ICardListState, ICardListResetAction } from '../types/list';
 import { ICard } from '../models/Card';
-import { MAIN_COLOR } from '../../../theme/colors';
+import { commonStyles } from '../../../theme/common';
 
 interface IProps {
   reset(): ICardListResetAction;
@@ -39,10 +39,13 @@ class ListScreen extends React.PureComponent<IProps> {
     const { cards, navigation } = this.props;
 
     return (
-      <Content padder>
-        <Text>{i18n.t('card.list.intro')}</Text>
+      <Content>
+        <Separator bordered>
+          <Text style={commonStyles.headerFlatList}>
+            {i18n.t('card.list.header')}
+          </Text>
+        </Separator>
         <FlatList
-          style={style.list}
           keyExtractor={card => card.id}
           data={cards.payload}
           refreshing={cards.loading}
@@ -53,26 +56,24 @@ class ListScreen extends React.PureComponent<IProps> {
             const { barCode, name, id } = card;
 
             return (
-              <Card key={id}>
-                <CardItem
-                  button
-                  onPress={() =>
-                    navigation.navigate('CardShow', { barCode, name, id })
-                  }
-                >
-                  <Body>
-                    <Text>{name}</Text>
-                  </Body>
-                  <Right>
-                    <Icon name={'ios-arrow-dropright-circle'} />
-                  </Right>
-                </CardItem>
-              </Card>
+              <ListItem
+                icon
+                onPress={() =>
+                  navigation.navigate('CardShow', { barCode, name, id })
+                }
+              >
+                <Body>
+                  <Text>{name}</Text>
+                </Body>
+                <Right>
+                  <Icon name={'ios-arrow-dropright-circle'} />
+                </Right>
+              </ListItem>
             );
           }}
         />
         <Button
-          style={style.addButton}
+          style={commonStyles.submitButton}
           onPress={() => {
             navigation.navigate('CardScan');
           }}
@@ -83,17 +84,6 @@ class ListScreen extends React.PureComponent<IProps> {
     );
   };
 }
-
-const style = StyleSheet.create({
-  list: {
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  addButton: {
-    backgroundColor: MAIN_COLOR,
-    alignSelf: 'flex-end',
-  },
-});
 
 export default connect(
   state => {

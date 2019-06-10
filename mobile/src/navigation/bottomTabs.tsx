@@ -4,9 +4,9 @@ import { MAIN_COLOR } from '../theme/colors';
 import { Icon } from 'native-base';
 import CardListScreen from '../modules/card/screens/ListScreen';
 import { ChatScreen } from '../modules/chat/screens/ChatScreen';
-import ProfilScreen from '../modules/user/screens/ProfilScreen';
 import i18n from '../i18n';
 import { HouseTabsStack } from './houseTabs';
+import SettingsScreen from '../modules/common/screens/SettingsScreen';
 
 export const BottomTabsStack = createMaterialBottomTabNavigator(
   {
@@ -37,12 +37,12 @@ export const BottomTabsStack = createMaterialBottomTabNavigator(
         ),
       },
     },
-    Profil: {
-      screen: ProfilScreen,
+    Settings: {
+      screen: SettingsScreen,
       navigationOptions: {
-        tabBarLabel: i18n.t('navigation.profil'),
+        tabBarLabel: i18n.t('navigation.settings'),
         tabBarIcon: () => (
-          <Icon style={{ color: MAIN_COLOR }} name={'person'} />
+          <Icon style={{ color: MAIN_COLOR }} name={'ios-settings'} />
         ),
       },
     },

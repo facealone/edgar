@@ -62,7 +62,7 @@ class RegistrationForm extends React.Component<
             <SubmitButton
               loading={loading}
               handleSubmit={handleSubmit}
-              label={i18n.t('firm.buttons.next')}
+              label={i18n.t('form.buttons.next')}
             />
           </Form>
         </Content>

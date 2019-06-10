@@ -8,6 +8,10 @@ export const commonStyles = StyleSheet.create({
     margin: 10,
     marginTop: 20,
   },
+  headerFlatList: {
+    textTransform: 'uppercase',
+    fontSize: 13,
+  },
   intro: { margin: 10 },
   headerIcon: { color: '#fff', marginTop: 10 },
 });

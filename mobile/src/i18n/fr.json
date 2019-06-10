@@ -63,7 +63,7 @@
     "navigation": {
       "home": "Maison",
       "cards": "Cartes",
-      "profil": "Profile",
+      "settings": "Paramètres",
       "chat": "Chat",
       "tabs": {
         "shops": "Magasins",
@@ -73,7 +73,7 @@
     },
     "card": {
       "list": {
-        "intro": "Portefeuille encombrant ? Toutes vos cartes maintenant dans votre application !"
+        "header": "Mes cartes de fidélites"
       },
       "show": {
         "footer": "Code barre : {{barCode}}"
@@ -88,6 +88,25 @@
         "button": "Sauvegarder",
         "form": {
           "name": "Nom de la carte"
+        }
+      }
+    },
+    "settings": {
+      "menu": {
+        "main": {
+          "title": "Général",
+          "recommend": "Recommander Edgar à un ami"
+        },
+        "user": {
+          "title": "Compte utilisateur",
+          "logout": "Se déconnecter",
+          "personalInformation": "Mes informations personnelles",
+          "editPassword": "Modifier le mot de passe"
+        },
+        "house": {
+          "title": "Maison",
+          "voucher": "Inviter un utilisateur",
+          "manageHouses": "Gérer mes maisons"
         }
       }
     }
