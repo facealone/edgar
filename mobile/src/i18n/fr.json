@@ -73,7 +73,10 @@
     },
     "card": {
       "list": {
-        "intro": "Portefeuille encombrant ? Toutes vos cartes maintenant sauvegardées dans votre application !"
+        "intro": "Portefeuille encombrant ? Toutes vos cartes maintenant dans votre application !"
+      },
+      "show": {
+        "footer": "Code barre : {{barCode}}"
       },
       "scan": {
         "button": "Ajouter votre carte",

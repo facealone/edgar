@@ -7,6 +7,7 @@ import {
 } from '../constants/list';
 import { CARD_ADD_SUCCESS } from '../constants/add';
 import { AUTH_AUTHENTICATION_LOGOUT } from '../../auth/constants/authentication';
+import { CARD_REMOVE_SUCCESS } from '../constants/remove';
 
 const initialState: ICardListState = {
   loading: false,
@@ -29,6 +30,12 @@ export const listReducers = (
       return {
         ...state,
         payload: action.payload,
+      };
+
+    case CARD_REMOVE_SUCCESS:
+      return {
+        ...state,
+        payload: state.payload.filter(card => card.id !== action.id),
       };
 
     case CARD_LIST_LOADING:

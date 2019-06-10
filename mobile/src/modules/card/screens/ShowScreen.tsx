@@ -1,9 +1,11 @@
-import React, { Fragment } from 'react';
-import { Content, Text, Button, Icon, Card, CardItem, Body } from 'native-base';
-import * as Permissions from 'expo-permissions';
+import React from 'react';
+import { Content, Text, Card, CardItem, Body } from 'native-base';
 import * as Brightness from 'expo-brightness';
 import Barcode from 'react-native-barcode-builder';
-import { commonStyles } from '../../../theme/common';
+import RemoveButton from '../components/RemoveButton';
+import { MAIN_COLOR } from '../../../theme/colors';
+import i18n from '../../../i18n';
+import { StyleSheet } from 'react-native';
 
 interface IProps {
   navigation: any;
@@ -13,70 +15,71 @@ interface IState {
   brightness: number;
 }
 
-export default class ShowScreen extends React.Component<IProps, IState> {
+class ShowScreen extends React.Component<IProps, IState> {
   state = {
-    brightness: 100,
-  };
-
-  static navigationOptions = ({ navigation }: any) => {
-    const { state } = navigation;
-
-    return {
-      title: state.params.name,
-      headerRight: (
-        <Fragment>
-          <Button transparent>
-            <Icon
-              name={'remove-circle-outline'}
-              style={commonStyles.headerIcon}
-            />
-          </Button>
-          <Button transparent>
-            <Icon name={'share'} style={commonStyles.headerIcon} />
-          </Button>
-        </Fragment>
-      ),
-    };
+    brightness: 50,
   };
 
   componentDidMount = async () => {
-    await Permissions.askAsync(Permissions.SYSTEM_BRIGHTNESS);
-
-    const { status } = await Permissions.getAsync(
-      Permissions.SYSTEM_BRIGHTNESS,
-    );
-
-    if ('granted' === status) {
-      this.setState({
-        brightness: await Brightness.getSystemBrightnessAsync(),
-      });
-      Brightness.setSystemBrightnessAsync(100);
-    }
+    const brightness = await Brightness.getBrightnessAsync();
+    this.setState({ brightness });
+    Brightness.setBrightnessAsync(100);
   };
 
-  componentWillUnmount = () => {
-    Brightness.setSystemBrightnessAsync(this.state.brightness);
+  componentWillUnmount = async () => {
+    await Brightness.setBrightnessAsync(this.state.brightness);
   };
 
   render = () => {
-    const { state } = this.props.navigation;
+    const { name, barCode } = this.props.navigation.state.params;
 
     return (
       <Content padder>
         <Card>
           <CardItem header bordered>
-            <Text>{state.params.name}</Text>
+            <Text style={styles.header}>{name}</Text>
           </CardItem>
           <CardItem bordered>
             <Body>
-              <Barcode value={state.params.barCode} />
+              <Barcode value={barCode} />
             </Body>
           </CardItem>
           <CardItem footer bordered>
-            <Text>{state.params.barCode}</Text>
+            <Text style={styles.footer}>
+              {i18n.t('card.show.footer', { barCode })}
+            </Text>
           </CardItem>
         </Card>
       </Content>
     );
   };
 }
+
+const styles = StyleSheet.create({
+  header: {
+    color: MAIN_COLOR,
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    width: '100%',
+    fontFamily: 'Roboto',
+    fontSize: 19,
+  },
+  footer: {
+    color: MAIN_COLOR,
+    textAlign: 'center',
+    width: '100%',
+    fontFamily: 'Roboto',
+    fontSize: 15,
+  },
+});
+
+ShowScreen.navigationOptions = ({ navigation }: any) => {
+  const { name, id } = navigation.state.params;
+
+  return {
+    title: name,
+    headerRight: <RemoveButton navigation={navigation} id={id} />,
+  };
+};
+
+export default ShowScreen;
