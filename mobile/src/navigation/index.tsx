@@ -15,8 +15,10 @@ import AuthLoadingScreen from '../modules/auth/screens/AuthLoadingScreen';
 import SendVoucherScreen from '../modules/house/screens/member/SendVoucherScreen';
 import CardShowScreen from '../modules/card/screens/ShowScreen';
 import CardAddScreen from '../modules/card/screens/AddScreen';
+import ShopAddScreen from '../modules/shop/screens/AddScreen';
 import { ScanScreen } from '../modules/card/screens/ScanScreen';
 import { commonStyles } from '../theme/common';
+
 const options = {
   headerStyle: {
     backgroundColor: MAIN_COLOR,
@@ -82,6 +84,7 @@ const AppNavigator = createStackNavigator(
     CardShow: CardShowScreen,
     CardScan: ScanScreen,
     CardAdd: CardAddScreen,
+    ShopAdd: ShopAddScreen,
   },
   {
     initialRouteName: 'BottomTabs',

@@ -29,6 +29,10 @@ export interface IShopAddResetAction {
   type: typeof SHOP_ADD_RESET;
 }
 
+export interface IShopForm {
+  name: string;
+}
+
 export type IShopAddActionTypes =
   | IShopAddSuccessAction
   | IShopAddLoadingAction

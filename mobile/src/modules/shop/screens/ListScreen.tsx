@@ -43,7 +43,7 @@ class ListScreen extends React.Component<IProps> {
       <Content>
         <Separator bordered>
           <Text style={commonStyles.centerHeaderFlatList}>
-            {i18n.t('shops.list.title')}
+            {i18n.t('shop.list.title')}
           </Text>
         </Separator>
         <FlatList
@@ -54,13 +54,17 @@ class ListScreen extends React.Component<IProps> {
             this.props.listShops();
           }}
           renderItem={({ item: card }: IShop) => {
-            const { name, id } = card;
+            const { name, id, numberOfItems } = card;
 
             return (
               <ListItem key={id} icon>
                 <Body>
                   <Text>{name}</Text>
-                  <Text style={style.helper}>8 articles</Text>
+                  <Text style={style.helper}>
+                    {0 === numberOfItems
+                      ? i18n.t('shop.list.emptyItem')
+                      : i18n.t('shop.list.emptyItem', { item: numberOfItems })}
+                  </Text>
                 </Body>
                 <Right>
                   <Icon name={'ios-arrow-dropright-circle'} />
@@ -75,7 +79,7 @@ class ListScreen extends React.Component<IProps> {
             navigation.navigate('ShopAdd');
           }}
         >
-          <Text>{i18n.t('shops.add.title')}</Text>
+          <Text>{i18n.t('shop.add.title')}</Text>
         </Button>
       </Content>
     );

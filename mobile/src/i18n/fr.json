@@ -110,12 +110,17 @@
         }
       }
     },
-    "shops": {
+    "shop": {
       "list": {
-        "title": "Mes listes de courses"
+        "title": "Mes listes de courses",
+        "countItem": "{{item}} article(s)",
+        "emptyItem": "Aucun article"
       },
       "add": {
-        "title": "Créer une liste"
+        "title": "Créer une liste",
+        "form": {
+          "name": "Nom de la liste"
+        }
       }
     }
   }
