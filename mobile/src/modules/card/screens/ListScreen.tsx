@@ -41,7 +41,7 @@ class ListScreen extends React.PureComponent<IProps> {
     return (
       <Content>
         <Separator bordered>
-          <Text style={commonStyles.headerFlatList}>
+          <Text style={commonStyles.centerHeaderFlatList}>
             {i18n.t('card.list.header')}
           </Text>
         </Separator>
@@ -57,6 +57,7 @@ class ListScreen extends React.PureComponent<IProps> {
 
             return (
               <ListItem
+                key={id}
                 icon
                 onPress={() =>
                   navigation.navigate('CardShow', { barCode, name, id })

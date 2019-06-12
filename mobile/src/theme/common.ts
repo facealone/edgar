@@ -8,6 +8,12 @@ export const commonStyles = StyleSheet.create({
     margin: 10,
     marginTop: 20,
   },
+  centerHeaderFlatList: {
+    textTransform: 'uppercase',
+    fontWeight: '500',
+    textAlign: 'center',
+    fontSize: 13,
+  },
   headerFlatList: {
     textTransform: 'uppercase',
     fontWeight: '500',

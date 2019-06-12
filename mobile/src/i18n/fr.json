@@ -109,6 +109,14 @@
           "manageHouses": "Gérer mes maisons"
         }
       }
+    },
+    "shops": {
+      "list": {
+        "title": "Mes listes de courses"
+      },
+      "add": {
+        "title": "Créer une liste"
+      }
     }
   }
 }

@@ -4,49 +4,79 @@ import {
   Text,
   Separator,
   ListItem,
-  Left,
   Icon,
   Body,
   Right,
+  Button,
 } from 'native-base';
 import { commonStyles } from '../../../theme/common';
 import { MAIN_COLOR } from '../../../theme/colors';
-import { StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { FlatList, StyleSheet } from 'react-native';
+import { bindActionCreators } from 'redux';
+import i18n from '../../../i18n';
+import { IShop } from '../models/Shop';
+import { IShopListState, IShopListResetAction } from '../types/list';
+import { listShops } from '../middlewares/list';
+import { reset } from '../actions/list';
 
-export default class ListScreen extends React.Component {
+interface IProps {
+  navigation: any;
+  shops: IShopListState;
+  listShops(): any;
+  reset(): IShopListResetAction;
+}
+
+class ListScreen extends React.Component<IProps> {
+  componentWillUnmount = () => {
+    this.props.reset();
+  };
+
+  componentDidMount = () => {
+    this.props.listShops();
+  };
+
   render = () => {
+    const { navigation, shops } = this.props;
+
     return (
       <Content>
         <Separator bordered>
-          <Text style={commonStyles.headerFlatList}>Mes listes de courses</Text>
+          <Text style={commonStyles.centerHeaderFlatList}>
+            {i18n.t('shops.list.title')}
+          </Text>
         </Separator>
-        <ListItem icon>
-          <Body>
-            <Text>Franprix</Text>
-            <Text style={style.helper}>8 articles</Text>
-          </Body>
-          <Right>
-            <Icon name={'ios-arrow-dropright-circle'} />
-          </Right>
-        </ListItem>
-        <ListItem icon>
-          <Body>
-            <Text>Carrefour</Text>
-            <Text style={style.helper}>2 articles</Text>
-          </Body>
-          <Right>
-            <Icon name={'ios-arrow-dropright-circle'} />
-          </Right>
-        </ListItem>
-        <ListItem icon>
-          <Body>
-            <Text>Leclerc</Text>
-            <Text style={style.helper}>Aucun article</Text>
-          </Body>
-          <Right>
-            <Icon name={'ios-arrow-dropright-circle'} />
-          </Right>
-        </ListItem>
+        <FlatList
+          keyExtractor={shop => shop.id}
+          data={shops.payload}
+          refreshing={shops.loading}
+          onRefresh={() => {
+            this.props.listShops();
+          }}
+          renderItem={({ item: card }: IShop) => {
+            const { name, id } = card;
+
+            return (
+              <ListItem key={id} icon>
+                <Body>
+                  <Text>{name}</Text>
+                  <Text style={style.helper}>8 articles</Text>
+                </Body>
+                <Right>
+                  <Icon name={'ios-arrow-dropright-circle'} />
+                </Right>
+              </ListItem>
+            );
+          }}
+        />
+        <Button
+          style={commonStyles.submitButton}
+          onPress={() => {
+            navigation.navigate('ShopAdd');
+          }}
+        >
+          <Text>{i18n.t('shops.add.title')}</Text>
+        </Button>
       </Content>
     );
   };
@@ -58,3 +88,16 @@ const style = StyleSheet.create({
     fontSize: 12,
   },
 });
+
+export default connect(
+  state => {
+    return {
+      shops: state.shop.list,
+    };
+  },
+  dispatch => {
+    return {
+      ...bindActionCreators({ listShops, reset }, dispatch),
+    };
+  },
+)(ListScreen);
