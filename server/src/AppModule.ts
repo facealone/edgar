@@ -5,6 +5,7 @@ import { HouseModule } from './Infrastructure/House/HouseModule';
 import { AuthModule } from './Infrastructure/Auth/AuthModule';
 import { ShopModule } from './Infrastructure/Shop/ShopModule';
 import { CardModule } from './Infrastructure/Card/CardModule';
+import { RecipeModule } from './Infrastructure/Recipe/RecipeModule';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { CardModule } from './Infrastructure/Card/CardModule';
     AuthModule,
     CardModule,
     HouseModule,
+    RecipeModule,
     ShopModule,
     UserModule,
   ],
