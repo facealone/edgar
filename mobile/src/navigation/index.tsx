@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import {
   createStackNavigator,
   createSwitchNavigator,
@@ -17,6 +17,7 @@ import CardShowScreen from '../modules/card/screens/ShowScreen';
 import CardAddScreen from '../modules/card/screens/AddScreen';
 import ShopAddScreen from '../modules/shop/screens/AddScreen';
 import { ScanScreen } from '../modules/card/screens/ScanScreen';
+import RecipeBrowseScreen from '../modules/recipe/screens/BrowseScreen';
 import { commonStyles } from '../theme/common';
 
 const options = {
@@ -65,7 +66,7 @@ const AppNavigator = createStackNavigator(
       navigationOptions: {
         title: 'Boulevard Ney', // todo : dynamic house name
         headerRight: (
-          <Fragment>
+          <>
             <Button transparent>
               <Icon
                 name={'ios-notifications'}
@@ -75,7 +76,7 @@ const AppNavigator = createStackNavigator(
             <Button transparent>
               <Icon name={'person-add'} style={commonStyles.headerIcon} />
             </Button>
-          </Fragment>
+          </>
         ),
       },
     },
@@ -85,6 +86,7 @@ const AppNavigator = createStackNavigator(
     CardScan: ScanScreen,
     CardAdd: CardAddScreen,
     ShopAdd: ShopAddScreen,
+    RecipeBrowser: RecipeBrowseScreen,
   },
   {
     initialRouteName: 'BottomTabs',

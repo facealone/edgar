@@ -2,6 +2,7 @@ import { createMaterialTopTabNavigator } from 'react-navigation';
 import { MAIN_COLOR } from '../theme/colors';
 import ShopListScreen from '../modules/shop/screens/ListScreen';
 import CardsScreen from '../modules/card/screens/ListScreen';
+import RecipesScreen from '../modules/recipe/screens/ListScreen';
 import i18n from '../i18n';
 
 export const HouseTabsStack = createMaterialTopTabNavigator(
@@ -19,7 +20,7 @@ export const HouseTabsStack = createMaterialTopTabNavigator(
       },
     },
     Recipes: {
-      screen: CardsScreen,
+      screen: RecipesScreen,
       navigationOptions: {
         tabBarLabel: i18n.t('navigation.tabs.recipes'),
       },
