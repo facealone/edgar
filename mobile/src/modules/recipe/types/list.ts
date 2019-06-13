@@ -7,6 +7,9 @@ import {
   RECIPE_LIST_ERROR,
 } from '../constants/list';
 import { ILoadingAction, IErrorAction } from '../../common/types/actions';
+import { IAuthenticationLogoutAction } from '../../auth/types/authentication';
+import { IRecipeAddSuccessAction } from './add';
+import { IRecipeRemoveSuccessAction } from './remove';
 
 export interface IRecipeListState extends IState {
   payload: IRecipe[];
@@ -32,5 +35,8 @@ export interface IRecipeListResetAction {
 export type IRecipeListActionTypes =
   | IRecipeListSuccessAction
   | IRecipeListErrorAction
+  | IRecipeAddSuccessAction
+  | IRecipeRemoveSuccessAction
   | IRecipeListResetAction
-  | IRecipeListLoadingAction;
+  | IRecipeListLoadingAction
+  | IAuthenticationLogoutAction;

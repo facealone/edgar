@@ -5,6 +5,9 @@ import {
   RECIPE_LIST_LOADING,
   RECIPE_LIST_ERROR,
 } from '../constants/list';
+import { AUTH_AUTHENTICATION_LOGOUT } from '../../auth/constants/authentication';
+import { RECIPE_ADD_SUCCESS } from '../constants/add';
+import { RECIPE_REMOVE_SUCCESS } from '../constants/remove';
 
 const initialState: IRecipeListState = {
   payload: [],
@@ -23,6 +26,18 @@ export const listReducers = (
         payload: action.payload,
       };
 
+    case RECIPE_ADD_SUCCESS:
+      return {
+        ...state,
+        payload: [...state.payload, action.payload],
+      };
+
+    case RECIPE_REMOVE_SUCCESS:
+      return {
+        ...state,
+        payload: state.payload.filter(recipe => recipe.id !== action.id),
+      };
+
     case RECIPE_LIST_LOADING:
       return {
         ...state,
@@ -36,6 +51,7 @@ export const listReducers = (
       };
 
     case RECIPE_LIST_RESET:
+    case AUTH_AUTHENTICATION_LOGOUT:
       return initialState;
 
     default:
