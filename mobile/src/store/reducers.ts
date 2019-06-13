@@ -4,6 +4,7 @@ import auth from '../modules/auth/reducers';
 import card from '../modules/card/reducers';
 import house from '../modules/house/reducers';
 import shop from '../modules/shop/reducers';
+import recipe from '../modules/recipe/reducers';
 
 export default combineReducers({
   form: formReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   card,
   house,
   shop,
+  recipe,
 });
