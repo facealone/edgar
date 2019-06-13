@@ -9,6 +9,7 @@ import { CreateRecipeCommandHandler } from 'src/Application/Recipe/Command/Creat
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { UserHouseRepository } from '../User/Repository/UserHouseRepository';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
+import { GetRecipesController } from './Controller/GetRecipesController';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { UserHouse } from 'src/Domain/User/UserHouse.entity';
     AuthModule,
     TypeOrmModule.forFeature([Recipe, UserHouse]),
   ],
-  controllers: [CreateRecipeController],
+  controllers: [CreateRecipeController, GetRecipesController],
   providers: [
     { provide: 'IRecipeRepository', useClass: RecipeRepository },
     { provide: 'IUserHouseRepository', useClass: UserHouseRepository },

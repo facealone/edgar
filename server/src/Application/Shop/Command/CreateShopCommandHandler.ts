@@ -39,6 +39,6 @@ export class CreateShopCommandHandler {
       }),
     );
 
-    return new ShopView(shop.id, shop.name);
+    return new ShopView(shop.id, shop.name, 0);
   };
 }

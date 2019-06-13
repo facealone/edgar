@@ -1,3 +1,7 @@
 export class ShopView {
-  constructor(public id: string, public name: string) {}
+  constructor(
+    public readonly id: string,
+    public readonly name: string,
+    public readonly numberOfItems: number = 0,
+  ) {}
 }

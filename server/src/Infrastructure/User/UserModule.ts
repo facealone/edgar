@@ -10,16 +10,13 @@ import { UserHouseRepository } from './Repository/UserHouseRepository';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
 import { ChangeCurrentHouseComandHandler } from 'src/Application/User/Command/ChangeCurrentHouseCommandHandler';
 import { CreateUserHouseCommandHandler } from 'src/Application/User/Command/CreateUserHouseCommandHandler';
-import { ChangeCurrentHouseController } from './Controller/CurrentHouse/ChangeCurrentHouseController';
+import { ChangeCurrentHouseController } from './Controller/ChangeCurrentHouseController';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { UpdateMeController } from './Controller/UpdateMeController';
 import { UpdateUserCommandHandler } from 'src/Application/User/Command/UpdateUserCommandHandler';
-import { GetHousesController } from './Controller/CurrentHouse/GetHousesController';
 import { GetHousesByUserQueryHandler } from 'src/Application/User/Query/GetHousesByUserQueryHandler';
 import { GetUsersByHouseQueryHandler } from 'src/Application/User/Query/GetUsersByHouseQueryHandler';
-import { GetCardsController } from './Controller/GetCardsController';
-import { GetShopsController } from './Controller/CurrentHouse/GetShopsController';
-import { GetMembersController } from './Controller/CurrentHouse/GetMembersController';
+import { GetCurrentHouseMembersController } from './Controller/GetCurrentHouseMembersController';
 import { UpdatePushNotificationTokenController } from './Controller/UpdatePushNotificationTokenController';
 import { UpdatePushNotificationTokenCommandHandler } from 'src/Application/User/Command/UpdatePushNotificationTokenCommandHandler';
 import { GetUserByApiTokenHandler } from 'src/Application/User/Query/GetUserByApiTokenQueryHandler';
@@ -29,11 +26,8 @@ import { GetUserByApiTokenHandler } from 'src/Application/User/Query/GetUserByAp
   controllers: [
     GetLoggedUserController,
     UpdateMeController,
-    GetCardsController,
     ChangeCurrentHouseController,
-    GetShopsController,
-    GetMembersController,
-    GetHousesController,
+    GetCurrentHouseMembersController,
     UpdatePushNotificationTokenController,
   ],
   providers: [

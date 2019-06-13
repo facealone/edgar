@@ -10,7 +10,7 @@ export const listShops = () => {
       const shops = [];
 
       for (const shop of response.data) {
-        shops.push(new Shop(shop.id, shop.name));
+        shops.push(new Shop(shop.id, shop.name, shop.numberOfItems));
       }
 
       dispatch(success(shops));

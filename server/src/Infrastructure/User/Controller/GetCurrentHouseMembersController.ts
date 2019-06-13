@@ -18,7 +18,7 @@ import { GetUsersByHouseView } from 'src/Application/User/View/GetUsersByHouseVi
 @Controller('/users/me/current-house')
 @ApiUseTags('User')
 @UseGuards(AuthGuard())
-export class GetMembersController {
+export class GetCurrentHouseMembersController {
   constructor(
     @Inject('IQueryBusAdapter')
     private readonly queryBus: IQueryBusAdapter,

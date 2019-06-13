@@ -9,10 +9,11 @@ import { CreateCardCommandHandler } from 'src/Application/Card/Command/CreateCar
 import { GetCardsByUserQueryHandler } from 'src/Application/Card/Query/GetCardsByUserQueryHandler';
 import { RemoveCardController } from './Controller/RemoveCardController';
 import { RemoveCardCommandHandler } from 'src/Application/Card/Command/RemoveCardCommandHandler';
+import { GetCardsController } from './Controller/GetCardsController';
 
 @Module({
   imports: [BusModule, AuthModule, TypeOrmModule.forFeature([Card])],
-  controllers: [CreateCardController, RemoveCardController],
+  controllers: [GetCardsController, CreateCardController, RemoveCardController],
   providers: [
     { provide: 'ICardRepository', useClass: CardRepository },
     CreateCardCommandHandler,

@@ -24,7 +24,7 @@ export class GetShopsByHouseQueryHandler {
     const shopViews = [];
 
     for (const shop of shops) {
-      shopViews.push(new ShopView(shop.id, shop.name));
+      shopViews.push(new ShopView(shop.id, shop.name, 0));
     }
 
     return shopViews;

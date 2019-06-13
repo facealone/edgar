@@ -13,10 +13,11 @@ import { GetShopsByHouseQueryHandler } from 'src/Application/Shop/Query/GetShops
 import { UpdateShopController } from './Controller/UpdateShopController';
 import { GetShopByIdQueryHandler } from 'src/Application/Shop/Query/GetShopByIdQueryHandler';
 import { UpdateShopCommandHandler } from 'src/Application/Shop/Command/UpdateShopCommandHandler';
+import { GetShopsController } from './Controller/GetShopsController';
 
 @Module({
   imports: [BusModule, AuthModule, TypeOrmModule.forFeature([Shop, UserHouse])],
-  controllers: [CreateShopController, UpdateShopController],
+  controllers: [GetShopsController, CreateShopController, UpdateShopController],
   providers: [
     { provide: 'IShopRepository', useClass: ShopRepository },
     { provide: 'IUserHouseRepository', useClass: UserHouseRepository },

@@ -21,6 +21,7 @@ import { UpdateHouseController } from './Controller/UpdateHouseController';
 import { GetHouseByIdQueryHandler } from 'src/Application/House/Query/GetHouseByIdQueryHandler';
 import { UpdateHouseCommandHandler } from 'src/Application/House/Command/UpdateHouseCommandHandler';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
+import { GetHousesController } from './Controller/GetHousesController';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
     TypeOrmModule.forFeature([House, Voucher, UserHouse]),
   ],
   controllers: [
+    GetHousesController,
     CreateHouseController,
     CreateVoucherController,
     ConsumeVoucherController,

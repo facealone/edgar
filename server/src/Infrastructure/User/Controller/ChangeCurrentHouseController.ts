@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { ApiUseTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
-import { LoggedUser } from '../../Decorator/LoggedUserDecorator';
+import { LoggedUser } from '../Decorator/LoggedUserDecorator';
 import { User } from 'src/Domain/User/User.entity';
 import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapter';
 import { ChangeCurrentHouseCommand } from 'src/Application/User/Command/ChangeCurrentHouseCommand';
