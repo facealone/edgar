@@ -11,6 +11,8 @@ import { UserHouseRepository } from '../User/Repository/UserHouseRepository';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
 import { GetRecipesController } from './Controller/GetRecipesController';
 import { GetRecipesByHouseQueryHandler } from 'src/Application/Recipe/Query/GetRecipesByHouseQueryHandler';
+import { RemoveRecipeCommandHandler } from 'src/Application/Recipe/Command/RemoveRecipeCommandHandler';
+import { RemoveRecipeController } from './Controller/RemoveRecipeController';
 
 @Module({
   imports: [
@@ -18,12 +20,17 @@ import { GetRecipesByHouseQueryHandler } from 'src/Application/Recipe/Query/GetR
     AuthModule,
     TypeOrmModule.forFeature([Recipe, UserHouse]),
   ],
-  controllers: [CreateRecipeController, GetRecipesController],
+  controllers: [
+    CreateRecipeController,
+    GetRecipesController,
+    RemoveRecipeController,
+  ],
   providers: [
     { provide: 'IRecipeRepository', useClass: RecipeRepository },
     { provide: 'IUserHouseRepository', useClass: UserHouseRepository },
     CreateRecipeCommandHandler,
     GetRecipesByHouseQueryHandler,
+    RemoveRecipeCommandHandler,
     IsMemberOfHouse,
   ],
 })

@@ -22,4 +22,15 @@ export class RecipeRepository implements IRecipeRepository {
       order: { name: 'ASC' },
     });
   };
+
+  public findOneById = async (id: string): Promise<Recipe | null> => {
+    return await this.repository.findOne({
+      where: { id },
+      relations: ['house'],
+    });
+  };
+
+  public remove = async (recipe: Recipe): Promise<void> => {
+    await this.repository.remove(recipe);
+  };
 }
