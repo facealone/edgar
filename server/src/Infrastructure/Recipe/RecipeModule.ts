@@ -10,6 +10,7 @@ import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { UserHouseRepository } from '../User/Repository/UserHouseRepository';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
 import { GetRecipesController } from './Controller/GetRecipesController';
+import { GetRecipesByHouseQueryHandler } from 'src/Application/Recipe/Query/GetRecipesByHouseQueryHandler';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { GetRecipesController } from './Controller/GetRecipesController';
     { provide: 'IRecipeRepository', useClass: RecipeRepository },
     { provide: 'IUserHouseRepository', useClass: UserHouseRepository },
     CreateRecipeCommandHandler,
+    GetRecipesByHouseQueryHandler,
     IsMemberOfHouse,
   ],
 })
