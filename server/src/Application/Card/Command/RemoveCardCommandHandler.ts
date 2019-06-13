@@ -22,6 +22,6 @@ export class RemoveCardCommandHandler {
       throw new ForbiddenException();
     }
 
-    await this.cardRepository.remove(card);
+    this.cardRepository.remove(card);
   };
 }

@@ -27,6 +27,6 @@ export class RemoveRecipeCommandHandler {
       throw new ForbiddenException();
     }
 
-    await this.recipeRepository.remove(recipe);
+    this.recipeRepository.remove(recipe);
   };
 }

@@ -18,12 +18,12 @@ export class RemoveRecipeController {
 
   @ApiOperation({ title: 'Remove recipe by logged user' })
   @Delete(':id')
-  public async index(
+  public index(
     @LoggedUser() user: User,
     @Param() command: RemoveRecipeCommand,
-  ): Promise<void> {
+  ): void {
     command.user = user;
 
-    await this.commandBus.execute(command);
+    this.commandBus.execute(command);
   }
 }

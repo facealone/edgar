@@ -18,12 +18,12 @@ export class RemoveCardController {
 
   @ApiOperation({ title: 'Remove loyalty card by logged user' })
   @Delete(':id')
-  public async index(
+  public index(
     @Param() command: RemoveCardCommand,
     @LoggedUser() user: User,
-  ): Promise<void> {
+  ): void {
     command.user = user;
 
-    return await this.commandBus.execute(command);
+    this.commandBus.execute(command);
   }
 }
