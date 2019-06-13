@@ -10,9 +10,8 @@ import {
   Button,
 } from 'native-base';
 import { commonStyles } from '../../../theme/common';
-import { MAIN_COLOR } from '../../../theme/colors';
 import { connect } from 'react-redux';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native';
 import { bindActionCreators } from 'redux';
 import i18n from '../../../i18n';
 import { IShop } from '../models/Shop';
@@ -60,7 +59,7 @@ class ListScreen extends React.Component<IProps> {
               <ListItem key={id} icon>
                 <Body>
                   <Text>{name}</Text>
-                  <Text style={style.helper}>
+                  <Text style={commonStyles.listHelper}>
                     {0 === numberOfItems
                       ? i18n.t('shop.list.emptyItem')
                       : i18n.t('shop.list.emptyItem', { item: numberOfItems })}
@@ -85,13 +84,6 @@ class ListScreen extends React.Component<IProps> {
     );
   };
 }
-
-const style = StyleSheet.create({
-  helper: {
-    color: MAIN_COLOR,
-    fontSize: 12,
-  },
-});
 
 export default connect(
   state => {

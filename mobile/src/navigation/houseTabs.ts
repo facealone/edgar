@@ -19,7 +19,7 @@ export const HouseTabsStack = createMaterialTopTabNavigator(
         tabBarLabel: i18n.t('navigation.tabs.menus'),
       },
     },
-    Recipes: {
+    RecipeList: {
       screen: RecipesScreen,
       navigationOptions: {
         tabBarLabel: i18n.t('navigation.tabs.recipes'),

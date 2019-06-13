@@ -29,6 +29,11 @@ export interface IRecipeAddResetAction {
   type: typeof RECIPE_ADD_RESET;
 }
 
+export interface IRecipeForm {
+  name: string;
+  uri: string;
+}
+
 export type IRecipeAddActionTypes =
   | IRecipeAddSuccessAction
   | IRecipeAddErrorAction

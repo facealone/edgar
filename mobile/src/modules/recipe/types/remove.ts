@@ -29,7 +29,7 @@ export interface IRecipeRemoveResetAction {
   type: typeof RECIPE_REMOVE_RESET;
 }
 
-export type IRecipeREMOVEActionTypes =
+export type IRecipeRemoveActionTypes =
   | IRecipeRemoveSuccessAction
   | IRecipeRemoveErrorAction
   | IRecipeRemoveResetAction

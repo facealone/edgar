@@ -10,15 +10,17 @@ export const commonStyles = StyleSheet.create({
   },
   centerHeaderFlatList: {
     textTransform: 'uppercase',
-    fontWeight: '500',
     textAlign: 'center',
     fontSize: 13,
   },
   headerFlatList: {
     textTransform: 'uppercase',
-    fontWeight: '500',
     fontSize: 13,
   },
   intro: { margin: 10 },
   headerIcon: { color: '#fff', marginTop: 10 },
+  listHelper: {
+    color: MAIN_COLOR,
+    fontSize: 12,
+  },
 });

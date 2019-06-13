@@ -84,7 +84,7 @@
         "intro": "Scannez le code-barres de votre carte"
       },
       "add": {
-        "title": "Ajouter votre carte",
+        "title": "Ajouter une carte",
         "button": "Sauvegarder",
         "form": {
           "name": "Nom de la carte"
@@ -121,6 +121,14 @@
         "form": {
           "name": "Nom de la liste"
         }
+      }
+    },
+    "recipe": {
+      "list": {
+        "title": "Mes recettes Marmiton"
+      },
+      "add": {
+        "title": "Ajouter une recette"
       }
     }
   }

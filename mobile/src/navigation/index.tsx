@@ -19,6 +19,8 @@ import ShopAddScreen from '../modules/shop/screens/AddScreen';
 import { ScanScreen } from '../modules/card/screens/ScanScreen';
 import RecipeBrowseScreen from '../modules/recipe/screens/BrowseScreen';
 import { commonStyles } from '../theme/common';
+import RecipeAddScreen from '../modules/recipe/screens/AddScreen';
+import RecipeShowScreen from '../modules/recipe/screens/ShowScreen';
 
 const options = {
   headerStyle: {
@@ -87,6 +89,8 @@ const AppNavigator = createStackNavigator(
     CardAdd: CardAddScreen,
     ShopAdd: ShopAddScreen,
     RecipeBrowser: RecipeBrowseScreen,
+    RecipeAdd: RecipeAddScreen,
+    RecipeShow: RecipeShowScreen,
   },
   {
     initialRouteName: 'BottomTabs',

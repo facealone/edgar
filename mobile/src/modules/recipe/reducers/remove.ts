@@ -1,4 +1,4 @@
-import { IRecipeRemoveState, IRecipeREMOVEActionTypes } from '../types/remove';
+import { IRecipeRemoveState, IRecipeRemoveActionTypes } from '../types/remove';
 import {
   RECIPE_REMOVE_RESET,
   RECIPE_REMOVE_SUCCESS,
@@ -14,7 +14,7 @@ const initialState: IRecipeRemoveState = {
 
 export const removeReducers = (
   state = initialState,
-  action: IRecipeREMOVEActionTypes,
+  action: IRecipeRemoveActionTypes,
 ): IRecipeRemoveState => {
   switch (action.type) {
     case RECIPE_REMOVE_SUCCESS:
