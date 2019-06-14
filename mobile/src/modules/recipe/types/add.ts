@@ -32,6 +32,7 @@ export interface IRecipeAddResetAction {
 export interface IRecipeForm {
   name: string;
   uri: string;
+  recipeCategory: string;
 }
 
 export type IRecipeAddActionTypes =

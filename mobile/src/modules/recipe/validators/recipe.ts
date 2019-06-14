@@ -8,5 +8,9 @@ export const validate = (payload: IRecipeForm): object => {
     errors.name = i18n.t('form.errors.requiredField');
   }
 
+  if (!payload.recipeCategory) {
+    errors.recipeCategory = i18n.t('form.errors.requiredField');
+  }
+
   return errors;
 };

@@ -2,6 +2,7 @@ import { loading, success, errors } from '../actions/add';
 import { Recipe } from '../models/Recipe';
 import { IRecipeForm } from '../types/add';
 import { Owner } from '../../user/models/Owner';
+import { RecipeCategory } from '../models/RecipeCategory';
 
 export const addRecipe = (payload: IRecipeForm) => {
   return async (dispatch: any, getState: any, axios: any) => {
@@ -10,6 +11,7 @@ export const addRecipe = (payload: IRecipeForm) => {
     try {
       const response = await axios.post('recipes', payload);
       const recipe = response.data;
+      const { owner, category } = recipe;
 
       dispatch(
         success(
@@ -17,7 +19,8 @@ export const addRecipe = (payload: IRecipeForm) => {
             recipe.id,
             recipe.name,
             recipe.uri,
-            new Owner(recipe.owner.firstName, recipe.owner.lastName),
+            new Owner(owner.firstName, owner.lastName),
+            new RecipeCategory(category.id, category.name),
           ),
         ),
       );
