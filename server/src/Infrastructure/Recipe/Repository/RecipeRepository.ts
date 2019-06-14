@@ -20,6 +20,7 @@ export class RecipeRepository implements IRecipeRepository {
     return await this.repository.find({
       where: { house },
       order: { name: 'ASC' },
+      relations: ['owner'],
     });
   };
 

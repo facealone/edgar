@@ -131,7 +131,10 @@
         "title": "Mes recettes Marmiton"
       },
       "add": {
-        "title": "Ajouter une recette"
+        "title": "Ajouter une recette",
+        "form": {
+          "name": "Nom de la recette"
+        }
       }
     }
   }

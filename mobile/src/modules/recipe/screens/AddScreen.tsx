@@ -38,6 +38,8 @@ class AddScreen extends React.Component<IProps> {
   };
 
   handleSubmit = (payload: IRecipeForm) => {
+    payload.uri = this.props.navigation.state.params.recipeUri;
+
     this.props.addRecipe(payload);
   };
 

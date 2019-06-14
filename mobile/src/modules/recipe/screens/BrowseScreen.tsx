@@ -4,22 +4,23 @@ import { WebView } from 'react-native';
 import { commonStyles } from '../../../theme/common';
 import i18n from '../../../i18n';
 
-export default class BrowseScreen extends React.Component {
-  static state = {
-    recipeUri: '',
-  };
+interface IProps {
+  navigation: any;
+}
 
-  static navigationOptions = {
-    title: i18n.t('recipe.add.title'),
-    headerRight: (
-      <Button transparent>
-        <Icon name={'save'} style={commonStyles.headerIcon} />
-      </Button>
-    ),
+const RECIPES_PROVIDER_URI = 'https://www.marmiton.org/recettes/';
+
+class BrowseScreen extends React.PureComponent<IProps> {
+  componentDidMount = () => {
+    this.props.navigation.setParams({
+      recipeUri: RECIPES_PROVIDER_URI,
+    });
   };
 
   onNavigationStateChange = (webViewState: any) => {
-    this.setState({ recipeUri: webViewState.url });
+    this.props.navigation.setParams({
+      recipeUri: webViewState.url,
+    });
   };
 
   render = () => {
@@ -27,7 +28,7 @@ export default class BrowseScreen extends React.Component {
       <Content contentContainerStyle={{ flex: 1 }}>
         <WebView
           source={{
-            uri: 'https://www.marmiton.org/recettes/',
+            uri: RECIPES_PROVIDER_URI,
           }}
           onNavigationStateChange={this.onNavigationStateChange}
           javaScriptEnabled
@@ -36,3 +37,24 @@ export default class BrowseScreen extends React.Component {
     );
   };
 }
+
+BrowseScreen.navigationOptions = ({ navigation }: any) => {
+  const params = navigation.state.params;
+
+  return {
+    title: i18n.t('recipe.add.title'),
+    headerRight: (
+      <Button
+        transparent
+        onPress={() =>
+          params.recipeUri &&
+          navigation.navigate('RecipeAdd', { recipeUri: params.recipeUri })
+        }
+      >
+        <Icon name={'save'} style={commonStyles.headerIcon} />
+      </Button>
+    ),
+  };
+};
+
+export default BrowseScreen;

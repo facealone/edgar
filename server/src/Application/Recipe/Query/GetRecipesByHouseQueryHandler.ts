@@ -26,7 +26,16 @@ export class GetRecipesByHouseQueryHandler {
     const recipeViews = [];
 
     for (const recipe of recipes) {
-      recipeViews.push(new RecipeView(recipe.id, recipe.name, recipe.uri));
+      const user = recipe.owner;
+
+      recipeViews.push(
+        new RecipeView(
+          recipe.id,
+          recipe.name,
+          recipe.uri,
+          new UserNameView(recipe.user.firstName, recipe.user.lastName),
+        ),
+      );
     }
 
     return recipeViews;
