@@ -11,6 +11,7 @@ import {
   Button,
   ListItem,
   Separator,
+  Left,
 } from 'native-base';
 import i18n from '../../../i18n';
 import { listCards } from '../middlewares/list';
@@ -18,6 +19,7 @@ import { reset } from '../actions/list';
 import { ICardListState, ICardListResetAction } from '../types/list';
 import { ICard } from '../models/Card';
 import { commonStyles } from '../../../theme/common';
+import { MAIN_COLOR } from '../../../theme/colors';
 
 interface IProps {
   reset(): ICardListResetAction;
@@ -63,6 +65,9 @@ class ListScreen extends React.PureComponent<IProps> {
                   navigation.navigate('CardShow', { barCode, name, id })
                 }
               >
+                <Left>
+                  <Icon name={'ios-card'} style={{ color: MAIN_COLOR }} />
+                </Left>
                 <Body>
                   <Text>{name}</Text>
                 </Body>

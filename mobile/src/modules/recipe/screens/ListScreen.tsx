@@ -11,6 +11,7 @@ import {
   Button,
   ListItem,
   Separator,
+  Left,
 } from 'native-base';
 import i18n from '../../../i18n';
 import { reset } from '../actions/list';
@@ -18,6 +19,7 @@ import { listRecipes } from '../middlewares/list';
 import { commonStyles } from '../../../theme/common';
 import { IRecipeListState, IRecipeListResetAction } from '../types/list';
 import { IRecipe } from '../models/Recipe';
+import { MAIN_COLOR } from '../../../theme/colors';
 
 interface IProps {
   reset(): IRecipeListResetAction;
@@ -63,6 +65,9 @@ class ListScreen extends React.PureComponent<IProps> {
                   navigation.navigate('RecipeShow', { name, uri, id })
                 }
               >
+                <Left>
+                  <Icon name={'book'} style={{ color: MAIN_COLOR }} />
+                </Left>
                 <Body>
                   <Text>{name}</Text>
                   <Text style={commonStyles.listHelper}>

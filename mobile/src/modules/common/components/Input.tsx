@@ -6,6 +6,7 @@ export const Input = ({
   input,
   secureTextEntry,
   returnKeyType,
+  autoFocus,
   keyboardType,
   textContentType,
   autoCapitalize,
@@ -26,10 +27,10 @@ export const Input = ({
           {...input}
           returnKeyType={returnKeyType}
           secureTextEntry={secureTextEntry}
+          autoFocus={autoFocus ? true : false}
           keyboardType={keyboardType}
           textContentType={textContentType}
           autoCapitalize={autoCapitalize}
-          clearButtonMode={'while-editing'}
         />
       </Item>
       {displayError && <Text style={styles.error}>{error}</Text>}

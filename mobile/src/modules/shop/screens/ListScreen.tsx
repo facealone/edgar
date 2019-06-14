@@ -8,6 +8,7 @@ import {
   Body,
   Right,
   Button,
+  Left,
 } from 'native-base';
 import { commonStyles } from '../../../theme/common';
 import { connect } from 'react-redux';
@@ -18,6 +19,7 @@ import { IShop } from '../models/Shop';
 import { IShopListState, IShopListResetAction } from '../types/list';
 import { listShops } from '../middlewares/list';
 import { reset } from '../actions/list';
+import { MAIN_COLOR } from '../../../theme/colors';
 
 interface IProps {
   navigation: any;
@@ -57,6 +59,9 @@ class ListScreen extends React.Component<IProps> {
 
             return (
               <ListItem key={id} icon>
+                <Left>
+                  <Icon name={'list'} style={{ color: MAIN_COLOR }} />
+                </Left>
                 <Body>
                   <Text>{name}</Text>
                   <Text style={commonStyles.listHelper}>

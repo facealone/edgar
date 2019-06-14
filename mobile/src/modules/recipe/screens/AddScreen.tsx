@@ -6,17 +6,21 @@ import RecipeForm from '../components/RecipeForm';
 import i18n from '../../../i18n';
 import { reset } from '../actions/add';
 import { addRecipe } from '../middlewares/add';
+import { listRecipeCategories } from '../middlewares/categories';
 import {
   IRecipeAddResetAction,
   IRecipeForm,
   IRecipeAddState,
 } from '../types/add';
 import { commonStyles } from '../../../theme/common';
+import { ICategoriesState } from '../types/categories';
 
 interface IProps {
   reset(): IRecipeAddResetAction;
+  listRecipeCategories(): any;
   addRecipe(payload: IRecipeForm): any;
   add: IRecipeAddState;
+  categories: ICategoriesState;
   navigation: any;
 }
 
@@ -37,6 +41,10 @@ class AddScreen extends React.Component<IProps> {
     }
   };
 
+  componentDidMount = () => {
+    this.props.listRecipeCategories();
+  };
+
   handleSubmit = (payload: IRecipeForm) => {
     payload.uri = this.props.navigation.state.params.recipeUri;
 
@@ -44,11 +52,17 @@ class AddScreen extends React.Component<IProps> {
   };
 
   render = () => {
-    const { add } = this.props;
+    const { add, categories } = this.props;
 
     return (
       <Content style={commonStyles.content}>
-        <RecipeForm loading={add.loading} onSubmit={this.handleSubmit} />
+        {categories.payload && (
+          <RecipeForm
+            categories={categories.payload}
+            loading={add.loading}
+            onSubmit={this.handleSubmit}
+          />
+        )}
       </Content>
     );
   };
@@ -58,11 +72,15 @@ export default connect(
   state => {
     return {
       add: state.recipe.add,
+      categories: state.recipe.categories,
     };
   },
   dispatch => {
     return {
-      ...bindActionCreators({ reset, addRecipe }, dispatch),
+      ...bindActionCreators(
+        { reset, addRecipe, listRecipeCategories },
+        dispatch,
+      ),
     };
   },
 )(AddScreen);
