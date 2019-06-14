@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Root } from 'native-base';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import { Container } from 'native-base';
@@ -24,8 +25,10 @@ export const Layout = () => {
   }
 
   return (
-    <Container>
-      <Navigation />
-    </Container>
+    <Root>
+      <Container>
+        <Navigation />
+      </Container>
+    </Root>
   );
 };

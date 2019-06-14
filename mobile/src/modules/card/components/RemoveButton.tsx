@@ -1,11 +1,12 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Button, Icon, Spinner } from 'native-base';
+import { Button, Icon, Spinner, Toast } from 'native-base';
 import { commonStyles } from '../../../theme/common';
 import { reset } from '../actions/remove';
 import { removeCard } from '../middlewares/remove';
 import { ICardRemoveState } from '../types/remove';
+import i18n from '../../../i18n';
 
 interface IProps {
   id: string;
@@ -25,6 +26,7 @@ class RemoveButton extends React.PureComponent<IProps> {
 
     if (remove.id) {
       navigation.navigate('CardList');
+      Toast.show({ text: i18n.t('success.remove') });
     }
   };
 
