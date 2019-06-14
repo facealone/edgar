@@ -6,6 +6,7 @@ import RemoveButton from '../components/RemoveButton';
 import { MAIN_COLOR } from '../../../theme/colors';
 import i18n from '../../../i18n';
 import { StyleSheet } from 'react-native';
+import { commonStyles } from '../../../theme/common';
 
 interface IProps {
   navigation: any;
@@ -34,7 +35,7 @@ class ShowScreen extends React.Component<IProps, IState> {
     const { name, barCode } = this.props.navigation.state.params;
 
     return (
-      <Content padder>
+      <Content style={commonStyles.content} padder>
         <Card>
           <CardItem header bordered>
             <Text style={styles.header}>{name}</Text>

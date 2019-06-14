@@ -23,4 +23,7 @@ export const commonStyles = StyleSheet.create({
     color: MAIN_COLOR,
     fontSize: 12,
   },
+  content: {
+    backgroundColor: '#fff',
+  },
 });

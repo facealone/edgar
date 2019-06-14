@@ -7,6 +7,7 @@ import { reset } from '../actions/add';
 import { addShop } from '../middlewares/add';
 import { IShopAddState, IShopAddResetAction, IShopForm } from '../types/add';
 import ShopForm from '../component/ShopForm';
+import { commonStyles } from '../../../theme/common';
 
 interface IProps {
   navigation: any;
@@ -40,7 +41,7 @@ class AddScreen extends React.PureComponent<IProps> {
     const { add } = this.props;
 
     return (
-      <Content padder>
+      <Content padder style={commonStyles.content}>
         <ShopForm onSubmit={this.handleSubmit} loading={add.loading} />
       </Content>
     );

@@ -36,7 +36,7 @@ class SettingsScreen extends React.Component<IProps> {
 
   render = () => {
     return (
-      <Content>
+      <Content style={commonStyles.content}>
         <Separator bordered>
           <Text style={commonStyles.headerFlatList}>
             {i18n.t('settings.menu.main.title')}

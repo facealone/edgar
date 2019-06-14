@@ -39,7 +39,7 @@ class ListScreen extends React.Component<IProps> {
     const { navigation, shops } = this.props;
 
     return (
-      <Content>
+      <Content style={commonStyles.content}>
         <Separator bordered>
           <Text style={commonStyles.centerHeaderFlatList}>
             {i18n.t('shop.list.title')}

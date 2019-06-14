@@ -39,7 +39,7 @@ class ListScreen extends React.PureComponent<IProps> {
     const { recipes, navigation } = this.props;
 
     return (
-      <Content>
+      <Content style={commonStyles.content}>
         <Separator bordered>
           <Text style={commonStyles.centerHeaderFlatList}>
             {i18n.t('recipe.list.title')}

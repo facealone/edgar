@@ -7,6 +7,7 @@ import i18n from '../../../i18n';
 import { ICardAddState, ICardForm, ICardAddResetAction } from '../types/add';
 import { reset } from '../actions/add';
 import { addCard } from '../middlewares/add';
+import { commonStyles } from '../../../theme/common';
 
 interface IProps {
   add: ICardAddState;
@@ -43,7 +44,7 @@ class AddScreen extends React.PureComponent<IProps> {
     const { add } = this.props;
 
     return (
-      <Content padder>
+      <Content padder style={commonStyles.content}>
         <CardForm onSubmit={this.handleSubmit} loading={add.loading} />
       </Content>
     );

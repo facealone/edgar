@@ -44,7 +44,7 @@ class AddScreen extends React.Component<IProps> {
     const { add } = this.props;
 
     return (
-      <Content>
+      <Content style={commonStyles.content}>
         <Text style={commonStyles.intro}>
           {i18n.t('house.add.introduction')}
         </Text>

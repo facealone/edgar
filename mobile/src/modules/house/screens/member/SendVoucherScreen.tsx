@@ -19,7 +19,7 @@ class SendVoucherScreen extends React.Component<IProps> {
     const { currentHouse } = this.props;
 
     return (
-      <Content>
+      <Content style={commonStyles.content}>
         <Text style={commonStyles.intro}>
           {i18n.t('house.member.voucher.introduction', {
             house: currentHouse.payload.name,

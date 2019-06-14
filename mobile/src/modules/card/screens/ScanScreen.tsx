@@ -4,6 +4,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import { Content, Text } from 'native-base';
 import i18n from '../../../i18n';
 import { StyleSheet, Vibration } from 'react-native';
+import { commonStyles } from '../../../theme/common';
 
 export const ScanScreen = ({ navigation }: any) => {
   const [hasCameraPermission, setCameraPermission] = useState<boolean>(false);
@@ -26,7 +27,7 @@ export const ScanScreen = ({ navigation }: any) => {
   }, []);
 
   return (
-    <Content padder>
+    <Content padder style={commonStyles.content}>
       <Text>{i18n.t('card.scan.intro')}</Text>
       {hasCameraPermission && (
         <BarCodeScanner
