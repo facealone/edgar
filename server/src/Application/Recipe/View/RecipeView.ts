@@ -1,4 +1,5 @@
 import { OwnerView } from 'src/Application/User/View/OwnerView';
+import { RecipeCategoryView } from './RecipeCategoryView';
 
 export class RecipeView {
   constructor(
@@ -6,5 +7,6 @@ export class RecipeView {
     public readonly name: string,
     public readonly uri: string,
     public readonly owner: OwnerView,
+    public readonly category: RecipeCategoryView,
   ) {}
 }

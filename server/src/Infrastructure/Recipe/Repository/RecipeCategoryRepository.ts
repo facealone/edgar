@@ -14,4 +14,8 @@ export class RecipeCategoryRepository implements IRecipeCategoryRepository {
   public findAll = async (): Promise<RecipeCategory[]> => {
     return await this.repository.find();
   };
+
+  public findOneById = async (id: string): Promise<RecipeCategory | null> => {
+    return await this.repository.findOne({ where: { id } });
+  };
 }

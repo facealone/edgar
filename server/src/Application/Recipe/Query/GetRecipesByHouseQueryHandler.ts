@@ -5,6 +5,7 @@ import { Inject, ForbiddenException } from '@nestjs/common';
 import { RecipeView } from '../View/RecipeView';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { OwnerView } from 'src/Application/User/View/OwnerView';
+import { RecipeCategoryView } from '../View/RecipeCategoryView';
 
 @QueryHandler(GetRecipesByHouseQuery)
 export class GetRecipesByHouseQueryHandler {
@@ -27,7 +28,7 @@ export class GetRecipesByHouseQueryHandler {
     const recipeViews = [];
 
     for (const recipe of recipes) {
-      const owner = recipe.owner;
+      const { owner, category } = recipe;
 
       recipeViews.push(
         new RecipeView(
@@ -35,6 +36,7 @@ export class GetRecipesByHouseQueryHandler {
           recipe.name,
           recipe.uri,
           new OwnerView(owner.firstName, owner.lastName),
+          new RecipeCategoryView(category.id, category.name),
         ),
       );
     }
