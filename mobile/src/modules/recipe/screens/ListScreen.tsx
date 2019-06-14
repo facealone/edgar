@@ -53,7 +53,7 @@ class ListScreen extends React.PureComponent<IProps> {
             this.props.listRecipes();
           }}
           renderItem={({ item: recipe }: IRecipe) => {
-            const { uri, name, id } = recipe;
+            const { uri, name, id, owner } = recipe;
 
             return (
               <ListItem
@@ -65,7 +65,9 @@ class ListScreen extends React.PureComponent<IProps> {
               >
                 <Body>
                   <Text>{name}</Text>
-                  <Text style={commonStyles.listHelper}>Entrée</Text>
+                  <Text style={commonStyles.listHelper}>
+                    Entrée - {owner.firstName + ' ' + owner.lastName}
+                  </Text>
                 </Body>
                 <Right>
                   <Icon name={'ios-arrow-dropright-circle'} />

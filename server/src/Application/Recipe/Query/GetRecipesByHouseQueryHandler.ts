@@ -4,6 +4,7 @@ import { IRecipeRepository } from 'src/Domain/Recipe/Repository/IRecipeRepositor
 import { Inject, ForbiddenException } from '@nestjs/common';
 import { RecipeView } from '../View/RecipeView';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
+import { OwnerView } from 'src/Application/User/View/OwnerView';
 
 @QueryHandler(GetRecipesByHouseQuery)
 export class GetRecipesByHouseQueryHandler {
@@ -26,14 +27,14 @@ export class GetRecipesByHouseQueryHandler {
     const recipeViews = [];
 
     for (const recipe of recipes) {
-      const user = recipe.owner;
+      const owner = recipe.owner;
 
       recipeViews.push(
         new RecipeView(
           recipe.id,
           recipe.name,
           recipe.uri,
-          new UserNameView(recipe.user.firstName, recipe.user.lastName),
+          new OwnerView(owner.firstName, owner.lastName),
         ),
       );
     }

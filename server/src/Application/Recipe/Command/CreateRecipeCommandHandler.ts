@@ -10,6 +10,7 @@ import { Recipe } from 'src/Domain/Recipe/Recipe.entity';
 import { RecipeView } from '../View/RecipeView';
 import { House } from 'src/Domain/House/House.entity';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
+import { OwnerView } from 'src/Application/User/View/OwnerView';
 
 @CommandHandler(CreateRecipeCommand)
 export class CreateRecipeCommandHandler {
@@ -37,6 +38,11 @@ export class CreateRecipeCommandHandler {
       new Recipe({ name, uri, house, owner: user }),
     );
 
-    return new RecipeView(recipe.id, recipe.name, recipe.uri);
+    return new RecipeView(
+      recipe.id,
+      recipe.name,
+      recipe.uri,
+      new OwnerView(user.firstName, user.lastName),
+    );
   };
 }
