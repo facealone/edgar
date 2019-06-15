@@ -8,10 +8,9 @@ import {
   Body,
   Right,
   Icon,
-  Button,
   ListItem,
   Separator,
-  Left,
+  Fab,
 } from 'native-base';
 import i18n from '../../../i18n';
 import { listCards } from '../middlewares/list';
@@ -19,7 +18,6 @@ import { reset } from '../actions/list';
 import { ICardListState, ICardListResetAction } from '../types/list';
 import { ICard } from '../models/Card';
 import { commonStyles } from '../../../theme/common';
-import { MAIN_COLOR } from '../../../theme/colors';
 
 interface IProps {
   reset(): ICardListResetAction;
@@ -41,52 +39,52 @@ class ListScreen extends React.PureComponent<IProps> {
     const { cards, navigation } = this.props;
 
     return (
-      <Content style={commonStyles.content}>
-        <Separator bordered>
-          <Text style={commonStyles.centerHeaderFlatList}>
-            {i18n.t('card.list.header')}
-          </Text>
-        </Separator>
-        <FlatList
-          keyExtractor={card => card.id}
-          data={cards.payload}
-          refreshing={cards.loading}
-          onRefresh={() => {
-            this.props.listCards();
-          }}
-          renderItem={({ item: card }: ICard) => {
-            const { barCode, name, id } = card;
+      <>
+        <Content style={commonStyles.content}>
+          <Separator bordered>
+            <Text style={commonStyles.centerHeaderFlatList}>
+              {i18n.t('card.list.header')}
+            </Text>
+          </Separator>
+          <FlatList
+            keyExtractor={card => card.id}
+            data={cards.payload}
+            refreshing={cards.loading}
+            onRefresh={() => {
+              this.props.listCards();
+            }}
+            renderItem={({ item: card }: ICard) => {
+              const { barCode, name, id } = card;
 
-            return (
-              <ListItem
-                key={id}
-                icon
-                onPress={() =>
-                  navigation.navigate('CardShow', { barCode, name, id })
-                }
-              >
-                <Left>
-                  <Icon name={'ios-card'} style={{ color: MAIN_COLOR }} />
-                </Left>
-                <Body>
-                  <Text>{name}</Text>
-                </Body>
-                <Right>
-                  <Icon name={'ios-arrow-dropright-circle'} />
-                </Right>
-              </ListItem>
-            );
-          }}
-        />
-        <Button
-          style={commonStyles.submitButton}
+              return (
+                <ListItem
+                  key={id}
+                  icon
+                  onPress={() =>
+                    navigation.navigate('CardShow', { barCode, name, id })
+                  }
+                >
+                  <Body>
+                    <Text>{name}</Text>
+                  </Body>
+                  <Right>
+                    <Icon name={'ios-arrow-dropright-circle'} />
+                  </Right>
+                </ListItem>
+              );
+            }}
+          />
+        </Content>
+        <Fab
+          style={commonStyles.fabButton}
+          position={'bottomRight'}
           onPress={() => {
             navigation.navigate('CardScan');
           }}
         >
-          <Text>{i18n.t('card.scan.button')}</Text>
-        </Button>
-      </Content>
+          <Icon name={'add'} />
+        </Fab>
+      </>
     );
   };
 }

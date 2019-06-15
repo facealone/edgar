@@ -40,6 +40,7 @@ export const categoriesReducers = (
         ...state,
         errors: [],
         loading: false,
+        currentFilter: null,
       };
 
     default:

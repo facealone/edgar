@@ -3,11 +3,12 @@ import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import { validate } from '../validators/recipe';
 import { IRecipeForm } from '../types/add';
 import { KeyboardAvoidingView } from 'react-native';
-import { Content, Form } from 'native-base';
+import { Content, Form, Picker } from 'native-base';
 import i18n from '../../../i18n';
 import { Input } from '../../common/components/Input';
 import { SubmitButton } from '../../common/components/SubmitButton';
 import { IRecipeCategory } from '../models/RecipeCategory';
+import { PickerInput } from '../../common/components/PickerInput';
 
 interface IProps {
   loading: boolean;
@@ -33,10 +34,18 @@ class RecipeForm extends React.PureComponent<
             />
             <Field
               label={i18n.t('recipe.add.form.category')}
-              returnKeyType={'done'}
               name={'recipeCategory'}
-              component={Input}
-            />
+              component={PickerInput}
+            >
+              {categories.map((category: IRecipeCategory) => (
+                <Picker.Item
+                  key={category.id}
+                  label={category.name}
+                  value={category.id}
+                />
+              ))}
+            </Field>
+
             <SubmitButton
               loading={loading}
               handleSubmit={handleSubmit}

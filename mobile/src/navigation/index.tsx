@@ -71,12 +71,9 @@ const AppNavigator = createStackNavigator(
           <>
             <Button transparent>
               <Icon
-                name={'ios-notifications'}
+                name={'ios-notifications-outline'}
                 style={commonStyles.headerIcon}
               />
-            </Button>
-            <Button transparent>
-              <Icon name={'person-add'} style={commonStyles.headerIcon} />
             </Button>
           </>
         ),

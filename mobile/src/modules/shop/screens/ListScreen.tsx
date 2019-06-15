@@ -7,8 +7,7 @@ import {
   Icon,
   Body,
   Right,
-  Button,
-  Left,
+  Fab,
 } from 'native-base';
 import { commonStyles } from '../../../theme/common';
 import { connect } from 'react-redux';
@@ -19,7 +18,6 @@ import { IShop } from '../models/Shop';
 import { IShopListState, IShopListResetAction } from '../types/list';
 import { listShops } from '../middlewares/list';
 import { reset } from '../actions/list';
-import { MAIN_COLOR } from '../../../theme/colors';
 
 interface IProps {
   navigation: any;
@@ -41,51 +39,53 @@ class ListScreen extends React.Component<IProps> {
     const { navigation, shops } = this.props;
 
     return (
-      <Content style={commonStyles.content}>
-        <Separator bordered>
-          <Text style={commonStyles.centerHeaderFlatList}>
-            {i18n.t('shop.list.title')}
-          </Text>
-        </Separator>
-        <FlatList
-          keyExtractor={shop => shop.id}
-          data={shops.payload}
-          refreshing={shops.loading}
-          onRefresh={() => {
-            this.props.listShops();
-          }}
-          renderItem={({ item: card }: IShop) => {
-            const { name, id, numberOfItems } = card;
+      <>
+        <Content style={commonStyles.content}>
+          <Separator bordered>
+            <Text style={commonStyles.centerHeaderFlatList}>
+              {i18n.t('shop.list.title')}
+            </Text>
+          </Separator>
+          <FlatList
+            keyExtractor={shop => shop.id}
+            data={shops.payload}
+            refreshing={shops.loading}
+            onRefresh={() => {
+              this.props.listShops();
+            }}
+            renderItem={({ item: card }: IShop) => {
+              const { name, id, numberOfItems } = card;
 
-            return (
-              <ListItem key={id} icon>
-                <Left>
-                  <Icon name={'list'} style={{ color: MAIN_COLOR }} />
-                </Left>
-                <Body>
-                  <Text>{name}</Text>
-                  <Text style={commonStyles.listHelper}>
-                    {0 === numberOfItems
-                      ? i18n.t('shop.list.emptyItem')
-                      : i18n.t('shop.list.emptyItem', { item: numberOfItems })}
-                  </Text>
-                </Body>
-                <Right>
-                  <Icon name={'ios-arrow-dropright-circle'} />
-                </Right>
-              </ListItem>
-            );
-          }}
-        />
-        <Button
-          style={commonStyles.submitButton}
+              return (
+                <ListItem key={id} icon>
+                  <Body>
+                    <Text>{name}</Text>
+                    <Text style={commonStyles.listHelper}>
+                      {0 === numberOfItems
+                        ? i18n.t('shop.list.emptyItem')
+                        : i18n.t('shop.list.emptyItem', {
+                            item: numberOfItems,
+                          })}
+                    </Text>
+                  </Body>
+                  <Right>
+                    <Icon name={'ios-arrow-dropright-circle'} />
+                  </Right>
+                </ListItem>
+              );
+            }}
+          />
+        </Content>
+        <Fab
+          style={commonStyles.fabButton}
+          position={'bottomRight'}
           onPress={() => {
             navigation.navigate('ShopAdd');
           }}
         >
-          <Text>{i18n.t('shop.add.title')}</Text>
-        </Button>
-      </Content>
+          <Icon name={'add'} />
+        </Fab>
+      </>
     );
   };
 }

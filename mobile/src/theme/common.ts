@@ -26,4 +26,13 @@ export const commonStyles = StyleSheet.create({
   content: {
     backgroundColor: '#fff',
   },
+  fabButton: {
+    backgroundColor: MAIN_COLOR,
+  },
+  whiteText: {
+    color: '#fff',
+  },
+  darkText: {
+    color: MAIN_COLOR,
+  },
 });

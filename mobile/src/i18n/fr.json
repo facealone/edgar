@@ -82,7 +82,6 @@
         "footer": "Code barre : {{barCode}}"
       },
       "scan": {
-        "button": "Ajouter votre carte",
         "title": "Scanner votre carte",
         "intro": "Scannez le code-barres de votre carte"
       },
@@ -115,7 +114,7 @@
     },
     "shop": {
       "list": {
-        "title": "Mes listes de courses",
+        "title": "Listes de courses",
         "countItem": "{{item}} article(s)",
         "emptyItem": "Aucun article"
       },
@@ -128,7 +127,7 @@
     },
     "recipe": {
       "list": {
-        "title": "Mes recettes Marmiton"
+        "title": "Recettes sauvegardées"
       },
       "add": {
         "title": "Ajouter une recette",

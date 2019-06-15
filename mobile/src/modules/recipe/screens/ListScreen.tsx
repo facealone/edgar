@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FlatList } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import { bindActionCreators } from 'redux';
 import {
   Content,
@@ -8,10 +8,10 @@ import {
   Body,
   Right,
   Icon,
-  Button,
   ListItem,
   Separator,
-  Left,
+  Fab,
+  Button,
 } from 'native-base';
 import i18n from '../../../i18n';
 import { reset } from '../actions/list';
@@ -41,58 +41,73 @@ class ListScreen extends React.PureComponent<IProps> {
     const { recipes, navigation } = this.props;
 
     return (
-      <Content style={commonStyles.content}>
-        <Separator bordered>
-          <Text style={commonStyles.centerHeaderFlatList}>
-            {i18n.t('recipe.list.title')}
-          </Text>
-        </Separator>
-        <FlatList
-          keyExtractor={card => card.id}
-          data={recipes.payload}
-          refreshing={recipes.loading}
-          onRefresh={() => {
-            this.props.listRecipes();
-          }}
-          renderItem={({ item: recipe }: IRecipe) => {
-            const { uri, name, id, category, owner } = recipe;
+      <>
+        <Content style={commonStyles.content}>
+          <Separator bordered>
+            <Text style={commonStyles.centerHeaderFlatList}>
+              {i18n.t('recipe.list.title')}
+            </Text>
+          </Separator>
+          <Button iconRight style={style.filterButton} small bordered>
+            <Text style={commonStyles.darkText}>Filtrer</Text>
+            <Icon style={commonStyles.darkText} name={'ios-reorder'} />
+          </Button>
+          <FlatList
+            keyExtractor={card => card.id}
+            data={recipes.payload}
+            refreshing={recipes.loading}
+            onRefresh={() => {
+              this.props.listRecipes();
+            }}
+            renderItem={({ item: recipe }: IRecipe) => {
+              const { uri, name, id, category, owner } = recipe;
 
-            return (
-              <ListItem
-                key={id}
-                icon
-                onPress={() =>
-                  navigation.navigate('RecipeShow', { name, uri, id })
-                }
-              >
-                <Left>
-                  <Icon name={'book'} style={{ color: MAIN_COLOR }} />
-                </Left>
-                <Body>
-                  <Text>{name}</Text>
-                  <Text style={commonStyles.listHelper}>
-                    {`${category.name} - ${owner.firstName} ${owner.lastName}`}
-                  </Text>
-                </Body>
-                <Right>
-                  <Icon name={'ios-arrow-dropright-circle'} />
-                </Right>
-              </ListItem>
-            );
-          }}
-        />
-        <Button
-          style={commonStyles.submitButton}
+              return (
+                <ListItem
+                  key={id}
+                  icon
+                  onPress={() =>
+                    navigation.navigate('RecipeShow', { name, uri, id })
+                  }
+                >
+                  <Body>
+                    <Text>{name}</Text>
+                    <Text style={commonStyles.listHelper}>
+                      {`${category.name} - ${owner.firstName} ${
+                        owner.lastName
+                      }`}
+                    </Text>
+                  </Body>
+                  <Right>
+                    <Icon name={'ios-arrow-dropright-circle'} />
+                  </Right>
+                </ListItem>
+              );
+            }}
+          />
+        </Content>
+        <Fab
+          style={commonStyles.fabButton}
+          position={'bottomRight'}
           onPress={() => {
             navigation.navigate('RecipeBrowser');
           }}
         >
-          <Text>{i18n.t('recipe.add.title')}</Text>
-        </Button>
-      </Content>
+          <Icon name={'add'} />
+        </Fab>
+      </>
     );
   };
 }
+
+export const style = StyleSheet.create({
+  filterButton: {
+    backgroundColor: '#fff',
+    borderColor: MAIN_COLOR,
+    alignSelf: 'flex-start',
+    margin: 10,
+  },
+});
 
 export default connect(
   state => {
