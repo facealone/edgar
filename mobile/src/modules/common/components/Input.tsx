@@ -24,7 +24,8 @@ export const Input = ({
       <Item stackedLabel error={displayError}>
         <Label>{label}</Label>
         <BaseInput
-          {...input}
+          name={input.name}
+          onChange={input.onChange}
           returnKeyType={returnKeyType}
           secureTextEntry={secureTextEntry}
           autoFocus={autoFocus ? true : false}
