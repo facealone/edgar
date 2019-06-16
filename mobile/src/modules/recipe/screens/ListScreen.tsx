@@ -48,9 +48,9 @@ class ListScreen extends React.PureComponent<IProps> {
               {i18n.t('recipe.list.title')}
             </Text>
           </Separator>
-          <Button iconRight style={style.filterButton} small bordered>
-            <Text style={commonStyles.darkText}>Filtrer</Text>
+          <Button iconLeft style={style.filterButton} small bordered>
             <Icon style={commonStyles.darkText} name={'ios-reorder'} />
+            <Text style={commonStyles.darkText}>Filtrer</Text>
           </Button>
           <FlatList
             keyExtractor={card => card.id}

@@ -35,6 +35,8 @@ class SettingsScreen extends React.Component<IProps> {
   };
 
   render = () => {
+    const { navigation } = this.props;
+
     return (
       <Content style={commonStyles.content}>
         <Separator bordered>
@@ -55,23 +57,20 @@ class SettingsScreen extends React.Component<IProps> {
             {i18n.t('settings.menu.house.title')}
           </Text>
         </Separator>
-        <ListItem
-          icon
-          onPress={() => this.props.navigation.navigate('SendVoucher')}
-        >
+        <ListItem icon onPress={() => navigation.navigate('HouseList')}>
+          <Left>
+            <Icon style={{ color: MAIN_COLOR }} name={'ios-switch'} />
+          </Left>
+          <Body>
+            <Text>{i18n.t('settings.menu.house.myHouses')}</Text>
+          </Body>
+        </ListItem>
+        <ListItem icon onPress={() => navigation.navigate('SendVoucher')}>
           <Left>
             <Icon style={{ color: MAIN_COLOR }} name={'person-add'} />
           </Left>
           <Body>
             <Text>{i18n.t('settings.menu.house.voucher')}</Text>
-          </Body>
-        </ListItem>
-        <ListItem icon>
-          <Left>
-            <Icon style={{ color: MAIN_COLOR }} name={'ios-home'} />
-          </Left>
-          <Body>
-            <Text>{i18n.t('settings.menu.house.manageHouses')}</Text>
           </Body>
         </ListItem>
         <Separator bordered>

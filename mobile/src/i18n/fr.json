@@ -48,6 +48,9 @@
         "title": "Créez votre maison",
         "introduction": "Vous y êtes presque, créez maintenant votre première maison."
       },
+      "list": {
+        "header": "Gérez ici vos maisons"
+      },
       "form": {
         "name": "Nom de la maison"
       },
@@ -108,7 +111,7 @@
         "house": {
           "title": "Maison",
           "voucher": "Inviter un utilisateur",
-          "manageHouses": "Gérer mes maisons"
+          "myHouses": "Mes maisons"
         }
       }
     },

@@ -22,6 +22,7 @@ import { commonStyles } from '../theme/common';
 import RecipeAddScreen from '../modules/recipe/screens/AddScreen';
 import RecipeShowScreen from '../modules/recipe/screens/ShowScreen';
 import CurrentHouseTitle from '../modules/house/components/CurrentHouseTitle';
+import HouseListScreen from '../modules/house/screens/ListScreen';
 
 const options = {
   headerStyle: {
@@ -86,6 +87,7 @@ const AppNavigator = createStackNavigator(
       },
     },
     HouseAdd: HouseAddScreen,
+    HouseList: HouseListScreen,
     SendVoucher: SendVoucherScreen,
     CardShow: CardShowScreen,
     CardScan: ScanScreen,

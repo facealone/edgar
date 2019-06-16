@@ -44,6 +44,13 @@ export const listReducers = (
       };
 
     case HOUSE_LIST_RESET:
+      return {
+        ...state,
+        loading: false,
+        errors: [],
+      };
+      break;
+
     case AUTH_AUTHENTICATION_LOGOUT:
       return initialState;
 
