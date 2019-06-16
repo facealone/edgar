@@ -21,10 +21,16 @@ import RecipeBrowseScreen from '../modules/recipe/screens/BrowseScreen';
 import { commonStyles } from '../theme/common';
 import RecipeAddScreen from '../modules/recipe/screens/AddScreen';
 import RecipeShowScreen from '../modules/recipe/screens/ShowScreen';
+import CurrentHouseTitle from '../modules/house/components/CurrentHouseTitle';
 
 const options = {
   headerStyle: {
     backgroundColor: MAIN_COLOR,
+  },
+  headerTitleStyle: {
+    fontSize: 19,
+    fontWeight: 'normal',
+    fontFamily: 'Roboto',
   },
   headerTintColor: '#ffffff',
 };
@@ -66,7 +72,7 @@ const AppNavigator = createStackNavigator(
     BottomTabs: {
       screen: BottomTabsStack,
       navigationOptions: {
-        title: 'Boulevard Ney', // todo : dynamic house name
+        headerTitle: <CurrentHouseTitle />,
         headerRight: (
           <>
             <Button transparent>
