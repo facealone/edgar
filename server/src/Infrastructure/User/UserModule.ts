@@ -16,7 +16,7 @@ import { UpdateMeController } from './Controller/UpdateMeController';
 import { UpdateUserCommandHandler } from 'src/Application/User/Command/UpdateUserCommandHandler';
 import { GetHousesByUserQueryHandler } from 'src/Application/User/Query/GetHousesByUserQueryHandler';
 import { GetUsersByHouseQueryHandler } from 'src/Application/User/Query/GetUsersByHouseQueryHandler';
-import { GetCurrentHouseMembersController } from './Controller/GetCurrentHouseMembersController';
+import { GetHouseMembersController } from './Controller/GetHouseMembersController';
 import { UpdatePushNotificationTokenController } from './Controller/UpdatePushNotificationTokenController';
 import { UpdatePushNotificationTokenCommandHandler } from 'src/Application/User/Command/UpdatePushNotificationTokenCommandHandler';
 import { GetUserByApiTokenHandler } from 'src/Application/User/Query/GetUserByApiTokenQueryHandler';
@@ -27,7 +27,7 @@ import { GetUserByApiTokenHandler } from 'src/Application/User/Query/GetUserByAp
     GetLoggedUserController,
     UpdateMeController,
     ChangeCurrentHouseController,
-    GetCurrentHouseMembersController,
+    GetHouseMembersController,
     UpdatePushNotificationTokenController,
   ],
   providers: [

@@ -4,5 +4,6 @@ export class GetHousesByUserView {
     public name: string,
     public role: string,
     public current: boolean,
+    public createdAt: Date,
   ) {}
 }

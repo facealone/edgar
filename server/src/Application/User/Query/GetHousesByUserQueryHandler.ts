@@ -29,6 +29,7 @@ export class GetHousesByUserQueryHandler {
           house.name,
           role,
           house.id === user.currentHouse.id,
+          userHouse.createdAt,
         ),
       );
     }

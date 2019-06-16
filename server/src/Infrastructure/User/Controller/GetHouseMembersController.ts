@@ -5,6 +5,7 @@ import {
   Inject,
   Get,
   BadRequestException,
+  Param,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
@@ -13,21 +14,25 @@ import { GetUsersByHouseQuery } from 'src/Application/User/Query/GetUsersByHouse
 import { User } from 'src/Domain/User/User.entity';
 import { House } from 'src/Domain/House/House.entity';
 import { GetUsersByHouseView } from 'src/Application/User/View/GetUsersByHouseView';
+import { GetHouseByIdQuery } from 'src/Application/House/Query/GetHouseByIdQuery';
 
 @ApiBearerAuth()
-@Controller('/users/me/current-house')
-@ApiUseTags('User')
+@Controller('houses')
+@ApiUseTags('House')
 @UseGuards(AuthGuard())
-export class GetCurrentHouseMembersController {
+export class GetHouseMembersController {
   constructor(
     @Inject('IQueryBusAdapter')
     private readonly queryBus: IQueryBusAdapter,
   ) {}
 
-  @ApiOperation({ title: 'Get members of the logged user current house' })
-  @Get('/members')
-  public async index(@LoggedUser() user: User): Promise<GetUsersByHouseView[]> {
-    const house = user.currentHouse;
+  @ApiOperation({ title: 'Get house members' })
+  @Get(':id/members')
+  public async index(
+    @LoggedUser() user: User,
+    @Param() query: GetHouseByIdQuery,
+  ): Promise<GetUsersByHouseView[]> {
+    const house = await this.queryBus.execute(query);
 
     if (!(house instanceof House)) {
       throw new BadRequestException();

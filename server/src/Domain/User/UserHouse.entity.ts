@@ -1,4 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  CreateDateColumn,
+} from 'typeorm';
 import { House } from '../House/House.entity';
 import { User } from './User.entity';
 
@@ -36,6 +42,9 @@ export class UserHouse {
 
   @ManyToOne(type => User, { nullable: false })
   user: User;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt: Date;
 
   constructor(userHouse: Partial<UserHouse>) {
     Object.assign(this, userHouse);
