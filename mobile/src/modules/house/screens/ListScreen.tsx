@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { FlatList } from 'react-native';
 import {
   Content,
   Text,
@@ -9,11 +10,11 @@ import {
   Right,
   Fab,
   Separator,
+  Left,
 } from 'native-base';
 import { bindActionCreators } from 'redux';
 import i18n from '../../../i18n';
 import { commonStyles } from '../../../theme/common';
-import { FlatList } from 'react-native-gesture-handler';
 import { IHouseListState } from '../types/list';
 import { reset } from '../actions/list';
 import { listHouses } from '../middlewares/list';
@@ -61,9 +62,19 @@ class ListScreen extends React.Component<IProps> {
               const { name, id } = house;
 
               return (
-                <ListItem key={id} icon>
+                <ListItem
+                  key={id}
+                  icon
+                  onPress={() => navigation.navigate('HouseShow', { id, name })}
+                >
+                  <Left>
+                    <Icon style={commonStyles.darkText} name={'ios-home'} />
+                  </Left>
                   <Body>
                     <Text>{name}</Text>
+                    <Text style={commonStyles.listHelper}>
+                      Rejoint le 10/10/2019
+                    </Text>
                   </Body>
                   <Right>
                     <Icon name={'ios-arrow-dropright-circle'} />

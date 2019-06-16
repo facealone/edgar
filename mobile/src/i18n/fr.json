@@ -44,6 +44,10 @@
       }
     },
     "house": {
+      "show": {
+        "loginOnHouse": "Se connecter sur \"{{house}}\"",
+        "members": "Membres de la maison"
+      },
       "add": {
         "title": "Créez votre maison",
         "introduction": "Vous y êtes presque, créez maintenant votre première maison."

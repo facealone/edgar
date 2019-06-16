@@ -10,6 +10,7 @@ import { ILoadingAction, IErrorAction } from '../../common/types/actions';
 import { IAuthenticationLogoutAction } from '../../auth/types/authentication';
 import { IRecipeAddSuccessAction } from './add';
 import { IRecipeRemoveSuccessAction } from './remove';
+import { ICurrentHouseSuccessAction } from '../../house/types/current';
 
 export interface IRecipeListState extends IState {
   payload: IRecipe[];
@@ -38,5 +39,6 @@ export type IRecipeListActionTypes =
   | IRecipeAddSuccessAction
   | IRecipeRemoveSuccessAction
   | IRecipeListResetAction
+  | ICurrentHouseSuccessAction
   | IRecipeListLoadingAction
   | IAuthenticationLogoutAction;

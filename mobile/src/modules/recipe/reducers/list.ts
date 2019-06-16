@@ -8,6 +8,7 @@ import {
 import { AUTH_AUTHENTICATION_LOGOUT } from '../../auth/constants/authentication';
 import { RECIPE_ADD_SUCCESS } from '../constants/add';
 import { RECIPE_REMOVE_SUCCESS } from '../constants/remove';
+import { HOUSE_CURRENT_SUCCESS } from '../../house/constants/current';
 
 const initialState: IRecipeListState = {
   payload: [],
@@ -52,6 +53,7 @@ export const listReducers = (
 
     case RECIPE_LIST_RESET:
     case AUTH_AUTHENTICATION_LOGOUT:
+    case HOUSE_CURRENT_SUCCESS:
       return initialState;
 
     default:

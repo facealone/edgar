@@ -26,6 +26,6 @@ export class ChangeCurrentHouseComandHandler {
 
     const { currentHouse } = await this.userRepository.save(user);
 
-    return new CurrentHouseUpdatedView(currentHouse.id);
+    return new CurrentHouseUpdatedView(currentHouse.id, currentHouse.name);
   };
 }

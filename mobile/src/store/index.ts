@@ -15,12 +15,12 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 export default () => {
-  let store = createStore(
+  const store = createStore(
     persistedReducer,
     applyMiddleware(thunk.withExtraArgument(client), axiosMiddleware(client)),
   );
 
-  let persistor = persistStore(store);
+  const persistor = persistStore(store);
 
   return { store, persistor };
 };
