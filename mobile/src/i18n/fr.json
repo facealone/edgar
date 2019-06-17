@@ -104,18 +104,14 @@
       "menu": {
         "main": {
           "title": "Général",
-          "recommend": "Recommander Edgar à un ami"
+          "recommend": "Recommander Edgar à un ami",
+          "houses": "Mes maisons"
         },
         "user": {
           "title": "Compte utilisateur",
           "logout": "Se déconnecter",
           "personalInformation": "Mes informations personnelles",
           "editPassword": "Modifier le mot de passe"
-        },
-        "house": {
-          "title": "Maison",
-          "voucher": "Inviter un utilisateur",
-          "myHouses": "Mes maisons"
         }
       }
     },

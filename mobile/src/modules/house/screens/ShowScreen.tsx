@@ -61,7 +61,7 @@ class ShowScreen extends React.Component<IProps> {
 }
 
 ShowScreen.navigationOptions = ({ navigation }: any) => {
-  const { name, id } = navigation.state.params;
+  const { name } = navigation.state.params;
 
   return {
     title: name,

@@ -44,33 +44,20 @@ class SettingsScreen extends React.Component<IProps> {
             {i18n.t('settings.menu.main.title')}
           </Text>
         </Separator>
+        <ListItem icon onPress={() => navigation.navigate('HouseList')}>
+          <Left>
+            <Icon style={{ color: MAIN_COLOR }} name={'ios-switch'} />
+          </Left>
+          <Body>
+            <Text>{i18n.t('settings.menu.main.houses')}</Text>
+          </Body>
+        </ListItem>
         <ListItem icon>
           <Left>
             <Icon style={{ color: MAIN_COLOR }} name={'heart'} />
           </Left>
           <Body>
             <Text>{i18n.t('settings.menu.main.recommend')}</Text>
-          </Body>
-        </ListItem>
-        <Separator bordered>
-          <Text style={commonStyles.headerFlatList}>
-            {i18n.t('settings.menu.house.title')}
-          </Text>
-        </Separator>
-        <ListItem icon onPress={() => navigation.navigate('HouseList')}>
-          <Left>
-            <Icon style={{ color: MAIN_COLOR }} name={'ios-switch'} />
-          </Left>
-          <Body>
-            <Text>{i18n.t('settings.menu.house.myHouses')}</Text>
-          </Body>
-        </ListItem>
-        <ListItem icon onPress={() => navigation.navigate('SendVoucher')}>
-          <Left>
-            <Icon style={{ color: MAIN_COLOR }} name={'person-add'} />
-          </Left>
-          <Body>
-            <Text>{i18n.t('settings.menu.house.voucher')}</Text>
           </Body>
         </ListItem>
         <Separator bordered>

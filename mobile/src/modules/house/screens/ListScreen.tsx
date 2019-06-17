@@ -29,7 +29,7 @@ interface IProps {
 
 class ListScreen extends React.Component<IProps> {
   static navigationOptions = {
-    title: i18n.t('settings.menu.house.myHouses'),
+    title: i18n.t('settings.menu.main.houses'),
   };
 
   componentDidMount = () => {
@@ -72,9 +72,6 @@ class ListScreen extends React.Component<IProps> {
                   </Left>
                   <Body>
                     <Text>{name}</Text>
-                    <Text style={commonStyles.listHelper}>
-                      Rejoint le 10/10/2019
-                    </Text>
                   </Body>
                   <Right>
                     <Icon name={'ios-arrow-dropright-circle'} />
