@@ -13,10 +13,14 @@ import {
 } from '../types/current';
 import { IError } from '../../common/models/Error';
 
-export const success = (payload: IHouse): ICurrentHouseSuccessAction => {
+export const success = (
+  payload: IHouse,
+  success: boolean,
+): ICurrentHouseSuccessAction => {
   return {
     type: HOUSE_CURRENT_SUCCESS,
     payload,
+    success,
   };
 };
 

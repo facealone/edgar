@@ -33,7 +33,13 @@ export class GetUsersByHouseQueryHandler {
       const { user, role } = userHouse;
 
       userHousesviews.push(
-        new GetUsersByHouseView(user.id, user.firstName, user.lastName, role),
+        new GetUsersByHouseView(
+          user.id,
+          user.firstName,
+          user.lastName,
+          user.email,
+          role,
+        ),
       );
     }
 

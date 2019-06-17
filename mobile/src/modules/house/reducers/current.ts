@@ -10,6 +10,7 @@ import { AUTH_AUTHENTICATION_LOGOUT } from '../../auth/constants/authentication'
 
 const initialState: ICurrentHouseState = {
   payload: null,
+  success: false,
   loading: false,
   errors: [],
 };
@@ -23,6 +24,7 @@ export const currentReducers = (
     case HOUSE_CURRENT_SUCCESS:
       return {
         ...state,
+        success: true,
         payload: action.payload,
       };
 
@@ -42,6 +44,7 @@ export const currentReducers = (
       return {
         ...state,
         loading: false,
+        success: false,
         errors: [],
       };
 

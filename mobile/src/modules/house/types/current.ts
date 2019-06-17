@@ -12,11 +12,13 @@ import { ILoadingAction, IErrorAction } from '../../common/types/actions';
 
 export interface ICurrentHouseState extends IState {
   payload: IHouse | null;
+  success: boolean;
 }
 
 export interface ICurrentHouseSuccessAction {
   type: typeof HOUSE_CURRENT_SUCCESS;
   payload: IHouse;
+  success: boolean;
 }
 
 export interface ICurrentHouseLoadingAction extends ILoadingAction {
