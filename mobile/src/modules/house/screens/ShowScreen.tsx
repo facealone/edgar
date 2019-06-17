@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Content, Text, Button, Icon, Spinner } from 'native-base';
+import { Content, Text, Button, Icon, Spinner, Fab } from 'native-base';
 import { bindActionCreators } from 'redux';
 import { commonStyles } from '../../../theme/common';
 import i18n from '../../../i18n';
@@ -36,26 +36,37 @@ class ShowScreen extends React.Component<IProps> {
     const { name, id } = navigation.state.params;
 
     return (
-      <Content style={commonStyles.content}>
-        {current.payload.id !== id && (
-          <Button
-            style={styles.joinButton}
-            iconLeft
-            small
-            disabled={current.loading}
-            onPress={() => changeCurrentHouse(id)}
-          >
-            {current.loading && <Spinner color={'#fff'} />}
-            {!current.loading && <Icon name={'ios-log-in'} />}
-            <Text>
-              {i18n.t('house.show.loginOnHouse', {
-                house: name,
-              })}
-            </Text>
-          </Button>
-        )}
-        <MemberList house={id} />
-      </Content>
+      <>
+        <Content style={commonStyles.content}>
+          {current.payload.id !== id && (
+            <Button
+              style={styles.joinButton}
+              iconLeft
+              small
+              disabled={current.loading}
+              onPress={() => changeCurrentHouse(id)}
+            >
+              {current.loading && <Spinner color={'#fff'} />}
+              {!current.loading && <Icon name={'ios-log-in'} />}
+              <Text>
+                {i18n.t('house.show.loginOnHouse', {
+                  house: name,
+                })}
+              </Text>
+            </Button>
+          )}
+          <MemberList house={id} />
+        </Content>
+        <Fab
+          style={commonStyles.fabButton}
+          position={'bottomRight'}
+          onPress={() => {
+            navigation.navigate('SendVoucher', { id, name });
+          }}
+        >
+          <Icon name={'person-add'} />
+        </Fab>
+      </>
     );
   };
 }

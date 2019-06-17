@@ -60,8 +60,14 @@
       },
       "member": {
         "voucher": {
-          "title": "Invitez vos amis",
-          "introduction": "Invitez maintenant vos amis / famille pour partager avec eux la gestion de votre maison \"{{house}}\""
+          "title": "Invitez quelqu'un",
+          "introduction": "Invitez maintenant une personne à rejoindre la maison \"{{house}}\".",
+          "success": {
+            "message": "Salut, je t'invite à rejoindre la maison \"{{house}}\" sur l'application Edgar Majordome. Voici ton code: {{voucher}}"
+          },
+          "form": {
+            "submit": "Envoyer l'invitation"
+          }
         }
       }
     },

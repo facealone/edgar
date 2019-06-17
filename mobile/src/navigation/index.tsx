@@ -12,7 +12,7 @@ import HouseAddScreen from '../modules/house/screens/AddScreen';
 import RegistrationScreen from '../modules/auth/screens/RegistrationScreen';
 import { BottomTabsStack } from './bottomTabs';
 import AuthLoadingScreen from '../modules/auth/screens/AuthLoadingScreen';
-import SendVoucherScreen from '../modules/house/screens/member/SendVoucherScreen';
+import SendVoucherScreen from '../modules/house/screens/voucher/SendVoucherScreen';
 import CardShowScreen from '../modules/card/screens/ShowScreen';
 import CardAddScreen from '../modules/card/screens/AddScreen';
 import ShopAddScreen from '../modules/shop/screens/AddScreen';

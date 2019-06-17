@@ -25,7 +25,7 @@ export class CreateVoucherCommandHandler {
     command: CreateVoucherCommand,
   ): Promise<VoucherView> => {
     const { user, houseId, role } = command;
-    const house = this.houseRepository.find(houseId);
+    const house = await this.houseRepository.find(houseId);
 
     if (!(house instanceof House)) {
       throw new BadRequestException('house.not.found');
@@ -44,6 +44,6 @@ export class CreateVoucherCommandHandler {
       }),
     );
 
-    return new VoucherView(voucher.code);
+    return new VoucherView(voucher.code, voucher.role);
   };
 }
