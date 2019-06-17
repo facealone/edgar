@@ -1,4 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  CreateDateColumn,
+} from 'typeorm';
 import { House } from './House.entity';
 import { User } from '../User/User.entity';
 import { UserRole } from '../User/UserHouse.entity';
@@ -10,9 +16,6 @@ export class Voucher {
 
   @Column({ type: 'varchar', nullable: false })
   code: string;
-
-  @Column({ type: 'varchar', nullable: false })
-  email: string;
 
   @Column({
     type: 'enum',
@@ -27,6 +30,9 @@ export class Voucher {
 
   @ManyToOne(type => User, { onDelete: 'CASCADE', nullable: false })
   user: User;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt: Date;
 
   constructor(voucher: Partial<Voucher>) {
     Object.assign(this, voucher);

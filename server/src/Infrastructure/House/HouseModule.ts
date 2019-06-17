@@ -8,7 +8,6 @@ import { HouseRepository } from './Repository/HouseRepository';
 import { CreateHouseCommandHandler } from 'src/Application/House/Command/CreateHouseCommandHandler';
 import { AuthModule } from '../Auth/AuthModule';
 import { CreateVoucherController } from './Controller/Voucher/CreateVoucherController';
-import { CanCreateVoucher } from 'src/Domain/House/CanCreateVoucher';
 import { CreateVoucherCommandHandler } from 'src/Application/House/Command/Voucher/CreateVoucherCommandHandler';
 import { CodeGeneratorAdapter } from '../Adapter/CodeGeneratorAdapter';
 import { MailerAdapter } from '../Adapter/MailerAdapter';
@@ -47,7 +46,6 @@ import { GetHousesController } from './Controller/GetHousesController';
     CreateVoucherCommandHandler,
     ConsumeVoucherCommandHandler,
     GetHouseByIdQueryHandler,
-    CanCreateVoucher,
     IsMemberOfHouse,
   ],
 })

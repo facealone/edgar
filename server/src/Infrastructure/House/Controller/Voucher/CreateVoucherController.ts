@@ -18,7 +18,7 @@ export class CreateVoucherController {
   ) {}
 
   @ApiOperation({
-    title: 'Create voucher for the current house of the the logged user',
+    title: 'Create voucher for a specific house by the logged user',
   })
   @Post()
   public async index(
