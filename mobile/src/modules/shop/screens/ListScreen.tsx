@@ -43,7 +43,7 @@ class ListScreen extends React.Component<IProps> {
         <Content style={commonStyles.content}>
           <Separator bordered>
             <Text style={commonStyles.centerHeaderFlatList}>
-              {i18n.t('shop.list.title')}
+              {i18n.t('shop.list.title')} ({shops.payload.length})
             </Text>
           </Separator>
           <FlatList

@@ -10,6 +10,7 @@ import { reset } from '../actions/current';
 import MemberList from '../components/member/MemberList';
 import { StyleSheet } from 'react-native';
 import { MAIN_COLOR } from '../../../theme/colors';
+import VoucherList from '../components/voucher/VoucherList';
 
 interface IProps {
   navigation: any;
@@ -56,6 +57,7 @@ class ShowScreen extends React.Component<IProps> {
             </Button>
           )}
           <MemberList house={id} />
+          <VoucherList house={id} />
         </Content>
         <Fab
           style={commonStyles.fabButton}

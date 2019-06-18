@@ -10,7 +10,7 @@ import {
 } from '../../constants/voucher/add';
 
 const initialState: IHouseVoucherAddState = {
-  voucher: null,
+  payload: null,
   loading: false,
   errors: [],
 };
@@ -23,7 +23,7 @@ export const addReducers = (
     case HOUSE_VOUCHER_ADD_SUCCESS:
       return {
         ...state,
-        voucher: action.voucher,
+        payload: action.payload,
       };
 
     case HOUSE_VOUCHER_ADD_LOADING:

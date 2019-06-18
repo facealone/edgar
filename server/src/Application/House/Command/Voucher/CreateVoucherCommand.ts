@@ -12,6 +12,10 @@ export class CreateVoucherCommand implements ICommand {
 
   @IsNotEmpty()
   @ApiModelProperty()
+  public username: string;
+
+  @IsNotEmpty()
+  @ApiModelProperty()
   @IsIn([UserRole.GUEST, UserRole.OWNER])
   public role: string;
 

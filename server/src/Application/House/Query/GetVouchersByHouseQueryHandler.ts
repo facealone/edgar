@@ -26,7 +26,9 @@ export class GetVouchersByHouseQueryHandler {
     const voucherViews = [];
 
     for (const voucher of vouchers) {
-      voucherViews.push(new VoucherView(voucher.code, voucher.role));
+      voucherViews.push(
+        new VoucherView(voucher.username, voucher.code, voucher.role),
+      );
     }
 
     return voucherViews;

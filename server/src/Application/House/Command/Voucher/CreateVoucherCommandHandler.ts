@@ -24,7 +24,7 @@ export class CreateVoucherCommandHandler {
   public execute = async (
     command: CreateVoucherCommand,
   ): Promise<VoucherView> => {
-    const { user, houseId, role } = command;
+    const { user, houseId, username, role } = command;
     const house = await this.houseRepository.find(houseId);
 
     if (!(house instanceof House)) {
@@ -38,12 +38,13 @@ export class CreateVoucherCommandHandler {
     const voucher = await this.voucherRepository.save(
       new Voucher({
         user,
+        username,
         role,
         code: this.codeGeneratorAdapter.generate(),
         house,
       }),
     );
 
-    return new VoucherView(voucher.code, voucher.role);
+    return new VoucherView(voucher.username, voucher.code, voucher.role);
   };
 }

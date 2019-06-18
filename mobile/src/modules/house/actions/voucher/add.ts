@@ -11,11 +11,12 @@ import {
   IHouseVoucherAddErrorAction,
   IHouseVoucherAddLoadingAction,
 } from '../../types/voucher/add';
+import { IVoucher } from '../../models/Voucher';
 
-export const success = (voucher: string): IHouseVoucherAddSuccessAction => {
+export const success = (payload: IVoucher): IHouseVoucherAddSuccessAction => {
   return {
     type: HOUSE_VOUCHER_ADD_SUCCESS,
-    voucher,
+    payload,
   };
 };
 

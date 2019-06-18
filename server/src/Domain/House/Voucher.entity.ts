@@ -17,6 +17,9 @@ export class Voucher {
   @Column({ type: 'varchar', nullable: false })
   code: string;
 
+  @Column({ type: 'varchar', nullable: false })
+  username: string;
+
   @Column({
     type: 'enum',
     enum: UserRole,

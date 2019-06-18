@@ -45,7 +45,7 @@ class ListScreen extends React.PureComponent<IProps> {
         <Content style={commonStyles.content}>
           <Separator bordered>
             <Text style={commonStyles.centerHeaderFlatList}>
-              {i18n.t('recipe.list.title')}
+              {i18n.t('recipe.list.title')} ({recipes.payload.length})
             </Text>
           </Separator>
           <Button iconLeft style={style.filterButton} small bordered>

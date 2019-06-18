@@ -51,9 +51,9 @@ class MemberList extends React.Component<IProps> {
             </Left>
             <Body>
               <Text>{`${member.firstName} ${member.lastName}`}</Text>
-              <Text style={commonStyles.listHelper}>{`${member.email} - ${
-                member.role
-              }`}</Text>
+              <Text style={commonStyles.listHelper}>
+                {i18n.t(`roles.${member.role}`)} - {member.email}
+              </Text>
             </Body>
           </ListItem>
         ))}

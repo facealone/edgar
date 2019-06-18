@@ -10,18 +10,20 @@ import { addVoucher } from '../../middlewares/voucher/add';
 import {
   IHouseVoucherAddState,
   IHouseVoucherAddResetAction,
+  IVoucherForm,
 } from '../../types/voucher/add';
+import VoucherForm from '../../components/voucher/VoucherForm';
 
 interface IProps {
   add: IHouseVoucherAddState;
   reset(): IHouseVoucherAddResetAction;
   navigation: any;
-  addVoucher(houseId: string): any;
+  addVoucher(payload: IVoucherForm): any;
 }
 
 class SendVoucherScreen extends React.Component<IProps> {
   static navigationOptions = {
-    title: i18n.t('house.member.voucher.title'),
+    title: i18n.t('house.voucher.title'),
   };
 
   componentWillUnmount = () => {
@@ -32,10 +34,10 @@ class SendVoucherScreen extends React.Component<IProps> {
     const { add, navigation } = this.props;
     const { name, id } = navigation.state.params;
 
-    if (add.voucher) {
+    if (add.payload) {
       await Share.share({
-        message: i18n.t('house.member.voucher.success.message', {
-          voucher: add.voucher,
+        message: i18n.t('house.voucher.success.message', {
+          voucher: add.payload.code,
           house: navigation.state.params.name,
         }),
       });
@@ -44,25 +46,24 @@ class SendVoucherScreen extends React.Component<IProps> {
     }
   };
 
+  handleSubmit = (payload: IVoucherForm) => {
+    const { id } = navigation.state.params;
+    payload.houseId = id;
+
+    this.props.addVoucher(payload);
+  };
+
   render = () => {
-    const { add, navigation, addVoucher } = this.props;
-    const { name, id } = navigation.state.params;
+    const { add, navigation } = this.props;
 
     return (
       <Content style={commonStyles.content}>
         <Text style={commonStyles.intro}>
-          {i18n.t('house.member.voucher.introduction', {
-            house: name,
+          {i18n.t('house.voucher.introduction', {
+            house: navigation.state.params.name,
           })}
         </Text>
-        <Button
-          style={commonStyles.submitButton}
-          disabled={add.loading}
-          onPress={() => addVoucher(id)}
-        >
-          {add.loading && <Spinner color={'#fff'} />}
-          <Text>{i18n.t('house.member.voucher.form.submit')}</Text>
-        </Button>
+        <VoucherForm loading={add.loading} onSubmit={this.handleSubmit} />
       </Content>
     );
   };

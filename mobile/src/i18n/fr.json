@@ -1,5 +1,9 @@
 {
   "translation": {
+    "roles": {
+      "ROLE_OWNER": "Propriétaire",
+      "ROLE_GUEST": "Invité"
+    },
     "form": {
       "buttons": {
         "next": "Suivant",
@@ -58,16 +62,21 @@
       "form": {
         "name": "Nom de la maison"
       },
-      "member": {
-        "voucher": {
-          "title": "Invitez quelqu'un",
-          "introduction": "Invitez maintenant une personne à rejoindre la maison \"{{house}}\".",
-          "success": {
-            "message": "Salut, je t'invite à rejoindre la maison \"{{house}}\" sur l'application Edgar Majordome. Voici ton code: {{voucher}}"
-          },
-          "form": {
-            "submit": "Envoyer l'invitation"
-          }
+      "voucher": {
+        "title": "Invitez quelqu'un",
+        "introduction": "Invitez maintenant une personne à rejoindre la maison \"{{house}}\".",
+        "success": {
+          "message": "Salut, je t'invite à rejoindre la maison \"{{house}}\" sur l'application Edgar Majordome. Voici ton code: {{voucher}}"
+        },
+        "list": {
+          "title": "Invitations en attente",
+          "code": "Code",
+          "role": "Role"
+        },
+        "form": {
+          "submit": "Envoyer l'invitation",
+          "name": "Nom de la personne",
+          "role": "Choisissez le role qu'elle aura dans la maison"
         }
       }
     },

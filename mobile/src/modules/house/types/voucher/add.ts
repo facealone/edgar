@@ -6,14 +6,15 @@ import {
   HOUSE_VOUCHER_ADD_RESET,
 } from '../../constants/voucher/add';
 import { IErrorAction, ILoadingAction } from '../../../common/types/actions';
+import { IVoucher } from '../../models/Voucher';
 
 export interface IHouseVoucherAddState extends IState {
-  voucher: string | null;
+  payload: IVoucher | null;
 }
 
 export interface IHouseVoucherAddSuccessAction {
   type: typeof HOUSE_VOUCHER_ADD_SUCCESS;
-  voucher: string;
+  payload: IVoucher;
 }
 
 export interface IHouseVoucherAddErrorAction extends IErrorAction {
@@ -30,6 +31,12 @@ export interface IHouseVoucherAddResetAction {
 
 export interface IHouseVoucherForm {
   name: string;
+}
+
+export interface IVoucherForm {
+  username: string;
+  role: string;
+  houseId: string;
 }
 
 export type IHouseVoucherAddActionTypes =

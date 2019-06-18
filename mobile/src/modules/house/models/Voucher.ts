@@ -1,4 +1,10 @@
-export class VoucherView {
+export interface IVoucher {
+  username: string;
+  code: string;
+  role: string;
+}
+
+export class Voucher implements IVoucher {
   constructor(
     public readonly username: string,
     public readonly code: string,
