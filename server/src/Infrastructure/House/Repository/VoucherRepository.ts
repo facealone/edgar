@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { IVoucherRepository } from 'src/Domain/House/Repository/IVoucherRepository';
 import { Voucher } from 'src/Domain/House/Voucher.entity';
+import { House } from 'src/Domain/House/House.entity';
 
 @Injectable()
 export class VoucherRepository implements IVoucherRepository {
@@ -18,6 +19,12 @@ export class VoucherRepository implements IVoucherRepository {
     return await this.repository.findOne({
       where: { code },
       relations: ['house'],
+    });
+  };
+
+  public findByHouse = async (house: House): Promise<Voucher[]> => {
+    return await this.repository.find({
+      where: { house },
     });
   };
 

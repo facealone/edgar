@@ -21,6 +21,8 @@ import { GetHouseByIdQueryHandler } from 'src/Application/House/Query/GetHouseBy
 import { UpdateHouseCommandHandler } from 'src/Application/House/Command/UpdateHouseCommandHandler';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { GetHousesController } from './Controller/GetHousesController';
+import { GetHouseVouchersController } from './Controller/Voucher/GetHouseVouchersController';
+import { GetVouchersByHouseQueryHandler } from 'src/Application/House/Query/GetVouchersByHouseQueryHandler';
 
 @Module({
   imports: [
@@ -31,6 +33,7 @@ import { GetHousesController } from './Controller/GetHousesController';
   controllers: [
     GetHousesController,
     CreateHouseController,
+    GetHouseVouchersController,
     CreateVoucherController,
     ConsumeVoucherController,
     UpdateHouseController,
@@ -46,6 +49,7 @@ import { GetHousesController } from './Controller/GetHousesController';
     CreateVoucherCommandHandler,
     ConsumeVoucherCommandHandler,
     GetHouseByIdQueryHandler,
+    GetVouchersByHouseQueryHandler,
     IsMemberOfHouse,
   ],
 })
