@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Content, Text, Button, Spinner } from 'native-base';
 import { commonStyles } from '../../../../theme/common';
 import i18n from '../../../../i18n';
-import { Share } from 'react-native';
+import { Share, Keyboard } from 'react-native';
 import { reset } from '../../actions/voucher/add';
 import { addVoucher } from '../../middlewares/voucher/add';
 import {
@@ -47,10 +47,12 @@ class SendVoucherScreen extends React.Component<IProps> {
   };
 
   handleSubmit = (payload: IVoucherForm) => {
+    const { addVoucher, navigation } = this.props;
     const { id } = navigation.state.params;
     payload.houseId = id;
 
-    this.props.addVoucher(payload);
+    Keyboard.dismiss();
+    addVoucher(payload);
   };
 
   render = () => {

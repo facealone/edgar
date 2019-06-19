@@ -45,6 +45,12 @@ export const listReducers = (
       };
 
     case SHOP_LIST_RESET:
+      return {
+        ...state,
+        errors: [],
+        loading: false,
+      };
+
     case AUTH_AUTHENTICATION_LOGOUT:
     case HOUSE_CURRENT_SUCCESS:
       return initialState;

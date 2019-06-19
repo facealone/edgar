@@ -3,7 +3,7 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import { MAIN_COLOR } from '../theme/colors';
 import { Icon } from 'native-base';
 import CardListScreen from '../modules/card/screens/ListScreen';
-import { ChatScreen } from '../modules/chat/screens/ChatScreen';
+import { BudgetScreen } from '../modules/budget/screens/BudgetScreen';
 import i18n from '../i18n';
 import { HouseTabsStack } from './houseTabs';
 import SettingsScreen from '../modules/common/screens/SettingsScreen';
@@ -29,11 +29,11 @@ export const BottomTabsStack = createMaterialBottomTabNavigator(
       },
     },
     Chat: {
-      screen: ChatScreen,
+      screen: BudgetScreen,
       navigationOptions: {
-        tabBarLabel: i18n.t('navigation.chat'),
+        tabBarLabel: i18n.t('navigation.budget'),
         tabBarIcon: () => (
-          <Icon style={{ color: MAIN_COLOR }} name={'ios-chatbubbles'} />
+          <Icon style={{ color: MAIN_COLOR }} name={'ios-pricetags'} />
         ),
       },
     },
@@ -49,6 +49,7 @@ export const BottomTabsStack = createMaterialBottomTabNavigator(
   },
   {
     initialRouteName: 'House',
+    lazy: true,
     activeColor: MAIN_COLOR,
     barStyle: { backgroundColor: '#fff' },
   },

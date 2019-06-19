@@ -8,6 +8,7 @@ import { ICardAddState, ICardForm, ICardAddResetAction } from '../types/add';
 import { reset } from '../actions/add';
 import { addCard } from '../middlewares/add';
 import { commonStyles } from '../../../theme/common';
+import { Keyboard } from 'react-native';
 
 interface IProps {
   add: ICardAddState;
@@ -37,6 +38,7 @@ class AddScreen extends React.PureComponent<IProps> {
     const { navigation, addCard } = this.props;
     const barCode = navigation.state.params.barCode;
 
+    Keyboard.dismiss();
     addCard(payload.name, barCode);
   };
 

@@ -2,10 +2,10 @@ import React from 'react';
 import { Content, Text } from 'native-base';
 import { commonStyles } from '../../../theme/common';
 
-export const ChatScreen = () => {
+export const BudgetScreen = () => {
   return (
     <Content style={commonStyles.content}>
-      <Text>Chat</Text>
+      <Text>Budget</Text>
     </Content>
   );
 };

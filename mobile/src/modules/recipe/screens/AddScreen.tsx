@@ -14,6 +14,7 @@ import {
 } from '../types/add';
 import { commonStyles } from '../../../theme/common';
 import { ICategoriesState } from '../types/categories';
+import { Keyboard } from 'react-native';
 
 interface IProps {
   reset(): IRecipeAddResetAction;
@@ -48,6 +49,7 @@ class AddScreen extends React.Component<IProps> {
   handleSubmit = (payload: IRecipeForm) => {
     payload.uri = this.props.navigation.state.params.recipeUri;
 
+    Keyboard.dismiss();
     this.props.addRecipe(payload);
   };
 

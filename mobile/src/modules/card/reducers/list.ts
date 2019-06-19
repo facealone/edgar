@@ -51,6 +51,12 @@ export const listReducers = (
       };
 
     case CARD_LIST_RESET:
+      return {
+        ...state,
+        errors: [],
+        loading: false,
+      };
+
     case AUTH_AUTHENTICATION_LOGOUT:
       return initialState;
 

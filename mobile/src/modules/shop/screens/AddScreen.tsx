@@ -8,6 +8,7 @@ import { addShop } from '../middlewares/add';
 import { IShopAddState, IShopAddResetAction, IShopForm } from '../types/add';
 import ShopForm from '../component/ShopForm';
 import { commonStyles } from '../../../theme/common';
+import { Keyboard } from 'react-native';
 
 interface IProps {
   navigation: any;
@@ -34,6 +35,7 @@ class AddScreen extends React.PureComponent<IProps> {
   };
 
   handleSubmit = (payload: IShopForm) => {
+    Keyboard.dismiss();
     this.props.addShop(payload.name);
   };
 
