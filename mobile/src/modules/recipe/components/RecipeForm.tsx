@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import { validate } from '../validators/recipe';
 import { IRecipeForm } from '../types/add';
-import { KeyboardAvoidingView } from 'react-native';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 import { Content, Form, Picker } from 'native-base';
 import i18n from '../../../i18n';
 import { Input } from '../../common/components/Input';
@@ -33,10 +33,17 @@ class RecipeForm extends React.PureComponent<
               component={Input}
             />
             <Field
-              label={i18n.t('recipe.add.form.category')}
+              placeholder={i18n.t('recipe.add.form.category')}
               name={'recipeCategory'}
+              mode={'dropdown'}
               component={PickerInput}
             >
+              {Platform.OS === 'android' && (
+                <Picker.Item
+                  label={i18n.t('recipe.add.form.category')}
+                  value={null}
+                />
+              )}
               {categories.map((category: IRecipeCategory) => (
                 <Picker.Item
                   key={category.id}

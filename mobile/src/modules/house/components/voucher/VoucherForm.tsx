@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Content, Picker } from 'native-base';
-import { KeyboardAvoidingView } from 'react-native';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import i18n from '../../../../i18n';
 import { Input } from '../../../common/components/Input';
@@ -32,10 +32,17 @@ class VoucherForm extends React.PureComponent<
               component={Input}
             />
             <Field
-              label={i18n.t('house.voucher.form.role')}
               name={'role'}
+              placeholder={i18n.t('house.voucher.form.role')}
+              mode={'dropdown'}
               component={PickerInput}
             >
+              {Platform.OS === 'android' && (
+                <Picker.Item
+                  label={i18n.t('house.voucher.form.role')}
+                  value={null}
+                />
+              )}
               <Picker.Item
                 label={i18n.t('roles.ROLE_OWNER')}
                 value={'ROLE_OWNER'}

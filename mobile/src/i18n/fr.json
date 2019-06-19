@@ -76,7 +76,7 @@
         "form": {
           "submit": "Envoyer l'invitation",
           "name": "Nom de la personne",
-          "role": "Choisissez le role qu'elle aura dans la maison"
+          "role": "Choisir un rôle"
         }
       }
     },
@@ -151,7 +151,7 @@
         "title": "Ajouter une recette",
         "form": {
           "name": "Nom de la recette",
-          "category": "Catégorie"
+          "category": "Choisir une catégorie"
         }
       }
     }

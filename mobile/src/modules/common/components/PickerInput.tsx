@@ -1,34 +1,35 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Text, Picker, Label, Item } from 'native-base';
 import { StyleSheet } from 'react-native';
 
 export const PickerInput = ({
   input: { onChange, value, ...inputProps },
-  label,
   children,
+  label,
   meta: { touched, error },
+  ...pickerProps
 }) => {
   let displayError = false;
 
   if (touched && error) {
     displayError = true;
   }
-  console.log(inputProps);
+
   return (
-    <Fragment>
-      <Item stackedLabel error={displayError}>
-        <Label>{label}</Label>
+    <>
+      <Item error={displayError}>
         <Picker
           mode={'dropdown'}
           selectedValue={value}
           onValueChange={value => onChange(value)}
           {...inputProps}
+          {...pickerProps}
         >
           {children}
         </Picker>
       </Item>
       {displayError && <Text style={styles.error}>{error}</Text>}
-    </Fragment>
+    </>
   );
 };
 

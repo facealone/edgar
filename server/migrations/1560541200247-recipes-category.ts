@@ -12,7 +12,7 @@ export class recipesCategory1560541200247 implements MigrationInterface {
       `ALTER TABLE "recipe" ADD CONSTRAINT "FK_991484dd8189182dafe91e44413" FOREIGN KEY ("categoryId") REFERENCES "recipe_category"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`,
     );
     await queryRunner.query(
-      `INSERT INTO recipe_category (name) VALUES ('Entrées'), ('Plats'), ('Desserts'), ('Autres');`,
+      `INSERT INTO recipe_category (name) VALUES ('Entrées'), ('Plats'), ('Desserts'), ('Accompagnements'), ('Végétarien'), ('Brunch et Ptit Dej'), ('Autres');`,
     );
   }
 

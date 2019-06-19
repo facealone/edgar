@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Text, Input as BaseInput, Label, Item } from 'native-base';
 import { StyleSheet } from 'react-native';
 
@@ -20,7 +20,7 @@ export const Input = ({
   }
 
   return (
-    <Fragment>
+    <>
       <Item stackedLabel error={displayError}>
         <Label>{label}</Label>
         <BaseInput
@@ -35,7 +35,7 @@ export const Input = ({
         />
       </Item>
       {displayError && <Text style={styles.error}>{error}</Text>}
-    </Fragment>
+    </>
   );
 };
 
