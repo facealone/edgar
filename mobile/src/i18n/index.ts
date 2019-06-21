@@ -4,7 +4,7 @@ import fr from './fr.json';
 
 i18n.use(initReactI18next).init({
   resources: {
-    fr: fr,
+    fr,
   },
   lng: 'fr',
 });

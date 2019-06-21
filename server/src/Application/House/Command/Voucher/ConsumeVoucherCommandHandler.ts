@@ -8,6 +8,7 @@ import { ChangeCurrentHouseCommand } from 'src/Application/User/Command/ChangeCu
 import { CreateUserHouseCommand } from 'src/Application/User/Command/CreateUserHouseCommand';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
+import { HouseView } from '../../View/HouseView';
 
 @CommandHandler(ConsumeVoucherCommand)
 export class ConsumeVoucherCommandHandler {
@@ -19,7 +20,9 @@ export class ConsumeVoucherCommandHandler {
     private readonly isMemberOfHouse: IsMemberOfHouse,
   ) {}
 
-  public execute = async (command: ConsumeVoucherCommand): Promise<void> => {
+  public execute = async (
+    command: ConsumeVoucherCommand,
+  ): Promise<HouseView> => {
     const { user, code } = command;
 
     const voucher = await this.voucherRepository.findOneByCode(code);
@@ -45,6 +48,8 @@ export class ConsumeVoucherCommandHandler {
       new ChangeCurrentHouseCommand(userHouse.user, userHouse.house),
     );
 
-    await this.voucherRepository.remove(voucher);
+    this.voucherRepository.remove(voucher);
+
+    return new HouseView(house.id, house.name);
   };
 }

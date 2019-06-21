@@ -56,11 +56,16 @@
         "title": "Créez votre maison",
         "introduction": "Vous y êtes presque, créez maintenant votre première maison."
       },
+      "join": {
+        "title": "Rejoindre une maison",
+        "introduction": "Saisissez le code que vous avez recu pour pouvoir rejoindre la maison."
+      },
       "list": {
         "header": "Gérez ici vos maisons"
       },
       "form": {
-        "name": "Nom de la maison"
+        "name": "Nom de la maison",
+        "code": "Code"
       },
       "voucher": {
         "title": "Invitez quelqu'un",

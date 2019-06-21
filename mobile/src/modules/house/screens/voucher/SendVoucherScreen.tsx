@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Content, Text, Button, Spinner } from 'native-base';
+import { Content, Text } from 'native-base';
 import { commonStyles } from '../../../../theme/common';
 import i18n from '../../../../i18n';
 import { Share, Keyboard } from 'react-native';

@@ -19,3 +19,21 @@ export const addHouse = (payload: IHouseForm) => {
     }
   };
 };
+
+export const joinHouse = (code: string) => {
+  return async (dispatch: any, getState: any, axios: any) => {
+    dispatch(loading(true));
+
+    try {
+      const response = await axios.put(`vouchers/${code}/consume`);
+      const { name, id } = response.data;
+
+      dispatch(success(new House(id, name)));
+    } catch (err) {
+      // todo : errors
+      dispatch(errors([]));
+    } finally {
+      dispatch(loading(false));
+    }
+  };
+};
