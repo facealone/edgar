@@ -8,6 +8,7 @@ import {
 import { CARD_ADD_SUCCESS } from '../constants/add';
 import { AUTH_AUTHENTICATION_LOGOUT } from '../../auth/constants/authentication';
 import { CARD_REMOVE_SUCCESS } from '../constants/remove';
+import { HOUSE_CURRENT_SUCCESS } from '../../house/constants/current';
 
 const initialState: ICardListState = {
   loading: false,
@@ -58,6 +59,7 @@ export const listReducers = (
       };
 
     case AUTH_AUTHENTICATION_LOGOUT:
+    case HOUSE_CURRENT_SUCCESS:
       return initialState;
 
     default:

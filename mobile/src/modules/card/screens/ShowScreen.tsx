@@ -42,7 +42,7 @@ class ShowScreen extends React.Component<IProps, IState> {
           </CardItem>
           <CardItem bordered>
             <Body>
-              <Barcode value={barCode} />
+              <Barcode style={styles.barCode} value={barCode} />
             </Body>
           </CardItem>
           <CardItem footer bordered>
@@ -64,6 +64,11 @@ const styles = StyleSheet.create({
     width: '100%',
     fontFamily: 'Roboto',
     fontSize: 19,
+  },
+  barCode: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   footer: {
     color: MAIN_COLOR,

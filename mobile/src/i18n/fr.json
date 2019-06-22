@@ -103,7 +103,7 @@
     },
     "card": {
       "list": {
-        "header": "Mes cartes de fidélites"
+        "header": "Cartes de fidélités"
       },
       "show": {
         "footer": "Code barre : {{barCode}}"

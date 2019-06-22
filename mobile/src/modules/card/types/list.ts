@@ -10,6 +10,7 @@ import { ICardAddSuccessAction } from './add';
 import { ICard } from '../models/Card';
 import { IAuthenticationLogoutAction } from '../../auth/types/authentication';
 import { ICardRemoveSuccessAction } from './remove';
+import { ICurrentHouseSuccessAction } from '../../house/types/current';
 
 export interface ICardListState extends IState {
   payload: ICard[];
@@ -35,6 +36,7 @@ export interface ICardListErrorAction extends IErrorAction {
 export type ICardListActionTypes =
   | ICardListSuccessAction
   | ICardRemoveSuccessAction
+  | ICurrentHouseSuccessAction
   | ICardAddSuccessAction
   | IAuthenticationLogoutAction
   | ICardListLoadingAction

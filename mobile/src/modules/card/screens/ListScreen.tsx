@@ -54,7 +54,7 @@ class ListScreen extends React.PureComponent<IProps> {
               this.props.listCards();
             }}
             renderItem={({ item: card }: ICard) => {
-              const { barCode, name, id } = card;
+              const { barCode, name, id, owner } = card;
 
               return (
                 <ListItem
@@ -66,6 +66,9 @@ class ListScreen extends React.PureComponent<IProps> {
                 >
                   <Body>
                     <Text>{name}</Text>
+                    <Text style={commonStyles.listHelper}>
+                      {`${owner.firstName} ${owner.lastName}`}
+                    </Text>
                   </Body>
                   <Right>
                     <Icon name={'ios-arrow-dropright-circle'} />
