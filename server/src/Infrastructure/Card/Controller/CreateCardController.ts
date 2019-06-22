@@ -17,7 +17,7 @@ export class CreateCardController {
     private readonly commandBus: ICommandBusAdapter,
   ) {}
 
-  @ApiOperation({ title: 'Create loyalty card by logged user' })
+  @ApiOperation({ title: 'Create card by the logged user in him current ' })
   @Post()
   public async index(
     @Body() command: CreateCardCommand,

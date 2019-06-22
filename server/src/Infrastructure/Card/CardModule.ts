@@ -6,18 +6,23 @@ import { CardRepository } from './Repository/CardRepository';
 import { Card } from 'src/Domain/Card/Card.entity';
 import { CreateCardController } from './Controller/CreateCardController';
 import { CreateCardCommandHandler } from 'src/Application/Card/Command/CreateCardCommandHandler';
-import { GetCardsByUserQueryHandler } from 'src/Application/Card/Query/GetCardsByUserQueryHandler';
+import { GetCardsByHouseQueryHandler } from 'src/Application/Card/Query/GetCardsByHouseQueryHandler';
 import { RemoveCardController } from './Controller/RemoveCardController';
 import { RemoveCardCommandHandler } from 'src/Application/Card/Command/RemoveCardCommandHandler';
 import { GetCardsController } from './Controller/GetCardsController';
+import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
+import { UserHouse } from 'src/Domain/User/UserHouse.entity';
+import { UserHouseRepository } from '../User/Repository/UserHouseRepository';
 
 @Module({
-  imports: [BusModule, AuthModule, TypeOrmModule.forFeature([Card])],
+  imports: [BusModule, AuthModule, TypeOrmModule.forFeature([Card, UserHouse])],
   controllers: [GetCardsController, CreateCardController, RemoveCardController],
   providers: [
     { provide: 'ICardRepository', useClass: CardRepository },
+    { provide: 'IUserHouseRepository', useClass: UserHouseRepository },
     CreateCardCommandHandler,
-    GetCardsByUserQueryHandler,
+    GetCardsByHouseQueryHandler,
+    IsMemberOfHouse,
     RemoveCardCommandHandler,
   ],
 })

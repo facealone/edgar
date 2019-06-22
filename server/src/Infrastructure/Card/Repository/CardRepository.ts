@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Card } from 'src/Domain/Card/Card.entity';
 import { ICardRepository } from 'src/Domain/Card/Repository/ICardRepository';
-import { User } from 'src/Domain/User/User.entity';
+import { House } from 'src/Domain/House/House.entity';
 
 @Injectable()
 export class CardRepository implements ICardRepository {
@@ -15,9 +15,10 @@ export class CardRepository implements ICardRepository {
     return await this.repository.save(card);
   };
 
-  public findByUser = async (user: User): Promise<Card[]> => {
+  public findByHouse = async (house: House): Promise<Card[]> => {
     return await this.repository.find({
-      where: { user },
+      where: { house },
+      relations: ['user'],
       order: { name: 'ASC' },
     });
   };
@@ -25,7 +26,7 @@ export class CardRepository implements ICardRepository {
   public findOneById = async (id: string): Promise<Card | null> => {
     return await this.repository.findOne({
       where: { id },
-      relations: ['user'],
+      relations: ['house'],
     });
   };
 

@@ -16,7 +16,7 @@ export class RemoveCardController {
     private readonly commandBus: ICommandBusAdapter,
   ) {}
 
-  @ApiOperation({ title: 'Remove loyalty card by logged user' })
+  @ApiOperation({ title: 'Remove card by logged user' })
   @Delete(':id')
   public index(
     @Param() command: RemoveCardCommand,
