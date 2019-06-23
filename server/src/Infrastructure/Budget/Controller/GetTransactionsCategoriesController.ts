@@ -17,7 +17,7 @@ export class GetTransactionsCategoriesController {
 
   @ApiOperation({ title: 'Get transaction categories' })
   @Get()
-  public async index(): Promise<TransactionCategoryView[]> {
-    return await this.queryBus.execute(new GetTransactionsCategoriesQuery());
+  public index(): TransactionCategoryView[] {
+    return this.queryBus.execute(new GetTransactionsCategoriesQuery());
   }
 }

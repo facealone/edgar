@@ -10,6 +10,7 @@ import { User } from './User.entity';
 
 export enum UserRole {
   OWNER = 'ROLE_OWNER',
+  CHILD = 'ROLE_CHILD',
   GUEST = 'ROLE_GUEST',
 }
 

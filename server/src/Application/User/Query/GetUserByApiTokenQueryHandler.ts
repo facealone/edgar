@@ -11,7 +11,7 @@ export class GetUserByApiTokenHandler {
     private readonly userRepository: IUserRepository,
   ) {}
 
-  public execute = (query: GetUserByApiToken): Promise<User> => {
-    return this.userRepository.findOneByApiToken(query.apiToken);
+  public execute = async (query: GetUserByApiToken): Promise<User> => {
+    return await this.userRepository.findOneByApiToken(query.apiToken);
   };
 }

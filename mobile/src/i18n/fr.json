@@ -2,6 +2,7 @@
   "translation": {
     "roles": {
       "ROLE_OWNER": "Propriétaire",
+      "ROLE_CHILD": "Enfant",
       "ROLE_GUEST": "Invité"
     },
     "form": {

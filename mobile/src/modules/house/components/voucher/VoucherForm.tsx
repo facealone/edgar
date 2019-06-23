@@ -48,6 +48,10 @@ class VoucherForm extends React.PureComponent<
                 value={'ROLE_OWNER'}
               />
               <Picker.Item
+                label={i18n.t('roles.ROLE_CHILD')}
+                value={'ROLE_CHILD'}
+              />
+              <Picker.Item
                 label={i18n.t('roles.ROLE_GUEST')}
                 value={'ROLE_GUEST'}
               />

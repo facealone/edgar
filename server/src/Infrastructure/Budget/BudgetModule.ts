@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { BusModule } from '../BusModule';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from '../Auth/AuthModule';
-import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { UserHouseRepository } from '../User/Repository/UserHouseRepository';
 import { UserHouse } from 'src/Domain/User/UserHouse.entity';
 import { Transaction } from 'src/Domain/Budget/Transaction.entity';
@@ -13,6 +12,9 @@ import { GetTransactionsCategoriesQueryHandler } from 'src/Application/Budget/Qu
 import { TransactionRepository } from './Repository/TransactionRepository';
 import { CreateTransactionController } from './Controller/CreateTransactionController';
 import { CreateTransactionCommandHandler } from 'src/Application/Budget/Command/CreateTransactionCommandHandler';
+import { GetTransactionsController } from './Controller/GetTransactionsController';
+import { GetTransactionsByHouseQueryHandler } from 'src/Application/Budget/Query/GetTransactionsByHouseQueryHandler';
+import { IsOwnerOfHouse } from 'src/Domain/User/IsOwnerOfHouse';
 
 @Module({
   imports: [
@@ -23,6 +25,7 @@ import { CreateTransactionCommandHandler } from 'src/Application/Budget/Command/
   controllers: [
     GetTransactionsCategoriesController,
     CreateTransactionController,
+    GetTransactionsController,
   ],
   providers: [
     { provide: 'IUserHouseRepository', useClass: UserHouseRepository },
@@ -33,7 +36,8 @@ import { CreateTransactionCommandHandler } from 'src/Application/Budget/Command/
     },
     GetTransactionsCategoriesQueryHandler,
     CreateTransactionCommandHandler,
-    IsMemberOfHouse,
+    GetTransactionsByHouseQueryHandler,
+    IsOwnerOfHouse,
   ],
 })
 export class BudgetModule {}

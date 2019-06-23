@@ -29,7 +29,11 @@ export class Transaction {
   })
   type: string;
 
-  @Column({ type: 'date', default: () => 'CURRENT_DATE', nullable: false })
+  @Column({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+    nullable: false,
+  })
   createdAt: Date;
 
   @ManyToOne(type => User, { nullable: false })

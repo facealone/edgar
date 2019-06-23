@@ -8,12 +8,12 @@ import { CreateTransactionCommand } from './CreateTransactionCommand';
 import { ITransactionRepository } from 'src/Domain/Budget/Repository/ITransactionRepository';
 import { TransactionView } from '../View/TransactionView';
 import { House } from 'src/Domain/House/House.entity';
-import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { ITransactionCategoryRepository } from 'src/Domain/Budget/Repository/ITransactionCategoryRepository';
 import { TransactionCategory } from 'src/Domain/Budget/TransactionCategory.entity';
 import { Transaction } from 'src/Domain/Budget/Transaction.entity';
 import { TransactionCategoryView } from '../View/TransactionCategoryView';
 import { OwnerView } from 'src/Application/User/View/OwnerView';
+import { IsOwnerOfHouse } from 'src/Domain/User/IsOwnerOfHouse';
 
 @CommandHandler(CreateTransactionCommand)
 export class CreateTransactionCommandHandler {
@@ -22,7 +22,7 @@ export class CreateTransactionCommandHandler {
     private readonly transactionRepository: ITransactionRepository,
     @Inject('ITransactionCategoryRepository')
     private readonly transactionCategoryRepository: ITransactionCategoryRepository,
-    private readonly isMemberOfHouse: IsMemberOfHouse,
+    private readonly isOwnerOfHouse: IsOwnerOfHouse,
   ) {}
 
   public execute = async (
@@ -36,8 +36,8 @@ export class CreateTransactionCommandHandler {
       throw new BadRequestException('user.empty.current_house');
     }
 
-    if (false === (await this.isMemberOfHouse.isSatisfiedBy(house, user))) {
-      throw new ForbiddenException('not.member.of.house');
+    if (false === (await this.isOwnerOfHouse.isSatisfiedBy(house, user))) {
+      throw new ForbiddenException('not.owner.of.house');
     }
 
     const category = await this.transactionCategoryRepository.findOneById(
