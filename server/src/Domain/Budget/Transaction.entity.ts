@@ -19,7 +19,7 @@ export class Transaction {
   @Column({ type: 'varchar', nullable: true })
   note: string;
 
-  @Column({ type: 'money', nullable: false, default: 0 })
+  @Column({ type: 'int', nullable: false, default: 0 })
   amount: number;
 
   @Column({

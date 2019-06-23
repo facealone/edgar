@@ -10,6 +10,9 @@ import { TransactionCategory } from 'src/Domain/Budget/TransactionCategory.entit
 import { TransactionCategoryRepository } from './Repository/TransactionCategoryRepository';
 import { GetTransactionsCategoriesController } from './Controller/GetTransactionsCategoriesController';
 import { GetTransactionsCategoriesQueryHandler } from 'src/Application/Budget/Query/GetTransactionsCategoriesQueryHandler';
+import { TransactionRepository } from './Repository/TransactionRepository';
+import { CreateTransactionController } from './Controller/CreateTransactionController';
+import { CreateTransactionCommandHandler } from 'src/Application/Budget/Command/CreateTransactionCommandHandler';
 
 @Module({
   imports: [
@@ -17,14 +20,19 @@ import { GetTransactionsCategoriesQueryHandler } from 'src/Application/Budget/Qu
     AuthModule,
     TypeOrmModule.forFeature([Transaction, TransactionCategory, UserHouse]),
   ],
-  controllers: [GetTransactionsCategoriesController],
+  controllers: [
+    GetTransactionsCategoriesController,
+    CreateTransactionController,
+  ],
   providers: [
     { provide: 'IUserHouseRepository', useClass: UserHouseRepository },
+    { provide: 'ITransactionRepository', useClass: TransactionRepository },
     {
       provide: 'ITransactionCategoryRepository',
       useClass: TransactionCategoryRepository,
     },
     GetTransactionsCategoriesQueryHandler,
+    CreateTransactionCommandHandler,
     IsMemberOfHouse,
   ],
 })

@@ -20,6 +20,10 @@ export class transaction1561312656872 implements MigrationInterface {
     await queryRunner.query(
       `ALTER TABLE "transaction" ADD CONSTRAINT "FK_d3951864751c5812e70d033978d" FOREIGN KEY ("categoryId") REFERENCES "transaction_category"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`,
     );
+    await queryRunner.query(`ALTER TABLE "transaction" DROP COLUMN "amount"`);
+    await queryRunner.query(
+      `ALTER TABLE "transaction" ADD "amount" integer NOT NULL DEFAULT 0`,
+    );
     await queryRunner.query(
       `INSERT INTO transaction_category (name) VALUES ('Alimentation / Supermarché'), ('Habillement / Chaussures'), ('Animaux'), ('Internet / TV / Téléphone'), ('Sports / Loisirs / Culture'), ('Education'), ('Enfants'), ('Impôts'), ('Transports'), ('Restauration / Hôtel'), ('Santé'), ('Logement / immobilier'), ('Services'), ('Autres');`,
     );
