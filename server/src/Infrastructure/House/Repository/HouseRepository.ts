@@ -7,7 +7,8 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class HouseRepository implements IHouseRepository {
   constructor(
-    @InjectRepository(House) private readonly repository: Repository<House>,
+    @InjectRepository(House)
+    private readonly repository: Repository<House>,
   ) {}
 
   public save = async (house: House): Promise<House> => {

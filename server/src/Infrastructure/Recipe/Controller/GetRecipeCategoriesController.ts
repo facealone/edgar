@@ -6,7 +6,7 @@ import { RecipeCategoryView } from 'src/Application/Recipe/View/RecipeCategoryVi
 import { GetRecipesCategoriesQuery } from 'src/Application/Recipe/Query/GetRecipesCategoriesQuery';
 
 @ApiBearerAuth()
-@Controller()
+@Controller('recipes-categories')
 @ApiUseTags('Recipe')
 @UseGuards(AuthGuard())
 export class GetRecipeCategoriesController {
@@ -16,7 +16,7 @@ export class GetRecipeCategoriesController {
   ) {}
 
   @ApiOperation({ title: 'Get recipe categories' })
-  @Get('/recipes-categories')
+  @Get()
   public async index(): Promise<RecipeCategoryView[]> {
     return await this.queryBus.execute(new GetRecipesCategoriesQuery());
   }
