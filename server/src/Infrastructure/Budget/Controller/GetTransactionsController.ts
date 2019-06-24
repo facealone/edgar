@@ -12,7 +12,7 @@ import { User } from 'src/Domain/User/User.entity';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { House } from 'src/Domain/House/House.entity';
 import { GetTransactionsByHouseQuery } from 'src/Application/Budget/Query/GetTransactionsByHouseQuery';
-import { TransactionListView } from 'src/Application/Budget/View/TransactionViewListView';
+import { TransactionListView } from 'src/Application/Budget/View/TransactionListView';
 
 @ApiBearerAuth()
 @Controller('users/me/current-house')

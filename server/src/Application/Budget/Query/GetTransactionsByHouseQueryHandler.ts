@@ -3,11 +3,11 @@ import { GetTransactionsByHouseQuery } from './GetTransactionsByHouseQuery';
 import { ITransactionRepository } from 'src/Domain/Budget/Repository/ITransactionRepository';
 import { Inject, ForbiddenException } from '@nestjs/common';
 import { TransactionView } from '../View/TransactionView';
-import { TransactionListView } from '../View/TransactionViewListView';
+import { TransactionListView } from '../View/TransactionListView';
 import { OwnerView } from 'src/Application/User/View/OwnerView';
-import { TransactionCategoryView } from '../View/TransactionCategoryView';
 import { TransactionType } from 'src/Domain/Budget/Transaction.entity';
 import { IsOwnerOfHouse } from 'src/Domain/User/IsOwnerOfHouse';
+import { TransactionCategoryView } from '../View/TransactionCategoryView';
 
 @QueryHandler(GetTransactionsByHouseQuery)
 export class GetTransactionsByHouseQueryHandler {
@@ -33,7 +33,7 @@ export class GetTransactionsByHouseQueryHandler {
     let cashOutlay: number = 0;
 
     for (const transaction of transactions) {
-      const { category, user } = transaction;
+      const { user, category } = transaction;
 
       if (TransactionType.CASH_INFLOW === transaction.type) {
         cashInflow += transaction.amount;
@@ -49,12 +49,8 @@ export class GetTransactionsByHouseQueryHandler {
           transaction.amount / 100,
           transaction.note,
           transaction.createdAt,
+          new TransactionCategoryView(category.id, category.name),
           new OwnerView(user.firstName, user.lastName),
-          new TransactionCategoryView(
-            category.id,
-            category.name,
-            category.icon,
-          ),
         ),
       );
     }

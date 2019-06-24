@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native';
 import { bindActionCreators } from 'redux';
 import {
   Content,
@@ -19,7 +19,6 @@ import { listRecipes } from '../middlewares/list';
 import { commonStyles } from '../../../theme/common';
 import { IRecipeListState, IRecipeListResetAction } from '../types/list';
 import { IRecipe } from '../models/Recipe';
-import { MAIN_COLOR } from '../../../theme/colors';
 
 interface IProps {
   reset(): IRecipeListResetAction;
@@ -48,9 +47,9 @@ class ListScreen extends React.PureComponent<IProps> {
               {i18n.t('recipe.list.title')} ({recipes.payload.length})
             </Text>
           </Separator>
-          <Button iconLeft style={style.filterButton} small bordered>
+          <Button iconLeft style={commonStyles.filterButton} small bordered>
             <Icon style={commonStyles.darkText} name={'ios-reorder'} />
-            <Text style={commonStyles.darkText}>Filtrer</Text>
+            <Text style={commonStyles.darkText}>Filtres</Text>
           </Button>
           <FlatList
             keyExtractor={card => card.id}
@@ -99,15 +98,6 @@ class ListScreen extends React.PureComponent<IProps> {
     );
   };
 }
-
-export const style = StyleSheet.create({
-  filterButton: {
-    backgroundColor: '#fff',
-    borderColor: MAIN_COLOR,
-    alignSelf: 'flex-start',
-    margin: 10,
-  },
-});
 
 export default connect(
   state => {

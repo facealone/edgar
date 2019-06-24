@@ -1,5 +1,5 @@
-import { TransactionCategoryView } from './TransactionCategoryView';
 import { OwnerView } from 'src/Application/User/View/OwnerView';
+import { TransactionCategoryView } from './TransactionCategoryView';
 
 export class TransactionView {
   constructor(
@@ -9,7 +9,7 @@ export class TransactionView {
     public readonly amount: number,
     public readonly note: string | null,
     public readonly createdAt: Date,
-    public readonly owner: OwnerView,
     public readonly category: TransactionCategoryView,
+    public readonly owner: OwnerView,
   ) {}
 }

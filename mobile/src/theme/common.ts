@@ -35,4 +35,10 @@ export const commonStyles = StyleSheet.create({
   darkText: {
     color: MAIN_COLOR,
   },
+  filterButton: {
+    backgroundColor: '#fff',
+    borderColor: MAIN_COLOR,
+    alignSelf: 'flex-start',
+    margin: 10,
+  },
 });

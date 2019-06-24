@@ -55,7 +55,7 @@ export class CreateTransactionCommandHandler {
         category,
         type,
         user,
-        house,
+        //house,
       }),
     );
 
@@ -66,8 +66,8 @@ export class CreateTransactionCommandHandler {
       transaction.amount / 100,
       transaction.note,
       transaction.createdAt,
+      new TransactionCategoryView(category.id, category.name),
       new OwnerView(user.firstName, user.lastName),
-      new TransactionCategoryView(category.id, category.name, category.icon),
     );
   };
 }

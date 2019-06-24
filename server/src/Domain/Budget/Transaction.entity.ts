@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { User } from '../User/User.entity';
-import { House } from '../House/House.entity';
+import { Budget } from './Budget.entity';
 import { TransactionCategory } from './TransactionCategory.entity';
 
 export enum TransactionType {
@@ -39,8 +39,8 @@ export class Transaction {
   @ManyToOne(type => User, { nullable: false })
   user: User;
 
-  @ManyToOne(type => House, { nullable: false })
-  house: House;
+  @ManyToOne(type => Budget, { nullable: false })
+  budget: Budget;
 
   @ManyToOne(type => TransactionCategory, { nullable: false })
   category: TransactionCategory;

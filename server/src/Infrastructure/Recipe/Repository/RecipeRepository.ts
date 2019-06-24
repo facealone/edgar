@@ -19,7 +19,7 @@ export class RecipeRepository implements IRecipeRepository {
   public findByHouse = async (house: House): Promise<Recipe[]> => {
     return await this.repository.find({
       where: { house },
-      order: { name: 'ASC' },
+      order: { createdAt: 'DESC' },
       relations: ['owner', 'category'],
     });
   };

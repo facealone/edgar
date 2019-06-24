@@ -14,6 +14,13 @@ export class Recipe {
   @Column({ type: 'varchar', nullable: false })
   uri: string;
 
+  @Column({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+    nullable: false,
+  })
+  createdAt: Date;
+
   @ManyToOne(type => House, { nullable: false })
   house: House;
 
