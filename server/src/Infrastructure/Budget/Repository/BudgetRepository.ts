@@ -16,6 +16,13 @@ export class BudgetRepository implements IBudgetRepository {
     return await this.repository.save(budget);
   };
 
+  public findOneById = async (id: string): Promise<Budget> => {
+    return await this.repository.findOne({
+      where: { id },
+      relations: ['house'],
+    });
+  };
+
   public findByHouse = async (house: House): Promise<Budget[]> => {
     return await this.repository.find({
       where: { house },

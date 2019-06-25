@@ -32,7 +32,12 @@ export class CreateTransactionCommand implements ICommand {
   @ApiModelProperty()
   @IsNotEmpty()
   @IsUUID()
-  public transactionCategory: string;
+  public categoryId: string;
+
+  @ApiModelProperty()
+  @IsNotEmpty()
+  @IsUUID()
+  public budgetId: string;
 
   public user: User;
 }

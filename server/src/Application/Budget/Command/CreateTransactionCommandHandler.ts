@@ -7,17 +7,20 @@ import { CommandHandler } from '@nestjs/cqrs';
 import { CreateTransactionCommand } from './CreateTransactionCommand';
 import { ITransactionRepository } from 'src/Domain/Budget/Repository/ITransactionRepository';
 import { TransactionView } from '../View/TransactionView';
-import { House } from 'src/Domain/House/House.entity';
 import { ITransactionCategoryRepository } from 'src/Domain/Budget/Repository/ITransactionCategoryRepository';
 import { TransactionCategory } from 'src/Domain/Budget/TransactionCategory.entity';
 import { Transaction } from 'src/Domain/Budget/Transaction.entity';
 import { TransactionCategoryView } from '../View/TransactionCategoryView';
 import { OwnerView } from 'src/Application/User/View/OwnerView';
 import { IsOwnerOfHouse } from 'src/Domain/User/IsOwnerOfHouse';
+import { IBudgetRepository } from 'src/Domain/Budget/Repository/IBudgetRepository';
+import { Budget } from 'src/Domain/Budget/Budget.entity';
 
 @CommandHandler(CreateTransactionCommand)
 export class CreateTransactionCommandHandler {
   constructor(
+    @Inject('IBudgetRepository')
+    private readonly budgetRepository: IBudgetRepository,
     @Inject('ITransactionRepository')
     private readonly transactionRepository: ITransactionRepository,
     @Inject('ITransactionCategoryRepository')
@@ -28,20 +31,22 @@ export class CreateTransactionCommandHandler {
   public execute = async (
     command: CreateTransactionCommand,
   ): Promise<TransactionView> => {
-    const { name, note, transactionCategory, type, user } = command;
+    const { name, note, categoryId, type, budgetId, user } = command;
     const amount = command.amount * 100;
-    const house = user.currentHouse;
 
-    if (!(house instanceof House)) {
-      throw new BadRequestException('user.empty.current_house');
+    const budget = await this.budgetRepository.findOneById(budgetId);
+    if (!(budget instanceof Budget)) {
+      throw new BadRequestException('budget.not.found');
     }
 
-    if (false === (await this.isOwnerOfHouse.isSatisfiedBy(house, user))) {
+    if (
+      false === (await this.isOwnerOfHouse.isSatisfiedBy(budget.house, user))
+    ) {
       throw new ForbiddenException('not.owner.of.house');
     }
 
     const category = await this.transactionCategoryRepository.findOneById(
-      transactionCategory,
+      categoryId,
     );
     if (!(category instanceof TransactionCategory)) {
       throw new BadRequestException('budget.category.not.found');
@@ -55,7 +60,7 @@ export class CreateTransactionCommandHandler {
         category,
         type,
         user,
-        //house,
+        budget,
       }),
     );
 
