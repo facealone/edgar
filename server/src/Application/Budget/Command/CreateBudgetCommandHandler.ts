@@ -44,6 +44,6 @@ export class CreateBudgetCommandHandler {
       }),
     );
 
-    return new BudgetView(budget.id, budget.name, budget.shared);
+    return new BudgetView(budget.id, budget.name, budget.amount);
   };
 }

@@ -39,7 +39,7 @@ export class Transaction {
   @ManyToOne(type => User, { nullable: false })
   user: User;
 
-  @ManyToOne(type => Budget, { nullable: false })
+  @ManyToOne(type => Budget, budget => budget.transactions, { nullable: false })
   budget: Budget;
 
   @ManyToOne(type => TransactionCategory, { nullable: false })

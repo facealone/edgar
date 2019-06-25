@@ -5,6 +5,7 @@ export class TransactionListView {
     public readonly cashInflow: number = 0,
     public readonly cashOutlay: number = 0,
     public readonly balance: number = 0,
+    public readonly budget: number = 0,
     public readonly transactions: TransactionView[],
   ) {}
 }

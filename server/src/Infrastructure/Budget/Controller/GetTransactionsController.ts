@@ -4,18 +4,20 @@ import {
   UseGuards,
   Inject,
   Get,
-  BadRequestException,
+  Param,
+  NotFoundException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorator';
 import { User } from 'src/Domain/User/User.entity';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
-import { House } from 'src/Domain/House/House.entity';
-import { GetTransactionsByHouseQuery } from 'src/Application/Budget/Query/GetTransactionsByHouseQuery';
+import { GetTransactionsByBudgetQuery } from 'src/Application/Budget/Query/GetTransactionsByBudgetQuery';
 import { TransactionListView } from 'src/Application/Budget/View/TransactionListView';
+import { Budget } from 'src/Domain/Budget/Budget.entity';
+import { GetBudgetByIdQuery } from 'src/Application/Budget/Query/GetBudgetByIdQuery';
 
 @ApiBearerAuth()
-@Controller('budgets')
+@Controller()
 @ApiUseTags('Budget')
 @UseGuards(AuthGuard())
 export class GetTransactionsController {
@@ -27,14 +29,19 @@ export class GetTransactionsController {
   @ApiOperation({
     title: 'Get transactions of the logged user current house',
   })
-  @Get(':id/transactions')
-  public index(@LoggedUser() user: User): TransactionListView {
-    const house = user.currentHouse;
+  @Get('budgets/:id/transactions')
+  public async index(
+    @Param() query: GetBudgetByIdQuery,
+    @LoggedUser() user: User,
+  ): Promise<TransactionListView> {
+    const budget = await this.queryBus.execute(query);
 
-    if (!(house instanceof House)) {
-      throw new BadRequestException();
+    if (!(budget instanceof Budget)) {
+      throw new NotFoundException();
     }
 
-    return this.queryBus.execute(new GetTransactionsByHouseQuery(user, house));
+    return this.queryBus.execute(
+      new GetTransactionsByBudgetQuery(user, budget),
+    );
   }
 }

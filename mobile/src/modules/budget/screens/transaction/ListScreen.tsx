@@ -12,37 +12,38 @@ import {
   Icon,
   Card,
   CardItem,
-  Button,
 } from 'native-base';
-import { commonStyles } from '../../../theme/common';
+import { commonStyles } from '../../../../theme/common';
 import {
   IBudgetTransactionListSate,
   IBudgetTransactionListResetAction,
-} from '../types/transaction/list';
-import i18n from '../../../i18n';
-import { Transaction, TransactionType } from '../models/Transaction';
-import { listTransactions } from '../middlewares/transaction/list';
-import { reset } from '../actions/transaction/list';
+} from '../../types/transaction/list';
+import { Transaction, TransactionType } from '../../models/Transaction';
+import { listTransactions } from '../../middlewares/transaction/list';
+import { reset } from '../../actions/transaction/list';
 import { bindActionCreators } from 'redux';
 
 interface IProps {
   transactions: IBudgetTransactionListSate;
   navigation: any;
   reset(): IBudgetTransactionListResetAction;
-  listTransactions(): any;
+  listTransactions(budgetId: string): any;
 }
 
-class TransactionScreen extends React.PureComponent<IProps> {
+class ListScreen extends React.PureComponent<IProps> {
   componentWillUnmount = () => {
     this.props.reset();
   };
 
   componentDidMount = () => {
-    this.props.listTransactions();
+    const { params } = this.props.navigation.state;
+
+    this.props.listTransactions(params.id);
   };
 
   render = () => {
     const { transactions } = this.props;
+    const { params } = this.props.navigation.state;
     const { payload } = transactions;
 
     return (
@@ -98,19 +99,15 @@ class TransactionScreen extends React.PureComponent<IProps> {
                   </CardItem>
                 </Card>
               </ScrollView>
-              <Button iconLeft style={commonStyles.filterButton} small bordered>
-                <Icon style={commonStyles.darkText} name={'ios-reorder'} />
-                <Text style={commonStyles.darkText}>Filtres</Text>
-              </Button>
               <FlatList
                 keyExtractor={transaction => transaction.id}
                 data={payload.transactions}
                 refreshing={transactions.loading}
                 onRefresh={() => {
-                  this.props.listTransactions();
+                  this.props.listTransactions(params.id);
                 }}
                 renderItem={({ item: transaction }: Transaction) => {
-                  const { id, name, amount, owner, type } = transaction;
+                  const { id, name, amount, note, owner, type } = transaction;
 
                   let sign = '-';
                   let style = styles.outlay;
@@ -150,6 +147,14 @@ class TransactionScreen extends React.PureComponent<IProps> {
   };
 }
 
+ListScreen.navigationOptions = ({ navigation }: any) => {
+  const { name } = navigation.state.params;
+
+  return {
+    title: name,
+  };
+};
+
 const styles = StyleSheet.create({
   inflow: {
     color: '#32CD32',
@@ -172,4 +177,4 @@ export default connect(
       ...bindActionCreators({ reset, listTransactions }, dispatch),
     };
   },
-)(TransactionScreen);
+)(ListScreen);

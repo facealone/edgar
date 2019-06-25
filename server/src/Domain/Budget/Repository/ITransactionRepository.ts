@@ -1,7 +1,7 @@
 import { Transaction } from '../Transaction.entity';
-import { House } from 'src/Domain/House/House.entity';
+import { Budget } from '../Budget.entity';
 
 export interface ITransactionRepository {
   save(transaction: Transaction): Promise<Transaction>;
-  findByHouse(house: House): Promise<Transaction[]>;
+  findByBudget(budget: Budget): Promise<Transaction[]>;
 }

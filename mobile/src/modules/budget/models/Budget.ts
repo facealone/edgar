@@ -1,4 +1,6 @@
-export class BudgetView {
+import { Transaction } from './Transaction';
+
+export class Budget {
   constructor(
     public readonly id: string,
     public readonly name: string,

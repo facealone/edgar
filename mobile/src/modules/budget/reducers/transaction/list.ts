@@ -8,8 +8,6 @@ import {
   BUDGET_TRANSACTION_LIST_RESET,
   BUDGET_TRANSACTION_LIST_LOADING,
 } from '../../constants/transaction/list';
-import { AUTH_AUTHENTICATION_LOGOUT } from '../../../auth/constants/authentication';
-import { HOUSE_CURRENT_SUCCESS } from '../../../house/constants/current';
 
 const initialState: IBudgetTransactionListSate = {
   payload: null,
@@ -41,14 +39,6 @@ export const listReducers = (
       };
 
     case BUDGET_TRANSACTION_LIST_RESET:
-      return {
-        ...state,
-        loading: false,
-        errors: [],
-      };
-
-    case AUTH_AUTHENTICATION_LOGOUT:
-    case HOUSE_CURRENT_SUCCESS:
       return initialState;
 
     default:

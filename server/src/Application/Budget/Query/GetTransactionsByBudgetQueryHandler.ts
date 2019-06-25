@@ -1,5 +1,5 @@
 import { QueryHandler } from '@nestjs/cqrs';
-import { GetTransactionsByHouseQuery } from './GetTransactionsByHouseQuery';
+import { GetTransactionsByBudgetQuery } from './GetTransactionsByBudgetQuery';
 import { ITransactionRepository } from 'src/Domain/Budget/Repository/ITransactionRepository';
 import { Inject, ForbiddenException } from '@nestjs/common';
 import { TransactionView } from '../View/TransactionView';
@@ -9,8 +9,8 @@ import { TransactionType } from 'src/Domain/Budget/Transaction.entity';
 import { IsOwnerOfHouse } from 'src/Domain/User/IsOwnerOfHouse';
 import { TransactionCategoryView } from '../View/TransactionCategoryView';
 
-@QueryHandler(GetTransactionsByHouseQuery)
-export class GetTransactionsByHouseQueryHandler {
+@QueryHandler(GetTransactionsByBudgetQuery)
+export class GetTransactionsByBudgetQueryHandler {
   constructor(
     @Inject('ITransactionRepository')
     private readonly transactionRepository: ITransactionRepository,
@@ -18,27 +18,29 @@ export class GetTransactionsByHouseQueryHandler {
   ) {}
 
   public execute = async (
-    query: GetTransactionsByHouseQuery,
+    query: GetTransactionsByBudgetQuery,
   ): Promise<TransactionListView> => {
-    const { house, user } = query;
+    const { budget, user } = query;
 
-    if (false === (await this.isOwnerOfHouse.isSatisfiedBy(house, user))) {
+    if (
+      false === (await this.isOwnerOfHouse.isSatisfiedBy(budget.house, user))
+    ) {
       throw new ForbiddenException('not.owner.of.house');
     }
 
-    const transactions = await this.transactionRepository.findByHouse(house);
+    const transactions = await this.transactionRepository.findByBudget(budget);
     const transactionsViews = [];
 
-    let cashInflow: number = 0;
-    let cashOutlay: number = 0;
+    let totalCashInflow: number = 0;
+    let totalCashOutlay: number = 0;
 
     for (const transaction of transactions) {
       const { user, category } = transaction;
 
       if (TransactionType.CASH_INFLOW === transaction.type) {
-        cashInflow += transaction.amount;
+        totalCashInflow += transaction.amount;
       } else {
-        cashOutlay += transaction.amount;
+        totalCashOutlay += transaction.amount;
       }
 
       transactionsViews.push(
@@ -55,10 +57,13 @@ export class GetTransactionsByHouseQueryHandler {
       );
     }
 
+    const balance = (budget.amount + totalCashInflow - totalCashOutlay) / 100;
+
     return new TransactionListView(
-      cashInflow / 100,
-      cashOutlay / 100,
-      (cashInflow - cashOutlay) / 100,
+      totalCashInflow / 100,
+      totalCashOutlay / 100,
+      balance,
+      budget.amount / 100,
       transactionsViews,
     );
   };

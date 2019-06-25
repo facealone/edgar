@@ -13,7 +13,7 @@ import { TransactionRepository } from './Repository/TransactionRepository';
 import { CreateTransactionController } from './Controller/CreateTransactionController';
 import { CreateTransactionCommandHandler } from 'src/Application/Budget/Command/CreateTransactionCommandHandler';
 import { GetTransactionsController } from './Controller/GetTransactionsController';
-import { GetTransactionsByHouseQueryHandler } from 'src/Application/Budget/Query/GetTransactionsByHouseQueryHandler';
+import { GetTransactionsByBudgetQueryHandler } from 'src/Application/Budget/Query/GetTransactionsByBudgetQueryHandler';
 import { IsOwnerOfHouse } from 'src/Domain/User/IsOwnerOfHouse';
 import { GetBudgetsController } from './Controller/GetBudgetsController';
 import { GetBudgetsByHouseQueryHandler } from 'src/Application/Budget/Query/GetBudgetsByHouseQueryHandler';
@@ -21,6 +21,7 @@ import { BudgetRepository } from './Repository/BudgetRepository';
 import { Budget } from 'src/Domain/Budget/Budget.entity';
 import { CreateBudgetController } from './Controller/CreateBudgetController';
 import { CreateBudgetCommandHandler } from 'src/Application/Budget/Command/CreateBudgetCommandHandler';
+import { GetBudgetByIdQueryHandler } from 'src/Application/Budget/Query/GetBudgetByIdQueryHandler';
 
 @Module({
   imports: [
@@ -52,7 +53,8 @@ import { CreateBudgetCommandHandler } from 'src/Application/Budget/Command/Creat
     GetBudgetsByHouseQueryHandler,
     CreateTransactionCommandHandler,
     CreateBudgetCommandHandler,
-    GetTransactionsByHouseQueryHandler,
+    GetTransactionsByBudgetQueryHandler,
+    GetBudgetByIdQueryHandler,
     IsOwnerOfHouse,
   ],
 })

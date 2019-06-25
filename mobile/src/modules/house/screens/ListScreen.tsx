@@ -10,7 +10,6 @@ import {
   Right,
   Fab,
   Separator,
-  Left,
 } from 'native-base';
 import { bindActionCreators } from 'redux';
 import i18n from '../../../i18n';
@@ -64,14 +63,11 @@ class ListScreen extends React.Component<IProps> {
               return (
                 <ListItem
                   key={id}
-                  icon
                   onPress={() => navigation.navigate('HouseShow', { id, name })}
                 >
-                  <Left>
-                    <Icon style={commonStyles.darkText} name={'ios-home'} />
-                  </Left>
                   <Body>
                     <Text>{name}</Text>
+                    <Text note>Rejoint le 10/10/2019</Text>
                   </Body>
                   <Right>
                     <Icon name={'ios-arrow-dropright-circle'} />

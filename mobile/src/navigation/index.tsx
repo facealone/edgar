@@ -24,6 +24,7 @@ import RecipeShowScreen from '../modules/recipe/screens/ShowScreen';
 import CurrentHouseTitle from '../modules/house/components/CurrentHouseTitle';
 import HouseListScreen from '../modules/house/screens/ListScreen';
 import HouseShowScreen from '../modules/house/screens/ShowScreen';
+import BudgetTransactionListScreen from '../modules/budget/screens/transaction/ListScreen';
 
 const options = {
   headerStyle: {
@@ -98,6 +99,7 @@ const AppNavigator = createStackNavigator(
     RecipeBrowser: RecipeBrowseScreen,
     RecipeAdd: RecipeAddScreen,
     RecipeShow: RecipeShowScreen,
+    BudgetTransactionList: BudgetTransactionListScreen,
   },
   {
     initialRouteName: 'BottomTabs',

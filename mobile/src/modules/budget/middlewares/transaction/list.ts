@@ -3,12 +3,12 @@ import { TransactionList } from '../../models/TransactionList';
 import { Transaction } from '../../models/Transaction';
 import { Owner } from '../../../user/models/Owner';
 
-export const listTransactions = () => {
+export const listTransactions = (budgetId: string) => {
   return async (dispatch: any, getState: any, axios: any) => {
     dispatch(loading(true));
 
     try {
-      const response = await axios.get('users/me/current-house/transactions');
+      const response = await axios.get(`budgets/${budgetId}/transactions`);
       const payload = response.data;
 
       const transactions = [];
@@ -34,6 +34,7 @@ export const listTransactions = () => {
           new TransactionList(
             payload.cashInflow,
             payload.cashOutlay,
+            payload.budget,
             payload.balance,
             transactions,
           ),

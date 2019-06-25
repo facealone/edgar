@@ -10,7 +10,7 @@ export class Transaction {
     public readonly id: string,
     public readonly name: string,
     public readonly type: string,
-    public readonly amount: number,
+    public readonly amount: number = 0,
     public readonly note: string | null,
     public readonly createdAt: Date,
     public readonly owner: IOwner,

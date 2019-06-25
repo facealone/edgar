@@ -7,8 +7,6 @@ import {
   BUDGET_TRANSACTION_LIST_LOADING,
 } from '../../constants/transaction/list';
 import { IErrorAction, ILoadingAction } from '../../../common/types/actions';
-import { ICurrentHouseSuccessAction } from '../../../house/types/current';
-import { IAuthenticationLogoutAction } from '../../../auth/types/authentication';
 
 export interface IBudgetTransactionListSate extends IState {
   payload: TransactionList | null;
@@ -35,6 +33,4 @@ export type IBudgetTransactionListActionTypes =
   | IBudgetTransactionListSuccessAction
   | IBudgetTransactionListLoadingAction
   | IBudgetTransactionListErrorAction
-  | ICurrentHouseSuccessAction
-  | IAuthenticationLogoutAction
   | IBudgetTransactionListResetAction;

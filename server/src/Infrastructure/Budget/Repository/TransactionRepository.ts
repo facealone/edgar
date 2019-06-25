@@ -3,7 +3,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Transaction } from 'src/Domain/Budget/Transaction.entity';
 import { ITransactionRepository } from 'src/Domain/Budget/Repository/ITransactionRepository';
-import { House } from 'src/Domain/House/House.entity';
+import { Budget } from 'src/Domain/Budget/Budget.entity';
 
 @Injectable()
 export class TransactionRepository implements ITransactionRepository {
@@ -16,9 +16,9 @@ export class TransactionRepository implements ITransactionRepository {
     return await this.repository.save(transaction);
   };
 
-  public findByHouse = async (house: House): Promise<Transaction[]> => {
+  public findByBudget = async (budget: Budget): Promise<Transaction[]> => {
     return await this.repository.find({
-      where: { house },
+      where: { budget },
       order: { createdAt: 'DESC' },
       relations: ['user', 'category'],
     });

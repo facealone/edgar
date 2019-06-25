@@ -26,7 +26,24 @@ export class GetBudgetsByHouseQueryHandler {
     const budgetsViews = [];
 
     for (const budget of budgets) {
-      budgetsViews.push(new BudgetView(budget.id, budget.name, budget.shared));
+      let balance = budget.amount;
+
+      if (budget.totalCashInflow > 0) {
+        balance += parseInt(budget.totalCashInflow);
+      }
+
+      if (budget.totalCashOutlay > 0) {
+        balance -= parseInt(budget.totalCashOutlay);
+      }
+
+      budgetsViews.push(
+        new BudgetView(
+          budget.id,
+          budget.name,
+          budget.amount / 100,
+          balance / 100,
+        ),
+      );
     }
 
     return budgetsViews;

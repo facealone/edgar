@@ -1,29 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FlatList } from 'react-native';
-import { bindActionCreators } from 'redux';
 import {
   Content,
   Text,
+  Separator,
+  ListItem,
   Body,
   Right,
-  Icon,
-  ListItem,
-  Separator,
   Fab,
+  Icon,
 } from 'native-base';
-import i18n from '../../../i18n';
-import { listCards } from '../middlewares/list';
-import { reset } from '../actions/list';
-import { ICardListState, ICardListResetAction } from '../types/list';
-import { ICard } from '../models/Card';
 import { commonStyles } from '../../../theme/common';
+import { IBudgetListSate, IBudgetListResetAction } from '../types/list';
+import { Budget } from '../models/Budget';
+import { listBudgets } from '../middlewares/list';
+import { reset } from '../actions/transaction/list';
+import { bindActionCreators } from 'redux';
+import i18n from '../../../i18n';
 
 interface IProps {
-  reset(): ICardListResetAction;
-  listCards(): any;
+  budget: IBudgetListSate;
   navigation: any;
-  cards: ICardListState;
+  reset(): IBudgetListResetAction;
+  listBudgets(): any;
 }
 
 class ListScreen extends React.PureComponent<IProps> {
@@ -32,45 +32,44 @@ class ListScreen extends React.PureComponent<IProps> {
   };
 
   componentDidMount = () => {
-    this.props.listCards();
+    this.props.listBudgets();
   };
 
   render = () => {
-    const { cards, navigation } = this.props;
+    const { budget, navigation } = this.props;
 
     return (
       <>
         <Content style={commonStyles.content}>
           <Separator bordered>
             <Text style={commonStyles.centerHeaderFlatList}>
-              {i18n.t('card.list.header')} ({cards.payload.length})
+              {i18n.t('budget.list.header')} Juin 2019 ({budget.payload.length})
             </Text>
           </Separator>
           <FlatList
-            keyExtractor={card => card.id}
-            data={cards.payload}
-            refreshing={cards.loading}
+            keyExtractor={budget => budget.id}
+            data={budget.payload}
+            refreshing={budget.loading}
             onRefresh={() => {
-              this.props.listCards();
+              this.props.listBudgets();
             }}
-            renderItem={({ item: card }: ICard) => {
-              const { barCode, name, id, owner } = card;
+            renderItem={({ item: budget }: Budget) => {
+              const { id, name, balance, amount } = budget;
+              const sign = balance > 0 ? '+' : '-';
 
               return (
                 <ListItem
                   key={id}
                   onPress={() =>
-                    navigation.navigate('CardShow', { barCode, name, id })
+                    navigation.navigate('BudgetTransactionList', { name, id })
                   }
                 >
                   <Body>
                     <Text>{name}</Text>
-                    <Text style={commonStyles.listHelper}>
-                      {`${owner.firstName} ${owner.lastName}`}
-                    </Text>
+                    <Text note>Budget mensuel {amount}€</Text>
                   </Body>
                   <Right>
-                    <Icon name={'ios-arrow-dropright-circle'} />
+                    <Text>{`${sign}${balance}€`}</Text>
                   </Right>
                 </ListItem>
               );
@@ -80,9 +79,7 @@ class ListScreen extends React.PureComponent<IProps> {
         <Fab
           style={commonStyles.fabButton}
           position={'bottomRight'}
-          onPress={() => {
-            navigation.navigate('CardScan');
-          }}
+          onPress={() => {}}
         >
           <Icon name={'add'} />
         </Fab>
@@ -94,12 +91,12 @@ class ListScreen extends React.PureComponent<IProps> {
 export default connect(
   state => {
     return {
-      cards: state.card.list,
+      budget: state.budget.list,
     };
   },
   dispatch => {
     return {
-      ...bindActionCreators({ listCards, reset }, dispatch),
+      ...bindActionCreators({ reset, listBudgets }, dispatch),
     };
   },
 )(ListScreen);

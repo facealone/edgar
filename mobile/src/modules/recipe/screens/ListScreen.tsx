@@ -64,17 +64,15 @@ class ListScreen extends React.PureComponent<IProps> {
               return (
                 <ListItem
                   key={id}
-                  icon
                   onPress={() =>
                     navigation.navigate('RecipeShow', { name, uri, id })
                   }
                 >
                   <Body>
                     <Text>{name}</Text>
-                    <Text style={commonStyles.listHelper}>
-                      {`${category.name} - ${owner.firstName} ${
-                        owner.lastName
-                      }`}
+                    <Text note>{category.name}</Text>
+                    <Text note>
+                      {owner.firstName} {owner.lastName}
                     </Text>
                   </Body>
                   <Right>

@@ -57,7 +57,7 @@ class ListScreen extends React.Component<IProps> {
               const { name, id, numberOfItems } = card;
 
               return (
-                <ListItem key={id} icon>
+                <ListItem key={id}>
                   <Body>
                     <Text>{name}</Text>
                     <Text style={commonStyles.listHelper}>

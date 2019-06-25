@@ -102,6 +102,11 @@
         "recipes": "Recettes"
       }
     },
+    "budget": {
+      "list": {
+        "header": "Budgets"
+      }
+    },
     "card": {
       "list": {
         "header": "Cartes de fidélités"

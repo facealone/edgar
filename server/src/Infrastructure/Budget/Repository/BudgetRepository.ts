@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Budget } from 'src/Domain/Budget/Budget.entity';
 import { IBudgetRepository } from 'src/Domain/Budget/Repository/IBudgetRepository';
 import { House } from 'src/Domain/House/House.entity';
+import { Transaction } from 'src/Domain/Budget/Transaction.entity';
 
 @Injectable()
 export class BudgetRepository implements IBudgetRepository {
@@ -23,10 +24,27 @@ export class BudgetRepository implements IBudgetRepository {
     });
   };
 
-  public findByHouse = async (house: House): Promise<Budget[]> => {
-    return await this.repository.find({
-      where: { house },
-      order: { createdAt: 'DESC' },
-    });
+  public findByHouse = async (house: House): Promise<any[]> => {
+    return await this.repository
+      .createQueryBuilder('budget')
+      .select('budget.id, budget.name, budget.amount, budget.shared')
+      .addSelect(subQuery => {
+        return subQuery
+          .select('SUM(t.amount)')
+          .from(Transaction, 't')
+          .where('t.budget.id = budget.id')
+          .andWhere("t.type = 'cash_inflow'");
+      }, 'totalCashInflow')
+      .addSelect(subQuery => {
+        return subQuery
+          .select('SUM(t.amount)')
+          .from(Transaction, 't')
+          .where('t.budget.id = budget.id')
+          .andWhere("t.type = 'cash_outlay'");
+      }, 'totalCashOutlay')
+      .where('budget.house = :house', { house: house.id })
+      .orderBy('budget.createdAt', 'DESC')
+      .groupBy('budget.id')
+      .getRawMany();
   };
 }

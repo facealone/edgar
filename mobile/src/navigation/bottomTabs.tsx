@@ -3,7 +3,7 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import { MAIN_COLOR } from '../theme/colors';
 import { Icon } from 'native-base';
 import CardListScreen from '../modules/card/screens/ListScreen';
-import BudgetTransactionScreen from '../modules/budget/screens/TransactionScreen';
+import BudgetListScreen from '../modules/budget/screens/ListScreen';
 import i18n from '../i18n';
 import { HouseTabsStack } from './houseTabs';
 import SettingsScreen from '../modules/common/screens/SettingsScreen';
@@ -28,8 +28,8 @@ export const BottomTabsStack = createMaterialBottomTabNavigator(
         ),
       },
     },
-    BudgetTransaction: {
-      screen: BudgetTransactionScreen,
+    BudgetList: {
+      screen: BudgetListScreen,
       navigationOptions: {
         tabBarLabel: i18n.t('navigation.budget'),
         tabBarIcon: () => (

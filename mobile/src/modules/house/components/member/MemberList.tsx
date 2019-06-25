@@ -1,14 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  Content,
-  Text,
-  Separator,
-  ListItem,
-  Body,
-  Left,
-  Icon,
-} from 'native-base';
+import { Content, Text, Separator, ListItem, Body } from 'native-base';
 import { bindActionCreators } from 'redux';
 import { commonStyles } from '../../../../theme/common';
 import i18n from '../../../../i18n';
@@ -45,15 +37,11 @@ class MemberList extends React.Component<IProps> {
           </Text>
         </Separator>
         {members.payload.map(member => (
-          <ListItem icon key={member.id}>
-            <Left>
-              <Icon name={'ios-person'} style={commonStyles.darkText} />
-            </Left>
+          <ListItem key={member.id}>
             <Body>
               <Text>{`${member.firstName} ${member.lastName}`}</Text>
-              <Text style={commonStyles.listHelper}>
-                {i18n.t(`roles.${member.role}`)} - {member.email}
-              </Text>
+              <Text note>{i18n.t(`roles.${member.role}`)}</Text>
+              <Text note>{member.email}</Text>
             </Body>
           </ListItem>
         ))}

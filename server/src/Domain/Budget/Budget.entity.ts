@@ -1,6 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { User } from '../User/User.entity';
 import { House } from '../House/House.entity';
+import { Transaction } from './Transaction.entity';
 
 @Entity()
 export class Budget {
@@ -28,6 +35,9 @@ export class Budget {
 
   @ManyToOne(type => House, { nullable: false })
   house: House;
+
+  @OneToMany(type => Transaction, transaction => transaction.budget)
+  transactions: Transaction[];
 
   constructor(budget: Partial<Budget>) {
     Object.assign(this, budget);
