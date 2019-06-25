@@ -13,8 +13,8 @@ export class Budget {
   @Column({ type: 'int', nullable: false, default: 0 })
   amount: number;
 
-  @Column({ type: 'boolean', nullable: false, default: false })
-  private: boolean;
+  @Column({ type: 'boolean', nullable: false, default: true })
+  shared: boolean;
 
   @Column({
     type: 'timestamp',

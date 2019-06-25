@@ -15,27 +15,43 @@ import { CreateTransactionCommandHandler } from 'src/Application/Budget/Command/
 import { GetTransactionsController } from './Controller/GetTransactionsController';
 import { GetTransactionsByHouseQueryHandler } from 'src/Application/Budget/Query/GetTransactionsByHouseQueryHandler';
 import { IsOwnerOfHouse } from 'src/Domain/User/IsOwnerOfHouse';
+import { GetBudgetsController } from './Controller/GetBudgetsController';
+import { GetBudgetsByHouseQueryHandler } from 'src/Application/Budget/Query/GetBudgetsByHouseQueryHandler';
+import { BudgetRepository } from './Repository/BudgetRepository';
+import { Budget } from 'src/Domain/Budget/Budget.entity';
+import { CreateBudgetController } from './Controller/CreateBudgetController';
+import { CreateBudgetCommandHandler } from 'src/Application/Budget/Command/CreateBudgetCommandHandler';
 
 @Module({
   imports: [
     BusModule,
     AuthModule,
-    TypeOrmModule.forFeature([Transaction, TransactionCategory, UserHouse]),
+    TypeOrmModule.forFeature([
+      Budget,
+      Transaction,
+      TransactionCategory,
+      UserHouse,
+    ]),
   ],
   controllers: [
     GetTransactionsCategoriesController,
+    CreateBudgetController,
     CreateTransactionController,
     GetTransactionsController,
+    GetBudgetsController,
   ],
   providers: [
     { provide: 'IUserHouseRepository', useClass: UserHouseRepository },
     { provide: 'ITransactionRepository', useClass: TransactionRepository },
+    { provide: 'IBudgetRepository', useClass: BudgetRepository },
     {
       provide: 'ITransactionCategoryRepository',
       useClass: TransactionCategoryRepository,
     },
     GetTransactionsCategoriesQueryHandler,
+    GetBudgetsByHouseQueryHandler,
     CreateTransactionCommandHandler,
+    CreateBudgetCommandHandler,
     GetTransactionsByHouseQueryHandler,
     IsOwnerOfHouse,
   ],

@@ -11,30 +11,30 @@ import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorato
 import { User } from 'src/Domain/User/User.entity';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { House } from 'src/Domain/House/House.entity';
-import { GetTransactionsByHouseQuery } from 'src/Application/Budget/Query/GetTransactionsByHouseQuery';
-import { TransactionListView } from 'src/Application/Budget/View/TransactionListView';
+import { BudgetView } from 'src/Application/Budget/View/BudgetView';
+import { GetBudgetsByHouseQuery } from 'src/Application/Budget/Query/GetBudgetsByHouseQuery';
 
 @ApiBearerAuth()
-@Controller('budgets')
+@Controller('users/me/current-house')
 @ApiUseTags('Budget')
 @UseGuards(AuthGuard())
-export class GetTransactionsController {
+export class GetBudgetsController {
   constructor(
     @Inject('IQueryBusAdapter')
     private readonly queryBus: IQueryBusAdapter,
   ) {}
 
   @ApiOperation({
-    title: 'Get transactions of the logged user current house',
+    title: 'Get budgets of the logged user current house',
   })
-  @Get(':id/transactions')
-  public index(@LoggedUser() user: User): TransactionListView {
+  @Get('budgets')
+  public index(@LoggedUser() user: User): BudgetView[] {
     const house = user.currentHouse;
 
     if (!(house instanceof House)) {
       throw new BadRequestException();
     }
 
-    return this.queryBus.execute(new GetTransactionsByHouseQuery(user, house));
+    return this.queryBus.execute(new GetBudgetsByHouseQuery(user, house));
   }
 }
