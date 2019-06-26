@@ -41,7 +41,7 @@ export class GetTransactionsController {
     }
 
     return this.queryBus.execute(
-      new GetTransactionsByBudgetQuery(user, budget, new Date()),
+      new GetTransactionsByBudgetQuery(user, budget, query.date),
     );
   }
 }
