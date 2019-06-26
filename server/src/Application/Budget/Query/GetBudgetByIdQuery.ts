@@ -1,5 +1,5 @@
 import { IQuery } from 'src/Application/IQuery';
-import { IsNotEmpty, IsUUID, IsDate } from 'class-validator';
+import { IsNotEmpty, IsUUID } from 'class-validator';
 import { ApiModelProperty } from '@nestjs/swagger';
 
 export class GetBudgetByIdQuery implements IQuery {
@@ -7,9 +7,4 @@ export class GetBudgetByIdQuery implements IQuery {
   @IsNotEmpty()
   @IsUUID()
   public id: string;
-
-  @ApiModelProperty()
-  @IsNotEmpty()
-  @IsDate()
-  public date: Date;
 }

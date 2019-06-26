@@ -5,7 +5,7 @@ import {
   Inject,
   Get,
   BadRequestException,
-  Param,
+  Query,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorator';
@@ -13,8 +13,8 @@ import { User } from 'src/Domain/User/User.entity';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { House } from 'src/Domain/House/House.entity';
 import { BudgetView } from 'src/Application/Budget/View/BudgetView';
+import { BudgetFilterDto } from './Dto/BudgetFilterDto';
 import { GetBudgetsByHouseQuery } from 'src/Application/Budget/Query/GetBudgetsByHouseQuery';
-import { DateFilterDto } from './Dto/DateFilterDto';
 
 @ApiBearerAuth()
 @Controller('users/me/current-house')
@@ -31,7 +31,7 @@ export class GetBudgetsController {
   })
   @Get('budgets')
   public index(
-    @Param() dateFilterDto: DateFilterDto,
+    @Query() budgetFilterDto: BudgetFilterDto,
     @LoggedUser() user: User,
   ): BudgetView[] {
     const house = user.currentHouse;
@@ -41,7 +41,7 @@ export class GetBudgetsController {
     }
 
     return this.queryBus.execute(
-      new GetBudgetsByHouseQuery(user, house, dateFilterDto.date),
+      new GetBudgetsByHouseQuery(user, house, new Date(budgetFilterDto.date)),
     );
   }
 }

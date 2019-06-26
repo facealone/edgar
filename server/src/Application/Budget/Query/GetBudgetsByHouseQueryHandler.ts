@@ -42,6 +42,7 @@ export class GetBudgetsByHouseQueryHandler {
           budget.name,
           budget.amount / 100,
           balance / 100,
+          budget.shared,
         ),
       );
     }

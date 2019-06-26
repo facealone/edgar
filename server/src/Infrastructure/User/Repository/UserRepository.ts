@@ -7,7 +7,8 @@ import { User } from 'src/Domain/User/User.entity';
 @Injectable()
 export class UserRepository implements IUserRepository {
   constructor(
-    @InjectRepository(User) private readonly repository: Repository<User>,
+    @InjectRepository(User)
+    private readonly repository: Repository<User>,
   ) {}
 
   public findOneById = async (id: string): Promise<User | null> => {

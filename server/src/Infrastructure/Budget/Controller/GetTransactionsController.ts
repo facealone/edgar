@@ -6,6 +6,7 @@ import {
   Get,
   Param,
   NotFoundException,
+  Query,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorator';
@@ -15,6 +16,7 @@ import { GetTransactionsByBudgetQuery } from 'src/Application/Budget/Query/GetTr
 import { TransactionListView } from 'src/Application/Budget/View/TransactionListView';
 import { Budget } from 'src/Domain/Budget/Budget.entity';
 import { GetBudgetByIdQuery } from 'src/Application/Budget/Query/GetBudgetByIdQuery';
+import { TransactionFilterDto } from './Dto/TransactionFilterDto';
 
 @ApiBearerAuth()
 @Controller()
@@ -32,6 +34,7 @@ export class GetTransactionsController {
   @Get('budgets/:id/transactions')
   public async index(
     @Param() query: GetBudgetByIdQuery,
+    @Query() transactionFilterDto: TransactionFilterDto,
     @LoggedUser() user: User,
   ): Promise<TransactionListView> {
     const budget = await this.queryBus.execute(query);
@@ -41,7 +44,11 @@ export class GetTransactionsController {
     }
 
     return this.queryBus.execute(
-      new GetTransactionsByBudgetQuery(user, budget, query.date),
+      new GetTransactionsByBudgetQuery(
+        user,
+        budget,
+        new Date(transactionFilterDto.date),
+      ),
     );
   }
 }
