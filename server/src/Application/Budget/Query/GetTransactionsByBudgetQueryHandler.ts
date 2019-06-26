@@ -20,7 +20,7 @@ export class GetTransactionsByBudgetQueryHandler {
   public execute = async (
     query: GetTransactionsByBudgetQuery,
   ): Promise<TransactionListView> => {
-    const { budget, user } = query;
+    const { budget, user, date } = query;
 
     if (
       false === (await this.isOwnerOfHouse.isSatisfiedBy(budget.house, user))
@@ -28,7 +28,10 @@ export class GetTransactionsByBudgetQueryHandler {
       throw new ForbiddenException('not.owner.of.house');
     }
 
-    const transactions = await this.transactionRepository.findByBudget(budget);
+    const transactions = await this.transactionRepository.findByBudget(
+      budget,
+      date,
+    );
     const transactionsViews = [];
 
     let totalCashInflow: number = 0;

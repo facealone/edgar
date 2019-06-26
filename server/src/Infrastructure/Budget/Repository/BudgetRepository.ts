@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, SelectQueryBuilder } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Budget } from 'src/Domain/Budget/Budget.entity';
 import { IBudgetRepository } from 'src/Domain/Budget/Repository/IBudgetRepository';
@@ -24,27 +24,40 @@ export class BudgetRepository implements IBudgetRepository {
     });
   };
 
-  public findByHouse = async (house: House): Promise<any[]> => {
+  public findByHouse = async (house: House, date: Date): Promise<any[]> => {
     return await this.repository
       .createQueryBuilder('budget')
       .select('budget.id, budget.name, budget.amount, budget.shared')
       .addSelect(subQuery => {
-        return subQuery
-          .select('SUM(t.amount)')
-          .from(Transaction, 't')
-          .where('t.budget.id = budget.id')
-          .andWhere("t.type = 'cash_inflow'");
+        return this.sumOfTransactionAmountQuery(subQuery, date, 'cash_inflow');
       }, 'totalCashInflow')
       .addSelect(subQuery => {
-        return subQuery
-          .select('SUM(t.amount)')
-          .from(Transaction, 't')
-          .where('t.budget.id = budget.id')
-          .andWhere("t.type = 'cash_outlay'");
+        return this.sumOfTransactionAmountQuery(subQuery, date, 'cash_outlay');
       }, 'totalCashOutlay')
       .where('budget.house = :house', { house: house.id })
       .orderBy('budget.createdAt', 'DESC')
       .groupBy('budget.id')
       .getRawMany();
+  };
+
+  private sumOfTransactionAmountQuery = (
+    subQuery: SelectQueryBuilder<Transaction>,
+    date: Date,
+    type: string,
+  ) => {
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    return subQuery
+      .select('SUM(transaction.amount)')
+      .from(Transaction, 'transaction')
+      .where('transaction.budget = budget.id')
+      .andWhere('extract(month FROM transaction.createdAt ) = :month', {
+        month,
+      })
+      .andWhere('extract(year FROM transaction.createdAt ) = :year', {
+        year,
+      })
+      .andWhere("transaction.type = '" + type + "'");
   };
 }

@@ -16,13 +16,13 @@ export class GetBudgetsByHouseQueryHandler {
   public execute = async (
     query: GetBudgetsByHouseQuery,
   ): Promise<BudgetView[]> => {
-    const { house, user } = query;
+    const { house, user, date } = query;
 
     if (false === (await this.isOwnerOfHouse.isSatisfiedBy(house, user))) {
       throw new ForbiddenException('not.owner.of.house');
     }
 
-    const budgets = await this.budgetRepository.findByHouse(house);
+    const budgets = await this.budgetRepository.findByHouse(house, date);
     const budgetsViews = [];
 
     for (const budget of budgets) {

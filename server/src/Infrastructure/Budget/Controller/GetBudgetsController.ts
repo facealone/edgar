@@ -35,6 +35,8 @@ export class GetBudgetsController {
       throw new BadRequestException();
     }
 
-    return this.queryBus.execute(new GetBudgetsByHouseQuery(user, house));
+    return this.queryBus.execute(
+      new GetBudgetsByHouseQuery(user, house, new Date()),
+    );
   }
 }

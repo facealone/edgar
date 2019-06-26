@@ -16,11 +16,25 @@ export class TransactionRepository implements ITransactionRepository {
     return await this.repository.save(transaction);
   };
 
-  public findByBudget = async (budget: Budget): Promise<Transaction[]> => {
-    return await this.repository.find({
-      where: { budget },
-      order: { createdAt: 'DESC' },
-      relations: ['user', 'category'],
-    });
+  public findByBudget = async (
+    budget: Budget,
+    date: Date,
+  ): Promise<Transaction[]> => {
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    return await this.repository
+      .createQueryBuilder('transaction')
+      .where('transaction.budget = :budget', { budget: budget.id })
+      .andWhere('extract(month FROM transaction.createdAt ) = :month', {
+        month,
+      })
+      .andWhere('extract(year FROM transaction.createdAt ) = :year', {
+        year,
+      })
+      .innerJoinAndSelect('transaction.user', 'user')
+      .innerJoinAndSelect('transaction.category', 'category')
+      .orderBy('transaction.createdAt', 'DESC')
+      .getMany();
   };
 }
