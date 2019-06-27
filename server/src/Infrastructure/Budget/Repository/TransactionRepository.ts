@@ -37,4 +37,17 @@ export class TransactionRepository implements ITransactionRepository {
       .orderBy('transaction.createdAt', 'DESC')
       .getMany();
   };
+
+  public findOneById = async (id: string): Promise<Transaction | null> => {
+    return await this.repository
+      .createQueryBuilder('transaction')
+      .where('transaction.id = :id', { id })
+      .innerJoinAndSelect('transaction.budget', 'budget')
+      .innerJoinAndSelect('budget.house', 'house')
+      .getOne();
+  };
+
+  public remove = (transaction: Transaction): void => {
+    this.repository.remove(transaction);
+  };
 }

@@ -30,7 +30,7 @@ export class CardRepository implements ICardRepository {
     });
   };
 
-  public remove = async (card: Card): Promise<void> => {
-    await this.repository.remove(card);
+  public remove = (card: Card): void => {
+    this.repository.remove(card);
   };
 }

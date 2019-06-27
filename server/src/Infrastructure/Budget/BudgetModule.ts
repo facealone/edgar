@@ -22,6 +22,9 @@ import { Budget } from 'src/Domain/Budget/Budget.entity';
 import { CreateBudgetController } from './Controller/CreateBudgetController';
 import { CreateBudgetCommandHandler } from 'src/Application/Budget/Command/CreateBudgetCommandHandler';
 import { GetBudgetByIdQueryHandler } from 'src/Application/Budget/Query/GetBudgetByIdQueryHandler';
+import { GetTransactionByIdQueryHandler } from 'src/Application/Budget/Query/GetTransactionByIdQueryHandler';
+import { RemoveTransactionController } from './Controller/RemoveTransactionController';
+import { RemoveTransactionCommandHandler } from 'src/Application/Budget/Command/RemoveTransactionCommandHandler';
 
 @Module({
   imports: [
@@ -40,6 +43,7 @@ import { GetBudgetByIdQueryHandler } from 'src/Application/Budget/Query/GetBudge
     CreateTransactionController,
     GetTransactionsController,
     GetBudgetsController,
+    RemoveTransactionController,
   ],
   providers: [
     { provide: 'IUserHouseRepository', useClass: UserHouseRepository },
@@ -55,6 +59,8 @@ import { GetBudgetByIdQueryHandler } from 'src/Application/Budget/Query/GetBudge
     CreateBudgetCommandHandler,
     GetTransactionsByBudgetQueryHandler,
     GetBudgetByIdQueryHandler,
+    GetTransactionByIdQueryHandler,
+    RemoveTransactionCommandHandler,
     IsOwnerOfHouse,
   ],
 })

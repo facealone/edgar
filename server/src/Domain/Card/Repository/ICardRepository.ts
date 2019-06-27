@@ -5,5 +5,5 @@ export interface ICardRepository {
   save(card: Card): Promise<Card>;
   findByHouse(house: House): Promise<Card[]>;
   findOneById(id: string): Promise<Card | null>;
-  remove(card: Card): Promise<void>;
+  remove(card: Card): void;
 }

@@ -31,7 +31,7 @@ export class RecipeRepository implements IRecipeRepository {
     });
   };
 
-  public remove = async (recipe: Recipe): Promise<void> => {
-    await this.repository.remove(recipe);
+  public remove = (recipe: Recipe): void => {
+    this.repository.remove(recipe);
   };
 }
