@@ -21,12 +21,12 @@ export class CreateBudgetController {
     title: 'Create budget by the logged user in him current house',
   })
   @Post()
-  public index(
+  public async index(
     @Body() command: CreateBudgetCommand,
     @LoggedUser() user: User,
-  ): BudgetView {
+  ): Promise<BudgetView> {
     command.user = user;
 
-    return this.commandBus.execute(command);
+    return await this.commandBus.execute(command);
   }
 }

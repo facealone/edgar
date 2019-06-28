@@ -21,12 +21,12 @@ export class CreateTransactionController {
     title: 'Create transaction by the logged user in him current house',
   })
   @Post()
-  public index(
+  public async index(
     @Body() command: CreateTransactionCommand,
     @LoggedUser() user: User,
-  ): TransactionView {
+  ): Promise<TransactionView> {
     command.user = user;
 
-    return this.commandBus.execute(command);
+    return await this.commandBus.execute(command);
   }
 }

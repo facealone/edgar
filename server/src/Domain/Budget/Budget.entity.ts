@@ -42,4 +42,10 @@ export class Budget {
   constructor(budget: Partial<Budget>) {
     Object.assign(this, budget);
   }
+
+  public update = (name: string, amount: number, shared: boolean): void => {
+    this.name = name;
+    this.amount = amount;
+    this.shared = shared;
+  };
 }

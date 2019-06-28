@@ -49,17 +49,23 @@ export class User {
     Object.assign(this, user);
   }
 
-  update = (firstName: string, lastName: string, email: string): void => {
+  public update = (
+    firstName: string,
+    lastName: string,
+    email: string,
+  ): void => {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
   };
 
-  updateCurrentHouse = (house: House): void => {
+  public updateCurrentHouse = (house: House): void => {
     this.currentHouse = house;
   };
 
-  updatePushNotificationToken = (pushNotificationToken: string): void => {
+  public updatePushNotificationToken = (
+    pushNotificationToken: string,
+  ): void => {
     this.pushNotificationToken = pushNotificationToken;
   };
 }
