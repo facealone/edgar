@@ -1,8 +1,9 @@
 import { House } from 'src/Domain/House/House.entity';
 import { Budget } from '../Budget.entity';
+import { User } from 'src/Domain/User/User.entity';
 
 export interface IBudgetRepository {
   save(budget: Budget): Promise<Budget>;
-  findOneById(id: string): Promise<Budget>;
-  findByHouse(house: House, date: Date): Promise<any[]>;
+  findOneByIdAndUser(id: string, user: User): Promise<Budget | null>;
+  findByHouseAndUser(house: House, user: User, date: Date): Promise<any[]>;
 }

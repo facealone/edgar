@@ -14,6 +14,8 @@ export class GetBudgetByIdQueryHandler {
   public execute = async (
     query: GetBudgetByIdQuery,
   ): Promise<Budget | null> => {
-    return await this.budgetRepository.findOneById(query.id);
+    const { id, user } = query;
+
+    return await this.budgetRepository.findOneByIdAndUser(id, user);
   };
 }

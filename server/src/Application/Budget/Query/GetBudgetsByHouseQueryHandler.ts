@@ -22,7 +22,11 @@ export class GetBudgetsByHouseQueryHandler {
       throw new ForbiddenException('not.owner.of.house');
     }
 
-    const budgets = await this.budgetRepository.findByHouse(house, date);
+    const budgets = await this.budgetRepository.findByHouseAndUser(
+      house,
+      user,
+      date,
+    );
     const budgetsViews = [];
 
     for (const budget of budgets) {

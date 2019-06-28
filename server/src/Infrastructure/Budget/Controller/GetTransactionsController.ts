@@ -37,8 +37,9 @@ export class GetTransactionsController {
     @Query() transactionFilterDto: TransactionFilterDto,
     @LoggedUser() user: User,
   ): Promise<TransactionListView> {
-    const budget = await this.queryBus.execute(query);
+    query.user = user;
 
+    const budget = await this.queryBus.execute(query);
     if (!(budget instanceof Budget)) {
       throw new NotFoundException();
     }

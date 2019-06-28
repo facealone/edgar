@@ -39,6 +39,8 @@ export class UpdateBudgetController {
     @Body() command: UpdateBudgetCommand,
     @LoggedUser() user: User,
   ): Promise<BudgetView> {
+    query.user = user;
+
     const budget = await this.queryBus.execute(query);
     if (!(budget instanceof Budget)) {
       throw new NotFoundException();

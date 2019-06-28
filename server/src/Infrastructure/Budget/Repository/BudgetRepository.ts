@@ -5,6 +5,7 @@ import { Budget } from 'src/Domain/Budget/Budget.entity';
 import { IBudgetRepository } from 'src/Domain/Budget/Repository/IBudgetRepository';
 import { House } from 'src/Domain/House/House.entity';
 import { Transaction } from 'src/Domain/Budget/Transaction.entity';
+import { User } from 'src/Domain/User/User.entity';
 
 @Injectable()
 export class BudgetRepository implements IBudgetRepository {
@@ -17,14 +18,27 @@ export class BudgetRepository implements IBudgetRepository {
     return await this.repository.save(budget);
   };
 
-  public findOneById = async (id: string): Promise<Budget> => {
-    return await this.repository.findOne({
-      where: { id },
-      relations: ['house'],
-    });
+  public findOneByIdAndUser = async (
+    id: string,
+    user: User,
+  ): Promise<Budget | null> => {
+    return await this.repository
+      .createQueryBuilder('budget')
+      .where('budget.id = :id', { id })
+      .andWhere(
+        'budget.shared = true OR (budget.shared = false AND user.id = :user)',
+        { user: user.id },
+      )
+      .innerJoinAndSelect('budget.house', 'house')
+      .innerJoin('budget.user', 'user')
+      .getOne();
   };
 
-  public findByHouse = async (house: House, date: Date): Promise<any[]> => {
+  public findByHouseAndUser = async (
+    house: House,
+    user: User,
+    date: Date,
+  ): Promise<any[]> => {
     return await this.repository
       .createQueryBuilder('budget')
       .select('budget.id, budget.name, budget.amount, budget.shared')
@@ -34,9 +48,14 @@ export class BudgetRepository implements IBudgetRepository {
       .addSelect(subQuery => {
         return this.sumOfTransactionAmountQuery(subQuery, date, 'cash_outlay');
       }, 'totalCashOutlay')
+      .innerJoin('budget.user', 'user')
       .where('budget.house = :house', { house: house.id })
+      .andWhere(
+        'budget.shared = true OR (budget.shared = false AND user.id = :user)',
+        { user: user.id },
+      )
       .orderBy('budget.createdAt', 'DESC')
-      .groupBy('budget.id')
+      .groupBy('budget.id, user.id')
       .getRawMany();
   };
 
