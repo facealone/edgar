@@ -27,6 +27,8 @@ import { RemoveTransactionController } from './Controller/RemoveTransactionContr
 import { RemoveTransactionCommandHandler } from 'src/Application/Budget/Command/RemoveTransactionCommandHandler';
 import { UpdateBudgetController } from './Controller/UpdateBudgetController';
 import { UpdateBudgetCommandHandler } from 'src/Application/Budget/Command/UpdateBudgetCommandHandler';
+import { UpdateTransactionCommandHandler } from 'src/Application/Budget/Command/UpdateTransactionCommandHandler';
+import { UpdateTransactionController } from './Controller/UpdateTransactionController';
 
 @Module({
   imports: [
@@ -45,6 +47,7 @@ import { UpdateBudgetCommandHandler } from 'src/Application/Budget/Command/Updat
     UpdateBudgetController,
     GetTransactionsController,
     CreateTransactionController,
+    UpdateTransactionController,
     RemoveTransactionController,
     GetTransactionsCategoriesController,
   ],
@@ -65,6 +68,7 @@ import { UpdateBudgetCommandHandler } from 'src/Application/Budget/Command/Updat
     GetTransactionByIdQueryHandler,
     RemoveTransactionCommandHandler,
     UpdateBudgetCommandHandler,
+    UpdateTransactionCommandHandler,
     IsOwnerOfHouse,
   ],
 })

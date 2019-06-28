@@ -48,4 +48,18 @@ export class Transaction {
   constructor(transaction: Partial<Transaction>) {
     Object.assign(this, transaction);
   }
+
+  public update = (
+    name: string,
+    amount: number,
+    note: string,
+    type: string,
+    category: TransactionCategory,
+  ): void => {
+    this.name = name;
+    this.amount = amount;
+    this.note = note;
+    this.type = type;
+    this.category = category;
+  };
 }

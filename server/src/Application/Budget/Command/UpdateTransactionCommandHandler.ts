@@ -1,26 +1,21 @@
 import {
   Inject,
-  BadRequestException,
   ForbiddenException,
+  BadRequestException,
 } from '@nestjs/common';
 import { CommandHandler } from '@nestjs/cqrs';
-import { CreateTransactionCommand } from './CreateTransactionCommand';
 import { ITransactionRepository } from 'src/Domain/Budget/Repository/ITransactionRepository';
-import { TransactionView } from '../View/TransactionView';
+import { IsOwnerOfHouse } from 'src/Domain/User/IsOwnerOfHouse';
+import { UpdateTransactionCommand } from './UpdateTransactionCommand';
 import { ITransactionCategoryRepository } from 'src/Domain/Budget/Repository/ITransactionCategoryRepository';
 import { TransactionCategory } from 'src/Domain/Budget/TransactionCategory.entity';
-import { Transaction } from 'src/Domain/Budget/Transaction.entity';
+import { TransactionView } from '../View/TransactionView';
 import { TransactionCategoryView } from '../View/TransactionCategoryView';
 import { OwnerView } from 'src/Application/User/View/OwnerView';
-import { IsOwnerOfHouse } from 'src/Domain/User/IsOwnerOfHouse';
-import { IBudgetRepository } from 'src/Domain/Budget/Repository/IBudgetRepository';
-import { Budget } from 'src/Domain/Budget/Budget.entity';
 
-@CommandHandler(CreateTransactionCommand)
-export class CreateTransactionCommandHandler {
+@CommandHandler(UpdateTransactionCommand)
+export class UpdateTransactionCommandHandler {
   constructor(
-    @Inject('IBudgetRepository')
-    private readonly budgetRepository: IBudgetRepository,
     @Inject('ITransactionRepository')
     private readonly transactionRepository: ITransactionRepository,
     @Inject('ITransactionCategoryRepository')
@@ -28,22 +23,12 @@ export class CreateTransactionCommandHandler {
     private readonly isOwnerOfHouse: IsOwnerOfHouse,
   ) {}
 
-  public execute = async (
-    command: CreateTransactionCommand,
-  ): Promise<TransactionView> => {
-    const { name, note, categoryId, type, budgetId, user } = command;
-    const amount = command.amount * 100;
-
-    const budget = await this.budgetRepository.findOneByIdAndUser(
-      budgetId,
-      user,
-    );
-    if (!(budget instanceof Budget)) {
-      throw new BadRequestException('budget.not.found');
-    }
+  public execute = async (command: UpdateTransactionCommand) => {
+    const { transaction, user, amount, note, name, type, categoryId } = command;
 
     if (
-      false === (await this.isOwnerOfHouse.isSatisfiedBy(budget.house, user))
+      false ===
+      (await this.isOwnerOfHouse.isSatisfiedBy(transaction.budget.house, user))
     ) {
       throw new ForbiddenException('not.owner.of.house');
     }
@@ -55,17 +40,9 @@ export class CreateTransactionCommandHandler {
       throw new BadRequestException('budget.category.not.found');
     }
 
-    const transaction = await this.transactionRepository.save(
-      new Transaction({
-        name,
-        amount,
-        note,
-        category,
-        type,
-        user,
-        budget,
-      }),
-    );
+    transaction.update(name, amount * 100, note, type, category);
+
+    await this.transactionRepository.save(transaction);
 
     return new TransactionView(
       transaction.id,
