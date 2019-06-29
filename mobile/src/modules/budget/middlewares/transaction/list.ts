@@ -2,6 +2,7 @@ import { loading, success, errors } from '../../actions/transaction/list';
 import { TransactionList } from '../../models/TransactionList';
 import { Transaction } from '../../models/Transaction';
 import { Owner } from '../../../user/models/Owner';
+import { TransactionCategory } from '../../models/TransactionCategory';
 
 export const listTransactions = (budgetId: string) => {
   return async (dispatch: any, getState: any, axios: any) => {
@@ -24,6 +25,7 @@ export const listTransactions = (budgetId: string) => {
             transaction.amount,
             transaction.note,
             transaction.createdAt,
+            new TransactionCategory(category.id, category.name),
             new Owner(owner.firstName, owner.lastName),
           ),
         );

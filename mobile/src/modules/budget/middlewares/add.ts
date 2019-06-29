@@ -1,16 +1,17 @@
-import { loading, success, errors } from '../actions/list';
+import { loading, success, errors } from '../actions/add';
 import { Budget } from '../models/Budget';
+import { IBudgetForm } from '../types/add';
 
-export const listBudgets = () => {
+export const addBudget = (payload: IBudgetForm) => {
   return async (dispatch: any, getState: any, axios: any) => {
     dispatch(loading(true));
 
     try {
-      const response = await axios.get('users/me/current-house/budgets');
-      const budgets = [];
+      const response = await axios.post('budgets', payload);
+      const budget = response.data;
 
-      for (const budget of response.data) {
-        budgets.push(
+      dispatch(
+        success(
           new Budget(
             budget.id,
             budget.name,
@@ -18,10 +19,8 @@ export const listBudgets = () => {
             budget.balance,
             budget.shared,
           ),
-        );
-      }
-
-      dispatch(success(budgets));
+        ),
+      );
     } catch (err) {
       // todo errors
       dispatch(errors([]));

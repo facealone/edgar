@@ -1,4 +1,5 @@
 import { IOwner } from '../../user/models/Owner';
+import { TransactionCategory } from './TransactionCategory';
 
 export enum TransactionType {
   CASH_OUTLAY = 'cash_outlay',
@@ -13,6 +14,7 @@ export class Transaction {
     public readonly amount: number = 0,
     public readonly note: string | null,
     public readonly createdAt: Date,
+    public readonly category: TransactionCategory,
     public readonly owner: IOwner,
   ) {}
 }

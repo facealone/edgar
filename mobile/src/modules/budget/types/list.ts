@@ -9,6 +9,7 @@ import { IErrorAction, ILoadingAction } from '../../common/types/actions';
 import { ICurrentHouseSuccessAction } from '../../house/types/current';
 import { IAuthenticationLogoutAction } from '../../auth/types/authentication';
 import { Budget } from '../models/Budget';
+import { IBudgetAddSuccessAction } from './add';
 
 export interface IBudgetListSate extends IState {
   payload: Budget[];
@@ -33,6 +34,7 @@ export interface IBudgetListResetAction {
 
 export type IBudgetListActionTypes =
   | IBudgetListSuccessAction
+  | IBudgetAddSuccessAction
   | IBudgetListLoadingAction
   | IBudgetListErrorAction
   | ICurrentHouseSuccessAction

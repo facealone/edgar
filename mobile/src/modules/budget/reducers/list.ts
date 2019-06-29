@@ -7,6 +7,7 @@ import {
 } from '../constants/list';
 import { AUTH_AUTHENTICATION_LOGOUT } from '../../auth/constants/authentication';
 import { HOUSE_CURRENT_SUCCESS } from '../../house/constants/current';
+import { BUDGET_ADD_SUCCESS } from '../constants/add';
 
 const initialState: IBudgetListSate = {
   payload: [],
@@ -23,6 +24,12 @@ export const listReducers = (
       return {
         ...state,
         payload: action.payload,
+      };
+
+    case BUDGET_ADD_SUCCESS:
+      return {
+        ...state,
+        payload: [...state.payload, action.payload],
       };
 
     case BUDGET_LIST_LOADING:
