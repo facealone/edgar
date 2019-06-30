@@ -24,10 +24,9 @@ export class BudgetRepository implements IBudgetRepository {
   ): Promise<Budget | null> => {
     return await this.repository
       .createQueryBuilder('budget')
-      .where('budget.id = :id', { id })
-      .andWhere(
-        'budget.shared = true OR (budget.shared = false AND user.id = :user)',
-        { user: user.id },
+      .where(
+        'budget.id = :id AND (budget.shared = true OR (budget.shared = false AND user.id = :user))',
+        { id, user: user.id },
       )
       .innerJoinAndSelect('budget.house', 'house')
       .innerJoin('budget.user', 'user')
@@ -49,10 +48,9 @@ export class BudgetRepository implements IBudgetRepository {
         return this.sumOfTransactionAmountQuery(subQuery, date, 'cash_outlay');
       }, 'totalCashOutlay')
       .innerJoin('budget.user', 'user')
-      .where('budget.house = :house', { house: house.id })
-      .andWhere(
-        'budget.shared = true OR (budget.shared = false AND user.id = :user)',
-        { user: user.id },
+      .where(
+        'budget.house = :house AND (budget.shared = true OR (budget.shared = false AND user.id = :user))',
+        { house: house.id, user: user.id },
       )
       .orderBy('budget.createdAt', 'DESC')
       .groupBy('budget.id, user.id')

@@ -33,11 +33,11 @@ export class GetBudgetsByHouseQueryHandler {
       let balance = budget.amount;
 
       if (budget.totalCashInflow > 0) {
-        balance += parseInt(budget.totalCashInflow);
+        balance += Number(budget.totalCashInflow);
       }
 
       if (budget.totalCashOutlay > 0) {
-        balance -= parseInt(budget.totalCashOutlay);
+        balance -= Number(budget.totalCashOutlay);
       }
 
       budgetsViews.push(

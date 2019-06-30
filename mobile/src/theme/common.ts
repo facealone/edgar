@@ -41,4 +41,12 @@ export const commonStyles = StyleSheet.create({
     alignSelf: 'flex-start',
     margin: 10,
   },
+  inflow: {
+    color: '#32CD32',
+    fontWeight: 'bold',
+  },
+  outlay: {
+    color: '#DC143C',
+    fontWeight: 'bold',
+  },
 });

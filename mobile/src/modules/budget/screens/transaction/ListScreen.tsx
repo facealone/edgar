@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FlatList, StyleSheet, ScrollView } from 'react-native';
+import { FlatList } from 'react-native';
 import {
   Content,
   Text,
@@ -10,8 +10,7 @@ import {
   Right,
   Fab,
   Icon,
-  Card,
-  CardItem,
+  Spinner,
 } from 'native-base';
 import { commonStyles } from '../../../../theme/common';
 import {
@@ -22,6 +21,7 @@ import { Transaction, TransactionType } from '../../models/Transaction';
 import { listTransactions } from '../../middlewares/transaction/list';
 import { reset } from '../../actions/transaction/list';
 import { bindActionCreators } from 'redux';
+import ResumeTransactions from '../../components/ResumeTransactions';
 
 interface IProps {
   transactions: IBudgetTransactionListSate;
@@ -55,50 +55,10 @@ class ListScreen extends React.PureComponent<IProps> {
             </Text>
           </Separator>
 
+          {transactions.loading && <Spinner />}
           {payload && (
             <>
-              <ScrollView
-                style={{ margin: 5 }}
-                horizontal
-                showsHorizontalScrollIndicator={false}
-              >
-                <Card>
-                  <CardItem header bordered>
-                    <Text>Entrée</Text>
-                  </CardItem>
-                  <CardItem bordered>
-                    <Body>
-                      <Text style={styles.inflow}>{payload.cashInflow}€</Text>
-                    </Body>
-                  </CardItem>
-                </Card>
-                <Card>
-                  <CardItem header bordered>
-                    <Text>Dépense</Text>
-                  </CardItem>
-                  <CardItem bordered>
-                    <Body>
-                      <Text style={styles.outlay}>{payload.cashOutlay}€</Text>
-                    </Body>
-                  </CardItem>
-                </Card>
-                <Card>
-                  <CardItem header bordered>
-                    <Text>Balance</Text>
-                  </CardItem>
-                  <CardItem bordered>
-                    <Body>
-                      <Text
-                        style={
-                          payload.balance > 0 ? styles.inflow : styles.outlay
-                        }
-                      >
-                        {payload.balance}€
-                      </Text>
-                    </Body>
-                  </CardItem>
-                </Card>
-              </ScrollView>
+              <ResumeTransactions transactions={transactions} />
               <FlatList
                 keyExtractor={transaction => transaction.id}
                 data={payload.transactions}
@@ -107,23 +67,33 @@ class ListScreen extends React.PureComponent<IProps> {
                   this.props.listTransactions(params.id);
                 }}
                 renderItem={({ item: transaction }: Transaction) => {
-                  const { id, name, amount, note, owner, type } = transaction;
+                  const {
+                    id,
+                    name,
+                    amount,
+                    category,
+                    owner,
+                    createdAt,
+                    type,
+                  } = transaction;
 
                   let sign = '-';
-                  let style = styles.outlay;
+                  let style = commonStyles.outlay;
 
                   if (TransactionType.CASH_INFLOW === type) {
                     sign = '+';
-                    style = styles.inflow;
+                    style = commonStyles.inflow;
                   }
 
                   return (
                     <ListItem key={id}>
                       <Body>
                         <Text>{name}</Text>
+                        <Text note>{category.name}</Text>
                         <Text note>
                           {owner.firstName} {owner.lastName}
                         </Text>
+                        <Text note>{createdAt}</Text>
                       </Body>
                       <Right>
                         <Text style={style}>{`${sign}${amount}€`}</Text>
@@ -154,17 +124,6 @@ ListScreen.navigationOptions = ({ navigation }: any) => {
     title: name,
   };
 };
-
-const styles = StyleSheet.create({
-  inflow: {
-    color: '#32CD32',
-    fontWeight: 'bold',
-  },
-  outlay: {
-    color: '#DC143C',
-    fontWeight: 'bold',
-  },
-});
 
 export default connect(
   state => {

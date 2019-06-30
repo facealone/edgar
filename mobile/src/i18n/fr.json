@@ -104,7 +104,16 @@
     },
     "budget": {
       "list": {
-        "header": "Budgets"
+        "header": "Budgets",
+        "balance": "Solde : {{amount}} €"
+      },
+      "transaction": {
+        "list": {
+          "budget": "Budget",
+          "inflow": "Entrées",
+          "outlay": "Dépenses",
+          "balance": "Solde"
+        }
       },
       "add": {
         "title": "Créer un budget",

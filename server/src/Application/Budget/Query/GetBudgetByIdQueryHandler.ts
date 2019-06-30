@@ -15,7 +15,6 @@ export class GetBudgetByIdQueryHandler {
     query: GetBudgetByIdQuery,
   ): Promise<Budget | null> => {
     const { id, user } = query;
-
     return await this.budgetRepository.findOneByIdAndUser(id, user);
   };
 }

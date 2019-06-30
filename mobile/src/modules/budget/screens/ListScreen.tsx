@@ -11,6 +11,7 @@ import {
   Fab,
   Icon,
 } from 'native-base';
+import RNSpeedometer from 'react-native-speedometer';
 import { commonStyles } from '../../../theme/common';
 import { IBudgetListSate, IBudgetListResetAction } from '../types/list';
 import { Budget } from '../models/Budget';
@@ -18,6 +19,7 @@ import { listBudgets } from '../middlewares/list';
 import { reset } from '../actions/transaction/list';
 import { bindActionCreators } from 'redux';
 import i18n from '../../../i18n';
+import { MAIN_COLOR } from '../../../theme/colors';
 
 interface IProps {
   budget: IBudgetListSate;
@@ -55,8 +57,7 @@ class ListScreen extends React.PureComponent<IProps> {
               this.props.listBudgets();
             }}
             renderItem={({ item: budget }: Budget) => {
-              const { id, name, balance, amount } = budget;
-              const sign = balance > 0 ? '+' : '-';
+              const { id, name, balance, shared, amount } = budget;
 
               return (
                 <ListItem
@@ -66,11 +67,27 @@ class ListScreen extends React.PureComponent<IProps> {
                   }
                 >
                   <Body>
-                    <Text>{name}</Text>
-                    <Text note>Budget mensuel {amount}€</Text>
+                    <Text>
+                      {name}
+                      {false === shared && (
+                        <>
+                          {' '}
+                          <Icon name={'lock'} fontSize={5} color={MAIN_COLOR} />
+                        </>
+                      )}
+                    </Text>
+                    <Text note>
+                      {i18n.t('budget.list.balance', { amount: balance })}
+                    </Text>
                   </Body>
                   <Right>
-                    <Text>{`${sign}${balance}€`}</Text>
+                    <RNSpeedometer
+                      value={balance}
+                      maxValue={amount}
+                      size={70}
+                      labelStyle={{ display: 'none' }}
+                      labelNoteStyle={{ display: 'none' }}
+                    />
                   </Right>
                 </ListItem>
               );

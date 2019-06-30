@@ -6,7 +6,9 @@ export const listBudgets = () => {
     dispatch(loading(true));
 
     try {
-      const response = await axios.get('users/me/current-house/budgets');
+      const response = await axios.get(
+        `users/me/current-house/budgets?date=${new Date().toISOString()}`,
+      );
       const budgets = [];
 
       for (const budget of response.data) {

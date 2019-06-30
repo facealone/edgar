@@ -9,9 +9,10 @@ export const listTransactions = (budgetId: string) => {
     dispatch(loading(true));
 
     try {
-      const response = await axios.get(`budgets/${budgetId}/transactions`);
+      const response = await axios.get(
+        `budgets/${budgetId}/transactions?date=${new Date().toISOString()}`,
+      );
       const payload = response.data;
-
       const transactions = [];
 
       for (const transaction of payload.transactions) {
