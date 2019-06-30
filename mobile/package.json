@@ -20,6 +20,7 @@
     "react-i18next": "^10.10.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-barcode-builder": "^1.0.5",
+    "react-native-elements": "^1.1.0",
     "react-native-paper": "^2.15.2",
     "react-navigation": "^3.11.0",
     "react-navigation-material-bottom-tabs": "^1.0.0",

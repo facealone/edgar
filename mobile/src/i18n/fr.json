@@ -105,6 +105,18 @@
     "budget": {
       "list": {
         "header": "Budgets"
+      },
+      "add": {
+        "title": "Créer un budget",
+        "form": {
+          "name": "Nom du budget",
+          "amount": "Votre budget mensuel en €",
+          "shared": "Partager ce budget avec les autres membres",
+          "errors": {
+            "amountValue": "Le montant doit être supérieur à 0.",
+            "amountFormat": "Le format est incorrect, pour les décimales utiliser le point."
+          }
+        }
       }
     },
     "card": {

@@ -40,7 +40,7 @@ export class UpdateTransactionCommandHandler {
       throw new BadRequestException('budget.category.not.found');
     }
 
-    transaction.update(name, amount * 100, note, type, category);
+    transaction.update(name, Math.round(amount * 100), note, type, category);
 
     await this.transactionRepository.save(transaction);
 

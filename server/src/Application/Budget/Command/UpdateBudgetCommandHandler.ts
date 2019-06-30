@@ -24,7 +24,7 @@ export class UpdateBudgetCommandHandler {
       throw new ForbiddenException('not.owner.of.house');
     }
 
-    budget.update(name, amount * 100, shared);
+    budget.update(name, Math.round(amount * 100), shared);
 
     await this.budgetRepository.save(budget);
 

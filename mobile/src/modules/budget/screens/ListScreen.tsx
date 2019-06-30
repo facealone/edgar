@@ -43,9 +43,10 @@ class ListScreen extends React.PureComponent<IProps> {
         <Content style={commonStyles.content}>
           <Separator bordered>
             <Text style={commonStyles.centerHeaderFlatList}>
-              {i18n.t('budget.list.header')} Juin 2019 ({budget.payload.length})
+              {i18n.t('budget.list.header')} ({budget.payload.length})
             </Text>
           </Separator>
+
           <FlatList
             keyExtractor={budget => budget.id}
             data={budget.payload}
@@ -79,7 +80,9 @@ class ListScreen extends React.PureComponent<IProps> {
         <Fab
           style={commonStyles.fabButton}
           position={'bottomRight'}
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate('BudgetAdd');
+          }}
         >
           <Icon name={'add'} />
         </Fab>

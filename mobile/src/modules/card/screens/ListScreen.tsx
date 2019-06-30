@@ -58,6 +58,7 @@ class ListScreen extends React.PureComponent<IProps> {
 
               return (
                 <ListItem
+                  icon
                   key={id}
                   onPress={() =>
                     navigation.navigate('CardShow', { barCode, name, id })

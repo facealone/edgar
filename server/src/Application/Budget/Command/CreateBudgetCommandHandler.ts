@@ -23,7 +23,7 @@ export class CreateBudgetCommandHandler {
     command: CreateBudgetCommand,
   ): Promise<BudgetView> => {
     const { name, shared, user } = command;
-    const amount = command.amount * 100;
+    const amount = Math.round(command.amount * 100);
     const house = user.currentHouse;
 
     if (!(house instanceof House)) {
@@ -47,8 +47,8 @@ export class CreateBudgetCommandHandler {
     return new BudgetView(
       budget.id,
       budget.name,
-      budget.amount,
-      budget.amount,
+      budget.amount / 100,
+      budget.amount / 100,
       budget.shared,
     );
   };

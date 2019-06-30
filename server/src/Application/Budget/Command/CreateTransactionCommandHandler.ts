@@ -32,7 +32,7 @@ export class CreateTransactionCommandHandler {
     command: CreateTransactionCommand,
   ): Promise<TransactionView> => {
     const { name, note, categoryId, type, budgetId, user } = command;
-    const amount = command.amount * 100;
+    const amount = Math.round(command.amount * 100);
 
     const budget = await this.budgetRepository.findOneByIdAndUser(
       budgetId,
