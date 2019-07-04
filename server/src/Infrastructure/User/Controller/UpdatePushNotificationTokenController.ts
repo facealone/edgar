@@ -3,9 +3,9 @@ import { Controller, UseGuards, Put, Body, Inject } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { LoggedUser } from '../Decorator/LoggedUserDecorator';
 import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapter';
-import { User } from 'src/Domain/User/User.entity';
 import { UpdatePushNotificationTokenCommand } from 'src/Application/User/Command/UpdatePushNotificationTokenCommand';
 import { PushNotifcationTokenUpdatedView } from 'src/Application/User/View/PushNotifcationTokenUpdatedView';
+import { User } from 'src/Domain/User/User.entity';
 
 @ApiBearerAuth()
 @Controller('users')
@@ -21,9 +21,9 @@ export class UpdatePushNotificationTokenController {
   @Put('/me/push-notification-token')
   public async index(
     @Body() command: UpdatePushNotificationTokenCommand,
-    @LoggedUser() loggedUser: User,
+    @LoggedUser() user: User,
   ): Promise<PushNotifcationTokenUpdatedView> {
-    command.user = loggedUser;
+    command.user = user;
 
     return await this.commandBus.execute(command);
   }

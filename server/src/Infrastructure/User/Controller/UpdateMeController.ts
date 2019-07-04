@@ -4,7 +4,6 @@ import { AuthGuard } from '@nestjs/passport';
 import { LoggedUser } from '../Decorator/LoggedUserDecorator';
 import { UpdateUserCommand } from 'src/Application/User/Command/UpdateUserCommand';
 import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapter';
-import { LoggedUserView } from 'src/Application/User/View/LoggedUserView';
 import { User } from 'src/Domain/User/User.entity';
 
 @ApiBearerAuth()
@@ -21,9 +20,9 @@ export class UpdateMeController {
   @Put('/me')
   public async index(
     @Body() command: UpdateUserCommand,
-    @LoggedUser() loggedUser: User,
-  ): Promise<LoggedUserView> {
-    command.user = loggedUser;
+    @LoggedUser() user: User,
+  ): Promise<User> {
+    command.user = user;
 
     return await this.commandBus.execute(command);
   }

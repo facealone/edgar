@@ -8,11 +8,10 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorator';
-import { User } from 'src/Domain/User/User.entity';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { GetCardsByHouseQuery } from 'src/Application/Card/Query/GetCardsByHouseQuery';
 import { CardView } from 'src/Application/Card/View/CardView';
-import { House } from 'src/Domain/House/House.entity';
+import { User } from 'src/Domain/User/User.entity';
 
 @ApiBearerAuth()
 @Controller('users/me/current-house')
@@ -27,12 +26,10 @@ export class GetCardsController {
   @ApiOperation({ title: 'Get cards of the logged user current house' })
   @Get('/cards')
   public async index(@LoggedUser() user: User): Promise<CardView[]> {
-    const house = user.currentHouse;
-
-    if (!(house instanceof House)) {
+    if (!user.currentHouse) {
       throw new BadRequestException();
     }
 
-    return await this.queryBus.execute(new GetCardsByHouseQuery(house, user));
+    return await this.queryBus.execute(new GetCardsByHouseQuery(user));
   }
 }

@@ -18,22 +18,20 @@ export class GetHousesByUserQueryHandler {
     const userHouses = await this.userHouseRepository.findUserHousesByUser(
       user,
     );
-    const userHousesviews = [];
+    const userHousesViews = [];
 
     for (const userHouse of userHouses) {
-      const { house, role } = userHouse;
-
-      userHousesviews.push(
+      userHousesViews.push(
         new GetHousesByUserView(
-          house.id,
-          house.name,
-          role,
-          house.id === user.currentHouse.id,
+          userHouse.house.id,
+          userHouse.house.name,
+          userHouse.role,
+          userHouse.house.id === user.currentHouse.id,
           userHouse.createdAt,
         ),
       );
     }
 
-    return userHousesviews;
+    return userHousesViews;
   };
 }

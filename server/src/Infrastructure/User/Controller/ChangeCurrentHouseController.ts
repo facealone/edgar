@@ -12,11 +12,11 @@ import { LoggedUser } from '../Decorator/LoggedUserDecorator';
 import { User } from 'src/Domain/User/User.entity';
 import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapter';
 import { ChangeCurrentHouseCommand } from 'src/Application/User/Command/ChangeCurrentHouseCommand';
-import { House } from 'src/Domain/House/House.entity';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { GetHouseByIdQuery } from 'src/Application/House/Query/GetHouseByIdQuery';
 import { CurrentHouseDto } from 'src/Infrastructure/User/Controller/Dto/CurrentHouseDto';
 import { CurrentHouseUpdatedView } from 'src/Application/User/View/CurrentHouseUpdatedView';
+import { House } from 'src/Domain/House/House.entity';
 
 @ApiBearerAuth()
 @Controller('users')
@@ -40,7 +40,6 @@ export class ChangeCurrentHouseController {
     query.id = currentHouseDto.house;
 
     const house = await this.queryBus.execute(query);
-
     if (!(house instanceof House)) {
       throw new NotFoundException('house.not.found');
     }

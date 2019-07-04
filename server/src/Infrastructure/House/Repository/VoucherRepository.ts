@@ -8,7 +8,8 @@ import { House } from 'src/Domain/House/House.entity';
 @Injectable()
 export class VoucherRepository implements IVoucherRepository {
   constructor(
-    @InjectRepository(Voucher) private readonly repository: Repository<Voucher>,
+    @InjectRepository(Voucher)
+    private readonly repository: Repository<Voucher>,
   ) {}
 
   public save = async (voucher: Voucher): Promise<Voucher> => {
@@ -16,16 +17,21 @@ export class VoucherRepository implements IVoucherRepository {
   };
 
   public findOneByCode = async (code: string): Promise<Voucher | null> => {
-    return await this.repository.findOne({
-      where: { code },
-      relations: ['house'],
-    });
+    return await this.repository
+      .createQueryBuilder('voucher')
+      .select(['voucher.code', 'house.id'])
+      .where('voucher.code = :code', { code })
+      .innerJoin('voucher.house', 'house')
+      .getOne();
   };
 
   public findByHouse = async (house: House): Promise<Voucher[]> => {
-    return await this.repository.find({
-      where: { house },
-    });
+    return await this.repository
+      .createQueryBuilder('voucher')
+      .select(['voucher.code', 'voucher.username', 'voucher.role'])
+      .where('voucher.house = :house', { house: house.id })
+      .limit(20)
+      .getMany();
   };
 
   public remove = async (voucher: Voucher): Promise<void> => {

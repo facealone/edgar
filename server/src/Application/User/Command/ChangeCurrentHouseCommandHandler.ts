@@ -4,6 +4,8 @@ import { ChangeCurrentHouseCommand } from './ChangeCurrentHouseCommand';
 import { IUserRepository } from 'src/Domain/User/Repository/IUserRepository';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { CurrentHouseUpdatedView } from '../View/CurrentHouseUpdatedView';
+import { User } from 'src/Domain/User/User.entity';
+import { House } from 'src/Domain/House/House.entity';
 
 @CommandHandler(ChangeCurrentHouseCommand)
 export class ChangeCurrentHouseComandHandler {
@@ -24,8 +26,8 @@ export class ChangeCurrentHouseComandHandler {
 
     user.updateCurrentHouse(house);
 
-    const { currentHouse } = await this.userRepository.save(user);
+    await this.userRepository.save(user);
 
-    return new CurrentHouseUpdatedView(currentHouse.id, currentHouse.name);
+    return new CurrentHouseUpdatedView(house.id, house.name);
   };
 }

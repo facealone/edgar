@@ -17,6 +17,7 @@ export class UpdatePushNotificationTokenCommandHandler {
     const { user, pushNotificationToken } = command;
 
     user.updatePushNotificationToken(pushNotificationToken);
+
     await this.userRepository.save(user);
 
     return new PushNotifcationTokenUpdatedView(pushNotificationToken);

@@ -15,7 +15,8 @@ export class GetCardsByHouseQueryHandler {
   ) {}
 
   public execute = async (query: GetCardsByHouseQuery): Promise<CardView[]> => {
-    const { house, user } = query;
+    const { user } = query;
+    const house = user.currentHouse;
 
     if (false === (await this.isMemberOfHouse.isSatisfiedBy(house, user))) {
       throw new ForbiddenException('not.member.of.house');

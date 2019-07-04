@@ -8,7 +8,6 @@ import {
 } from '@nestjs/common';
 import { Recipe } from 'src/Domain/Recipe/Recipe.entity';
 import { RecipeView } from '../View/RecipeView';
-import { House } from 'src/Domain/House/House.entity';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { OwnerView } from 'src/Application/User/View/OwnerView';
 import { IRecipeCategoryRepository } from 'src/Domain/Recipe/Repository/IRecipeCategoryRepository';
@@ -21,7 +20,7 @@ export class CreateRecipeCommandHandler {
     @Inject('IRecipeRepository')
     private readonly recipeRepository: IRecipeRepository,
     @Inject('IRecipeCategoryRepository')
-    private readonly recipeCateogryRepository: IRecipeCategoryRepository,
+    private readonly recipeCategoryRepository: IRecipeCategoryRepository,
     private readonly isMemberOfHouse: IsMemberOfHouse,
   ) {}
 
@@ -31,15 +30,11 @@ export class CreateRecipeCommandHandler {
     const { name, uri, user, recipeCategory } = command;
     const house = user.currentHouse;
 
-    if (!(house instanceof House)) {
-      throw new BadRequestException('user.empty.current_house');
-    }
-
     if (false === (await this.isMemberOfHouse.isSatisfiedBy(house, user))) {
       throw new ForbiddenException('not.member.of.house');
     }
 
-    const category = await this.recipeCateogryRepository.findOneById(
+    const category = await this.recipeCategoryRepository.findOneById(
       recipeCategory,
     );
     if (!(category instanceof RecipeCategory)) {
@@ -47,7 +42,13 @@ export class CreateRecipeCommandHandler {
     }
 
     const recipe = await this.recipeRepository.save(
-      new Recipe({ name, uri, house, owner: user, category }),
+      new Recipe({
+        name,
+        uri,
+        house,
+        category,
+        owner: user,
+      }),
     );
 
     return new RecipeView(

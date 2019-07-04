@@ -16,6 +16,10 @@ export class HouseRepository implements IHouseRepository {
   };
 
   public find = async (id: string): Promise<House | null> => {
-    return await this.repository.findOne({ id });
+    return await this.repository
+      .createQueryBuilder('house')
+      .select(['house.id', 'house.name'])
+      .where('house.id = :id', { id })
+      .getOne();
   };
 }

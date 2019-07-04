@@ -49,6 +49,16 @@ export class User {
     Object.assign(this, user);
   }
 
+  public updatePushNotificationToken = (
+    pushNotificationToken: string,
+  ): void => {
+    this.pushNotificationToken = pushNotificationToken;
+  };
+
+  public updateCurrentHouse = (currentHouse: House): void => {
+    this.currentHouse = currentHouse;
+  };
+
   public update = (
     firstName: string,
     lastName: string,
@@ -57,15 +67,5 @@ export class User {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
-  };
-
-  public updateCurrentHouse = (house: House): void => {
-    this.currentHouse = house;
-  };
-
-  public updatePushNotificationToken = (
-    pushNotificationToken: string,
-  ): void => {
-    this.pushNotificationToken = pushNotificationToken;
   };
 }

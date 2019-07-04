@@ -21,7 +21,14 @@ export class UserHouseRepository implements IUserHouseRepository {
     user: User,
     house: House,
   ): Promise<UserHouse | null> => {
-    return await this.repository.findOne({ user, house });
+    return await this.repository
+      .createQueryBuilder('userHouse')
+      .select('userHouse.id')
+      .where('userHouse.house = :house AND userHouse.user = :user', {
+        user: user.id,
+        house: house.id,
+      })
+      .getOne();
   };
 
   public findOneByUserHouseRole = async (
@@ -29,20 +36,52 @@ export class UserHouseRepository implements IUserHouseRepository {
     house: House,
     role: string,
   ): Promise<UserHouse | null> => {
-    return await this.repository.findOne({ user, house, role });
+    return await this.repository
+      .createQueryBuilder('userHouse')
+      .select('userHouse.id')
+      .where(
+        'userHouse.house = :house AND userHouse.user = :user AND userHouse.role = :role',
+        {
+          user: user.id,
+          house: house.id,
+          role,
+        },
+      )
+      .getOne();
   };
 
   public findUserHousesByUser = async (user: User): Promise<UserHouse[]> => {
-    return await this.repository.find({
-      where: { user },
-      relations: ['house'],
-    });
+    return await this.repository
+      .createQueryBuilder('userHouse')
+      .select([
+        'house.id',
+        'house.name',
+        'userHouse.role',
+        'userHouse.createdAt',
+      ])
+      .where('userHouse.user = :user', {
+        user: user.id,
+      })
+      .innerJoin('userHouse.house', 'house')
+      .limit(20)
+      .getMany();
   };
 
   public findUserHousesByHouse = async (house: House): Promise<UserHouse[]> => {
-    return await this.repository.find({
-      where: { house },
-      relations: ['user'],
-    });
+    return await this.repository
+      .createQueryBuilder('userHouse')
+      .select([
+        'user.id',
+        'user.firstName',
+        'user.email',
+        'user.lastName',
+        'userHouse.role',
+      ])
+      .where('userHouse.house = :house', {
+        house: house.id,
+      })
+      .innerJoin('userHouse.user', 'user')
+      .limit(20)
+      .getMany();
   };
 }

@@ -23,8 +23,8 @@ export class UpdateShopCommandHandler {
     }
 
     shop.updateName(name);
-    const savedShop = await this.shopRepository.save(shop);
+    await this.shopRepository.save(shop);
 
-    return new ShopView(savedShop.id, savedShop.name, 0);
+    return new ShopView(shop.id, name, 0);
   };
 }

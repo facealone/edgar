@@ -30,7 +30,7 @@ export class RegisterCommandHandler {
 
     const password = this.encryptionAdapter.hash(command.password);
     const apiToken = this.encryptionAdapter.hash(
-      command.email + Date.now().toString(),
+      command.password + command.email + Date.now().toString(),
     );
 
     const user = new User({

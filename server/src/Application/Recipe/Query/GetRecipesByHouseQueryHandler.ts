@@ -18,7 +18,8 @@ export class GetRecipesByHouseQueryHandler {
   public execute = async (
     query: GetRecipesByHouseQuery,
   ): Promise<RecipeView[]> => {
-    const { house, user } = query;
+    const { user } = query;
+    const house = user.currentHouse;
 
     if (false === (await this.isMemberOfHouse.isSatisfiedBy(house, user))) {
       throw new ForbiddenException('not.member.of.house');
@@ -28,15 +29,13 @@ export class GetRecipesByHouseQueryHandler {
     const recipeViews = [];
 
     for (const recipe of recipes) {
-      const { owner, category } = recipe;
-
       recipeViews.push(
         new RecipeView(
           recipe.id,
           recipe.name,
           recipe.uri,
-          new OwnerView(owner.firstName, owner.lastName),
-          new RecipeCategoryView(category.id, category.name),
+          new OwnerView(recipe.owner.firstName, recipe.owner.lastName),
+          new RecipeCategoryView(recipe.category.id, recipe.category.name),
         ),
       );
     }

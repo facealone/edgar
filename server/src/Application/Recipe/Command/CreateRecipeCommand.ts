@@ -1,7 +1,7 @@
 import { ICommand } from 'src/Application/ICommand';
-import { User } from 'src/Domain/User/User.entity';
 import { ApiModelProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsUrl, IsUUID } from 'class-validator';
+import { User } from 'src/Domain/User/User.entity';
 
 export class CreateRecipeCommand implements ICommand {
   @ApiModelProperty()

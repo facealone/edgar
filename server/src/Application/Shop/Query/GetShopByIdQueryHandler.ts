@@ -12,6 +12,6 @@ export class GetShopByIdQueryHandler {
   ) {}
 
   public execute = async (query: GetShopByIdQuery): Promise<Shop | null> => {
-    return await this.shopRepository.find(query.id);
+    return await this.shopRepository.findOneById(query.id);
   };
 }

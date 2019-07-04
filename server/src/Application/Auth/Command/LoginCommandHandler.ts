@@ -4,7 +4,6 @@ import { Inject, UnauthorizedException } from '@nestjs/common';
 import { User } from 'src/Domain/User/User.entity';
 import { LoginCommand } from './LoginCommand';
 import { AuthenticatedView } from '../View/AuthenticatedView';
-import { House } from 'src/Domain/House/House.entity';
 import { HouseView } from 'src/Application/House/View/HouseView';
 import { IEncryptionAdapter } from 'src/Application/Adapter/IEncryptionAdapter';
 
@@ -29,14 +28,14 @@ export class LoginCommandHandler {
       throw new UnauthorizedException();
     }
 
-    const house = user.currentHouse;
-
     return new AuthenticatedView(
       user.firstName,
       user.lastName,
       user.email,
       user.apiToken,
-      house instanceof House ? new HouseView(house.id, house.name) : null,
+      user.currentHouse
+        ? new HouseView(user.currentHouse.id, user.currentHouse.name)
+        : null,
     );
   };
 }

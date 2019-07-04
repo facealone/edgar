@@ -1,7 +1,8 @@
 import { CommandHandler } from '@nestjs/cqrs';
-import { Inject } from '@nestjs/common';
+import { Inject, BadRequestException } from '@nestjs/common';
 import { UpdateUserCommand } from './UpdateUserCommand';
 import { IUserRepository } from 'src/Domain/User/Repository/IUserRepository';
+import { CanUserRegister } from 'src/Domain/User/CanUserRegister';
 import { LoggedUserView } from '../View/LoggedUserView';
 
 @CommandHandler(UpdateUserCommand)
@@ -9,6 +10,7 @@ export class UpdateUserCommandHandler {
   constructor(
     @Inject('IUserRepository')
     private readonly userRepository: IUserRepository,
+    private readonly canUserRegister: CanUserRegister,
   ) {}
 
   public execute = async (
@@ -16,17 +18,23 @@ export class UpdateUserCommandHandler {
   ): Promise<LoggedUserView> => {
     const { user, firstName, lastName, email } = command;
 
+    if (
+      user.email !== email &&
+      false === (await this.canUserRegister.isSatisfiedBy(email))
+    ) {
+      throw new BadRequestException('user.email.already.exists');
+    }
+
     user.update(firstName, lastName, email);
 
-    const savedUser = await this.userRepository.save(user);
-    const house = user.currentHouse;
+    await this.userRepository.save(user);
 
     return new LoggedUserView(
-      savedUser.id,
-      savedUser.firstName,
-      savedUser.lastName,
-      savedUser.email,
-      house ? house.id : null,
+      user.id,
+      firstName,
+      lastName,
+      email,
+      user.currentHouse ? user.currentHouse.id : null,
     );
   };
 }

@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { BusModule } from '../BusModule';
 import { UserRepository } from 'src/Infrastructure/User/Repository/UserRepository';
-import { GetUserByIdQueryHandler } from 'src/Application/User/Query/GetUserByIdQueryHandler';
 import { GetLoggedUserController } from './Controller/GetLoggedUserController';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/Domain/User/User.entity';
@@ -20,6 +19,7 @@ import { GetHouseMembersController } from './Controller/GetHouseMembersControlle
 import { UpdatePushNotificationTokenController } from './Controller/UpdatePushNotificationTokenController';
 import { UpdatePushNotificationTokenCommandHandler } from 'src/Application/User/Command/UpdatePushNotificationTokenCommandHandler';
 import { GetUserByApiTokenHandler } from 'src/Application/User/Query/GetUserByApiTokenQueryHandler';
+import { CanUserRegister } from 'src/Domain/User/CanUserRegister';
 
 @Module({
   imports: [BusModule, AuthModule, TypeOrmModule.forFeature([User, UserHouse])],
@@ -33,7 +33,6 @@ import { GetUserByApiTokenHandler } from 'src/Application/User/Query/GetUserByAp
   providers: [
     { provide: 'IUserRepository', useClass: UserRepository },
     { provide: 'IUserHouseRepository', useClass: UserHouseRepository },
-    GetUserByIdQueryHandler,
     UpdateUserCommandHandler,
     ChangeCurrentHouseComandHandler,
     CreateUserHouseCommandHandler,
@@ -41,6 +40,7 @@ import { GetUserByApiTokenHandler } from 'src/Application/User/Query/GetUserByAp
     GetHousesByUserQueryHandler,
     GetUsersByHouseQueryHandler,
     GetUserByApiTokenHandler,
+    CanUserRegister,
     UpdatePushNotificationTokenCommandHandler,
   ],
 })

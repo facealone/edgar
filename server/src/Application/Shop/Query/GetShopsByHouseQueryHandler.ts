@@ -14,7 +14,8 @@ export class GetShopsByHouseQueryHandler {
   ) {}
 
   public execute = async (query: GetShopsByHouseQuery): Promise<ShopView[]> => {
-    const { house, user } = query;
+    const { user } = query;
+    const house = user.currentHouse;
 
     if (false === (await this.isMemberOfHouse.isSatisfiedBy(house, user))) {
       throw new ForbiddenException('not.member.of.house');

@@ -1,8 +1,8 @@
-import { User } from '../User/User.entity';
 import { Inject } from '@nestjs/common';
 import { IUserHouseRepository } from '../User/Repository/IUserHouseRepository';
 import { UserHouse } from '../User/UserHouse.entity';
 import { House } from '../House/House.entity';
+import { User } from './User.entity';
 
 export class IsMemberOfHouse {
   constructor(

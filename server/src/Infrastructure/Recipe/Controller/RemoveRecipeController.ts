@@ -3,8 +3,8 @@ import { Inject, Controller, UseGuards, Delete, Param } from '@nestjs/common';
 import { ApiBearerAuth, ApiUseTags, ApiOperation } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorator';
-import { User } from 'src/Domain/User/User.entity';
 import { RemoveRecipeCommand } from 'src/Application/Recipe/Command/RemoveRecipeCommand';
+import { User } from 'src/Domain/User/User.entity';
 
 @ApiBearerAuth()
 @Controller('recipes')
@@ -18,12 +18,12 @@ export class RemoveRecipeController {
 
   @ApiOperation({ title: 'Remove recipe by logged user' })
   @Delete(':id')
-  public index(
+  public async index(
     @LoggedUser() user: User,
     @Param() command: RemoveRecipeCommand,
-  ): void {
+  ): Promise<void> {
     command.user = user;
 
-    this.commandBus.execute(command);
+    await this.commandBus.execute(command);
   }
 }

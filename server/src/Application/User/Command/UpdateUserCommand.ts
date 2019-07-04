@@ -1,11 +1,9 @@
 import { ICommand } from 'src/Application/ICommand';
-import { User } from 'src/Domain/User/User.entity';
 import { IsNotEmpty, IsEmail } from 'class-validator';
 import { ApiModelProperty } from '@nestjs/swagger';
+import { User } from 'src/Domain/User/User.entity';
 
 export class UpdateUserCommand implements ICommand {
-  public user: User;
-
   @IsNotEmpty()
   @ApiModelProperty()
   public firstName: string;
@@ -18,4 +16,6 @@ export class UpdateUserCommand implements ICommand {
   @IsEmail()
   @ApiModelProperty()
   public email: string;
+
+  public user: User;
 }

@@ -1,8 +1,8 @@
 import { GetHouseByIdQuery } from './GetHouseByIdQuery';
-import { House } from 'src/Domain/House/House.entity';
 import { QueryHandler } from '@nestjs/cqrs';
 import { Inject } from '@nestjs/common';
 import { IHouseRepository } from 'src/Domain/House/Repository/IHouseRepository';
+import { House } from 'src/Domain/House/House.entity';
 
 @QueryHandler(GetHouseByIdQuery)
 export class GetHouseByIdQueryHandler {

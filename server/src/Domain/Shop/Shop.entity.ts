@@ -20,7 +20,7 @@ export class Shop {
     Object.assign(this, shop);
   }
 
-  updateName = (name: string): void => {
+  public updateName = (name: string): void => {
     this.name = name;
   };
 }

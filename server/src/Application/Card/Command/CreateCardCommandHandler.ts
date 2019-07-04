@@ -1,14 +1,9 @@
 import { CommandHandler } from '@nestjs/cqrs';
 import { CreateCardCommand } from './CreateCardCommand';
 import { ICardRepository } from 'src/Domain/Card/Repository/ICardRepository';
-import {
-  Inject,
-  BadRequestException,
-  ForbiddenException,
-} from '@nestjs/common';
+import { Inject, ForbiddenException } from '@nestjs/common';
 import { CardView } from '../View/CardView';
 import { Card } from 'src/Domain/Card/Card.entity';
-import { House } from 'src/Domain/House/House.entity';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { OwnerView } from 'src/Application/User/View/OwnerView';
 
@@ -23,10 +18,6 @@ export class CreateCardCommandHandler {
   public execute = async (command: CreateCardCommand): Promise<CardView> => {
     const { name, barCode, user } = command;
     const house = user.currentHouse;
-
-    if (!(house instanceof House)) {
-      throw new BadRequestException('user.empty.current_house');
-    }
 
     if (false === (await this.isMemberOfHouse.isSatisfiedBy(house, user))) {
       throw new ForbiddenException('not.member.of.house');
