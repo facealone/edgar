@@ -13,7 +13,7 @@ import { User } from 'src/Domain/User/User.entity';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { House } from 'src/Domain/House/House.entity';
 import { BudgetView } from 'src/Application/Budget/View/BudgetView';
-import { BudgetFilterDto } from './Dto/BudgetFilterDto';
+import { BudgetFiltersDto } from './Dto/BudgetFiltersDto';
 import { GetBudgetsByHouseQuery } from 'src/Application/Budget/Query/GetBudgetsByHouseQuery';
 
 @ApiBearerAuth()
@@ -31,8 +31,8 @@ export class GetBudgetsController {
   })
   @Get('budgets')
   public index(
-    @Query() budgetFilterDto: BudgetFilterDto,
     @LoggedUser() user: User,
+    @Query() filters: BudgetFiltersDto,
   ): BudgetView[] {
     const house = user.currentHouse;
 
@@ -41,7 +41,7 @@ export class GetBudgetsController {
     }
 
     return this.queryBus.execute(
-      new GetBudgetsByHouseQuery(user, house, new Date(budgetFilterDto.date)),
+      new GetBudgetsByHouseQuery(user, house, filters),
     );
   }
 }

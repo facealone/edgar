@@ -4,6 +4,7 @@ import {
   Get,
   Inject,
   BadRequestException,
+  Query,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiUseTags, ApiOperation } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
@@ -13,6 +14,7 @@ import { GetRecipesByHouseQuery } from 'src/Application/Recipe/Query/GetRecipesB
 import { RecipeView } from 'src/Application/Recipe/View/RecipeView';
 import { User } from 'src/Domain/User/User.entity';
 import { Pagination } from 'src/Application/Common/Pagination';
+import { RecipeFiltersDto } from './Dto/RecipeFiltersDto';
 
 @ApiBearerAuth()
 @Controller('users/me/current-house')
@@ -28,11 +30,14 @@ export class GetRecipesController {
   @Get('/recipes')
   public async index(
     @LoggedUser() user: User,
+    @Query() filters: RecipeFiltersDto,
   ): Promise<Pagination<RecipeView>> {
     if (!user.currentHouse) {
       throw new BadRequestException();
     }
 
-    return await this.queryBus.execute(new GetRecipesByHouseQuery(user));
+    return await this.queryBus.execute(
+      new GetRecipesByHouseQuery(user, filters),
+    );
   }
 }

@@ -12,11 +12,11 @@ import { AuthGuard } from '@nestjs/passport';
 import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorator';
 import { User } from 'src/Domain/User/User.entity';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
-import { GetTransactionsByBudgetQuery } from 'src/Application/Budget/Query/GetTransactionsByBudgetQuery';
+import { GetTransactionsByBudgetQuery } from 'src/Application/Budget/Query/Transaction/GetTransactionsByBudgetQuery';
 import { TransactionListView } from 'src/Application/Budget/View/TransactionListView';
 import { Budget } from 'src/Domain/Budget/Budget.entity';
 import { GetBudgetByIdQuery } from 'src/Application/Budget/Query/GetBudgetByIdQuery';
-import { TransactionFilterDto } from './Dto/TransactionFilterDto';
+import { TransactionFiltersDto } from '../Dto/TransactionFiltersDto';
 
 @ApiBearerAuth()
 @Controller()
@@ -33,9 +33,9 @@ export class GetTransactionsController {
   })
   @Get('budgets/:id/transactions')
   public async index(
-    @Param() query: GetBudgetByIdQuery,
-    @Query() transactionFilterDto: TransactionFilterDto,
     @LoggedUser() user: User,
+    @Param() query: GetBudgetByIdQuery,
+    @Query() filters: TransactionFiltersDto,
   ): Promise<TransactionListView> {
     query.user = user;
 
@@ -45,11 +45,7 @@ export class GetTransactionsController {
     }
 
     return this.queryBus.execute(
-      new GetTransactionsByBudgetQuery(
-        user,
-        budget,
-        new Date(transactionFilterDto.date),
-      ),
+      new GetTransactionsByBudgetQuery(user, budget, filters),
     );
   }
 }

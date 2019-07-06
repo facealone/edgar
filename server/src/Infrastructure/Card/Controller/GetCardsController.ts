@@ -5,6 +5,7 @@ import {
   Inject,
   Get,
   BadRequestException,
+  Query,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorator';
@@ -13,6 +14,7 @@ import { GetCardsByHouseQuery } from 'src/Application/Card/Query/GetCardsByHouse
 import { CardView } from 'src/Application/Card/View/CardView';
 import { User } from 'src/Domain/User/User.entity';
 import { Pagination } from 'src/Application/Common/Pagination';
+import { CardFiltersDto } from './Dto/CardFiltersDto';
 
 @ApiBearerAuth()
 @Controller('users/me/current-house')
@@ -26,11 +28,14 @@ export class GetCardsController {
 
   @ApiOperation({ title: 'Get cards of the logged user current house' })
   @Get('/cards')
-  public async index(@LoggedUser() user: User): Promise<Pagination<CardView>> {
+  public async index(
+    @LoggedUser() user: User,
+    @Query() filters: CardFiltersDto,
+  ): Promise<Pagination<CardView>> {
     if (!user.currentHouse) {
       throw new BadRequestException();
     }
 
-    return await this.queryBus.execute(new GetCardsByHouseQuery(user));
+    return await this.queryBus.execute(new GetCardsByHouseQuery(user, filters));
   }
 }

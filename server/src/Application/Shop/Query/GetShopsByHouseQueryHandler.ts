@@ -17,14 +17,17 @@ export class GetShopsByHouseQueryHandler {
   public execute = async (
     query: GetShopsByHouseQuery,
   ): Promise<Pagination<ShopView>> => {
-    const { user } = query;
+    const { user, filters } = query;
     const house = user.currentHouse;
 
     if (false === (await this.isMemberOfHouse.isSatisfiedBy(house, user))) {
       throw new ForbiddenException('not.member.of.house');
     }
 
-    const [shops, total] = await this.shopRepository.findByHouse(house, 1);
+    const [shops, total] = await this.shopRepository.findByHouse(
+      house,
+      filters,
+    );
     const shopViews = [];
 
     for (const shop of shops) {

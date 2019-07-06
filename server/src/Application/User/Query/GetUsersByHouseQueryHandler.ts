@@ -17,7 +17,7 @@ export class GetUsersByHouseQueryHandler {
   public execute = async (
     query: GetUsersByHouseQuery,
   ): Promise<Pagination<GetUsersByHouseView>> => {
-    const { house } = query;
+    const { house, filters } = query;
 
     if (
       false === (await this.isMemberOfHouse.isSatisfiedBy(house, query.user))
@@ -28,7 +28,7 @@ export class GetUsersByHouseQueryHandler {
     const userHousesviews = [];
     const [userHouses, total] = await this.userHouseRepository.findByHouse(
       house,
-      1,
+      filters,
     );
 
     for (const userHouse of userHouses) {

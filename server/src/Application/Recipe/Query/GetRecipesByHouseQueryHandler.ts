@@ -19,14 +19,17 @@ export class GetRecipesByHouseQueryHandler {
   public execute = async (
     query: GetRecipesByHouseQuery,
   ): Promise<Pagination<RecipeView>> => {
-    const { user } = query;
+    const { user, filters } = query;
     const house = user.currentHouse;
 
     if (false === (await this.isMemberOfHouse.isSatisfiedBy(house, user))) {
       throw new ForbiddenException('not.member.of.house');
     }
 
-    const [recipes, total] = await this.recipeRepository.findByHouse(house, 1);
+    const [recipes, total] = await this.recipeRepository.findByHouse(
+      house,
+      filters,
+    );
     const recipeViews = [];
 
     for (const recipe of recipes) {

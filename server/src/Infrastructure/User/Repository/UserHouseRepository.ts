@@ -6,6 +6,8 @@ import { IUserHouseRepository } from 'src/Domain/User/Repository/IUserHouseRepos
 import { User } from 'src/Domain/User/User.entity';
 import { House } from 'src/Domain/House/House.entity';
 import { MAX_ITEMS_PER_PAGE } from 'src/Application/Common/Pagination';
+import { HouseFiltersDto } from 'src/Infrastructure/House/Controller/Dto/HouseFiltersDto';
+import { MemberFiltersDto } from '../Controller/Dto/MemberFiltersDto';
 
 @Injectable()
 export class UserHouseRepository implements IUserHouseRepository {
@@ -53,7 +55,7 @@ export class UserHouseRepository implements IUserHouseRepository {
 
   public findByUser = async (
     user: User,
-    page: number = 1,
+    filters: HouseFiltersDto,
   ): Promise<[UserHouse[], number]> => {
     return await this.repository
       .createQueryBuilder('userHouse')
@@ -67,14 +69,14 @@ export class UserHouseRepository implements IUserHouseRepository {
         user: user.id,
       })
       .innerJoin('userHouse.house', 'house')
-      .offset((page - 1) * MAX_ITEMS_PER_PAGE)
+      .offset((filters.page - 1) * MAX_ITEMS_PER_PAGE)
       .limit(MAX_ITEMS_PER_PAGE)
       .getManyAndCount();
   };
 
   public findByHouse = async (
     house: House,
-    page: number = 1,
+    filters: MemberFiltersDto,
   ): Promise<[UserHouse[], number]> => {
     return await this.repository
       .createQueryBuilder('userHouse')
@@ -89,7 +91,7 @@ export class UserHouseRepository implements IUserHouseRepository {
         house: house.id,
       })
       .innerJoin('userHouse.user', 'user')
-      .offset((page - 1) * MAX_ITEMS_PER_PAGE)
+      .offset((filters.page - 1) * MAX_ITEMS_PER_PAGE)
       .limit(MAX_ITEMS_PER_PAGE)
       .getManyAndCount();
   };

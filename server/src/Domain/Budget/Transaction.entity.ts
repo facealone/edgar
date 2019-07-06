@@ -3,11 +3,6 @@ import { User } from '../User/User.entity';
 import { Budget } from './Budget.entity';
 import { TransactionCategory } from './TransactionCategory.entity';
 
-export enum TransactionType {
-  CASH_OUTLAY = 'cash_outlay',
-  CASH_INFLOW = 'cash_inflow',
-}
-
 @Entity()
 export class Transaction {
   @PrimaryGeneratedColumn('uuid')
@@ -21,13 +16,6 @@ export class Transaction {
 
   @Column({ type: 'int', nullable: false, default: 0 })
   amount: number;
-
-  @Column({
-    type: 'enum',
-    enum: TransactionType,
-    default: TransactionType.CASH_OUTLAY,
-  })
-  type: string;
 
   @Column({
     type: 'timestamp',
@@ -53,13 +41,11 @@ export class Transaction {
     name: string,
     amount: number,
     note: string,
-    type: string,
     category: TransactionCategory,
   ): void => {
     this.name = name;
     this.amount = amount;
     this.note = note;
-    this.type = type;
     this.category = category;
   };
 }

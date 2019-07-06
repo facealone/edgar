@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   NotFoundException,
+  Query,
 } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
@@ -16,6 +17,7 @@ import { House } from 'src/Domain/House/House.entity';
 import { GetVouchersByHouseQuery } from 'src/Application/House/Query/GetVouchersByHouseQuery';
 import { VoucherView } from 'src/Application/House/View/Voucher/VoucherView';
 import { Pagination } from 'src/Application/Common/Pagination';
+import { VoucherFiltersDto } from '../Dto/VoucherFiltersDto';
 
 @Controller('houses')
 @ApiUseTags('House')
@@ -32,6 +34,7 @@ export class GetHouseVouchersController {
   public async index(
     @LoggedUser() user: User,
     @Param() query: GetHouseByIdQuery,
+    @Query() filters: VoucherFiltersDto,
   ): Promise<Pagination<VoucherView>> {
     const house = await this.queryBus.execute(query);
 
@@ -40,7 +43,7 @@ export class GetHouseVouchersController {
     }
 
     return await this.queryBus.execute(
-      new GetVouchersByHouseQuery(house, user),
+      new GetVouchersByHouseQuery(house, user, filters),
     );
   }
 }

@@ -3,25 +3,24 @@ import {
   Controller,
   UseGuards,
   Inject,
-  Body,
-  Put,
   Param,
   NotFoundException,
+  Delete,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapter';
 import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorator';
 import { User } from 'src/Domain/User/User.entity';
+import { ICommandBusAdapter } from 'src/Application/Adapter/Bus/ICommandBusAdapter';
+import { GetTransactionByIdQuery } from 'src/Application/Budget/Query/Transaction/GetTransactionByIdQuery';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
-import { GetTransactionByIdQuery } from 'src/Application/Budget/Query/GetTransactionByIdQuery';
-import { UpdateTransactionCommand } from 'src/Application/Budget/Command/UpdateTransactionCommand';
 import { Transaction } from 'src/Domain/Budget/Transaction.entity';
+import { RemoveTransactionCommand } from 'src/Application/Budget/Command/Transaction/RemoveTransactionCommand';
 
 @ApiBearerAuth()
 @Controller()
 @ApiUseTags('Budget')
 @UseGuards(AuthGuard())
-export class UpdateTransactionController {
+export class RemoveTransactionController {
   constructor(
     @Inject('IQueryBusAdapter')
     private readonly queryBus: IQueryBusAdapter,
@@ -30,12 +29,11 @@ export class UpdateTransactionController {
   ) {}
 
   @ApiOperation({
-    title: 'Update transaction by the logged user',
+    title: 'Remove transaction by the logged user',
   })
-  @Put('transactions/:id')
+  @Delete('transactions/:id')
   public async index(
     @Param() query: GetTransactionByIdQuery,
-    @Body() command: UpdateTransactionCommand,
     @LoggedUser() user: User,
   ) {
     const transaction = await this.queryBus.execute(query);
@@ -43,9 +41,6 @@ export class UpdateTransactionController {
       throw new NotFoundException();
     }
 
-    command.user = user;
-    command.transaction = transaction;
-
-    return this.commandBus.execute(command);
+    this.commandBus.execute(new RemoveTransactionCommand(user, transaction));
   }
 }

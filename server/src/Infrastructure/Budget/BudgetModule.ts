@@ -7,13 +7,13 @@ import { UserHouse } from 'src/Domain/User/UserHouse.entity';
 import { Transaction } from 'src/Domain/Budget/Transaction.entity';
 import { TransactionCategory } from 'src/Domain/Budget/TransactionCategory.entity';
 import { TransactionCategoryRepository } from './Repository/TransactionCategoryRepository';
-import { GetTransactionsCategoriesController } from './Controller/GetTransactionsCategoriesController';
-import { GetTransactionsCategoriesQueryHandler } from 'src/Application/Budget/Query/GetTransactionsCategoriesQueryHandler';
+import { GetTransactionsCategoriesController } from './Controller/Transaction/GetTransactionsCategoriesController';
+import { GetTransactionsCategoriesQueryHandler } from 'src/Application/Budget/Query/Transaction/GetTransactionsCategoriesQueryHandler';
 import { TransactionRepository } from './Repository/TransactionRepository';
 import { CreateTransactionController } from './Controller/CreateTransactionController';
-import { CreateTransactionCommandHandler } from 'src/Application/Budget/Command/CreateTransactionCommandHandler';
-import { GetTransactionsController } from './Controller/GetTransactionsController';
-import { GetTransactionsByBudgetQueryHandler } from 'src/Application/Budget/Query/GetTransactionsByBudgetQueryHandler';
+import { CreateTransactionCommandHandler } from 'src/Application/Budget/Command/Transaction/CreateTransactionCommandHandler';
+import { GetTransactionsController } from './Controller/Transaction/GetTransactionsController';
+import { GetTransactionsByBudgetQueryHandler } from 'src/Application/Budget/Query/Transaction/GetTransactionsByBudgetQueryHandler';
 import { IsOwnerOfHouse } from 'src/Domain/User/IsOwnerOfHouse';
 import { GetBudgetsController } from './Controller/GetBudgetsController';
 import { GetBudgetsByHouseQueryHandler } from 'src/Application/Budget/Query/GetBudgetsByHouseQueryHandler';
@@ -22,13 +22,13 @@ import { Budget } from 'src/Domain/Budget/Budget.entity';
 import { CreateBudgetController } from './Controller/CreateBudgetController';
 import { CreateBudgetCommandHandler } from 'src/Application/Budget/Command/CreateBudgetCommandHandler';
 import { GetBudgetByIdQueryHandler } from 'src/Application/Budget/Query/GetBudgetByIdQueryHandler';
-import { GetTransactionByIdQueryHandler } from 'src/Application/Budget/Query/GetTransactionByIdQueryHandler';
-import { RemoveTransactionController } from './Controller/RemoveTransactionController';
-import { RemoveTransactionCommandHandler } from 'src/Application/Budget/Command/RemoveTransactionCommandHandler';
-import { UpdateBudgetController } from './Controller/UpdateBudgetController';
+import { GetTransactionByIdQueryHandler } from 'src/Application/Budget/Query/Transaction/GetTransactionByIdQueryHandler';
+import { RemoveTransactionController } from './Controller/Transaction/RemoveTransactionController';
+import { RemoveTransactionCommandHandler } from 'src/Application/Budget/Command/Transaction/RemoveTransactionCommandHandler';
+import { UpdateBudgetController } from './Controller/Transaction/UpdateBudgetController';
 import { UpdateBudgetCommandHandler } from 'src/Application/Budget/Command/UpdateBudgetCommandHandler';
-import { UpdateTransactionCommandHandler } from 'src/Application/Budget/Command/UpdateTransactionCommandHandler';
-import { UpdateTransactionController } from './Controller/UpdateTransactionController';
+import { UpdateTransactionCommandHandler } from 'src/Application/Budget/Command/Transaction/UpdateTransactionCommandHandler';
+import { UpdateTransactionController } from './Controller/Transaction/UpdateTransactionController';
 
 @Module({
   imports: [

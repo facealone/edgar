@@ -2,7 +2,7 @@ import { QueryHandler } from '@nestjs/cqrs';
 import { GetTransactionsCategoriesQuery } from './GetTransactionsCategoriesQuery';
 import { ITransactionCategoryRepository } from 'src/Domain/Budget/Repository/ITransactionCategoryRepository';
 import { Inject } from '@nestjs/common';
-import { TransactionCategoryView } from '../View/TransactionCategoryView';
+import { TransactionCategoryView } from '../../View/TransactionCategoryView';
 
 @QueryHandler(GetTransactionsCategoriesQuery)
 export class GetTransactionsCategoriesQueryHandler {
@@ -19,7 +19,7 @@ export class GetTransactionsCategoriesQueryHandler {
 
     for (const category of categories) {
       categoriesViews.push(
-        new TransactionCategoryView(category.id, category.name, category.icon),
+        new TransactionCategoryView(category.id, category.name),
       );
     }
 

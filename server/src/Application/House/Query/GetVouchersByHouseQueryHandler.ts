@@ -17,7 +17,7 @@ export class GetVouchersByHouseQueryHandler {
   public execute = async (
     query: GetVouchersByHouseQuery,
   ): Promise<Pagination<VoucherView>> => {
-    const { user, house } = query;
+    const { user, house, filters } = query;
 
     if (false === (await this.isMemberOfHouse.isSatisfiedBy(house, user))) {
       throw new ForbiddenException('not.member.of.house');
@@ -26,7 +26,7 @@ export class GetVouchersByHouseQueryHandler {
     const voucherViews = [];
     const [vouchers, total] = await this.voucherRepository.findByHouse(
       house,
-      1,
+      filters,
     );
 
     for (const voucher of vouchers) {

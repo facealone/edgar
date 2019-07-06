@@ -15,11 +15,12 @@ export class GetHousesByUserQueryHandler {
   public execute = async (
     query: GetHousesByUserQuery,
   ): Promise<Pagination<GetHousesByUserView>> => {
-    const user = query.user;
+    const { user, filters } = query;
+
     const userHousesViews = [];
     const [userHouses, total] = await this.userHouseRepository.findByUser(
       user,
-      1,
+      filters,
     );
 
     for (const userHouse of userHouses) {

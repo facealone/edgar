@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Recipe } from 'src/Domain/Recipe/Recipe.entity';
 import { House } from 'src/Domain/House/House.entity';
 import { MAX_ITEMS_PER_PAGE } from 'src/Application/Common/Pagination';
+import { RecipeFiltersDto } from '../Controller/Dto/RecipeFiltersDto';
 
 @Injectable()
 export class RecipeRepository implements IRecipeRepository {
@@ -19,7 +20,7 @@ export class RecipeRepository implements IRecipeRepository {
 
   public findByHouse = async (
     house: House,
-    page: number = 1,
+    filters: RecipeFiltersDto,
   ): Promise<[Recipe[], number]> => {
     return await this.repository
       .createQueryBuilder('recipe')
@@ -36,7 +37,7 @@ export class RecipeRepository implements IRecipeRepository {
       .innerJoin('recipe.owner', 'user')
       .innerJoin('recipe.category', 'category')
       .orderBy('recipe.createdAt', 'DESC')
-      .offset((page - 1) * MAX_ITEMS_PER_PAGE)
+      .offset((filters.page - 1) * MAX_ITEMS_PER_PAGE)
       .limit(MAX_ITEMS_PER_PAGE)
       .getManyAndCount();
   };

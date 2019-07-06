@@ -5,6 +5,7 @@ import { Card } from 'src/Domain/Card/Card.entity';
 import { ICardRepository } from 'src/Domain/Card/Repository/ICardRepository';
 import { House } from 'src/Domain/House/House.entity';
 import { MAX_ITEMS_PER_PAGE } from 'src/Application/Common/Pagination';
+import { CardFiltersDto } from '../Controller/Dto/CardFiltersDto';
 
 @Injectable()
 export class CardRepository implements ICardRepository {
@@ -19,7 +20,7 @@ export class CardRepository implements ICardRepository {
 
   public findByHouse = async (
     house: House,
-    page: number = 1,
+    filters: CardFiltersDto,
   ): Promise<[Card[], number]> => {
     return await this.repository
       .createQueryBuilder('card')
@@ -33,7 +34,7 @@ export class CardRepository implements ICardRepository {
       .where('card.house = :id', { id: house.id })
       .innerJoin('card.user', 'user')
       .orderBy('card.name', 'ASC')
-      .offset((page - 1) * MAX_ITEMS_PER_PAGE)
+      .offset((filters.page - 1) * MAX_ITEMS_PER_PAGE)
       .limit(MAX_ITEMS_PER_PAGE)
       .getManyAndCount();
   };

@@ -4,13 +4,13 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 import { CommandHandler } from '@nestjs/cqrs';
-import { CreateTransactionCommand } from './Transaction/CreateTransactionCommand';
+import { CreateTransactionCommand } from './CreateTransactionCommand';
 import { ITransactionRepository } from 'src/Domain/Budget/Repository/ITransactionRepository';
-import { TransactionView } from '../View/TransactionView';
+import { TransactionView } from '../../View/TransactionView';
 import { ITransactionCategoryRepository } from 'src/Domain/Budget/Repository/ITransactionCategoryRepository';
 import { TransactionCategory } from 'src/Domain/Budget/TransactionCategory.entity';
 import { Transaction } from 'src/Domain/Budget/Transaction.entity';
-import { TransactionCategoryView } from '../View/TransactionCategoryView';
+import { TransactionCategoryView } from '../../View/TransactionCategoryView';
 import { OwnerView } from 'src/Application/User/View/OwnerView';
 import { IsOwnerOfHouse } from 'src/Domain/User/IsOwnerOfHouse';
 import { IBudgetRepository } from 'src/Domain/Budget/Repository/IBudgetRepository';
@@ -31,7 +31,7 @@ export class CreateTransactionCommandHandler {
   public execute = async (
     command: CreateTransactionCommand,
   ): Promise<TransactionView> => {
-    const { name, note, categoryId, type, budgetId, user } = command;
+    const { name, note, categoryId, budgetId, user } = command;
     const amount = Math.round(command.amount * 100);
 
     const budget = await this.budgetRepository.findOneByIdAndUser(
@@ -61,7 +61,6 @@ export class CreateTransactionCommandHandler {
         amount,
         note,
         category,
-        type,
         user,
         budget,
       }),
@@ -70,7 +69,6 @@ export class CreateTransactionCommandHandler {
     return new TransactionView(
       transaction.id,
       transaction.name,
-      transaction.type,
       transaction.amount / 100,
       transaction.note,
       transaction.createdAt,

@@ -3,7 +3,7 @@ import { Controller, UseGuards, Get, Inject } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { TransactionCategoryView } from 'src/Application/Budget/View/TransactionCategoryView';
-import { GetTransactionsCategoriesQuery } from 'src/Application/Budget/Query/GetTransactionsCategoriesQuery';
+import { GetTransactionsCategoriesQuery } from 'src/Application/Budget/Query/Transaction/GetTransactionsCategoriesQuery';
 
 @ApiBearerAuth()
 @Controller('transactions-categories')

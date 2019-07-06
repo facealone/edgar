@@ -1,5 +1,5 @@
 import { ApiUseTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
-import { Controller, UseGuards, Inject, Get } from '@nestjs/common';
+import { Controller, UseGuards, Inject, Get, Query } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { LoggedUser } from '../../User/Decorator/LoggedUserDecorator';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
@@ -7,6 +7,7 @@ import { GetHousesByUserQuery } from 'src/Application/User/Query/GetHousesByUser
 import { User } from 'src/Domain/User/User.entity';
 import { GetHousesByUserView } from 'src/Application/User/View/GetHousesByUserView';
 import { Pagination } from 'src/Application/Common/Pagination';
+import { HouseFiltersDto } from './Dto/HouseFiltersDto';
 
 @ApiBearerAuth()
 @Controller('users/me')
@@ -22,7 +23,8 @@ export class GetHousesController {
   @Get('/houses')
   public async index(
     @LoggedUser() user: User,
+    @Query() filters: HouseFiltersDto,
   ): Promise<Pagination<GetHousesByUserView>> {
-    return await this.queryBus.execute(new GetHousesByUserQuery(user));
+    return await this.queryBus.execute(new GetHousesByUserQuery(user, filters));
   }
 }
