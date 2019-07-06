@@ -15,6 +15,7 @@ import { GetHouseByIdQuery } from 'src/Application/House/Query/GetHouseByIdQuery
 import { House } from 'src/Domain/House/House.entity';
 import { GetVouchersByHouseQuery } from 'src/Application/House/Query/GetVouchersByHouseQuery';
 import { VoucherView } from 'src/Application/House/View/Voucher/VoucherView';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @Controller('houses')
 @ApiUseTags('House')
@@ -31,7 +32,7 @@ export class GetHouseVouchersController {
   public async index(
     @LoggedUser() user: User,
     @Param() query: GetHouseByIdQuery,
-  ): Promise<VoucherView> {
+  ): Promise<Pagination<VoucherView>> {
     const house = await this.queryBus.execute(query);
 
     if (!(house instanceof House)) {

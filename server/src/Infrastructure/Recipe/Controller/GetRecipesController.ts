@@ -12,6 +12,7 @@ import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { GetRecipesByHouseQuery } from 'src/Application/Recipe/Query/GetRecipesByHouseQuery';
 import { RecipeView } from 'src/Application/Recipe/View/RecipeView';
 import { User } from 'src/Domain/User/User.entity';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @ApiBearerAuth()
 @Controller('users/me/current-house')
@@ -25,7 +26,9 @@ export class GetRecipesController {
 
   @ApiOperation({ title: 'Get recipes of the logged user current house' })
   @Get('/recipes')
-  public async index(@LoggedUser() user: User): Promise<RecipeView[]> {
+  public async index(
+    @LoggedUser() user: User,
+  ): Promise<Pagination<RecipeView>> {
     if (!user.currentHouse) {
       throw new BadRequestException();
     }

@@ -5,6 +5,7 @@ import { UserHouse } from 'src/Domain/User/UserHouse.entity';
 import { IUserHouseRepository } from 'src/Domain/User/Repository/IUserHouseRepository';
 import { User } from 'src/Domain/User/User.entity';
 import { House } from 'src/Domain/House/House.entity';
+import { MAX_ITEMS_PER_PAGE } from 'src/Application/Common/Pagination';
 
 @Injectable()
 export class UserHouseRepository implements IUserHouseRepository {
@@ -50,7 +51,10 @@ export class UserHouseRepository implements IUserHouseRepository {
       .getOne();
   };
 
-  public findUserHousesByUser = async (user: User): Promise<UserHouse[]> => {
+  public findByUser = async (
+    user: User,
+    page: number = 1,
+  ): Promise<[UserHouse[], number]> => {
     return await this.repository
       .createQueryBuilder('userHouse')
       .select([
@@ -63,11 +67,15 @@ export class UserHouseRepository implements IUserHouseRepository {
         user: user.id,
       })
       .innerJoin('userHouse.house', 'house')
-      .limit(20)
-      .getMany();
+      .offset((page - 1) * MAX_ITEMS_PER_PAGE)
+      .limit(MAX_ITEMS_PER_PAGE)
+      .getManyAndCount();
   };
 
-  public findUserHousesByHouse = async (house: House): Promise<UserHouse[]> => {
+  public findByHouse = async (
+    house: House,
+    page: number = 1,
+  ): Promise<[UserHouse[], number]> => {
     return await this.repository
       .createQueryBuilder('userHouse')
       .select([
@@ -81,7 +89,8 @@ export class UserHouseRepository implements IUserHouseRepository {
         house: house.id,
       })
       .innerJoin('userHouse.user', 'user')
-      .limit(20)
-      .getMany();
+      .offset((page - 1) * MAX_ITEMS_PER_PAGE)
+      .limit(MAX_ITEMS_PER_PAGE)
+      .getManyAndCount();
   };
 }

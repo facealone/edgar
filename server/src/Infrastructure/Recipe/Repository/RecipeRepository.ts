@@ -4,6 +4,7 @@ import { IRecipeRepository } from 'src/Domain/Recipe/Repository/IRecipeRepositor
 import { InjectRepository } from '@nestjs/typeorm';
 import { Recipe } from 'src/Domain/Recipe/Recipe.entity';
 import { House } from 'src/Domain/House/House.entity';
+import { MAX_ITEMS_PER_PAGE } from 'src/Application/Common/Pagination';
 
 @Injectable()
 export class RecipeRepository implements IRecipeRepository {
@@ -16,7 +17,10 @@ export class RecipeRepository implements IRecipeRepository {
     return await this.repository.save(recipe);
   };
 
-  public findByHouse = async (house: House): Promise<Recipe[]> => {
+  public findByHouse = async (
+    house: House,
+    page: number = 1,
+  ): Promise<[Recipe[], number]> => {
     return await this.repository
       .createQueryBuilder('recipe')
       .select([
@@ -32,8 +36,9 @@ export class RecipeRepository implements IRecipeRepository {
       .innerJoin('recipe.owner', 'user')
       .innerJoin('recipe.category', 'category')
       .orderBy('recipe.createdAt', 'DESC')
-      .limit(20)
-      .getMany();
+      .offset((page - 1) * MAX_ITEMS_PER_PAGE)
+      .limit(MAX_ITEMS_PER_PAGE)
+      .getManyAndCount();
   };
 
   public findOneById = async (id: string): Promise<Recipe | null> => {

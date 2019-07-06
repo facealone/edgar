@@ -6,6 +6,7 @@ import { RecipeView } from '../View/RecipeView';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { OwnerView } from 'src/Application/User/View/OwnerView';
 import { RecipeCategoryView } from '../View/RecipeCategoryView';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @QueryHandler(GetRecipesByHouseQuery)
 export class GetRecipesByHouseQueryHandler {
@@ -17,7 +18,7 @@ export class GetRecipesByHouseQueryHandler {
 
   public execute = async (
     query: GetRecipesByHouseQuery,
-  ): Promise<RecipeView[]> => {
+  ): Promise<Pagination<RecipeView>> => {
     const { user } = query;
     const house = user.currentHouse;
 
@@ -25,7 +26,7 @@ export class GetRecipesByHouseQueryHandler {
       throw new ForbiddenException('not.member.of.house');
     }
 
-    const recipes = await this.recipeRepository.findByHouse(house);
+    const [recipes, total] = await this.recipeRepository.findByHouse(house, 1);
     const recipeViews = [];
 
     for (const recipe of recipes) {
@@ -40,6 +41,6 @@ export class GetRecipesByHouseQueryHandler {
       );
     }
 
-    return recipeViews;
+    return new Pagination<RecipeView>(recipeViews, total);
   };
 }

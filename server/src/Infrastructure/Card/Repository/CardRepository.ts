@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Card } from 'src/Domain/Card/Card.entity';
 import { ICardRepository } from 'src/Domain/Card/Repository/ICardRepository';
 import { House } from 'src/Domain/House/House.entity';
+import { MAX_ITEMS_PER_PAGE } from 'src/Application/Common/Pagination';
 
 @Injectable()
 export class CardRepository implements ICardRepository {
@@ -16,7 +17,10 @@ export class CardRepository implements ICardRepository {
     return await this.repository.save(card);
   };
 
-  public findByHouse = async (house: House): Promise<Card[]> => {
+  public findByHouse = async (
+    house: House,
+    page: number = 1,
+  ): Promise<[Card[], number]> => {
     return await this.repository
       .createQueryBuilder('card')
       .select([
@@ -28,9 +32,10 @@ export class CardRepository implements ICardRepository {
       ])
       .where('card.house = :id', { id: house.id })
       .innerJoin('card.user', 'user')
-      .orderBy('name', 'ASC')
-      .limit(20)
-      .getMany();
+      .orderBy('card.name', 'ASC')
+      .offset((page - 1) * MAX_ITEMS_PER_PAGE)
+      .limit(MAX_ITEMS_PER_PAGE)
+      .getManyAndCount();
   };
 
   public findOneById = async (id: string): Promise<Card | null> => {

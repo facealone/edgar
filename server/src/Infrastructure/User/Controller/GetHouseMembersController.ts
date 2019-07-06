@@ -15,6 +15,7 @@ import { User } from 'src/Domain/User/User.entity';
 import { House } from 'src/Domain/House/House.entity';
 import { GetUsersByHouseView } from 'src/Application/User/View/GetUsersByHouseView';
 import { GetHouseByIdQuery } from 'src/Application/House/Query/GetHouseByIdQuery';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @ApiBearerAuth()
 @Controller('houses')
@@ -31,7 +32,7 @@ export class GetHouseMembersController {
   public async index(
     @LoggedUser() user: User,
     @Param() query: GetHouseByIdQuery,
-  ): Promise<GetUsersByHouseView[]> {
+  ): Promise<Pagination<GetUsersByHouseView>> {
     const house = await this.queryBus.execute(query);
 
     if (!(house instanceof House)) {

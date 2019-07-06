@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { IVoucherRepository } from 'src/Domain/House/Repository/IVoucherRepository';
 import { Voucher } from 'src/Domain/House/Voucher.entity';
 import { House } from 'src/Domain/House/House.entity';
+import { MAX_ITEMS_PER_PAGE } from 'src/Application/Common/Pagination';
 
 @Injectable()
 export class VoucherRepository implements IVoucherRepository {
@@ -25,13 +26,17 @@ export class VoucherRepository implements IVoucherRepository {
       .getOne();
   };
 
-  public findByHouse = async (house: House): Promise<Voucher[]> => {
+  public findByHouse = async (
+    house: House,
+    page: number = 1,
+  ): Promise<[Voucher[], number]> => {
     return await this.repository
       .createQueryBuilder('voucher')
       .select(['voucher.code', 'voucher.username', 'voucher.role'])
       .where('voucher.house = :house', { house: house.id })
-      .limit(20)
-      .getMany();
+      .offset((page - 1) * MAX_ITEMS_PER_PAGE)
+      .limit(MAX_ITEMS_PER_PAGE)
+      .getManyAndCount();
   };
 
   public remove = async (voucher: Voucher): Promise<void> => {

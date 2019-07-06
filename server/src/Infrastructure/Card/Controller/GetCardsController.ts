@@ -12,6 +12,7 @@ import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { GetCardsByHouseQuery } from 'src/Application/Card/Query/GetCardsByHouseQuery';
 import { CardView } from 'src/Application/Card/View/CardView';
 import { User } from 'src/Domain/User/User.entity';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @ApiBearerAuth()
 @Controller('users/me/current-house')
@@ -25,7 +26,7 @@ export class GetCardsController {
 
   @ApiOperation({ title: 'Get cards of the logged user current house' })
   @Get('/cards')
-  public async index(@LoggedUser() user: User): Promise<CardView[]> {
+  public async index(@LoggedUser() user: User): Promise<Pagination<CardView>> {
     if (!user.currentHouse) {
       throw new BadRequestException();
     }

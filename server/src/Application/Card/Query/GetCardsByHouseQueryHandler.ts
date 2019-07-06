@@ -5,6 +5,10 @@ import { CardView } from '../View/CardView';
 import { GetCardsByHouseQuery } from './GetCardsByHouseQuery';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { OwnerView } from 'src/Application/User/View/OwnerView';
+import {
+  Pagination,
+  MAX_ITEMS_PER_PAGE,
+} from 'src/Application/Common/Pagination';
 
 @QueryHandler(GetCardsByHouseQuery)
 export class GetCardsByHouseQueryHandler {
@@ -14,7 +18,9 @@ export class GetCardsByHouseQueryHandler {
     private readonly isMemberOfHouse: IsMemberOfHouse,
   ) {}
 
-  public execute = async (query: GetCardsByHouseQuery): Promise<CardView[]> => {
+  public execute = async (
+    query: GetCardsByHouseQuery,
+  ): Promise<Pagination<CardView>> => {
     const { user } = query;
     const house = user.currentHouse;
 
@@ -22,7 +28,7 @@ export class GetCardsByHouseQueryHandler {
       throw new ForbiddenException('not.member.of.house');
     }
 
-    const cards = await this.cardRepository.findByHouse(house);
+    const [cards, total] = await this.cardRepository.findByHouse(house, 1);
     const cardViews = [];
 
     for (const card of cards) {
@@ -36,6 +42,6 @@ export class GetCardsByHouseQueryHandler {
       );
     }
 
-    return cardViews;
+    return new Pagination<CardView>(cardViews, total);
   };
 }

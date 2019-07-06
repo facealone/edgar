@@ -4,6 +4,7 @@ import { IVoucherRepository } from 'src/Domain/House/Repository/IVoucherReposito
 import { Inject, ForbiddenException } from '@nestjs/common';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { VoucherView } from '../View/Voucher/VoucherView';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @QueryHandler(GetVouchersByHouseQuery)
 export class GetVouchersByHouseQueryHandler {
@@ -15,15 +16,18 @@ export class GetVouchersByHouseQueryHandler {
 
   public execute = async (
     query: GetVouchersByHouseQuery,
-  ): Promise<VoucherView[]> => {
+  ): Promise<Pagination<VoucherView>> => {
     const { user, house } = query;
 
     if (false === (await this.isMemberOfHouse.isSatisfiedBy(house, user))) {
       throw new ForbiddenException('not.member.of.house');
     }
 
-    const vouchers = await this.voucherRepository.findByHouse(house);
     const voucherViews = [];
+    const [vouchers, total] = await this.voucherRepository.findByHouse(
+      house,
+      1,
+    );
 
     for (const voucher of vouchers) {
       voucherViews.push(
@@ -31,6 +35,6 @@ export class GetVouchersByHouseQueryHandler {
       );
     }
 
-    return voucherViews;
+    return new Pagination<VoucherView>(voucherViews, total);
   };
 }

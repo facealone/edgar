@@ -3,6 +3,7 @@ import { Inject } from '@nestjs/common';
 import { GetHousesByUserQuery } from './GetHousesByUserQuery';
 import { IUserHouseRepository } from 'src/Domain/User/Repository/IUserHouseRepository';
 import { GetHousesByUserView } from '../View/GetHousesByUserView';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @QueryHandler(GetHousesByUserQuery)
 export class GetHousesByUserQueryHandler {
@@ -13,12 +14,13 @@ export class GetHousesByUserQueryHandler {
 
   public execute = async (
     query: GetHousesByUserQuery,
-  ): Promise<GetHousesByUserView[]> => {
+  ): Promise<Pagination<GetHousesByUserView>> => {
     const user = query.user;
-    const userHouses = await this.userHouseRepository.findUserHousesByUser(
-      user,
-    );
     const userHousesViews = [];
+    const [userHouses, total] = await this.userHouseRepository.findByUser(
+      user,
+      1,
+    );
 
     for (const userHouse of userHouses) {
       userHousesViews.push(
@@ -32,6 +34,6 @@ export class GetHousesByUserQueryHandler {
       );
     }
 
-    return userHousesViews;
+    return new Pagination<GetHousesByUserView>(userHousesViews, total);
   };
 }

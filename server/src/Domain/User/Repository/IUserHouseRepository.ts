@@ -10,6 +10,6 @@ export interface IUserHouseRepository {
     house: House,
     role: string,
   ): Promise<UserHouse | null>;
-  findUserHousesByUser(user: User): Promise<UserHouse[]>;
-  findUserHousesByHouse(house: House): Promise<UserHouse[]>;
+  findByUser(user: User, page: number): Promise<[UserHouse[], number]>;
+  findByHouse(house: House, page: number): Promise<[UserHouse[], number]>;
 }

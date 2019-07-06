@@ -4,6 +4,7 @@ import { GetShopsByHouseQuery } from './GetShopsByHouseQuery';
 import { IShopRepository } from 'src/Domain/Shop/Repository/IShopRepository';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { ShopView } from '../View/ShopView';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @QueryHandler(GetShopsByHouseQuery)
 export class GetShopsByHouseQueryHandler {
@@ -13,7 +14,9 @@ export class GetShopsByHouseQueryHandler {
     private readonly isMemberOfHouse: IsMemberOfHouse,
   ) {}
 
-  public execute = async (query: GetShopsByHouseQuery): Promise<ShopView[]> => {
+  public execute = async (
+    query: GetShopsByHouseQuery,
+  ): Promise<Pagination<ShopView>> => {
     const { user } = query;
     const house = user.currentHouse;
 
@@ -21,13 +24,13 @@ export class GetShopsByHouseQueryHandler {
       throw new ForbiddenException('not.member.of.house');
     }
 
-    const shops = await this.shopRepository.findByHouse(house);
+    const [shops, total] = await this.shopRepository.findByHouse(house, 1);
     const shopViews = [];
 
     for (const shop of shops) {
       shopViews.push(new ShopView(shop.id, shop.name, 0));
     }
 
-    return shopViews;
+    return new Pagination<ShopView>(shopViews, total);
   };
 }

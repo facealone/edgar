@@ -12,6 +12,7 @@ import { LoggedUser } from 'src/Infrastructure/User/Decorator/LoggedUserDecorato
 import { GetShopsByHouseQuery } from 'src/Application/Shop/Query/GetShopsByHouseQuery';
 import { ShopView } from 'src/Application/Shop/View/ShopView';
 import { User } from 'src/Domain/User/User.entity';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @ApiBearerAuth()
 @Controller('/users/me/current-house')
@@ -25,7 +26,7 @@ export class GetShopsController {
 
   @ApiOperation({ title: 'Get shops of the logged user current house' })
   @Get('/shops')
-  public async index(@LoggedUser() user: User): Promise<ShopView[]> {
+  public async index(@LoggedUser() user: User): Promise<Pagination<ShopView>> {
     if (!user.currentHouse) {
       throw new BadRequestException();
     }

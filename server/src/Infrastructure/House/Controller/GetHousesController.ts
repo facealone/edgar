@@ -5,6 +5,8 @@ import { LoggedUser } from '../../User/Decorator/LoggedUserDecorator';
 import { IQueryBusAdapter } from 'src/Application/Adapter/Bus/IQueryBusAdapter';
 import { GetHousesByUserQuery } from 'src/Application/User/Query/GetHousesByUserQuery';
 import { User } from 'src/Domain/User/User.entity';
+import { GetHousesByUserView } from 'src/Application/User/View/GetHousesByUserView';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @ApiBearerAuth()
 @Controller('users/me')
@@ -18,7 +20,9 @@ export class GetHousesController {
 
   @ApiOperation({ title: 'Get logged user houses' })
   @Get('/houses')
-  public async index(@LoggedUser() user: User) {
+  public async index(
+    @LoggedUser() user: User,
+  ): Promise<Pagination<GetHousesByUserView>> {
     return await this.queryBus.execute(new GetHousesByUserQuery(user));
   }
 }

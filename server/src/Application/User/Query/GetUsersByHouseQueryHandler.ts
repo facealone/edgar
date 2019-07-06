@@ -4,6 +4,7 @@ import { IUserHouseRepository } from 'src/Domain/User/Repository/IUserHouseRepos
 import { GetUsersByHouseQuery } from './GetUsersByHouseQuery';
 import { IsMemberOfHouse } from 'src/Domain/User/IsMemberOfHouse';
 import { GetUsersByHouseView } from '../View/GetUsersByHouseView';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @QueryHandler(GetUsersByHouseQuery)
 export class GetUsersByHouseQueryHandler {
@@ -15,7 +16,7 @@ export class GetUsersByHouseQueryHandler {
 
   public execute = async (
     query: GetUsersByHouseQuery,
-  ): Promise<GetUsersByHouseView[]> => {
+  ): Promise<Pagination<GetUsersByHouseView>> => {
     const { house } = query;
 
     if (
@@ -25,8 +26,9 @@ export class GetUsersByHouseQueryHandler {
     }
 
     const userHousesviews = [];
-    const userHouses = await this.userHouseRepository.findUserHousesByHouse(
+    const [userHouses, total] = await this.userHouseRepository.findByHouse(
       house,
+      1,
     );
 
     for (const userHouse of userHouses) {
@@ -43,6 +45,6 @@ export class GetUsersByHouseQueryHandler {
       );
     }
 
-    return userHousesviews;
+    return new Pagination<GetUsersByHouseView>(userHousesviews, total);
   };
 }
