@@ -6,15 +6,15 @@ import {
   RECIPE_CATEGORIES_ERROR,
 } from '../constants/categories';
 import { ILoadingAction, IErrorAction } from '../../common/types/actions';
-import { IRecipeCategory } from '../models/RecipeCategory';
+import { RecipeCategory } from '../models/RecipeCategory';
 
 export interface ICategoriesState extends IState {
-  payload: IRecipeCategory[];
+  payload: RecipeCategory[];
 }
 
 export interface ICategoriesSuccessAction {
   type: typeof RECIPE_CATEGORIES_SUCCESS;
-  payload: IRecipeCategory[];
+  payload: RecipeCategory[];
 }
 
 export interface ICategoriesLoadingAction extends ILoadingAction {

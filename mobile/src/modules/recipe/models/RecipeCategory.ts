@@ -1,8 +1,3 @@
-export interface IRecipeCategory {
-  id: string;
-  name: string;
-}
-
-export class RecipeCategory implements IRecipeCategory {
+export class RecipeCategory {
   constructor(public readonly id: string, public readonly name: string) {}
 }

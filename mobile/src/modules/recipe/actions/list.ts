@@ -1,4 +1,4 @@
-import { IRecipe } from '../models/Recipe';
+import { Recipe } from '../models/Recipe';
 import {
   RECIPE_LIST_SUCCESS,
   RECIPE_LIST_LOADING,
@@ -12,8 +12,11 @@ import {
   IRecipeListErrorAction,
   IRecipeListLoadingAction,
 } from '../types/list';
+import { Pagination } from '../../common/models/Pagination';
 
-export const success = (payload: IRecipe[]): IRecipeListSuccessAction => {
+export const success = (
+  payload: Pagination<Recipe>,
+): IRecipeListSuccessAction => {
   return {
     type: RECIPE_LIST_SUCCESS,
     payload,

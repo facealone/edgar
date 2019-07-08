@@ -11,10 +11,10 @@ import {
   ICategoriesErrorAction,
   ICategoriesLoadingAction,
 } from '../types/categories';
-import { IRecipeCategory } from '../models/RecipeCategory';
+import { RecipeCategory } from '../models/RecipeCategory';
 
 export const success = (
-  payload: IRecipeCategory[],
+  payload: RecipeCategory[],
 ): ICategoriesSuccessAction => {
   return {
     type: RECIPE_CATEGORIES_SUCCESS,

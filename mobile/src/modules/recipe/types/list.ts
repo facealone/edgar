@@ -1,4 +1,4 @@
-import { IRecipe } from '../models/Recipe';
+import { Recipe } from '../models/Recipe';
 import { IState } from '../../common/types/states';
 import {
   RECIPE_LIST_SUCCESS,
@@ -11,14 +11,15 @@ import { IAuthenticationLogoutAction } from '../../auth/types/authentication';
 import { IRecipeAddSuccessAction } from './add';
 import { IRecipeRemoveSuccessAction } from './remove';
 import { ICurrentHouseSuccessAction } from '../../house/types/current';
+import { Pagination } from '../../common/models/Pagination';
 
 export interface IRecipeListState extends IState {
-  payload: IRecipe[];
+  payload: Pagination<Recipe>;
 }
 
 export interface IRecipeListSuccessAction {
   type: typeof RECIPE_LIST_SUCCESS;
-  payload: IRecipe[];
+  payload: Pagination<Recipe>;
 }
 
 export interface IRecipeListLoadingAction extends ILoadingAction {

@@ -1,4 +1,4 @@
-import { IRecipe } from '../models/Recipe';
+import { Recipe } from '../models/Recipe';
 import {
   RECIPE_ADD_SUCCESS,
   RECIPE_ADD_LOADING,
@@ -13,7 +13,7 @@ import {
   IRecipeAddLoadingAction,
 } from '../types/add';
 
-export const success = (payload: IRecipe): IRecipeAddSuccessAction => {
+export const success = (payload: Recipe): IRecipeAddSuccessAction => {
   return {
     type: RECIPE_ADD_SUCCESS,
     payload,

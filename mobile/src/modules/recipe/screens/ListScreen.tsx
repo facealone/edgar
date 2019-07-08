@@ -18,7 +18,7 @@ import { reset } from '../actions/list';
 import { listRecipes } from '../middlewares/list';
 import { commonStyles } from '../../../theme/common';
 import { IRecipeListState, IRecipeListResetAction } from '../types/list';
-import { IRecipe } from '../models/Recipe';
+import { Recipe } from '../models/Recipe';
 
 interface IProps {
   reset(): IRecipeListResetAction;
@@ -44,7 +44,7 @@ class ListScreen extends React.PureComponent<IProps> {
         <Content style={commonStyles.content}>
           <Separator bordered>
             <Text style={commonStyles.centerHeaderFlatList}>
-              {i18n.t('recipe.list.title')} ({recipes.payload.length})
+              {i18n.t('recipe.list.title')} ({recipes.payload.totalItems})
             </Text>
           </Separator>
           <Button iconLeft style={commonStyles.filterButton} small bordered>
@@ -53,12 +53,12 @@ class ListScreen extends React.PureComponent<IProps> {
           </Button>
           <FlatList
             keyExtractor={card => card.id}
-            data={recipes.payload}
+            data={recipes.payload.items}
             refreshing={recipes.loading}
             onRefresh={() => {
               this.props.listRecipes();
             }}
-            renderItem={({ item: recipe }: IRecipe) => {
+            renderItem={({ item: recipe }: Recipe) => {
               const { uri, name, id, category, owner } = recipe;
 
               return (

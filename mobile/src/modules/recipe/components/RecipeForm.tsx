@@ -7,12 +7,12 @@ import { Content, Form, Picker } from 'native-base';
 import i18n from '../../../i18n';
 import { Input } from '../../common/components/Input';
 import { SubmitButton } from '../../common/components/SubmitButton';
-import { IRecipeCategory } from '../models/RecipeCategory';
+import { RecipeCategory } from '../models/RecipeCategory';
 import { PickerInput } from '../../common/components/PickerInput';
 
 interface IProps {
   loading: boolean;
-  categories: IRecipeCategory[];
+  categories: RecipeCategory[];
   handleSubmit(): any;
 }
 
@@ -44,7 +44,7 @@ class RecipeForm extends React.PureComponent<
                   value={null}
                 />
               )}
-              {categories.map((category: IRecipeCategory) => (
+              {categories.map((category: RecipeCategory) => (
                 <Picker.Item
                   key={category.id}
                   label={category.name}

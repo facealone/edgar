@@ -1,20 +1,12 @@
-import { IOwner } from '../../user/models/Owner';
-import { IRecipeCategory } from './RecipeCategory';
+import { Owner } from '../../user/models/Owner';
+import { RecipeCategory } from './RecipeCategory';
 
-export interface IRecipe {
-  id: string;
-  name: string;
-  uri: string;
-  owner: IOwner;
-  category: IRecipeCategory;
-}
-
-export class Recipe implements IRecipe {
+export class Recipe {
   constructor(
     public readonly id: string,
     public readonly name: string,
     public readonly uri: string,
-    public readonly owner: IOwner,
-    public readonly category: IRecipeCategory,
+    public readonly owner: Owner,
+    public readonly category: RecipeCategory,
   ) {}
 }

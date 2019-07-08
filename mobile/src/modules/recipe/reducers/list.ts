@@ -9,9 +9,11 @@ import { AUTH_AUTHENTICATION_LOGOUT } from '../../auth/constants/authentication'
 import { RECIPE_ADD_SUCCESS } from '../constants/add';
 import { RECIPE_REMOVE_SUCCESS } from '../constants/remove';
 import { HOUSE_CURRENT_SUCCESS } from '../../house/constants/current';
+import { Pagination } from '../../common/models/Pagination';
+import { Recipe } from '../models/Recipe';
 
 const initialState: IRecipeListState = {
-  payload: [],
+  payload: new Pagination<Recipe>(),
   loading: false,
   errors: [],
 };
@@ -30,13 +32,23 @@ export const listReducers = (
     case RECIPE_ADD_SUCCESS:
       return {
         ...state,
-        payload: [...state.payload, action.payload],
+        payload: {
+          ...state.payload,
+          items: [
+            ...state.payload.items.slice(0, 0),
+            action.payload,
+            ...state.payload.items.slice(0),
+          ],
+        },
       };
 
     case RECIPE_REMOVE_SUCCESS:
       return {
         ...state,
-        payload: state.payload.filter(recipe => recipe.id !== action.id),
+        payload: {
+          ...state.payload,
+          items: state.payload.items.filter(recipe => recipe.id !== action.id),
+        },
       };
 
     case RECIPE_LIST_LOADING:

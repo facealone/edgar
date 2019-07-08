@@ -2,16 +2,20 @@ import { loading, success, errors } from '../actions/list';
 import { Recipe } from '../models/Recipe';
 import { Owner } from '../../user/models/Owner';
 import { RecipeCategory } from '../models/RecipeCategory';
+import { Pagination } from '../../common/models/Pagination';
 
-export const listRecipes = () => {
+export const listRecipes = (page: number = 1) => {
   return async (dispatch: any, getState: any, axios: any) => {
     dispatch(loading(true));
 
     try {
-      const response = await axios.get('users/me/current-house/recipes');
+      const response = await axios.get('users/me/current-house/recipes', {
+        page,
+      });
+      const payload: Pagination<Recipe> = response.data;
       const recipes = [];
 
-      for (const recipe of response.data) {
+      for (const recipe of payload.items) {
         const { owner, category } = recipe;
 
         recipes.push(
@@ -25,7 +29,15 @@ export const listRecipes = () => {
         );
       }
 
-      dispatch(success(recipes));
+      dispatch(
+        success(
+          new Pagination<Recipe>(
+            recipes,
+            payload.pageCount,
+            payload.totalItems,
+          ),
+        ),
+      );
     } catch (err) {
       // todo errors
       dispatch(errors([]));
