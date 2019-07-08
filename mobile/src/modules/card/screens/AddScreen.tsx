@@ -1,5 +1,5 @@
 import React from 'react';
-import { Content, Text } from 'native-base';
+import { Content } from 'native-base';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import CardForm from '../components/CardForm';

@@ -10,7 +10,7 @@ import {
   ICardAddErrorAction,
   ICardAddResetAction,
 } from '../types/add';
-import { ICard } from '../models/Card';
+import { Card } from '../models/Card';
 import { IError } from '../../common/models/Error';
 
 export const loading = (loading: boolean): ICardAddLoadingAction => {
@@ -20,7 +20,7 @@ export const loading = (loading: boolean): ICardAddLoadingAction => {
   };
 };
 
-export const success = (payload: ICard): ICardAddSuccessAction => {
+export const success = (payload: Card): ICardAddSuccessAction => {
   return {
     type: CARD_ADD_SUCCESS,
     payload,

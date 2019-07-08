@@ -16,7 +16,7 @@ import i18n from '../../../i18n';
 import { listCards } from '../middlewares/list';
 import { reset } from '../actions/list';
 import { ICardListState, ICardListResetAction } from '../types/list';
-import { ICard } from '../models/Card';
+import { Card } from '../models/Card';
 import { commonStyles } from '../../../theme/common';
 
 interface IProps {
@@ -43,17 +43,17 @@ class ListScreen extends React.PureComponent<IProps> {
         <Content style={commonStyles.content}>
           <Separator bordered>
             <Text style={commonStyles.centerHeaderFlatList}>
-              {i18n.t('card.list.header')} ({cards.payload.length})
+              {i18n.t('card.list.header')} ({cards.payload.totalItems})
             </Text>
           </Separator>
           <FlatList
             keyExtractor={card => card.id}
-            data={cards.payload}
+            data={cards.payload.items}
             refreshing={cards.loading}
             onRefresh={() => {
               this.props.listCards();
             }}
-            renderItem={({ item: card }: ICard) => {
+            renderItem={({ item: card }: Card) => {
               const { barCode, name, id, owner } = card;
 
               return (

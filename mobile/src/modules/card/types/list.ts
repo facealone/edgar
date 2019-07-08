@@ -5,20 +5,21 @@ import {
   CARD_LIST_ERROR,
 } from '../constants/list';
 import { ILoadingAction, IErrorAction } from '../../common/types/actions';
+import { Card } from '../models/Card';
+import { IAuthenticationLogoutAction } from '../../auth/types/authentication';
+import { ICurrentHouseSuccessAction } from '../../house/types/current';
+import { Pagination } from '../../common/models/Pagination';
 import { IState } from '../../common/types/states';
 import { ICardAddSuccessAction } from './add';
-import { ICard } from '../models/Card';
-import { IAuthenticationLogoutAction } from '../../auth/types/authentication';
-import { ICardRemoveSuccessAction } from './remove';
-import { ICurrentHouseSuccessAction } from '../../house/types/current';
+import { ICardRemoveActionTypes } from './remove';
 
 export interface ICardListState extends IState {
-  payload: ICard[];
+  payload: Pagination<Card>;
 }
 
 export interface ICardListSuccessAction {
   type: typeof CARD_LIST_SUCCESS;
-  payload: ICard[];
+  payload: Pagination<Card>;
 }
 
 export interface ICardListLoadingAction extends ILoadingAction {
@@ -35,9 +36,9 @@ export interface ICardListErrorAction extends IErrorAction {
 
 export type ICardListActionTypes =
   | ICardListSuccessAction
-  | ICardRemoveSuccessAction
-  | ICurrentHouseSuccessAction
   | ICardAddSuccessAction
+  | ICardRemoveActionTypes
+  | ICurrentHouseSuccessAction
   | IAuthenticationLogoutAction
   | ICardListLoadingAction
   | ICardListResetAction

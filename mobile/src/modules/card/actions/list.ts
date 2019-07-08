@@ -10,10 +10,11 @@ import {
   ICardListLoadingAction,
   ICardListResetAction,
 } from '../types/list';
-import { ICard } from '../models/Card';
+import { Card } from '../models/Card';
 import { IError } from '../../common/models/Error';
+import { Pagination } from '../../common/models/Pagination';
 
-export const success = (payload: ICard[]): ICardListSuccessAction => {
+export const success = (payload: Pagination<Card>): ICardListSuccessAction => {
   return {
     type: CARD_LIST_SUCCESS,
     payload,

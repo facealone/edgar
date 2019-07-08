@@ -6,15 +6,15 @@ import {
 } from '../constants/add';
 import { ILoadingAction, IErrorAction } from '../../common/types/actions';
 import { IState } from '../../common/types/states';
-import { ICard } from '../models/Card';
+import { Card } from '../models/Card';
 
 export interface ICardAddState extends IState {
-  payload: ICard | null;
+  payload: Card | null;
 }
 
 export interface ICardAddSuccessAction {
   type: typeof CARD_ADD_SUCCESS;
-  payload: ICard;
+  payload: Card;
 }
 
 export interface ICardAddErrorAction extends IErrorAction {

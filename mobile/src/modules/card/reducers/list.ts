@@ -1,4 +1,4 @@
-import { ICardListState, ICardListActionTypes } from '../types/list';
+import { ICardListActionTypes, ICardListState } from '../types/list';
 import {
   CARD_LIST_SUCCESS,
   CARD_LIST_LOADING,
@@ -9,10 +9,12 @@ import { CARD_ADD_SUCCESS } from '../constants/add';
 import { AUTH_AUTHENTICATION_LOGOUT } from '../../auth/constants/authentication';
 import { CARD_REMOVE_SUCCESS } from '../constants/remove';
 import { HOUSE_CURRENT_SUCCESS } from '../../house/constants/current';
+import { Pagination } from '../../common/models/Pagination';
+import { Card } from '../models/Card';
 
 const initialState: ICardListState = {
   loading: false,
-  payload: [],
+  payload: new Pagination<Card>(),
   errors: [],
 };
 
@@ -24,7 +26,15 @@ export const listReducers = (
     case CARD_ADD_SUCCESS:
       return {
         ...state,
-        payload: [...state.payload, action.payload],
+        payload: {
+          ...state.payload,
+          items: [
+            ...state.payload.items.slice(0, 0),
+            action.payload,
+            ...state.payload.items.slice(0),
+          ],
+          totalItems: state.payload.totalItems + 1,
+        },
       };
 
     case CARD_LIST_SUCCESS:
@@ -36,7 +46,11 @@ export const listReducers = (
     case CARD_REMOVE_SUCCESS:
       return {
         ...state,
-        payload: state.payload.filter(card => card.id !== action.id),
+        payload: {
+          ...state.payload,
+          items: state.payload.items.filter(card => card.id !== action.id),
+          totalItems: state.payload.totalItems - 1,
+        },
       };
 
     case CARD_LIST_LOADING:
