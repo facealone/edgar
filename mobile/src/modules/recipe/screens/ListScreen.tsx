@@ -70,7 +70,11 @@ class ListScreen extends React.PureComponent<IProps> {
                 >
                   <Body>
                     <Text>{name}</Text>
-                    <Text note>{category.name}</Text>
+                    <Text note>
+                      {i18n.t('recipe.list.category', {
+                        category: category.name,
+                      })}
+                    </Text>
                     <Text note>
                       {owner.firstName} {owner.lastName}
                     </Text>

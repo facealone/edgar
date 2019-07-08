@@ -11,6 +11,7 @@ import {
 import { HOUSE_VOUCHER_ADD_SUCCESS } from '../../constants/voucher/add';
 import { Pagination } from '../../../common/models/Pagination';
 import { Voucher } from '../../models/Voucher';
+import { AUTH_AUTHENTICATION_LOGOUT } from '../../../auth/constants/authentication';
 
 const initialState: IHouseVoucherListState = {
   payload: new Pagination<Voucher>(),
@@ -56,6 +57,7 @@ export const listReducers = (
       };
 
     case HOUSE_VOUCHER_LIST_RESET:
+    case AUTH_AUTHENTICATION_LOGOUT:
       return initialState;
 
     default:

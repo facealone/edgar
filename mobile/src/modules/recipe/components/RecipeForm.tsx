@@ -27,8 +27,9 @@ class RecipeForm extends React.PureComponent<
         <Content>
           <Form>
             <Field
-              autoFocus
+              autoFocus={true}
               label={i18n.t('recipe.add.form.name')}
+              placeholder={i18n.t('recipe.add.form.placeholder')}
               name={'name'}
               component={Input}
             />

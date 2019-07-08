@@ -143,7 +143,8 @@
         "title": "Ajouter une carte",
         "button": "Sauvegarder",
         "form": {
-          "name": "Nom de la carte"
+          "name": "Nom de la carte",
+          "placeholder": "Ex: Franprix"
         }
       }
     },
@@ -171,18 +172,21 @@
       "add": {
         "title": "Créer une liste",
         "form": {
-          "name": "Nom de la liste"
+          "name": "Nom de la liste",
+          "placeholder": "Ex: Leclerc"
         }
       }
     },
     "recipe": {
       "list": {
-        "title": "Recettes sauvegardées"
+        "title": "Recettes sauvegardées",
+        "category": "Catégorie : {{category}}"
       },
       "add": {
         "title": "Ajouter une recette",
         "form": {
           "name": "Nom de la recette",
+          "placeholder": "Ex: Crumble aux pommes",
           "category": "Choisir une catégorie"
         }
       }

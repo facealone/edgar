@@ -7,6 +7,7 @@ export const Input = ({
   secureTextEntry,
   returnKeyType,
   autoFocus,
+  placeholder,
   keyboardType,
   textContentType,
   autoCapitalize,
@@ -25,6 +26,7 @@ export const Input = ({
         <Label>{label}</Label>
         <BaseInput
           name={input.name}
+          placeholder={placeholder}
           onChange={input.onChange}
           returnKeyType={returnKeyType}
           secureTextEntry={secureTextEntry}

@@ -7,7 +7,9 @@ export const listVouchers = (houseId: string, page: number = 1) => {
     dispatch(loading(true));
 
     try {
-      const response = await axios.get(`houses/${houseId}/vouchers`, { page });
+      const response = await axios.get(
+        `houses/${houseId}/vouchers?page=${page}`,
+      );
       const { items, pageCount, totalItems } = response.data;
       const vouchers = [];
 

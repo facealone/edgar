@@ -8,6 +8,7 @@ import { IState } from '../../../common/types/states';
 import { ILoadingAction, IErrorAction } from '../../../common/types/actions';
 import { Member } from '../../models/Member';
 import { Pagination } from '../../../common/models/Pagination';
+import { IAuthenticationLogoutAction } from '../../../auth/types/authentication';
 
 export interface IHouseMemberListState extends IState {
   payload: Pagination<Member>;
@@ -32,6 +33,7 @@ export interface IHouseMemberListResetAction {
 
 export type IHouseMemberListActionTypes =
   | IHouseMemberListSuccessAction
+  | IAuthenticationLogoutAction
   | IHouseMemberListLoadingAction
   | IHouseMemberListErrorAction
   | IHouseMemberListResetAction;

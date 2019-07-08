@@ -10,6 +10,7 @@ import {
 } from '../../constants/member/list';
 import { Pagination } from '../../../common/models/Pagination';
 import { Member } from '../../models/Member';
+import { AUTH_AUTHENTICATION_LOGOUT } from '../../../auth/constants/authentication';
 
 const initialState: IHouseMemberListState = {
   loading: false,
@@ -41,6 +42,7 @@ export const listReducers = (
       };
 
     case HOUSE_MEMBER_LIST_RESET:
+    case AUTH_AUTHENTICATION_LOGOUT:
       return initialState;
 
     default:

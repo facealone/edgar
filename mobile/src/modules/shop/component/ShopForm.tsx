@@ -22,8 +22,9 @@ class ShopForm extends React.Component<InjectedFormProps<IShopForm> & IProps> {
         <Content>
           <Form>
             <Field
-              autoFocus
+              autoFocus={true}
               label={i18n.t('shop.add.form.name')}
+              placeholder={i18n.t('shop.add.form.placeholder')}
               returnKeyType={'done'}
               name={'name'}
               component={Input}

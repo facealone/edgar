@@ -8,9 +8,9 @@ export const listCards = (page: number = 1) => {
     dispatch(loading(true));
 
     try {
-      const response = await axios.get('users/me/current-house/cards', {
-        page,
-      });
+      const response = await axios.get(
+        `users/me/current-house/cards?page=${page}`,
+      );
       const { items, pageCount, totalItems } = response.data;
       const cards = [];
 

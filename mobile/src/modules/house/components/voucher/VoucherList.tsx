@@ -41,11 +41,11 @@ class VoucherList extends React.Component<IProps> {
             <Body>
               <Text>{voucher.username}</Text>
               <Text note>
-                {i18n.t('house.voucher.list.role')} :{' '}
-                {i18n.t(`roles.${voucher.role}`)}
+                {i18n.t('house.voucher.list.code')} : {voucher.code}
               </Text>
               <Text note>
-                {i18n.t('house.voucher.list.code')} : {voucher.code}
+                {i18n.t('house.voucher.list.role')} :{' '}
+                {i18n.t(`roles.${voucher.role}`)}
               </Text>
             </Body>
           </ListItem>

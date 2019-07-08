@@ -9,6 +9,7 @@ import { ILoadingAction, IErrorAction } from '../../../common/types/actions';
 import { Voucher } from '../../models/Voucher';
 import { IHouseVoucherAddSuccessAction } from './add';
 import { Pagination } from '../../../common/models/Pagination';
+import { IAuthenticationLogoutAction } from '../../../auth/types/authentication';
 
 export interface IHouseVoucherListState extends IState {
   payload: Pagination<Voucher>;
@@ -34,6 +35,7 @@ export interface IHouseVoucherListResetAction {
 export type IHouseVoucherListActionTypes =
   | IHouseVoucherListSuccessAction
   | IHouseVoucherAddSuccessAction
+  | IAuthenticationLogoutAction
   | IHouseVoucherListLoadingAction
   | IHouseVoucherListErrorAction
   | IHouseVoucherListResetAction;

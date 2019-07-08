@@ -2,13 +2,13 @@ import { loading, success, errors } from '../actions/list';
 import { Budget } from '../models/Budget';
 import { Pagination } from '../../common/models/Pagination';
 
-export const listBudgets = () => {
+export const listBudgets = (page: number = 1) => {
   return async (dispatch: any, getState: any, axios: any) => {
     dispatch(loading(true));
 
     try {
       const response = await axios.get(
-        `users/me/current-house/budgets?date=${new Date().toISOString()}`,
+        `users/me/current-house/budgets?date=${new Date().toISOString()}&page=${page}`,
       );
       const { items, pageCount, totalItems } = response.data;
       const budgets = [];

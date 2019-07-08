@@ -62,6 +62,7 @@ class ListScreen extends React.Component<IProps> {
 
               return (
                 <ListItem
+                  icon
                   key={id}
                   onPress={() => navigation.navigate('HouseShow', { id, name })}
                 >

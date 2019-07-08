@@ -7,11 +7,11 @@ export const listMembers = (house: string, page: number = 1) => {
     dispatch(loading(true));
 
     try {
-      const response = await axios.get(`houses/${house}/members`, { page });
+      const response = await axios.get(`houses/${house}/members?page=${page}`);
       const { items, pageCount, totalItems } = response.data;
       const members = [];
 
-      for (const member of response.data) {
+      for (const member of items) {
         members.push(
           new Member(
             member.id,

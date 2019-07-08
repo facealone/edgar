@@ -24,8 +24,9 @@ class CardForm extends React.PureComponent<
         <Content>
           <Form>
             <Field
-              autoFocus
+              autoFocus={true}
               label={i18n.t('card.add.form.name')}
+              placeholder={i18n.t('card.add.form.placeholder')}
               returnKeyType={'done'}
               name={'name'}
               component={Input}
