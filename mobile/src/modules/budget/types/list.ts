@@ -10,13 +10,14 @@ import { ICurrentHouseSuccessAction } from '../../house/types/current';
 import { IAuthenticationLogoutAction } from '../../auth/types/authentication';
 import { Budget } from '../models/Budget';
 import { IBudgetAddSuccessAction } from './add';
+import { Pagination } from '../../common/models/Pagination';
 
 export interface IBudgetListSate extends IState {
-  payload: Budget[];
+  payload: Pagination<Budget>;
 }
 
 export interface IBudgetListSuccessAction {
-  payload: Budget[];
+  payload: Pagination<Budget>;
   type: typeof BUDGET_LIST_SUCCESS;
 }
 

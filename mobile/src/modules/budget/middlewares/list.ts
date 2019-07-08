@@ -1,5 +1,6 @@
 import { loading, success, errors } from '../actions/list';
 import { Budget } from '../models/Budget';
+import { Pagination } from '../../common/models/Pagination';
 
 export const listBudgets = () => {
   return async (dispatch: any, getState: any, axios: any) => {
@@ -9,9 +10,10 @@ export const listBudgets = () => {
       const response = await axios.get(
         `users/me/current-house/budgets?date=${new Date().toISOString()}`,
       );
+      const { items, pageCount, totalItems } = response.data;
       const budgets = [];
 
-      for (const budget of response.data) {
+      for (const budget of items) {
         budgets.push(
           new Budget(
             budget.id,
@@ -23,7 +25,7 @@ export const listBudgets = () => {
         );
       }
 
-      dispatch(success(budgets));
+      dispatch(success(new Pagination<Budget>(budgets, pageCount, totalItems)));
     } catch (err) {
       // todo errors
       dispatch(errors([]));

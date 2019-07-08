@@ -10,7 +10,7 @@ import {
   BUDGET_ADD_ERROR,
   BUDGET_ADD_RESET,
 } from '../constants/add';
-import { IError } from '../../common/models/Error';
+import { Error } from '../../common/models/Error';
 import { Budget } from '../models/Budget';
 
 export const success = (payload: Budget): IBudgetAddSuccessAction => {
@@ -27,7 +27,7 @@ export const loading = (loading: boolean): IBudgetAddLoadingAction => {
   };
 };
 
-export const errors = (errors: IError[]): IBudgetAddErrorAction => {
+export const errors = (errors: Error[]): IBudgetAddErrorAction => {
   return {
     type: BUDGET_ADD_ERROR,
     errors,

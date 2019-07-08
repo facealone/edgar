@@ -5,7 +5,7 @@ import {
   RECIPE_LIST_ERROR,
   RECIPE_LIST_RESET,
 } from '../constants/list';
-import { IError } from '../../common/models/Error';
+import { Error } from '../../common/models/Error';
 import {
   IRecipeListSuccessAction,
   IRecipeListResetAction,
@@ -30,7 +30,7 @@ export const loading = (loading: boolean): IRecipeListLoadingAction => {
   };
 };
 
-export const errors = (errors: IError[]): IRecipeListErrorAction => {
+export const errors = (errors: Error[]): IRecipeListErrorAction => {
   return {
     type: RECIPE_LIST_ERROR,
     errors,

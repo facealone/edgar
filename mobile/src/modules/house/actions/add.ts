@@ -1,5 +1,4 @@
-import { IHouse } from '../../home/models/House';
-import { IError } from '../../common/models/Error';
+import { Error } from '../../common/models/Error';
 import {
   HOUSE_ADD_RESET,
   HOUSE_ADD_SUCCESS,
@@ -12,8 +11,9 @@ import {
   IHouseAddErrorAction,
   IHouseAddLoadingAction,
 } from '../types/add';
+import { House } from '../models/House';
 
-export const success = (payload: IHouse): IHouseAddSuccessAction => {
+export const success = (payload: House): IHouseAddSuccessAction => {
   return {
     type: HOUSE_ADD_SUCCESS,
     payload,
@@ -27,7 +27,7 @@ export const loading = (loading: boolean): IHouseAddLoadingAction => {
   };
 };
 
-export const errors = (errors: IError[]): IHouseAddErrorAction => {
+export const errors = (errors: Error[]): IHouseAddErrorAction => {
   return {
     type: HOUSE_ADD_ERROR,
     errors,

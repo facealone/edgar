@@ -11,7 +11,7 @@ import {
   ICardListResetAction,
 } from '../types/list';
 import { Card } from '../models/Card';
-import { IError } from '../../common/models/Error';
+import { Error } from '../../common/models/Error';
 import { Pagination } from '../../common/models/Pagination';
 
 export const success = (payload: Pagination<Card>): ICardListSuccessAction => {
@@ -28,7 +28,7 @@ export const loading = (loading: boolean): ICardListLoadingAction => {
   };
 };
 
-export const errors = (errors: IError[]): ICardListErrorAction => {
+export const errors = (errors: Error[]): ICardListErrorAction => {
   return {
     type: CARD_LIST_ERROR,
     errors,

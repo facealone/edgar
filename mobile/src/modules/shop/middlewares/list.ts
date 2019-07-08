@@ -10,18 +10,14 @@ export const listShops = (page: number = 1) => {
       const response = await axios.get('users/me/current-house/shops', {
         page,
       });
-      const payload = response.data;
+      const { items, pageCount, totalItems } = response.data;
       const shops = [];
 
-      for (const shop of payload.items) {
+      for (const shop of items) {
         shops.push(new Shop(shop.id, shop.name, shop.numberOfItems));
       }
 
-      dispatch(
-        success(
-          new Pagination<Shop>(shops, payload.pageCount, payload.totalItems),
-        ),
-      );
+      dispatch(success(new Pagination<Shop>(shops, pageCount, totalItems)));
     } catch (err) {
       // todo errors
       dispatch(errors([]));

@@ -6,16 +6,17 @@ import {
 } from '../../constants/voucher/list';
 import { IState } from '../../../common/types/states';
 import { ILoadingAction, IErrorAction } from '../../../common/types/actions';
-import { IVoucher } from '../../models/Voucher';
+import { Voucher } from '../../models/Voucher';
 import { IHouseVoucherAddSuccessAction } from './add';
+import { Pagination } from '../../../common/models/Pagination';
 
 export interface IHouseVoucherListState extends IState {
-  payload: IVoucher[];
+  payload: Pagination<Voucher>;
 }
 
 export interface IHouseVoucherListSuccessAction {
   type: typeof HOUSE_VOUCHER_LIST_SUCCESS;
-  payload: IVoucher[];
+  payload: Pagination<Voucher>;
 }
 
 export interface IHouseVoucherListLoadingAction extends ILoadingAction {

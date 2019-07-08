@@ -4,7 +4,7 @@ import {
   CARD_REMOVE_ERROR,
   CARD_REMOVE_RESET,
 } from '../constants/remove';
-import { IError } from '../../common/models/Error';
+import { Error } from '../../common/models/Error';
 import {
   ICardRemoveLoadingAction,
   ICardRemoveSuccessAction,
@@ -26,7 +26,7 @@ export const success = (id: string): ICardRemoveSuccessAction => {
   };
 };
 
-export const errors = (errors: IError[]): ICardRemoveErrorAction => {
+export const errors = (errors: Error[]): ICardRemoveErrorAction => {
   return {
     type: CARD_REMOVE_ERROR,
     errors,

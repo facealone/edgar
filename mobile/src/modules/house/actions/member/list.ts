@@ -10,10 +10,13 @@ import {
   IHouseMemberListErrorAction,
   IHouseMemberListResetAction,
 } from '../../types/member/list';
-import { IMember } from '../../models/Member';
-import { IError } from '../../../common/models/Error';
+import { Member } from '../../models/Member';
+import { Error } from '../../../common/models/Error';
+import { Pagination } from '../../../common/models/Pagination';
 
-export const success = (payload: IMember[]): IHouseMemberListSuccessAction => {
+export const success = (
+  payload: Pagination<Member>,
+): IHouseMemberListSuccessAction => {
   return {
     type: HOUSE_MEMBER_LIST_SUCCESS,
     payload,
@@ -27,7 +30,7 @@ export const loading = (loading: boolean): IHouseMemberListLoadingAction => {
   };
 };
 
-export const errors = (errors: IError[]): IHouseMemberListErrorAction => {
+export const errors = (errors: Error[]): IHouseMemberListErrorAction => {
   return {
     type: HOUSE_MEMBER_LIST_ERROR,
     errors,

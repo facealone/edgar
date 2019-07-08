@@ -8,11 +8,13 @@ import {
   HOUSE_MEMBER_LIST_ERROR,
   HOUSE_MEMBER_LIST_RESET,
 } from '../../constants/member/list';
+import { Pagination } from '../../../common/models/Pagination';
+import { Member } from '../../models/Member';
 
 const initialState: IHouseMemberListState = {
   loading: false,
   errors: [],
-  payload: [],
+  payload: new Pagination<Member>(),
 };
 
 export const listReducers = (

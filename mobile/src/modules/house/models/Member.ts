@@ -1,12 +1,4 @@
-export interface IMember {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  role: string;
-}
-
-export class Member implements IMember {
+export class Member {
   constructor(
     public readonly id: string,
     public readonly firstName: string,

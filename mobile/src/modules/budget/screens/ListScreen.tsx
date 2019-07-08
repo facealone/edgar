@@ -45,13 +45,13 @@ class ListScreen extends React.PureComponent<IProps> {
         <Content style={commonStyles.content}>
           <Separator bordered>
             <Text style={commonStyles.centerHeaderFlatList}>
-              {i18n.t('budget.list.header')} ({budget.payload.length})
+              {i18n.t('budget.list.header')} ({budget.payload.totalItems})
             </Text>
           </Separator>
 
           <FlatList
             keyExtractor={budget => budget.id}
-            data={budget.payload}
+            data={budget.payload.items}
             refreshing={budget.loading}
             onRefresh={() => {
               this.props.listBudgets();

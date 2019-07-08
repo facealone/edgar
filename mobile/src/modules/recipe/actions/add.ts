@@ -5,7 +5,7 @@ import {
   RECIPE_ADD_ERROR,
   RECIPE_ADD_RESET,
 } from '../constants/add';
-import { IError } from '../../common/models/Error';
+import { Error } from '../../common/models/Error';
 import {
   IRecipeAddSuccessAction,
   IRecipeAddResetAction,
@@ -27,7 +27,7 @@ export const loading = (loading: boolean): IRecipeAddLoadingAction => {
   };
 };
 
-export const errors = (errors: IError[]): IRecipeAddErrorAction => {
+export const errors = (errors: Error[]): IRecipeAddErrorAction => {
   return {
     type: RECIPE_ADD_ERROR,
     errors,

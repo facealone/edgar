@@ -1,5 +1,5 @@
 import { IState } from '../../common/types/states';
-import { IHouse } from '../models/House';
+import { House } from '../models/House';
 import {
   HOUSE_ADD_SUCCESS,
   HOUSE_ADD_ERROR,
@@ -9,12 +9,12 @@ import {
 import { IErrorAction, ILoadingAction } from '../../common/types/actions';
 
 export interface IHouseAddState extends IState {
-  payload: IHouse | null;
+  payload: House | null;
 }
 
 export interface IHouseAddSuccessAction {
   type: typeof HOUSE_ADD_SUCCESS;
-  payload: IHouse;
+  payload: House;
 }
 
 export interface IHouseAddErrorAction extends IErrorAction {

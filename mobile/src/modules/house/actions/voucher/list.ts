@@ -1,4 +1,4 @@
-import { IError } from '../../../common/models/Error';
+import { Error } from '../../../common/models/Error';
 import {
   HOUSE_VOUCHER_LIST_RESET,
   HOUSE_VOUCHER_LIST_SUCCESS,
@@ -11,10 +11,11 @@ import {
   IHouseVoucherListErrorAction,
   IHouseVoucherListLoadingAction,
 } from '../../types/voucher/list';
-import { IVoucher } from '../../models/Voucher';
+import { Voucher } from '../../models/Voucher';
+import { Pagination } from '../../../common/models/Pagination';
 
 export const success = (
-  payload: IVoucher[],
+  payload: Pagination<Voucher>,
 ): IHouseVoucherListSuccessAction => {
   return {
     type: HOUSE_VOUCHER_LIST_SUCCESS,
@@ -29,7 +30,7 @@ export const loading = (loading: boolean): IHouseVoucherListLoadingAction => {
   };
 };
 
-export const errors = (errors: IError[]): IHouseVoucherListErrorAction => {
+export const errors = (errors: Error[]): IHouseVoucherListErrorAction => {
   return {
     type: HOUSE_VOUCHER_LIST_ERROR,
     errors,

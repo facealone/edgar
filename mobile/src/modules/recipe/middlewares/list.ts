@@ -12,10 +12,10 @@ export const listRecipes = (page: number = 1) => {
       const response = await axios.get('users/me/current-house/recipes', {
         page,
       });
-      const payload = response.data;
+      const { items, pageCount, totalItems } = response.data;
       const recipes = [];
 
-      for (const recipe of payload.items) {
+      for (const recipe of items) {
         const { owner, category } = recipe;
 
         recipes.push(
@@ -29,15 +29,7 @@ export const listRecipes = (page: number = 1) => {
         );
       }
 
-      dispatch(
-        success(
-          new Pagination<Recipe>(
-            recipes,
-            payload.pageCount,
-            payload.totalItems,
-          ),
-        ),
-      );
+      dispatch(success(new Pagination<Recipe>(recipes, pageCount, totalItems)));
     } catch (err) {
       // todo errors
       dispatch(errors([]));

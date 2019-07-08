@@ -6,17 +6,18 @@ import {
 } from '../constants/list';
 import { IState } from '../../common/types/states';
 import { ILoadingAction, IErrorAction } from '../../common/types/actions';
-import { IHouse } from '../models/House';
+import { House } from '../models/House';
 import { IHouseAddActionTypes } from './add';
 import { IAuthenticationLogoutAction } from '../../auth/types/authentication';
+import { Pagination } from '../../common/models/Pagination';
 
 export interface IHouseListState extends IState {
-  payload: IHouse[];
+  payload: Pagination<House>;
 }
 
 export interface IHouseListSuccessAction {
   type: typeof HOUSE_LIST_SUCCESS;
-  payload: IHouse[];
+  payload: Pagination<House>;
 }
 
 export interface IHouseListLoadingAction extends ILoadingAction {

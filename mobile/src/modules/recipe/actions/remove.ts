@@ -4,7 +4,7 @@ import {
   RECIPE_REMOVE_ERROR,
   RECIPE_REMOVE_RESET,
 } from '../constants/remove';
-import { IError } from '../../common/models/Error';
+import { Error } from '../../common/models/Error';
 import {
   IRecipeRemoveSuccessAction,
   IRecipeRemoveResetAction,
@@ -26,7 +26,7 @@ export const loading = (loading: boolean): IRecipeRemoveLoadingAction => {
   };
 };
 
-export const errors = (errors: IError[]): IRecipeRemoveErrorAction => {
+export const errors = (errors: Error[]): IRecipeRemoveErrorAction => {
   return {
     type: RECIPE_REMOVE_ERROR,
     errors,

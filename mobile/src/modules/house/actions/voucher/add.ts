@@ -1,4 +1,4 @@
-import { IError } from '../../../common/models/Error';
+import { Error } from '../../../common/models/Error';
 import {
   HOUSE_VOUCHER_ADD_RESET,
   HOUSE_VOUCHER_ADD_SUCCESS,
@@ -11,9 +11,9 @@ import {
   IHouseVoucherAddErrorAction,
   IHouseVoucherAddLoadingAction,
 } from '../../types/voucher/add';
-import { IVoucher } from '../../models/Voucher';
+import { Voucher } from '../../models/Voucher';
 
-export const success = (payload: IVoucher): IHouseVoucherAddSuccessAction => {
+export const success = (payload: Voucher): IHouseVoucherAddSuccessAction => {
   return {
     type: HOUSE_VOUCHER_ADD_SUCCESS,
     payload,
@@ -27,7 +27,7 @@ export const loading = (loading: boolean): IHouseVoucherAddLoadingAction => {
   };
 };
 
-export const errors = (errors: IError[]): IHouseVoucherAddErrorAction => {
+export const errors = (errors: Error[]): IHouseVoucherAddErrorAction => {
   return {
     type: HOUSE_VOUCHER_ADD_ERROR,
     errors,

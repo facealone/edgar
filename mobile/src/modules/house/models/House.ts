@@ -1,8 +1,3 @@
-export interface IHouse {
-  id: string;
-  name: string;
-}
-
-export class House implements IHouse {
+export class House {
   constructor(public readonly id: string, public readonly name: string) {}
 }

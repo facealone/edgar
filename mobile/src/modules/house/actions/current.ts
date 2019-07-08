@@ -4,17 +4,17 @@ import {
   HOUSE_CURRENT_ERROR,
   HOUSE_CURRENT_RESET,
 } from '../constants/current';
-import { IHouse } from '../models/House';
+import { House } from '../models/House';
 import {
   ICurrentHouseSuccessAction,
   ICurrentHouseLoadingAction,
   ICurrentHouseErrorAction,
   ICurrentHouseResetAction,
 } from '../types/current';
-import { IError } from '../../common/models/Error';
+import { Error } from '../../common/models/Error';
 
 export const success = (
-  payload: IHouse,
+  payload: House,
   success: boolean,
 ): ICurrentHouseSuccessAction => {
   return {
@@ -31,7 +31,7 @@ export const loading = (loading: boolean): ICurrentHouseLoadingAction => {
   };
 };
 
-export const errors = (errors: IError[]): ICurrentHouseErrorAction => {
+export const errors = (errors: Error[]): ICurrentHouseErrorAction => {
   return {
     type: HOUSE_CURRENT_ERROR,
     errors,

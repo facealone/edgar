@@ -10,7 +10,7 @@ import {
   IShopListLoadingAction,
   IShopListResetAction,
 } from '../types/list';
-import { IError } from '../../common/models/Error';
+import { Error } from '../../common/models/Error';
 import { Shop } from '../models/Shop';
 import { Pagination } from '../../common/models/Pagination';
 
@@ -28,7 +28,7 @@ export const loading = (loading: boolean): IShopListLoadingAction => {
   };
 };
 
-export const errors = (errors: IError[]): IShopListErrorAction => {
+export const errors = (errors: Error[]): IShopListErrorAction => {
   return {
     type: SHOP_LIST_ERROR,
     errors,

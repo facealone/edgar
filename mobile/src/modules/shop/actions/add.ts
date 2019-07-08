@@ -11,7 +11,7 @@ import {
   SHOP_ADD_ERROR,
   SHOP_ADD_RESET,
 } from '../constants/add';
-import { IError } from '../../common/models/Error';
+import { Error } from '../../common/models/Error';
 
 export const success = (payload: Shop): IShopAddSuccessAction => {
   return {
@@ -25,7 +25,7 @@ export const loading = (loading: boolean): IShopAddLoadingAction => {
     loading,
   };
 };
-export const errors = (errors: IError[]): IShopAddErrorAction => {
+export const errors = (errors: Error[]): IShopAddErrorAction => {
   return {
     type: SHOP_ADD_ERROR,
     errors,

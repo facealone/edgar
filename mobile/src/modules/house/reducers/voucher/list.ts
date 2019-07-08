@@ -9,9 +9,11 @@ import {
   HOUSE_VOUCHER_LIST_RESET,
 } from '../../constants/voucher/list';
 import { HOUSE_VOUCHER_ADD_SUCCESS } from '../../constants/voucher/add';
+import { Pagination } from '../../../common/models/Pagination';
+import { Voucher } from '../../models/Voucher';
 
 const initialState: IHouseVoucherListState = {
-  payload: [],
+  payload: new Pagination<Voucher>(),
   loading: false,
   errors: [],
 };
@@ -30,7 +32,15 @@ export const listReducers = (
     case HOUSE_VOUCHER_ADD_SUCCESS:
       return {
         ...state,
-        payload: [...state.payload, action.payload],
+        payload: {
+          ...state.payload,
+          items: [
+            ...state.payload.items.slice(0, 0),
+            action.payload,
+            ...state.payload.items.slice(0),
+          ],
+          totalItems: state.payload.totalItems + 1,
+        },
       };
 
     case HOUSE_VOUCHER_LIST_LOADING:

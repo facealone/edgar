@@ -11,7 +11,7 @@ import {
   ICardAddResetAction,
 } from '../types/add';
 import { Card } from '../models/Card';
-import { IError } from '../../common/models/Error';
+import { Error } from '../../common/models/Error';
 
 export const loading = (loading: boolean): ICardAddLoadingAction => {
   return {
@@ -27,7 +27,7 @@ export const success = (payload: Card): ICardAddSuccessAction => {
   };
 };
 
-export const errors = (errors: IError[]): ICardAddErrorAction => {
+export const errors = (errors: Error[]): ICardAddErrorAction => {
   return {
     type: CARD_ADD_ERROR,
     errors,

@@ -1,6 +1,6 @@
-import { IHouseForm } from '../types/house';
 import { errors, loading, success } from '../actions/add';
 import { House } from '../models/House';
+import { IHouseForm } from '../types/add';
 
 export const addHouse = (payload: IHouseForm) => {
   return async (dispatch: any, getState: any, axios: any) => {

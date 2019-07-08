@@ -15,7 +15,7 @@ import {
   IAuthenticationUserAction,
 } from '../types/authentication';
 import { ILoggedUser } from '../models/LoggedUser';
-import { IError } from '../../common/models/Error';
+import { Error } from '../../common/models/Error';
 import { TokenStorage } from '../../../libraries/tokenStorage';
 
 export const authenticated = (authenticated: boolean): IAuthenticatedAction => {
@@ -39,7 +39,7 @@ export const loading = (loading: boolean): IAuthenticationLoadingAction => {
   };
 };
 
-export const errors = (errors: IError[]): IAuthenticationErrorAction => {
+export const errors = (errors: Error[]): IAuthenticationErrorAction => {
   return {
     type: AUTH_AUTHENTICATION_ERROR,
     errors,

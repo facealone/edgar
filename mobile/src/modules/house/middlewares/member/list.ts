@@ -1,12 +1,14 @@
 import { errors, loading, success } from '../../actions/member/list';
 import { Member } from '../../models/Member';
+import { Pagination } from '../../../common/models/Pagination';
 
-export const listMembers = (house: string) => {
+export const listMembers = (house: string, page: number = 1) => {
   return async (dispatch: any, getState: any, axios: any) => {
     dispatch(loading(true));
 
     try {
-      const response = await axios.get(`houses/${house}/members`);
+      const response = await axios.get(`houses/${house}/members`, { page });
+      const { items, pageCount, totalItems } = response.data;
       const members = [];
 
       for (const member of response.data) {
@@ -21,7 +23,7 @@ export const listMembers = (house: string) => {
         );
       }
 
-      dispatch(success(members));
+      dispatch(success(new Pagination<Member>(members, pageCount, totalItems)));
     } catch (err) {
       // todo : errors
       dispatch(errors([]));

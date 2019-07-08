@@ -17,7 +17,7 @@ import { commonStyles } from '../../../theme/common';
 import { IHouseListState } from '../types/list';
 import { reset } from '../actions/list';
 import { listHouses } from '../middlewares/list';
-import { IHouse } from '../models/House';
+import { House } from '../models/House';
 
 interface IProps {
   navigation: any;
@@ -47,17 +47,17 @@ class ListScreen extends React.Component<IProps> {
         <Content style={commonStyles.content}>
           <Separator bordered>
             <Text style={commonStyles.centerHeaderFlatList}>
-              {i18n.t('house.list.header')}
+              {i18n.t('house.list.header')} ({houses.payload.totalItems})
             </Text>
           </Separator>
           <FlatList
             keyExtractor={house => house.id}
-            data={houses.payload}
+            data={houses.payload.items}
             refreshing={houses.loading}
             onRefresh={() => {
               this.props.listHouses();
             }}
-            renderItem={({ item: house }: IHouse) => {
+            renderItem={({ item: house }: House) => {
               const { name, id } = house;
 
               return (

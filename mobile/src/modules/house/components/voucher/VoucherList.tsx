@@ -33,10 +33,10 @@ class VoucherList extends React.Component<IProps> {
       <Content style={commonStyles.content}>
         <Separator bordered>
           <Text style={commonStyles.headerFlatList}>
-            {i18n.t('house.voucher.list.title')} ({vouchers.payload.length})
+            {i18n.t('house.voucher.list.title')} ({vouchers.payload.totalItems})
           </Text>
         </Separator>
-        {vouchers.payload.map(voucher => (
+        {vouchers.payload.items.map(voucher => (
           <ListItem key={voucher.code}>
             <Body>
               <Text>{voucher.username}</Text>

@@ -11,10 +11,10 @@ export const listCards = (page: number = 1) => {
       const response = await axios.get('users/me/current-house/cards', {
         page,
       });
-      const payload = response.data;
+      const { items, pageCount, totalItems } = response.data;
       const cards = [];
 
-      for (const card of payload.items) {
+      for (const card of items) {
         cards.push(
           new Card(
             card.id,
@@ -25,11 +25,7 @@ export const listCards = (page: number = 1) => {
         );
       }
 
-      dispatch(
-        success(
-          new Pagination<Card>(cards, payload.pageCount, payload.totalItems),
-        ),
-      );
+      dispatch(success(new Pagination<Card>(cards, pageCount, totalItems)));
     } catch (err) {
       // todo errors
       dispatch(errors([]));

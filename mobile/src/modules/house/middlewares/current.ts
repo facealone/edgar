@@ -9,7 +9,7 @@ export const changeCurrentHouse = (house: string) => {
       const response = await axios.put('users/me/current-house', { house });
       const { name, id } = response.data;
 
-      dispatch(success(new House(id, name)));
+      dispatch(success(new House(id, name), true));
     } catch (err) {
       // todo : errors
       dispatch(errors([]));

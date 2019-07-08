@@ -1,4 +1,4 @@
-import { IHouse } from '../models/House';
+import { House } from '../models/House';
 import {
   HOUSE_CURRENT_SUCCESS,
   HOUSE_CURRENT_LOADING,
@@ -11,13 +11,13 @@ import { IState } from '../../common/types/states';
 import { ILoadingAction, IErrorAction } from '../../common/types/actions';
 
 export interface ICurrentHouseState extends IState {
-  payload: IHouse | null;
+  payload: House | null;
   success: boolean;
 }
 
 export interface ICurrentHouseSuccessAction {
   type: typeof HOUSE_CURRENT_SUCCESS;
-  payload: IHouse;
+  payload: House;
   success: boolean;
 }
 

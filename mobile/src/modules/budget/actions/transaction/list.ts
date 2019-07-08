@@ -11,7 +11,7 @@ import {
   BUDGET_TRANSACTION_LIST_ERROR,
   BUDGET_TRANSACTION_LIST_RESET,
 } from '../../constants/transaction/list';
-import { IError } from '../../../common/models/Error';
+import { Error } from '../../../common/models/Error';
 
 export const success = (
   payload: TransactionList,
@@ -31,7 +31,7 @@ export const loading = (
   };
 };
 
-export const errors = (errors: IError[]): IBudgetTransactionListErrorAction => {
+export const errors = (errors: Error[]): IBudgetTransactionListErrorAction => {
   return {
     type: BUDGET_TRANSACTION_LIST_ERROR,
     errors,

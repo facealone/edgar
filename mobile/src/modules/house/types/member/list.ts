@@ -6,15 +6,16 @@ import {
 } from '../../constants/member/list';
 import { IState } from '../../../common/types/states';
 import { ILoadingAction, IErrorAction } from '../../../common/types/actions';
-import { IMember } from '../../models/Member';
+import { Member } from '../../models/Member';
+import { Pagination } from '../../../common/models/Pagination';
 
 export interface IHouseMemberListState extends IState {
-  payload: IMember[];
+  payload: Pagination<Member>;
 }
 
 export interface IHouseMemberListSuccessAction {
   type: typeof HOUSE_MEMBER_LIST_SUCCESS;
-  payload: IMember[];
+  payload: Pagination<Member>;
 }
 
 export interface IHouseMemberListLoadingAction extends ILoadingAction {

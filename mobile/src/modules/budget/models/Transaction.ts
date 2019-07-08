@@ -1,4 +1,4 @@
-import { IOwner } from '../../user/models/Owner';
+import { Owner } from '../../user/models/Owner';
 import { TransactionCategory } from './TransactionCategory';
 
 export enum TransactionType {
@@ -15,6 +15,6 @@ export class Transaction {
     public readonly note: string | null,
     public readonly createdAt: Date,
     public readonly category: TransactionCategory,
-    public readonly owner: IOwner,
+    public readonly owner: Owner,
   ) {}
 }

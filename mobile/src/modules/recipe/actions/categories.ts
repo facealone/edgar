@@ -4,7 +4,7 @@ import {
   RECIPE_CATEGORIES_ERROR,
   RECIPE_CATEGORIES_RESET,
 } from '../constants/categories';
-import { IError } from '../../common/models/Error';
+import { Error } from '../../common/models/Error';
 import {
   ICategoriesSuccessAction,
   ICategoriesResetAction,
@@ -29,7 +29,7 @@ export const loading = (loading: boolean): ICategoriesLoadingAction => {
   };
 };
 
-export const errors = (errors: IError[]): ICategoriesErrorAction => {
+export const errors = (errors: Error[]): ICategoriesErrorAction => {
   return {
     type: RECIPE_CATEGORIES_ERROR,
     errors,

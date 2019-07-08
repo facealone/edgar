@@ -33,10 +33,10 @@ class MemberList extends React.Component<IProps> {
       <Content style={commonStyles.content}>
         <Separator bordered>
           <Text style={commonStyles.headerFlatList}>
-            {i18n.t('house.show.members')} ({members.payload.length})
+            {i18n.t('house.show.members')} ({members.payload.totalItems})
           </Text>
         </Separator>
-        {members.payload.map(member => (
+        {members.payload.items.map(member => (
           <ListItem key={member.id}>
             <Body>
               <Text>{`${member.firstName} ${member.lastName}`}</Text>
