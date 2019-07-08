@@ -1,10 +1,4 @@
-export interface IShop {
-  id: string;
-  name: string;
-  numberOfItems: number;
-}
-
-export class Shop implements IShop {
+export class Shop {
   constructor(
     public readonly id: string,
     public readonly name: string,

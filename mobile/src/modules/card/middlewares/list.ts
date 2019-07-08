@@ -11,7 +11,7 @@ export const listCards = (page: number = 1) => {
       const response = await axios.get('users/me/current-house/cards', {
         page,
       });
-      const payload: Pagination<Card> = response.data;
+      const payload = response.data;
       const cards = [];
 
       for (const card of payload.items) {

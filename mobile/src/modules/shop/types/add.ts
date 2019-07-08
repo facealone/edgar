@@ -1,5 +1,5 @@
 import { IState } from '../../common/types/states';
-import { IShop } from '../models/Shop';
+import { Shop } from '../models/Shop';
 import {
   SHOP_ADD_SUCCESS,
   SHOP_ADD_LOADING,
@@ -9,12 +9,12 @@ import {
 import { ILoadingAction, IErrorAction } from '../../common/types/actions';
 
 export interface IShopAddState extends IState {
-  payload: IShop | null;
+  payload: Shop | null;
 }
 
 export interface IShopAddSuccessAction {
   type: typeof SHOP_ADD_SUCCESS;
-  payload: IShop;
+  payload: Shop;
 }
 
 export interface IShopAddLoadingAction extends ILoadingAction {

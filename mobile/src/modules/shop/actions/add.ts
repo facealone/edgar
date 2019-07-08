@@ -1,4 +1,4 @@
-import { IShop } from '../models/Shop';
+import { Shop } from '../models/Shop';
 import {
   IShopAddSuccessAction,
   IShopAddLoadingAction,
@@ -13,7 +13,7 @@ import {
 } from '../constants/add';
 import { IError } from '../../common/models/Error';
 
-export const success = (payload: IShop): IShopAddSuccessAction => {
+export const success = (payload: Shop): IShopAddSuccessAction => {
   return {
     type: SHOP_ADD_SUCCESS,
     payload,

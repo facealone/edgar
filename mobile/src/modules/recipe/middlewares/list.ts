@@ -12,7 +12,7 @@ export const listRecipes = (page: number = 1) => {
       const response = await axios.get('users/me/current-house/recipes', {
         page,
       });
-      const payload: Pagination<Recipe> = response.data;
+      const payload = response.data;
       const recipes = [];
 
       for (const recipe of payload.items) {

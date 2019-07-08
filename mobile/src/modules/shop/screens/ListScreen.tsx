@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import { FlatList } from 'react-native';
 import { bindActionCreators } from 'redux';
 import i18n from '../../../i18n';
-import { IShop } from '../models/Shop';
+import { Shop } from '../models/Shop';
 import { IShopListState, IShopListResetAction } from '../types/list';
 import { listShops } from '../middlewares/list';
 import { reset } from '../actions/list';
@@ -43,17 +43,17 @@ class ListScreen extends React.Component<IProps> {
         <Content style={commonStyles.content}>
           <Separator bordered>
             <Text style={commonStyles.centerHeaderFlatList}>
-              {i18n.t('shop.list.title')} ({shops.payload.length})
+              {i18n.t('shop.list.title')} ({shops.payload.totalItems})
             </Text>
           </Separator>
           <FlatList
             keyExtractor={shop => shop.id}
-            data={shops.payload}
+            data={shops.payload.items}
             refreshing={shops.loading}
             onRefresh={() => {
               this.props.listShops();
             }}
-            renderItem={({ item: card }: IShop) => {
+            renderItem={({ item: card }: Shop) => {
               const { name, id, numberOfItems } = card;
 
               return (

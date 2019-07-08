@@ -39,6 +39,7 @@ export const listReducers = (
             action.payload,
             ...state.payload.items.slice(0),
           ],
+          totalItems: state.payload.totalItems + 1,
         },
       };
 
@@ -48,6 +49,7 @@ export const listReducers = (
         payload: {
           ...state.payload,
           items: state.payload.items.filter(recipe => recipe.id !== action.id),
+          totalItems: state.payload.totalItems - 1,
         },
       };
 

@@ -8,10 +8,12 @@ import {
 import { SHOP_ADD_SUCCESS } from '../constants/add';
 import { AUTH_AUTHENTICATION_LOGOUT } from '../../auth/constants/authentication';
 import { HOUSE_CURRENT_SUCCESS } from '../../house/constants/current';
+import { Pagination } from '../../common/models/Pagination';
+import { Shop } from '../models/Shop';
 
 const initialState: IShopListState = {
   loading: false,
-  payload: [],
+  payload: new Pagination<Shop>(),
   errors: [],
 };
 
@@ -29,7 +31,15 @@ export const listReducers = (
     case SHOP_ADD_SUCCESS:
       return {
         ...state,
-        payload: [...state.payload, action.payload],
+        payload: {
+          ...state.payload,
+          items: [
+            ...state.payload.items.slice(0, 0),
+            action.payload,
+            ...state.payload.items.slice(0),
+          ],
+          totalItems: state.payload.totalItems + 1,
+        },
       };
 
     case SHOP_LIST_LOADING:

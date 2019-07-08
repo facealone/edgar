@@ -6,18 +6,19 @@ import {
 } from '../constants/list';
 import { IState } from '../../common/types/states';
 import { ILoadingAction, IErrorAction } from '../../common/types/actions';
-import { IShop } from '../models/Shop';
+import { Shop } from '../models/Shop';
 import { IShopAddSuccessAction } from './add';
 import { ICurrentHouseSuccessAction } from '../../house/types/current';
 import { IAuthenticationLogoutAction } from '../../auth/types/authentication';
+import { Pagination } from '../../common/models/Pagination';
 
 export interface IShopListState extends IState {
-  payload: IShop[];
+  payload: Pagination<Shop>;
 }
 
 export interface IShopListSuccessAction {
   type: typeof SHOP_LIST_SUCCESS;
-  payload: IShop[];
+  payload: Pagination<Shop>;
 }
 
 export interface IShopListLoadingAction extends ILoadingAction {

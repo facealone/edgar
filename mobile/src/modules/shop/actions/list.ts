@@ -11,9 +11,10 @@ import {
   IShopListResetAction,
 } from '../types/list';
 import { IError } from '../../common/models/Error';
-import { IShop } from '../models/Shop';
+import { Shop } from '../models/Shop';
+import { Pagination } from '../../common/models/Pagination';
 
-export const success = (payload: IShop[]): IShopListSuccessAction => {
+export const success = (payload: Pagination<Shop>): IShopListSuccessAction => {
   return {
     type: SHOP_LIST_SUCCESS,
     payload,
