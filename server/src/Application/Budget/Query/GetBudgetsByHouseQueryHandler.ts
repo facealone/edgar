@@ -31,10 +31,10 @@ export class GetBudgetsByHouseQueryHandler {
     );
 
     for (const budget of budgets) {
-      let balance = budget.amount;
+      let expenses = 0;
 
       if (budget.expenses > 0) {
-        balance -= Number(budget.expenses);
+        expenses += Number(budget.expenses);
       }
 
       budgetsViews.push(
@@ -42,7 +42,7 @@ export class GetBudgetsByHouseQueryHandler {
           budget.id,
           budget.name,
           budget.amount / 100,
-          balance / 100,
+          expenses / 100,
           budget.shared,
         ),
       );

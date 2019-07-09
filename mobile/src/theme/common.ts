@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { MAIN_COLOR } from './colors';
+import { MAIN_COLOR, GREEN_COLOR, RED_COLOR } from './colors';
 
 export const commonStyles = StyleSheet.create({
   submitButton: {
@@ -42,11 +42,11 @@ export const commonStyles = StyleSheet.create({
     margin: 10,
   },
   inflow: {
-    color: '#32CD32',
+    color: GREEN_COLOR,
     fontWeight: 'bold',
   },
   outlay: {
-    color: '#DC143C',
+    color: RED_COLOR,
     fontWeight: 'bold',
   },
 });

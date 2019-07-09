@@ -19,7 +19,7 @@ export const listBudgets = (page: number = 1) => {
             budget.id,
             budget.name,
             budget.amount,
-            budget.balance,
+            budget.amount - budget.expenses,
             budget.shared,
           ),
         );

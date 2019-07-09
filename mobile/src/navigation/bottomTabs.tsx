@@ -33,7 +33,7 @@ export const BottomTabsStack = createMaterialBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: i18n.t('navigation.budget'),
         tabBarIcon: () => (
-          <Icon style={{ color: MAIN_COLOR }} name={'ios-pricetags'} />
+          <Icon style={{ color: MAIN_COLOR }} name={'ios-cash'} />
         ),
       },
     },

@@ -8,9 +8,11 @@ import {
 import { AUTH_AUTHENTICATION_LOGOUT } from '../../auth/constants/authentication';
 import { HOUSE_CURRENT_SUCCESS } from '../../house/constants/current';
 import { BUDGET_ADD_SUCCESS } from '../constants/add';
+import { Pagination } from '../../common/models/Pagination';
+import { Budget } from '../models/Budget';
 
 const initialState: IBudgetListSate = {
-  payload: [],
+  payload: new Pagination<Budget>(),
   errors: [],
   loading: false,
 };
@@ -29,7 +31,15 @@ export const listReducers = (
     case BUDGET_ADD_SUCCESS:
       return {
         ...state,
-        payload: [...state.payload, action.payload],
+        payload: {
+          ...state.payload,
+          items: [
+            ...state.payload.items.slice(0, 0),
+            action.payload,
+            ...state.payload.items.slice(0),
+          ],
+          totalItems: state.payload.totalItems + 1,
+        },
       };
 
     case BUDGET_LIST_LOADING:

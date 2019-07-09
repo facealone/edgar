@@ -26,7 +26,7 @@ interface IProps {
   reset(): IShopListResetAction;
 }
 
-class ListScreen extends React.Component<IProps> {
+class ListScreen extends React.PureComponent<IProps> {
   componentWillUnmount = () => {
     this.props.reset();
   };

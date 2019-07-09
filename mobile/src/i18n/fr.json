@@ -95,7 +95,7 @@
       "home": "Maison",
       "cards": "Cartes",
       "settings": "Paramètres",
-      "budget": "Budget",
+      "budget": "Budgets",
       "tabs": {
         "shops": "Courses",
         "menus": "Menus",
@@ -105,7 +105,8 @@
     "budget": {
       "list": {
         "header": "Budgets",
-        "balance": "Solde : {{amount}} €"
+        "balance": "Solde : {{balance}}€",
+        "amount": "Budget mensuel: {{amount}}€"
       },
       "transaction": {
         "list": {
@@ -119,6 +120,7 @@
         "title": "Créer un budget",
         "form": {
           "name": "Nom du budget",
+          "placeholder": "Ex: courses",
           "amount": "Votre budget mensuel en €",
           "shared": "Partager ce budget avec les autres membres",
           "errors": {

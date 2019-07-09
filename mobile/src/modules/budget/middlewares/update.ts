@@ -16,7 +16,7 @@ export const updateBudget = (id: string, payload: IBudgetForm) => {
             budget.id,
             budget.name,
             budget.amount,
-            budget.balance,
+            budget.amount - budget.expenses,
             budget.shared,
           ),
         ),

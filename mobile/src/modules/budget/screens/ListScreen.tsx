@@ -11,7 +11,6 @@ import {
   Fab,
   Icon,
 } from 'native-base';
-import RNSpeedometer from 'react-native-speedometer';
 import { commonStyles } from '../../../theme/common';
 import { IBudgetListSate, IBudgetListResetAction } from '../types/list';
 import { Budget } from '../models/Budget';
@@ -19,7 +18,7 @@ import { listBudgets } from '../middlewares/list';
 import { reset } from '../actions/transaction/list';
 import { bindActionCreators } from 'redux';
 import i18n from '../../../i18n';
-import { MAIN_COLOR } from '../../../theme/colors';
+import { RED_COLOR } from '../../../theme/colors';
 
 interface IProps {
   budget: IBudgetListSate;
@@ -57,7 +56,10 @@ class ListScreen extends React.PureComponent<IProps> {
               this.props.listBudgets();
             }}
             renderItem={({ item: budget }: Budget) => {
-              const { id, name, balance, shared, amount } = budget;
+              const { id, name, shared, amount, balance } = budget;
+              const balanceText = i18n.t('budget.list.balance', {
+                balance,
+              });
 
               return (
                 <ListItem
@@ -72,22 +74,24 @@ class ListScreen extends React.PureComponent<IProps> {
                       {false === shared && (
                         <>
                           {' '}
-                          <Icon name={'lock'} fontSize={5} color={MAIN_COLOR} />
+                          <Icon name={'lock'} style={{ fontSize: 15 }} />
                         </>
                       )}
                     </Text>
+                    {balance > 0 && <Text note>{balanceText}</Text>}
+                    {balance <= 0 && (
+                      <Text note style={{ color: RED_COLOR }}>
+                        {balanceText}
+                      </Text>
+                    )}
                     <Text note>
-                      {i18n.t('budget.list.balance', { amount: balance })}
+                      {i18n.t('budget.list.amount', {
+                        amount,
+                      })}
                     </Text>
                   </Body>
                   <Right>
-                    <RNSpeedometer
-                      value={balance}
-                      maxValue={amount}
-                      size={70}
-                      labelStyle={{ display: 'none' }}
-                      labelNoteStyle={{ display: 'none' }}
-                    />
+                    <Icon name={'ios-arrow-dropright-circle'} />
                   </Right>
                 </ListItem>
               );

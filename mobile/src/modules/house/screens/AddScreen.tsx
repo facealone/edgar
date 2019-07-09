@@ -32,7 +32,10 @@ class AddScreen extends React.Component<IProps> {
     const { add, navigation } = this.props;
 
     if (add.payload) {
-      navigation.navigate('MembersInit');
+      navigation.navigate('SendVoucher', {
+        id: add.payload.id,
+        name: add.payload.name,
+      });
     }
   };
 

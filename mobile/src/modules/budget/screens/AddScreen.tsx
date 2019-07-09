@@ -21,7 +21,7 @@ interface IProps {
   addBudget(payload: IBudgetForm): any;
 }
 
-class AddScreen extends React.Component<IProps> {
+class AddScreen extends React.PureComponent<IProps> {
   static navigationOptions = {
     title: i18n.t('budget.add.title'),
   };

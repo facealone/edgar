@@ -32,7 +32,7 @@ class JoinScreen extends React.Component<IProps> {
     const { add, navigation } = this.props;
 
     if (add.payload) {
-      navigation.navigate('MembersInit');
+      navigation.navigate('House');
     }
   };
 

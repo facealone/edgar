@@ -28,6 +28,7 @@ class BudgetForm extends React.PureComponent<
             <Field
               autoFocus
               label={i18n.t('budget.add.form.name')}
+              placeholder={i18n.t('budget.add.form.placeholder')}
               name={'name'}
               component={Input}
             />

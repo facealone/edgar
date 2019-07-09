@@ -16,7 +16,7 @@ export const addBudget = (payload: IBudgetForm) => {
             budget.id,
             budget.name,
             budget.amount,
-            budget.balance,
+            budget.amount,
             budget.shared,
           ),
         ),
