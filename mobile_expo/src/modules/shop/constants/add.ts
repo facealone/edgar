@@ -1,0 +1,4 @@
+export const SHOP_ADD_LOADING = 'SHOP_ADD_LOADING';
+export const SHOP_ADD_SUCCESS = 'SHOP_ADD_SUCCESS';
+export const SHOP_ADD_ERROR = 'SHOP_ADD_ERROR';
+export const SHOP_ADD_RESET = 'SHOP_ADD_RESET';

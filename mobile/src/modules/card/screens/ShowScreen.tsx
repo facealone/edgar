@@ -1,6 +1,6 @@
 import React from 'react';
 import { Content, Text, Card, CardItem, Body } from 'native-base';
-import * as Brightness from 'expo-brightness';
+import DeviceBrightness from 'react-native-device-brightness';
 import Barcode from 'react-native-barcode-builder';
 import RemoveButton from '../components/RemoveButton';
 import { MAIN_COLOR } from '../../../theme/colors';
@@ -18,17 +18,17 @@ interface IState {
 
 class ShowScreen extends React.PureComponent<IProps, IState> {
   state = {
-    brightness: 50,
+    brightness: 0.5,
   };
 
   componentDidMount = async () => {
-    const brightness = await Brightness.getBrightnessAsync();
+    const brightness = await DeviceBrightness.getBrightnessLevel();
     this.setState({ brightness });
-    Brightness.setBrightnessAsync(100);
+    DeviceBrightness.setBrightnessLevel(1);
   };
 
   componentWillUnmount = async () => {
-    await Brightness.setBrightnessAsync(this.state.brightness);
+    await DeviceBrightness.setBrightnessLevel((this.state.brightness);
   };
 
   render = () => {

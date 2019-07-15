@@ -1,0 +1,197 @@
+{
+  "translation": {
+    "roles": {
+      "ROLE_OWNER": "Propriétaire",
+      "ROLE_CHILD": "Enfant",
+      "ROLE_GUEST": "Invité"
+    },
+    "form": {
+      "buttons": {
+        "next": "Suivant",
+        "save": "Sauvegarder"
+      },
+      "errors": {
+        "requiredField": "Ce champs est requis.",
+        "invalidEmail": "Cette adresse e-mail n'est pas valide."
+      }
+    },
+    "success": {
+      "remove": "Element supprimé"
+    },
+    "auth": {
+      "authentication": {
+        "login": "Se connecter",
+        "introduction": "Vous revoilà, saisissez votre adresse e-mail et votre mot de passe.",
+        "failure": {
+          "title": "Oups !",
+          "content": "Votre adresse email ou mot de passe est incorrect."
+        },
+        "form": {
+          "email": "Adresse e-mail",
+          "password": "Mot de passe",
+          "forgotPassword": "Mot de passe oublié ?"
+        }
+      },
+      "registration": {
+        "title": "Créer un compte",
+        "introduction": "Créez votre compte client pour utiliser dès maintenant Edgar Majordome gratuitement.",
+        "form": {
+          "firstName": "Prénom",
+          "lastName": "Nom",
+          "email": "Adresse e-mail",
+          "password": "Mot de passe",
+          "confirmPassword": "Confirmez votre mot de passe",
+          "errors": {
+            "invalidPasswords": "Les mots de passe doivent être identiques.",
+            "passwordLength": "Le mot de passe doit faire 8 charactères mininum."
+          }
+        }
+      }
+    },
+    "house": {
+      "show": {
+        "loginOnHouse": "Se connecter sur \"{{house}}\"",
+        "members": "Membres de la maison"
+      },
+      "add": {
+        "title": "Créez votre maison",
+        "introduction": "Vous y êtes presque, créez maintenant votre première maison."
+      },
+      "join": {
+        "title": "Rejoindre une maison",
+        "introduction": "Saisissez le code que vous avez recu pour pouvoir rejoindre la maison."
+      },
+      "list": {
+        "header": "Gérez ici vos maisons"
+      },
+      "form": {
+        "name": "Nom de la maison",
+        "code": "Code"
+      },
+      "voucher": {
+        "title": "Invitez quelqu'un",
+        "introduction": "Invitez maintenant une personne à rejoindre la maison \"{{house}}\".",
+        "success": {
+          "message": "Salut, je t'invite à rejoindre la maison \"{{house}}\" sur l'application Edgar Majordome. Voici ton code: {{voucher}}"
+        },
+        "list": {
+          "title": "Invitations en attente",
+          "code": "Code",
+          "role": "Role"
+        },
+        "form": {
+          "submit": "Envoyer l'invitation",
+          "name": "Nom de la personne",
+          "role": "Choisir un rôle"
+        }
+      }
+    },
+    "home": {
+      "slogan": "Edgar est un assistant personnel vous permettant de gérer vos maisons au quotidien.",
+      "goToLogin": "Déjà un compte ? Connectez-vous",
+      "cgu": "En utilisant Edgar Majordome, vous acceptez les conditions d'utilistions et la politique de confidentialité."
+    },
+    "navigation": {
+      "home": "Maison",
+      "cards": "Cartes",
+      "settings": "Paramètres",
+      "budget": "Budgets",
+      "tabs": {
+        "shops": "Courses",
+        "menus": "Menus",
+        "recipes": "Recettes"
+      }
+    },
+    "budget": {
+      "list": {
+        "header": "Budgets",
+        "balance": "Solde : {{balance}}€",
+        "amount": "Budget mensuel: {{amount}}€"
+      },
+      "transaction": {
+        "list": {
+          "budget": "Budget",
+          "inflow": "Entrées",
+          "outlay": "Dépenses",
+          "balance": "Solde"
+        }
+      },
+      "add": {
+        "title": "Créer un budget",
+        "form": {
+          "name": "Nom du budget",
+          "placeholder": "Ex: courses",
+          "amount": "Votre budget mensuel en €",
+          "shared": "Partager ce budget avec les autres membres",
+          "errors": {
+            "amountValue": "Le montant doit être supérieur à 0.",
+            "amountFormat": "Le format est incorrect, pour les décimales utiliser le point."
+          }
+        }
+      }
+    },
+    "card": {
+      "list": {
+        "header": "Cartes de fidélités"
+      },
+      "show": {
+        "footer": "Code barre : {{barCode}}"
+      },
+      "scan": {
+        "title": "Scanner votre carte",
+        "intro": "Scannez le code-barres de votre carte"
+      },
+      "add": {
+        "title": "Ajouter une carte",
+        "button": "Sauvegarder",
+        "form": {
+          "name": "Nom de la carte",
+          "placeholder": "Ex: Franprix"
+        }
+      }
+    },
+    "settings": {
+      "menu": {
+        "main": {
+          "title": "Général",
+          "recommend": "Recommander Edgar à un ami",
+          "houses": "Mes maisons"
+        },
+        "user": {
+          "title": "Compte utilisateur",
+          "logout": "Se déconnecter",
+          "personalInformation": "Mes informations personnelles",
+          "editPassword": "Modifier le mot de passe"
+        }
+      }
+    },
+    "shop": {
+      "list": {
+        "title": "Listes de courses",
+        "countItem": "{{item}} article(s)",
+        "emptyItem": "Aucun article"
+      },
+      "add": {
+        "title": "Créer une liste",
+        "form": {
+          "name": "Nom de la liste",
+          "placeholder": "Ex: Leclerc"
+        }
+      }
+    },
+    "recipe": {
+      "list": {
+        "title": "Recettes sauvegardées",
+        "category": "Catégorie : {{category}}"
+      },
+      "add": {
+        "title": "Ajouter une recette",
+        "form": {
+          "name": "Nom de la recette",
+          "placeholder": "Ex: Crumble aux pommes",
+          "category": "Choisir une catégorie"
+        }
+      }
+    }
+  }
+}

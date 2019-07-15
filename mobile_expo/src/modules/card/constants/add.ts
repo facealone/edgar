@@ -1,0 +1,4 @@
+export const CARD_ADD_SUCCESS = 'CARD_ADD_SUCCESS';
+export const CARD_ADD_LOADING = 'CARD_ADD_LOADING';
+export const CARD_ADD_ERROR = 'CARD_ADD_ERROR';
+export const CARD_ADD_RESET = 'CARD_ADD_RESET';
