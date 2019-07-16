@@ -4,13 +4,13 @@ import { Transaction } from '../../models/Transaction';
 import { Owner } from '../../../user/models/Owner';
 import { TransactionCategory } from '../../models/TransactionCategory';
 
-export const listTransactions = (budgetId: string) => {
+export const listTransactions = (budgetId: string, page: number = 1) => {
   return async (dispatch: any, getState: any, axios: any) => {
     dispatch(loading(true));
 
     try {
       const response = await axios.get(
-        `budgets/${budgetId}/transactions?date=${new Date().toISOString()}`,
+        `budgets/${budgetId}/transactions?date=${new Date().toISOString()}&page=${page}`,
       );
       const payload = response.data;
       const transactions = [];

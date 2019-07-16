@@ -5,7 +5,10 @@ export const ShoppingSuggestionMapping = {
       title: {
         type: 'keyword',
       },
-      category: {
+      categoryId: {
+        type: 'keyword',
+      },
+      categoryName: {
         type: 'keyword',
       },
     },

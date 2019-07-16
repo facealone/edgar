@@ -14,13 +14,29 @@ import { UpdateShopController } from './Controller/UpdateShopController';
 import { GetShopByIdQueryHandler } from 'src/Application/Shop/Query/GetShopByIdQueryHandler';
 import { UpdateShopCommandHandler } from 'src/Application/Shop/Command/UpdateShopCommandHandler';
 import { GetShopsController } from './Controller/GetShopsController';
+import { GetShoppingListItemController } from './Controller/ShoppingList/GetShoppingListItemController';
+import { ShoppingListSuggestion } from 'src/Domain/Shop/ShoppingListSuggestion.entity';
+import { ShoppingListSuggestionRepository } from './Repository/ShoppingItemSuggestionRepository';
 
 @Module({
-  imports: [BusModule, AuthModule, TypeOrmModule.forFeature([Shop, UserHouse])],
-  controllers: [GetShopsController, CreateShopController, UpdateShopController],
+  imports: [
+    BusModule,
+    AuthModule,
+    TypeOrmModule.forFeature([Shop, UserHouse, ShoppingListSuggestion]),
+  ],
+  controllers: [
+    GetShopsController,
+    CreateShopController,
+    UpdateShopController,
+    GetShoppingListItemController,
+  ],
   providers: [
     { provide: 'IShopRepository', useClass: ShopRepository },
     { provide: 'IUserHouseRepository', useClass: UserHouseRepository },
+    {
+      provide: 'IShoppingListSuggestionRepository',
+      useClass: ShoppingListSuggestionRepository,
+    },
     CreateShopCommandHandler,
     GetShopsByHouseQueryHandler,
     IsMemberOfHouse,
