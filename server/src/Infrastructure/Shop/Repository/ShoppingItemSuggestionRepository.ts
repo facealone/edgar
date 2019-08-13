@@ -15,4 +15,25 @@ export class ShoppingListSuggestionRepository
   public findAll = async (): Promise<ShoppingListSuggestion[]> => {
     return await this.repository.find();
   };
+
+  public findByName = (name: string): Promise<ShoppingListSuggestion[]> => {
+    return this.repository
+      .createQueryBuilder('shoppingListSuggestion')
+      .select([
+        'shoppingListSuggestion.name',
+        'shoppingListCategory.id',
+        'shoppingListCategory.name',
+      ])
+      .where('LOWER(shoppingListSuggestion.name) like LOWER(:name)', {
+        name: `%${name}%`,
+      })
+      .innerJoin(
+        'shoppingListSuggestion.shoppingListCategory',
+        'shoppingListCategory',
+      )
+      .orderBy('shoppingListCategory.position', 'ASC')
+      .addOrderBy('shoppingListSuggestion.name', 'ASC')
+      .limit(20)
+      .getMany();
+  };
 }

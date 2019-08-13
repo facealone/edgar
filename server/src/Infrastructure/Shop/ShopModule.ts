@@ -17,6 +17,8 @@ import { GetShopsController } from './Controller/GetShopsController';
 import { GetShoppingListItemController } from './Controller/ShoppingList/GetShoppingListItemController';
 import { ShoppingListSuggestion } from 'src/Domain/Shop/ShoppingListSuggestion.entity';
 import { ShoppingListSuggestionRepository } from './Repository/ShoppingItemSuggestionRepository';
+import { GetShoppingListSuggestionsController } from './Controller/ShoppingList/GetShoppingListSuggestionsController';
+import { GetShoppingListSuggestionsQueryHandler } from 'src/Application/Shop/Query/ShoppingList/GetShoppingListSuggestionsQueryHandler';
 
 @Module({
   imports: [
@@ -29,6 +31,7 @@ import { ShoppingListSuggestionRepository } from './Repository/ShoppingItemSugge
     CreateShopController,
     UpdateShopController,
     GetShoppingListItemController,
+    GetShoppingListSuggestionsController,
   ],
   providers: [
     { provide: 'IShopRepository', useClass: ShopRepository },
@@ -42,6 +45,7 @@ import { ShoppingListSuggestionRepository } from './Repository/ShoppingItemSugge
     IsMemberOfHouse,
     GetShopByIdQueryHandler,
     UpdateShopCommandHandler,
+    GetShoppingListSuggestionsQueryHandler,
   ],
 })
 export class ShopModule {}
